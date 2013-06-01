@@ -1,0 +1,21 @@
+<p>A quick fun &#8220;JS WTF?&#8221; post for you today. If you load up your JavaScript console &amp; enter:</p>
+
+<pre><code>5 &lt; 4 &lt; 3</code></pre>
+
+<p>You&#8217;d be expecting to see <code>false</code>, right? However, you&#8217;ll actually see <code>true</code>. <strong>WTF?</strong></p>
+
+<p>This is actually down to the way JavaScript evaluates this and <em>operator precedence</em>. What it sees is:</p>
+
+<pre><code>(5 &lt; 4) &lt; 3</code></pre>
+
+<p>Which in turn gives</p>
+
+<pre><code>false &lt; 3</code></pre>
+
+<p>JavaScript then coerces <code>false</code> into an integer <code>0</code>:</p>
+
+<pre><code>0 &lt; 3</code></pre>
+
+<p>And zero is indeed less than 3, so we get <code>true</code> returned.</p>
+
+<p>Not much learned from this one but it&#8217;s quite a fun thing to show someone &amp; then explain why. I&#8217;ll be trying to do a lot of these small &#8220;fun&#8221; posts as there&#8217;s a fair few areas of &#8220;WTF?&#8221; in JavaScript, as we all know.</p>

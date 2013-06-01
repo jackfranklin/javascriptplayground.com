@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Beginning Node.js</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/js/rainbow-custom.min.js"></script>
+  <script src="/js/app.js"></script>
+</head>
+	<body class=" blog_single ">
+    <header>
+      <nav>
+        <ul>
+          
+        </ul>
+      </nav>
+      <div class="container">
+        <hgroup>
+          <h2>JavaScript Playground</h2>
+          <h3>Tips, tricks, tutorials &amp; screencasts to help you improve your JavaScript</h3>
+        </hgroup>
+      <img src="/img/imac.png" alt="">
+      </div>
+    </header>
+    <div class="container">
+      <div class="container blog_single">
+  <section class="latest-article article">
+    <h1> Beginning Node.js </h1>
+    <p class="post_date"><span>Posted: </span>25 April 2012</p>
+    <div class="post_body">
+      <p>Unless you&#8217;ve been living under a rock for the past 12 months or so, you&#8217;ve probably heard of <a href='http://nodejs.org'>Node.js</a>. Simply put, Node is JavaScript on the server.</p>
+
+<p><em>Node.js is a platform built on Chrome&#8217;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</em> (taken from the Node.js homepage).</p>
+
+<p>Node takes JavaScript onto the server, which means it&#8217;s possible to write your entire application in JavaScript, using it for both the server side, handling requests &amp; rendering views, and then on the front-end as we always have done. Whilst this isn&#8217;t going to be an official tutorial series, I&#8217;ll be writing a fair bit on Node in the future.</p>
+
+<p>Today we will look at installing Node &amp; the package manager, NPM (really easy) and then the traditional &#8220;Hello World&#8221; tutorial. Once that&#8217;s done we will take a look about other resources to make Node development easier, then in future tutorials we will use them.</p>
+
+<p>There&#8217;s two ways to install Node. You can download the official package from the <a href='http://nodejs.org/'>website</a>. Node runs on Linux, OS X &amp; Windows. A word of warning: I am a Mac user myself and throughout this tutorial I will be using it exclusively. Although everything should work independent of OS, I wont be checking it myself.</p>
+
+<p>If you&#8217;re a Homebrew user (a package manager for OS X) you can get Node with <code>brew install node</code> and then NPM with: <code>curl http://npmjs.org/install.sh | sh</code>. NPM is Node&#8217;s package manager, similar to how Rubygems manages Gems. Despite its relative infancy, there are a lot of very useful packages out there. It&#8217;s worth having Node &amp; NPM installed just for convenience. A large amount of JS resources are installed via NPM, including CoffeeScript &amp; Grunt.js.</p>
+
+<p>Now we&#8217;ve got it installed, lets do the &#8220;Hello World&#8221; example. Create a new directory &amp; within that create <code>helloworld.js</code>. The idea here is that we will create a simple server, that when we visit a page will give us a plain text page back with just the line &#8220;Hello World&#8221; in. To do this we want to use the <code>http</code> package, which is installed by default. In Node to load in a module or package you&#8217;ve installed, we use <code>require</code>:</p>
+
+<pre><code>var http = require(&#39;http&#39;);</code></pre>
+
+<p>Once we&#8217;ve done that we can then get at the methods within that module through the <code>http</code> variable.</p>
+
+<p>The next step is to create a server, which is done through the <code>createServer</code> method, which takes a function as its argument. This function is passed in details on the request &amp; the response:</p>
+
+<pre><code>http.createServer(function(req, res) {
+});</code></pre>
+
+<p>Within this function all I wanted to do is return a plain text page with the line &#8220;Hello World&#8221;. It&#8217;s really easy:</p>
+
+<pre><code>res.writeHead(200, {&#39;Content-Type&#39; : &#39;text/plain&#39;});
+res.end(&#39;Hello World\n&#39;);</code></pre>
+
+<p>The first line writes the HTTP header, including the status &amp; more importantly the content type, which in this instance is just plain text. I then end the response from the server with the line &#8220;Hello World&#8221;.</p>
+
+<p>Finally, we need to tell the server to listen on a specific URL &amp; port. We can chain this onto the <code>createServer</code> method:</p>
+
+<pre><code>http.createServer(function(req, res) {}).listen(1337, &#39;127.0.0.1&#39;);</code></pre>
+
+<p>Putting that all together, we get:</p>
+
+<pre><code>var http = require(&#39;http&#39;);
+
+http.createServer(function(req, res) {
+  res.writeHead(200, {&#39;Content-Type&#39; : &#39;text/plain&#39;});
+  res.end(&#39;Hello World\n&#39;);
+}).listen(1337, &#39;127.0.0.1&#39;);</code></pre>
+
+<p>To run this, run <code>node helloworld.js </code> in your terminal, and then visit <code>http://127.0.0.1:1337</code> in your browser. You should see:</p>
+
+<p><img alt='' src='http://cl.ly/3b2t2r1Z3y3o3W2u0x2O/Screen%20Shot%202012-04-25%20at%2000.03.12.png' /></p>
+
+<p>It&#8217;s as easy as that. However, in most real world projects, people don&#8217;t tend to just use Node. There&#8217;s a few frameworks that have sprung up. The most popular at the moment is <a href='http://expressjs.com/'>Express JS</a>. I will be covering Express in much more detail in future tutorials, however for now lets see how we&#8217;d achieve the &#8220;Hello World&#8221; demo in Express. Once you start writing an app that has a lot of dependencies, it&#8217;s a good idea to keep track of them. In Rails you have a Gemfile, in Node &amp; NPM you have <code>package.json</code>. Create this in the root directory and just give it a name &amp; version:</p>
+
+<pre><code>{
+	&quot;name&quot; : &quot;JS Playground Hello World&quot;,
+	&quot;version&quot; : &quot;0.0.1&quot;
+}</code></pre>
+
+<p>To install express, in your terminal type <code>npm install express --save</code>. This will install express but also add it to your <code>package.json</code>. If you take a look at <code>package.json</code> now, you&#8217;ll see:</p>
+
+<pre><code>{
+  	&quot;name&quot;: &quot;JS Playground Hello World&quot;,
+    &quot;version&quot;: &quot;0.0.1&quot;,
+  	&quot;dependencies&quot;: {
+    	&quot;express&quot;: &quot;~2.5.9&quot;
+  	}
+}</code></pre>
+
+<p>This means if someone clones our project, for example, they can go into the directory &amp; run <code>npm install</code>. NPM then looks at our <code>package.json</code> file and automatically installs the dependencies. This makes it easier all round. It&#8217;s worth noting two things:</p>
+
+<ul>
+<li>NPM only updated our <code>package.json</code> because I passed it the <code>--save</code> flag. If I hadn&#8217;t done that, it would not have touched the JSON file.</li>
+
+<li>If your <code>package.json</code> is invalid, NPM will NOT update it &amp; also will not show any error messages, so be careful. This had me stuck for a while (in my opinion they would be better off showing an error message).</li>
+</ul>
+
+<p>Right, so we now have Express installed, so lets take a look at that &#8220;Hello World&#8221;. The first thing we do is require express. We can do this through <code>require()</code>. We can also immediately use Express&#8217; <code>createServer()</code> method to set it up. This returns an object with all the methods we need, so I save that to a variable <code>app</code>:</p>
+
+<pre><code>var app = require(&#39;express&#39;).createServer();</code></pre>
+
+<p>Then we need to tell it that when the user visits the index page, to just send back &#8220;Hello World&#8221;. This is very straight forward:</p>
+
+<pre><code>app.get(&#39;/&#39;, function(req, res) {
+	res.send(&quot;Hello World&quot;);
+});</code></pre>
+
+<p>This says that when we receive a <code>GET</code> request to <code>/</code> (the index / home page), to send back the text &#8220;Hello World&#8221;. Easy as that. Finally, we need to give it a port to listen on:</p>
+
+<pre><code>app.listen(3000);</code></pre>
+
+<p>Putting that together gives us:</p>
+
+<pre><code>var app = require(&#39;express&#39;).createServer();
+app.get(&#39;/&#39;, function(req, res) {
+  res.send(&quot;Hello World&quot;);
+});
+
+app.listen(3000);</code></pre>
+
+<p>Run it again like before:</p>
+
+<pre><code>node helloworld.js</code></pre>
+
+<p>And visit <code>http://127.0.0.1:3000</code>. You&#8217;ll see exactly the same as last time. You can see hopefully that doing things with Express makes sense. It does a lot of the work for us. I&#8217;ll be exploring Express in further tutorials.</p>
+
+<p>With that it&#8217;s time to round up this article. Hopefully this has served as a good introduction to Node.js &amp; NPM. In future tutorials I&#8217;ll be doing all sorts of things with Node &amp; Express, as well as other things, including:</p>
+
+<ul>
+<li>Creating a Node module</li>
+
+<li>Using CoffeeScript with Node</li>
+
+<li>Unit testing Node applications</li>
+</ul>
+
+<p>And a whole lot more. As always, if you have any questions, feedback or requests for future tutorials, please do leave a comment.</p>
+    </div>
+  </section>
+  <div id="disqus_thread" style="margin-top: 30px"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jsplayground'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+    </div>
+  <footer>
+    <div class="container">
+      <h2>JavaScript Playground</h2>
+      <p>Maintained by <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>. Designed by <a href="http://twitter.com/TobyHowarth">Toby Howarth</a></p>
+      <p>All content &copy; Jack Franklin</p>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3206068-17']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
+    </div>
+  </footer>
+	</body>
+</html>

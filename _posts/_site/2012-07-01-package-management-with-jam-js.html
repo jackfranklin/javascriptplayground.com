@@ -1,0 +1,87 @@
+<p>Today we&#8217;ll take a look at <a href='http://jamjs.org/'>Jam JS</a>, a JavaScript Package Manager. This uses <a href='http://requirejs.org/'>RequireJS</a> to load in your required packages and makes using JavaScript libraries much easier.</p>
+
+<p>The first thing to do is install it. This is done through the Node Package Manager, which I&#8217;ll presume you&#8217;ve got installed. If not, you need to install Node.js &amp; NPM; there are plenty of resources online for helping you do this. To install simply run:</p>
+
+<pre><code>npm install -g jamjs</code></pre>
+
+<p>The <code>-g</code> makes it install globally, which gives you the <code>jam</code> command to run on the command line.</p>
+
+<p>Lets create a new project, which will be a simple website with some jQuery written to change the background colour of the website. For this usually I&#8217;d pull in jQuery from Google&#8217;s CDN, but Jam can download &amp; set this up for us.</p>
+
+<p>Head into your project&#8217;s directory and run:</p>
+
+<pre><code>jam install jquery</code></pre>
+
+<p>This will download the latest version of jQuery and put it into <code>./jam/jquery/jquery.js</code>. By default all packages are installed to <code>./jam</code>. Now, we could just include that script manually, but Jam comes with RequireJS to manage this for us.</p>
+
+<p>Firstly, here&#8217;s my <code>index.html</code>:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Jam JS&lt;/title&gt;
+    &lt;script src=&quot;jam/require.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;Using Jam JS&lt;/h2&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>The key here is including <code>jam/require.js</code>, which pulls in the RequireJS source, all configured to work with Jam&#8217;s directory structure for packages.</p>
+
+<p>The work is done in <code>app.js</code>:</p>
+
+<pre><code>require([&#39;jquery&#39;], function () {
+  var changeBg = function() {
+    var body = $(&quot;body&quot;);
+
+    var colours = [&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;yellow&quot;];
+
+    body.css(&quot;background-color&quot;, colours[Math.floor(Math.random()*colours.length)]);
+
+    setTimeout(changeBg, 2000);
+
+  };
+
+  $(function() {
+    setTimeout(changeBg, 2000);
+  });
+});</code></pre>
+
+<p>That code just changes the background colour every 2 seconds, but the important bit is in the top line:</p>
+
+<pre><code>require([&#39;jquery&#39;], function() {});</code></pre>
+
+<p>RequireJS takes in a list of modules to load, and then a callback function to run once they are all loaded.</p>
+
+<p>So far, you might be wandering what the main advantage of Jam is. So far, it&#8217;s been useful but nothing ground breaking. The main advantage for me is that you can update your scripts automatically. I don&#8217;t know about you, but a lot of my projects still use old versions of libraries because I never got round to updating them. Well, with Jam it&#8217;s as simple as:</p>
+
+<pre><code>jam upgrade</code></pre>
+
+<p>This checks all your libraries and will download new versions if required. You can also check for upgrades for an individual package:</p>
+
+<pre><code>jam upgrade jquery</code></pre>
+
+<p>However, sometimes you might want to stay at a specific version. Imagine jQuery 1.9 (not out yet, of course) introduces a change that breaks your application. You can tell Jam to lock jQuery at 1.8.x with:</p>
+
+<pre><code>jam lock jquery@1.8.x</code></pre>
+
+<p>This will allow it to upgrade jQuery all the way through 1.8 but not to 1.9. When the time comes for you to upgrade &amp; fix those issues, you can unlock &amp; upgrade it again:</p>
+
+<pre><code>jam unlock jquery
+jam upgrade jquery</code></pre>
+
+<p>To view all your packages, you can do <code>jam ls</code>.</p>
+
+<p>You can see the list of Jam&#8217;s packages <a href='http://jamjs.org/packages/#/'>on the Jam site</a>, and also search. Whilst Jam is relatively new and does not have a huge library, a lot of very popular tools are on Jam, including jQuery, Underscore, CoffeeScript, Backbone, Handlebars and more.</p>
+
+<p>Once you&#8217;ve got all your packages installed and your website done, it&#8217;s time to put it live. We all know it&#8217;s bad practise to include all these scripts individually, so Jam provides a mechanism to pool all our scripts into one. This will compile every library and the RequireJS source into one file:</p>
+
+<pre><code>jam compile output.min.js</code></pre>
+
+<p>This will produce <code>output.min.js</code> which can then be included when putting your site into production.</p>
+
+<p>That brings to an end this whirlwind tour of Jam JS. Tools like this are becoming all the more common for JavaScript development &amp; that&#8217;s a good thing. In the next couple of months I&#8217;ll be taking a look at a few tools that attempt to improve the JavaScript workflow &amp; make managing libraries and packages easier.</p>
+
+<p>In a tutorial next week, I will show you how to make your own library a Jam package and publishing it for everyone to use.</p>

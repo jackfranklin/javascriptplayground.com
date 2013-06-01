@@ -1,0 +1,82 @@
+<p>Previously on this blog I&#8217;ve written about an AMD approach with <a href='http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction'>Require.js</a> and about package management with <a href='http://javascriptplayground.com/blog/2012/07/package-management-with-jam-js'>Jam JS</a>. Jam uses Require.js so what I thought would be a nice way to tie these two posts together would be to write on how to make your JS library AMD compliant and how to publish it with Jam, for use in other projects.</p>
+
+<p>The project I&#8217;m using is actually written in CoffeeScript, but it&#8217;s so similar to JavaScript in this instance that it shouldn&#8217;t be an issue. I&#8217;ve also included the same code in JavaScript, if CoffeeScript isn&#8217;t your thing.</p>
+
+<p>I discussed how to define a module in the previous RequireJS tutorial linked above, so if you&#8217;re not sure how to do things, please read that and then return here. The way to define something is simple - check if <code>window.define</code> exists, and if it does, use it to define our module. To define a module we need to pass it a function that simply returns what we want a user of our library to access. Sometimes that&#8217;s just one method, or it might be an object of multiple methods.</p>
+
+<p>In my case, using my little <a href='https://github.com/jackfranklin/responsiveImages'>Responsive Images</a> script, I just needed to expose the function <code>responsiveImage</code>, which I had already attached onto the window object at this stage. In CoffeeScript, it&#8217;s written like so:</p>
+
+<pre><code>#expose globally
+window.responsiveImage = responsiveImages
+
+# support AMD
+if typeof window.define is &quot;function&quot; &amp;&amp; window.define.amd
+    window.define &quot;responsiveImages&quot;, [], -&gt; window.responsiveImage</code></pre>
+
+<p>If I were to write that in JavaScript, it would be:</p>
+
+<pre><code>window.responsiveImage = responsiveImages;
+
+if (typeof window.define === &quot;function&quot; &amp;&amp; window.define.amd) {
+  window.define(&quot;responsiveImages&quot;, [], function() {
+    return window.responsiveImage;
+  });
+}</code></pre>
+
+<p>Note that I use <code>window.define</code> rather than <code>define</code> because all my code is wrapped within an anonymous function, so I don&#8217;t have access to the global scope through <code>this</code>.</p>
+
+<p>The next thing to do is to create a <code>package.json</code> file so Jam knows about our package and how to run it. For my project, it looks like this:</p>
+
+<pre><code>{
+  &quot;name&quot;: &quot;responsiveImages&quot;,
+  &quot;version&quot;: &quot;0.0.2&quot;,
+  &quot;description&quot;: &quot;A quick script to provide a way of changing which image to use based on window dimensions.&quot;,
+  &quot;main&quot;: &quot;responsiveimages.js&quot;,
+  &quot;repositories&quot;: [
+    {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;https://github.com/jackfranklin/responsiveImages.git&quot;
+  }
+  ],
+  &quot;github&quot;: &quot;https://github.com/jackfranklin/responsiveImages&quot;
+}</code></pre>
+
+<p>The only line there that isn&#8217;t immediately obvious is the one declaring <code>main</code>. By default Jam will look for a file <code>main.js</code>, but if yours isn&#8217;t called that you can tell it so in the JSON file. There&#8217;s a lot more options you can set - <a href='http://jamjs.org/docs#Package_json'>they are documented well on the Jam site</a>.</p>
+
+<p>Now it&#8217;s time to publish. Head to the <a href='http://jamjs.org/'>Jam site</a> and sign up. Then head into your library&#8217;s directory and run:</p>
+
+<pre><code>jam publish</code></pre>
+
+<p>If all goes well, you will see output similar to:</p>
+
+<pre><code>-&gt; jam publish
+Please provide credentials for: http://jamjs.org/repository
+Username: jackfranklin
+Password: 
+creating /Users/JackFranklin/.jam/cache/responsiveImages/0.0.2/responsiveImages-0.0.2.tar.gz
+extracting /Users/JackFranklin/.jam/cache/responsiveImages/0.0.2/responsiveImages-0.0.2.tar.gz
+OK</code></pre>
+
+<p>Now lets check this. Head into a project where you want to use the library (preferably this should be one which already uses Jam for package management) and run:</p>
+
+<pre><code>jam install responsiveImages</code></pre>
+
+<p>Changing the package name to yours. You&#8217;ll see output that should include something like</p>
+
+<pre><code>installing responsiveImages@0.0.1 </code></pre>
+
+<p>Once that&#8217;s done, try it out. Head into your main JS file and change the <code>require</code> call to include your new package. Remember that the package return is passed into the function as a variable, so add that in too:</p>
+
+<pre><code>require([&#39;jquery&#39;, &#39;responsiveImages&#39;], function ($, RI) {});</code></pre>
+
+<p>And now you should be able to use your library! As a test, I ran a simple <code>console.log(RI)</code> and made sure it logged the function I return. If you want to upgrade your package, it&#8217;s generally a 3 step process:</p>
+
+<ol>
+<li>Make your changes and commit them.</li>
+
+<li>Boost the version number in your <code>package.json</code></li>
+
+<li>Run <code>jam publish</code> again.</li>
+</ol>
+
+<p>If you&#8217;re working on a lot of projects that use a lot of similar code, I highly recommend extracting them out into small AMD modules that can then be managed with a tool like Jam. I&#8217;ve been doing it recently and it really has made things a lot nicer when it comes to JS library versioning, upgrading and so on.</p>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Exploring Backbone: Part 1</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/js/rainbow-custom.min.js"></script>
+  <script src="/js/app.js"></script>
+</head>
+	<body class=" page ">
+    <header>
+      <nav>
+        <ul>
+          
+        </ul>
+      </nav>
+      <div class="container">
+        <hgroup>
+          <h2>JavaScript Playground</h2>
+          <h3>Tips, tricks, tutorials &amp; screencasts to help you improve your JavaScript</h3>
+        </hgroup>
+      <img src="/img/imac.png" alt="">
+      </div>
+    </header>
+    <div class="container">
+      <div class="container blog_single">
+  <section class="latest-article article">
+    <h1> Exploring Backbone: Part 1 </h1>
+    <p class="post_date"><span>Posted: </span></p>
+    <div class="post_body">
+      <p><a href='http://documentcloud.github.com/backbone/'>Backbone.js</a> is a framework that lets us structure our applications using a pattern similiar to MVC (technically Backbone is not pure MVC as the C stands for &#8220;Collection&#8221;). However, Backbone is a powerful system to use when creating apps that are beyond very basic. When passing &amp; manipulating a lot of data, you should consider using something like Backbone.</p>
+
+<p>Since launching this blog I&#8217;ve had a lot of people ask me about Backbone. Although there are a lot of very good resources out there, I have struggled to get to grips with it myself and from the requests I&#8217;ve had I&#8217;d suggest a lot of others have too. So, I sat down to create a sample application with Backbone, and in this tutorial - which will span at least 3 parts - we will create a very simplified shopping cart application, with Backbone. As always the source will be on Github and is linked to at the end of this post.</p>
+
+<p>The first thing to do is set up our basic page and include our dependencies. Backbone relies on Underscore.js, a set of utility functions written by Backbone&#8217;s creator, Jeremy Ashkenas (who also created CoffeeScript). You need to download Underscore.js, Backbone.js &amp; include jQuery too, which I do from the Google CDN. The Backbone link can be found above at the beginning of this article, and <a href='http://documentcloud.github.com/underscore/'>here&#8217;s the link for Underscore.js</a>. I&#8217;ve also created a stylesheet &amp; <code>cart.js</code>, which is where the majority of our code will go:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Shopping Cart with Backbone&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/style.css&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;yourcart&quot;&gt;&lt;/div&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/underscore.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/backbone.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/cart.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>The first thing we want to do is create a model. A model is a way we can represent data in an application, and the objects that we have in our application. We&#8217;re going to have just one thing today, which is items, which sit in a shopping cart. The convention is to name a model as singular &amp; capitalise it, so our model will be <code>Item</code>. To create a model we extend <code>Backbone.Model</code> like so:</p>
+
+<pre><code>var Item = Backbone.Model.extend({
+  defaults: {
+    price: 35,
+    photo: &quot;http://www.placedog.com/100/100&quot;
+  }
+});</code></pre>
+
+<p>Here I set up the default values for my item. It&#8217;s going to have three fields, a title, price &amp; then a photo. Whilst I don&#8217;t want to set a default title, I set the defaults for the other properties. <a href='http://documentcloud.github.com/backbone/#Model-extend'>There&#8217;s a lot you can do by extending models</a> which I will revist in a future tutorial. If you fancy reading some more now, check out that link to the documentation. Now new items can be created easily. Load up <code>index.html</code> in the browser &amp; try this out in the command line:</p>
+
+<pre><code>var football = new Item({title: &quot;Football&quot;});
+football.get(&quot;title&quot;); //&quot;Football&quot;
+football.get(&quot;price&quot;); //35
+football.get(&quot;photo&quot;); //http://www.placedog…</code></pre>
+
+<p>However, this functionality on its own is not very good. We need some way of managing sets of data, and this is where Collections come in. We can create a new collection which will store data, and tell it which model to use:</p>
+
+<pre><code>var Cart = Backbone.Collection.extend({
+  model: Item
+});</code></pre>
+
+<p>Now refresh the page, load up the console &amp; try this:</p>
+
+<pre><code>var collection = new Cart({title: &quot;football&quot;});
+collection.at(0).get(&quot;price&quot;); //35</code></pre>
+
+<p>You can initialise a collection by passing it either a single object or an array of objects, all of which it will presume are instances of the model we specified above It will then use the values passed to create an instance of the model for each object passed in. The <code>at()</code> method gets an object at a specific index and returns it.</p>
+
+<p>Now we have a collection &amp; a model, we&#8217;ve done the &#8220;MC&#8221; bit of &#8220;MVC&#8221;. So lets hook it up into a view to explore the basics of views in Backbone &amp; then we&#8217;ll wrap this up for today.</p>
+
+<p>Firstly, we need some sample data to work with, so I&#8217;m going to create some sample items and initialise our <code>Cart</code> collection with them:</p>
+
+<pre><code>var items = [
+  { title: &quot;Macbook Air&quot;, price: 799 },
+  { title: &quot;Macbook Pro&quot;, price: 999 },
+  { title: &quot;The new iPad&quot;, price: 399 },
+  { title: &quot;Magic Mouse&quot;, price: 50 },
+  { title: &quot;Cinema Display&quot;, price: 799 }
+];
+
+var cartCollection = new Cart(items);</code></pre>
+
+<p>Each view you create should be responsible for a small part of your application. I want to end this tutorial by showing all the items we have on the page, laid out neatly. Rather than having 1 view &amp; dealing with everything in there, I&#8217;m going to set up two. The first will be the template for an individual item, and the second will be for showing every single item. Before we write the JS, we need to make a quick HTML template for it, using the templating engine that comes with Underscore. These should go within script tags in <code>index.html</code>:</p>
+
+<pre><code>&lt;script id=&quot;itemTemplate&quot; type=&quot;text/template&quot;&gt;
+    &lt;img src=&quot;&lt;%= photo %&gt;&quot; alt=&quot;&lt;%= title %&gt;&quot;&gt;
+    &lt;div&gt;
+      &lt;h2&gt;&lt;%= title %&gt;&lt;/h2&gt;
+      &lt;h4&gt;&amp;pound;&lt;%= price %&gt;&lt;/h4&gt;
+    &lt;/div&gt;
+&lt;/script&gt;</code></pre>
+
+<p>You can see what will happen here. Where I&#8217;ve used <code>&lt;% = title %&gt;</code>, that will be replaced with the item&#8217;s title, and so on. I&#8217;ve given it a type of <code>text/template</code>, if we used <code>text/javascript</code>, the browser would try (and fail) to parse it.</p>
+
+<p>Now I can write the JS for the view for a <em>single item</em>:</p>
+
+<pre><code>var ItemView = Backbone.View.extend({
+  tagName: &quot;div&quot;,
+  className: &quot;item-wrap&quot;,
+  template: $(&quot;#itemTemplate&quot;).html(),
+
+  render: function() {
+    var templ = _.template(this.template);
+    this.$el.html(templ(this.model.toJSON()));
+    return this;
+  }
+});</code></pre>
+
+<p><code>tagName</code> and <code>className</code> tells Backbone to wrap the template within a <code>div</code> with a class of <code>item-wrap</code>. We give it the template, grabbing the code from our <code>script</code> tag. The default for <code>tagName</code> is <code>div</code>, so I could haveb left it out, but I wanted to put it in to highlight the fact it exists. The <code>render</code> method just uses Underscore&#8217;s <code>template()</code> method to parse the template. We then call it with a JSON representation of the current model - which for this view will be an individual item. <code>$el</code> is a variable automatically set for us which stores a jQuery reference to the current object. Backbone does this for us to save us a bit of time and it comes in very handy. Note that in the <code>render</code> method we return <code>this</code>. This is so we can call this method from another view, and get access to the returned data. Whenever a view is rendered, one of the properties it has is <code>el</code>, which is the fully compiled template, with every <code>&lt;%= title %&gt;</code> substituted for the correct value and so on. We will use this in our next view.</p>
+
+<p>On its own however, this view doesn&#8217;t serve a purpose. Right now it will render some HTMl for each individual item, but as I said earlier we want to write another view that shows all the items. This one is a bit more complex:</p>
+
+<pre><code>var CartCollectionView = Backbone.View.extend({
+  el: $(&quot;#yourcart&quot;),
+  initialize: function() {
+    this.collection = cartCollection;
+    this.render();
+  },
+  render: function() {
+    this.collection.each(function(item) {
+        this.renderItem(item);
+      }, this);
+  },
+  renderItem: function(item) {
+    var itemView = new ItemView({ model: item });
+    this.$el.append(itemView.render().el); 
+  }
+});</code></pre>
+
+<p>Don&#8217;t panic! We shall work through this line by line. Right at the beginning, you will see I hard coded into <code>index.html</code> the <code>div</code> with an id of &#8220;yourcart&#8221;. Here I give Backbone a reference to it. From this Backbone will also create <code>this.$el</code>, a jQuery reference to the element. Of course, I&#8217;ve actually done this already by setting <code>el</code> to be <code>$(&quot;#yourcart&quot;)</code> but it&#8217;s still handy to know.</p>
+
+<p>The <code>initialize()</code> method tells the view which collection to use, which I set to <code>cartCollection</code>, which we set up earlier. I then make it call its own <code>render()</code> method. The <code>render</code> method takes the collection, and then uses <code>each</code> to loop through each item within the collection. The first argument is the iterator function, in which I just call <code>renderItem()</code>, passing the item in. The second argument is the context, which I pass in as <code>this</code>. This means the function is invoked with the value of <code>this</code> equal to whatever <code>this</code> was when it was invoked. In my case, this will mean <code>this</code> refers to the <code>CartCollectionView</code> object</p>
+
+<p>Finally, <code>renderItem()</code> takes an item, creates a new <code>ItemView()</code> for that specific Item, passing in the <code>model</code> property. From there we append the compiled <code>ItemView</code> template (remember the discussion about returning <code>this</code> within <code>ItemView</code> earlier? This was why) to <code>this.$el</code>, which is <code>$(&quot;#yourcart&quot;)</code>.</p>
+
+<p>That&#8217;s it. Although the code looks pretty overwhelming on the surface, once you look into it it&#8217;s not so bad. Finally, all we need to do is instantiate a new instance of our main view when the DOM is ready:</p>
+
+<pre><code>$(function() {
+  var cart = new CartCollectionView();
+});</code></pre>
+
+<p>And then (after a quick bit of CSS) you&#8217;ll see this:</p>
+
+<p><img alt='' src='https://img.skitch.com/20120422-k2f196g9jeuw8578hxcsb591i8.jpg' /></p>
+
+<p>I&#8217;m not going to cover the CSS, as I&#8217;m no designer, but it&#8217;s in the repository if you want to take a look. It&#8217;s hardily design of the century, mind.</p>
+
+<p>So, at this point we&#8217;re done for today. We&#8217;ve done a lot of stuff, but I bet you&#8217;ve got a lot of questions, such as:</p>
+
+<ul>
+<li>How do I add to a collection after initialising it?</li>
+
+<li>How can I show a filtered set of my objects?</li>
+
+<li>How do I let a user add a new item?</li>
+
+<li>How do I unit test my Backbone applications?</li>
+
+<li>Can I use Backbone.js with CoffeeScript?</li>
+</ul>
+
+<p>And plenty more. I hope to answer all of the above &amp; more in the future. Backbone is a big topic, there&#8217;s lots of cool stuff it&#8217;s capable of &amp; today we&#8217;ve really barely scratched the surface. As always, any questions please leave a comment &amp; I will answer them all in the next part, which will come soon. Code for this tutorial is <a href='https://github.com/jackfranklin/JS-Playground-Backbone'>on the Github repository</a>.</p>
+    </div>
+  </section>
+  <div id="disqus_thread" style="margin-top: 30px"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jsplayground'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+    </div>
+  <footer>
+    <div class="container">
+      <h2>JavaScript Playground</h2>
+      <p>Maintained by <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>. Designed by <a href="http://twitter.com/TobyHowarth">Toby Howarth</a></p>
+      <p>All content &copy; Jack Franklin</p>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3206068-17']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
+    </div>
+  </footer>
+	</body>
+</html>

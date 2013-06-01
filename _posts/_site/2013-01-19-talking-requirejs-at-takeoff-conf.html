@@ -1,0 +1,18 @@
+<p>So this week I attended my first conference outside of the UK and travelled to a freezing Lille, in Northern France (it&#8217;s been below freezing every day!) and spoke on <a href='http://requirejs.org'>RequireJS</a>, something I have <a href='http://javascriptplayground.com/blog/category/requirejs'>written about before</a>.</p>
+
+<p>In the future I will be doing a screencast on RequireJS in detail but for now I wanted to post up the slides and talk about the talk a little.</p>
+<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;script async class=&quot;speakerdeck-embed&quot; data-id=&quot;5a30af8043250130d05b22000a1c46b4&quot; data-ratio=&quot;1.2994923857868&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;</pre>
+<p>The main thing I said in my talk with RequireJS that I wanted to reiterate is that when you first start it, you&#8217;ll probably get frustrated. I know I did. The tipping point for me was when I figured out how to shim. When you first use Require it&#8217;s tempting to just ditch it when you encounter a non-AMD compliant library (such as Underscore), but shimming it is so simple:</p>
+
+<pre><code>require.config({
+	shim: {
+		&#39;lib/underscore&#39;: {
+			&#39;exports&#39;: &#39;_&#39;
+		}
+	}
+});</code></pre>
+
+<p>Something <a href='http://twitter.com/mheap'>@mheap</a> pointed out to me that once you have an optimised JS file, you can swap out the RequireJS source for <a href='https://github.com/jrburke/almond'>Almond</a>, a much more minimal AMD API that you can include into your build file - check the Github link for instructions on how to use.</p>
+
+<p>I&#8217;m a huge fan of RequireJS and it&#8217;s now very rare that I start a new JS project without utilising it.</p>

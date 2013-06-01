@@ -1,0 +1,60 @@
+<p>From jQuery 1.7 new methods were added for binding events, <code>.on()</code> and <code>.off()</code> which, unsurprisingly, does the opposite of <code>.on()</code>. Amongst the community, there seems to have been a bit of confusion over these methods &amp; in this post I want to clear this up, once &amp; for all.</p>
+
+<p>Firstly, I&#8217;m going to hit you with a rule:</p>
+
+<p><strong>From now on, you should use <code>.on()</code> and <code>.off()</code> for all your event binding in jQuery.</strong></p>
+
+<p>You actually will be doing this, whether you like it or not, if you&#8217;re using jQuery 1.7+. If you take a look at the source for <code>.click()</code>, you can see it actually just calls <code>.on()</code>:</p>
+
+<pre><code>function (data, fn) {
+    if (fn == null) {
+        fn = data;
+        data = null;
+    }
+
+    return arguments.length &gt; 0 ? this.on(name, null, data, fn) : this.trigger(name);
+}</code></pre>
+
+<p><em>For looking at the jQuery source I really like James Padolsey&#8217;s <a href='http://james.padolsey.com/jquery/#v=git'>jQuery source viewer</a></em></p>
+
+<p>It won&#8217;t surprise you to know that all the other methods like <code>.bind()</code>, <code>.delegate()</code> and so on all internally use <code>.on()</code>.</p>
+
+<p>In the most basic form, this is how we&#8217;d assign a click handler now:</p>
+
+<pre><code>$(elem).on(&quot;click&quot;, function() {
+	console.log(&quot;clicked&quot;);
+});</code></pre>
+
+<p>The preferred way now of binding events is through <em>delegation</em>. The idea of delegating is that you delegate an event to a parent, and then every time it detects that event, it looks to see if the item clicked on is what we want, and then it triggers that event. This is perhaps easier to see in an example:</p>
+
+<pre><code>$(&quot;table&quot;).on(&quot;click&quot;, &quot;tr&quot;, function() {
+	console.log(&quot;tr inside table clicked&quot;);
+});</code></pre>
+
+<p>The advantage of this is that it&#8217;s much easier work for the browser to bind one click event to one item, and then run a conditional every time that event fires, compared to binding a click event to every single <code>tr</code>. Essentially, with delegate, the process for the above code goes like this:</p>
+
+<ol>
+<li>Bind 1 click event to <code>table</code></li>
+
+<li>Detected a click event on <code>table</code></li>
+
+<li>Was that click event on a <code>tr</code> ?</li>
+
+<li>If so, fire the function.</li>
+
+<li>If not, do nothing.</li>
+</ol>
+
+<p>The final question you might be wondering is how we convert <code>.live()</code> events to <code>.on()</code> ? For those who are not familiar with <code>.live()</code>, it allowed you to bind an event to a selector and have that event still bound to elements you programmatically inserted into the page <em>after</em> the event binding.</p>
+
+<p>The solution is to use <code>.on()</code> &amp; delegation. Taking our <code>$(&quot;table&quot;).on()</code> example from above, this would still fire click events on <code>tr</code> items, even if those <code>tr</code> items had been dynamically inserted by our code.</p>
+
+<p>Events can be removed with <code>.off()</code>, for example:</p>
+
+<pre><code>$(&quot;p&quot;).off();</code></pre>
+
+<p><code>.off()</code> is actually pretty clever in the way it works, again the <a href='http://api.jquery.com/off/'>jQuery docs</a> offer a good overview. Personally I only want to briefly mention it here, as I don&#8217;t think it&#8217;s something I&#8217;ve ever used in practice.</p>
+
+<p>That concludes our brief look into <code>.on()</code>. From jQuery 1.7 onwards <code>.bind()</code>, <code>.live()</code> &amp; <code>.delegate()</code> are all <strong>deprecated</strong> and I would encourage you to use the new APIs available to use, as <code>.on()</code> is a far superior method in my opinion.</p>
+
+<p>For more, I suggest you read the <a href='http://api.jquery.com/on/'>jQuery documentation for <code>.on()</code></a> as it is a very comprehensive read.</p>

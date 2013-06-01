@@ -1,0 +1,43 @@
+<p>Something I will be focusing on on a regular basis here at JSP is producing tidy code that&#8217;s easier to maintain in the future as well as nicer to work with. One such area where people often produce messy code is when using jQuery&#8217;s <code>.css()</code> method.</p>
+
+<p>Basic usage of this goes like so:</p>
+
+<pre><code>$(elem).css(&quot;display&quot;); //returns value
+$(elem).css(&quot;display&quot;, &quot;block&quot;); //sets value</code></pre>
+
+<p>And in order to set multiple values, people will often do this:</p>
+
+<pre><code>$(elem)
+	.css(&quot;display&quot;, &quot;block&quot;)
+	.css(&quot;border&quot;, &quot;1px solid blue&quot;)
+	.css(&quot;background&quot;, &quot;#F00&quot;)
+	{and so on}</code></pre>
+
+<p>However this is the wrong way to do this, on so many levels. jQuery is written pretty cleverly, and <code>.css()</code> can take an object of properties &amp; their respective values:</p>
+
+<pre><code>$(elem).css({
+	&quot;border&quot; : &quot;1px solid blue&quot;,
+	&quot;display&quot; : &quot;block&quot;,
+	&quot;background&quot; : &quot;#F00&quot;
+});</code></pre>
+
+<p>It&#8217;s worth noting that you don&#8217;t actually need the quotes around the properties (but you do around the values), this would be valid:</p>
+
+<pre><code>$(elem).css({
+	border: &quot;1px solid blue&quot;,
+	{so on}
+});</code></pre>
+
+<p>However, you have to use quotes if you want to use a reserved word as a property. For example if you were creating a new element &amp; setting the class attribute:</p>
+
+<pre><code>$(&quot;&lt;div/&gt;&quot;, {
+	class: &quot;myDiv&quot;
+});</code></pre>
+
+<p>That&#8217;s invalid, as <code>class</code> is a reserved word, so you&#8217;d have to do :</p>
+
+<pre><code>$(&quot;&lt;div/&gt;&quot;, {
+	&quot;class&quot; : &quot;myDiv&quot;
+});</code></pre>
+
+<p>Because this always trips me up, I&#8217;ve simply gotten into the habit of always putting quotes around my property names in JS objects. This is more a personal preference than anything else, just pick what makes the most sense to you.</p>

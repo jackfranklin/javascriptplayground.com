@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Hosting a Node app on Heroku</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/js/rainbow-custom.min.js"></script>
+  <script src="/js/app.js"></script>
+</head>
+	<body class=" blog_single ">
+    <header>
+      <nav>
+        <ul>
+          
+        </ul>
+      </nav>
+      <div class="container">
+        <hgroup>
+          <h2>JavaScript Playground</h2>
+          <h3>Tips, tricks, tutorials &amp; screencasts to help you improve your JavaScript</h3>
+        </hgroup>
+      <img src="/img/imac.png" alt="">
+      </div>
+    </header>
+    <div class="container">
+      <div class="container blog_single">
+  <section class="latest-article article">
+    <h1> Hosting a Node app on Heroku </h1>
+    <p class="post_date"><span>Posted: </span>07 October 2012</p>
+    <div class="post_body">
+      <p>Today I want to look at using the popular <a href='http://www.heroku.com'>Heroku</a> to host a simple Node app. I got asked recently if I had any suggestions on hosting a small Node app, and Heroku&#8217;s free plan is usually more than enough for little side projects, or to show off something you&#8217;re working on. It can be a bit daunting if you&#8217;ve never used it before, so I thought a step by step guide would be of use. This tutorial does require knowledge of Git and also you should be comfortable with the command line - if you&#8217;re not then Heroku probably isn&#8217;t for you.</p>
+
+<p>Heroku is heavily used to run Ruby / Rails apps but recently added Node.js support and it&#8217;s a really great way to quickly and easily get something running online.</p>
+
+<p>If you haven&#8217;t already, you&#8217;ll need to <a href='https://api.heroku.com/signup/devcenter'>sign up to Heroku</a>, which is completely free. You&#8217;ll then need to install the <a href='https://toolbelt.heroku.com/'>Heroku Toolbelt</a>, which will give you access to the <code>heroku</code> command line interface.</p>
+
+<p>For the app, I&#8217;m going to use the small Express server example I introduced in my <a href='http://javascriptplayground.com/blog/2012/04/beginning-node-js-express-tutorial'>Beginning Node</a> tutorial. This contains <code>helloworld.js</code>, which has the following:</p>
+
+<pre><code>var app = require(&#39;express&#39;).createServer();
+app.get(&#39;/&#39;, function(req, res) {
+  res.send(&quot;Hello World&quot;);
+});
+
+app.listen(3000, function() {
+  console.log(&quot;listening on 3000&quot;);
+});</code></pre>
+
+<p>We need to make one change to this though. Heroku will need us to run on a specific port, which we access through the <code>process</code> object, which is available to use. Make your app listen on the port number specified in <code>process.env.PORT</code>, or if it can&#8217;t find one, revert to 3000. This way it will work both locally and on Heroku.</p>
+
+<pre><code>app.listen(process.env.PORT || 3000, function() {
+  console.log(&quot;listening on 3000&quot;);
+});</code></pre>
+
+<p>And also <code>package.json</code>, which lists the dependencies we have. Heroku also recommend you list your engines in <code>package.json</code>, so add them in so your file looks like so:</p>
+
+<pre><code>{
+  &quot;name&quot;: &quot;jsphelloworld&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;~2.5.9&quot;
+  },
+  &quot;engines&quot;: {
+    &quot;node&quot;: &quot;0.8.x&quot;,
+    &quot;npm&quot;: &quot;1.1.x&quot;
+  }
+}</code></pre>
+
+<p><em>This is using an outdated version of Express but for this tutorial it&#8217;s irrelevant - there&#8217;s tutorials planned around Express V3 in the near future.</em></p>
+
+<p>It&#8217;s important to note that you have to be using NPM to manage your dependencies to host with Heroku. You also need to be using Git as your VCS too, as to update files on Heroku you do a <code>git push</code>. Run <code>npm install</code> to make sure your <code>package.json</code> file is valid, and that you&#8217;ve got all your dependencies sorted.</p>
+
+<p>Next we need to tell the Heroku server how it should run our app. This is done through what Heroku call a <a href='https://devcenter.heroku.com/articles/procfile'>Procfile</a>. It&#8217;s a simple text file created in the project root and for this example, we simply need to tell it how to run our app, which is done like so:</p>
+
+<pre><code>web: node helloworld.js</code></pre>
+
+<p>That&#8217;s <strong>all</strong> your Procfile should contain. Youc an test this by running it through Foreman, a way of running apps that uses a Procile to do it. Run <code>foreman start</code> (it&#8217;s installed as part of the Heroku toolbelt) and you should see output somewhat like this:</p>
+
+<pre><code>-&gt; foreman start
+12:37:50 web.1  | started with pid 1890
+12:37:51 web.1  | Listening on 3000</code></pre>
+
+<p>If you get that, everything&#8217;s working fine. You can go to <code>localhost:3000</code> to check if you want to make sure.</p>
+
+<p>Now it&#8217;s time to get these files into Git. Initialise your Git repository if your code is not in Git already, and commit all the changes we&#8217;ve made. Now we&#8217;re ready to run it on Heroku.</p>
+
+<p>On the command line, run <code>heroku login</code>. This will authenticate you and set up any neccessary public keys required to allow you to push to Heroku. Now run <code>heroku create</code> to get Heroku to set up a site for you:</p>
+
+<pre><code>-&gt; heroku create
+Creating fathomless-cove-9338... done, stack is cedar
+http://fathomless-cove-9338.herokuapp.com/ | git@heroku.com:fathomless-cove-9338.git
+Git remote heroku added</code></pre>
+
+<p>Now it&#8217;s time to deploy your app. Heroku sets up a git remote for you, so to deploy simply run:</p>
+
+<pre><code>git push heroku master</code></pre>
+
+<p>This will take a few moments, especially the first time. Your output should look something like:</p>
+
+<pre><code>-&gt; git push heroku master
+Counting objects: 6, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 629 bytes, done.
+Total 6 (delta 0), reused 0 (delta 0)
+
+-----&gt; Heroku receiving push
+-----&gt; Node.js app detected
+-----&gt; Resolving engine versions
+       Using Node.js version: 0.8.11
+       Using npm version: 1.1.49
+-----&gt; Fetching Node.js binaries
+-----&gt; Vendoring node into slug
+-----&gt; Installing dependencies with npm
+      	[snip - NPM logging here is pretty verbose]
+       Dependencies installed
+-----&gt; Building runtime environment
+-----&gt; Discovering process types
+       Procfile declares types -&gt; web
+-----&gt; Compiled slug size: 4.0MB
+-----&gt; Launching... done, v3
+       http://fathomless-cove-9338.herokuapp.com deployed to Heroku</code></pre>
+
+<p>Nearly there! You now need to tell Heroku to run 1 web process, which is done like so:</p>
+
+<pre><code>heroku ps:scale web=1</code></pre>
+
+<p>And finally, check out your app:</p>
+
+<pre><code>heroku open</code></pre>
+
+<p>This will open your site in the browser and if yours is like <a href='http://fathomless-cove-9338.herokuapp.com/'>mine</a>, you should get the text &#8220;Hello World&#8221; right back at you.</p>
+
+<p>Heroku can be a little daunting at first but hopefully this guide has shown that it&#8217;s pretty straight forward once you get used to the way it works.</p>
+    </div>
+  </section>
+  <div id="disqus_thread" style="margin-top: 30px"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jsplayground'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+    </div>
+  <footer>
+    <div class="container">
+      <h2>JavaScript Playground</h2>
+      <p>Maintained by <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>. Designed by <a href="http://twitter.com/TobyHowarth">Toby Howarth</a></p>
+      <p>All content &copy; Jack Franklin</p>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3206068-17']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
+    </div>
+  </footer>
+	</body>
+</html>

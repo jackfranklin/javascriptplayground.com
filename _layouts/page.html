@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  {{ theme:partial name="metadata" }}
+</head>
+	<body class="page_single">
+    {{ theme:partial name="header" }}
+    <!-- Content -->
+    <div class="container">
+      <section class="latest-article article">
+        {{ template:body }}
+      </section>
+    </div>
+    <footer>
+      {{ theme:partial name="footer" }}
+    </footer>
+	</body>
+</html>

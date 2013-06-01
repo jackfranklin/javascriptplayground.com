@@ -1,0 +1,66 @@
+<p>Prior to jQuery 1.5, Ajax requests could get a bit messy. You&#8217;d probably do something like this, if we were making a simple <code>get</code> request:</p>
+
+<pre><code>$(function() {
+  $.get(
+    &quot;content.txt&quot;,
+    function(resp) {
+      console.log(&quot;first code block&quot;);
+      console.log(resp);
+    }
+  );
+
+});</code></pre>
+
+<p>But this gives you a potential issue - what happens if this fails? What if you can&#8217;t define the function to run in this code? These are issues before that have required a fair amount of work arounds but with 1.5 onwards we&#8217;ve got the <a href='http://api.jquery.com/category/deferred-object/'>jQuery Deferred Object</a>. In this post I&#8217;ll show you why this is so useful. All of the following code relies on <strong>jQuery 1.5 or higher</strong>.</p>
+
+<p>jQuery Ajax calls now return the jQuery Deferred object I linked to above. The documentation is a little overwhelming &amp; not entirely clear, so don&#8217;t worry if a brief look at that leaves you confused. Simply put, Ajax calls now return a jQuery object containing what&#8217;s known as a <a href='http://api.jquery.com/promise/'>promise</a>:</p>
+
+<blockquote>
+<p>The .promise() method returns a dynamically generated Promise that is resolved once all actions of a certain type bound to the collection, queued or not, have ended.</p>
+</blockquote>
+
+<p>In reality whilst working with basic Ajax calls, you don&#8217;t need to worry about the exact specifications or inner workings. Continuing from the <code>get</code> example above, here&#8217;s how we&#8217;d implement it using jQuery&#8217;s <code>when()</code>, <code>then()</code> and <code>fail()</code> methods:</p>
+
+<pre><code>$.when($.get(&quot;content.txt&quot;))
+  .then(function(resp) {
+    console.log(&quot;third code block, then() call&quot;);
+    console.log(resp);
+  })
+  .fail(function(resp) {
+    console.log(resp);
+  });</code></pre>
+
+<p>It can basically be read as:</p>
+
+<pre><code>$.when(some ajax request).then(do this if it succeeds).fail(or do this if it fails)</code></pre>
+
+<p>The main feature of this is that <code>$.when()</code> can take multiple functions, and will then call the functions you pass to <code>.then()</code> once <em>all those functions</em> have finished:</p>
+
+<pre><code>$.when(fn1(), fn2()).then().fail()</code></pre>
+
+<p>You still might not be able to see the main advantage of this method yet, compared to just defining the methods within an object via <code>$.ajax()</code>. However, more importantly, we are able to <em>save Ajax calls to bind events later</em>:</p>
+
+<pre><code>var xhrreq = $.get(&quot;content.txt&quot;);</code></pre>
+
+<p>We can then define <code>.success</code> and <code>.error</code> methods on this variable:</p>
+
+<pre><code>xhrreq.success(function(resp) {
+	console.log(resp);
+});</code></pre>
+
+<p>And:</p>
+
+<pre><code>xhrreq.error(function(resp) {
+  console.log(resp);
+});</code></pre>
+
+<p>With the main advantage here, being that we can declare many functions to run:</p>
+
+<pre><code>xhrreq.success(fn1);
+xhrreq.success(fn2);</code></pre>
+
+<p>Or, an even easier way:</p>
+
+<pre><code>xhrreq.success(fn1, fn2);</code></pre>
+
+<p>So, to conclude, hopefully this article has shown you that deferreds are a much improved way to work with Ajax calls in jQuery. In the future I&#8217;ll be doing follow up articles going into more depth.</p>

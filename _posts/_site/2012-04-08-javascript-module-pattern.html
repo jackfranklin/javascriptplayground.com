@@ -1,0 +1,97 @@
+<p>Lets say you&#8217;ve got a little library like this, that just increments a number:</p>
+
+<pre><code>var jspy = {
+  count: 0,
+
+  incrementCount: function() {
+    this.count++;
+  },
+
+  decrementCount: function() {
+    this.count--;
+  },
+
+  getCount: function() {
+    return this.count;
+  }
+
+};</code></pre>
+
+<p>However, people using this library are able to do <code>jspy.count = 5</code> to manually adjust the value. Lets say for the purpose of this tutorial, that users should not be able to do that. In other languages you&#8217;d be able to define a private variable, but JavaScript doesn&#8217;t explcitly have them. However, we are able to manipulate JavaScript to provide them to us, and that brings us on nicely to one of the most popular JavaScript design patterns, the <strong>Module</strong> or <strong>Modular</strong> pattern.</p>
+
+<p>The solution to the above is:</p>
+
+<pre><code>var jspy = (function() {
+  var _count = 0;
+  
+  var incrementCount = function() {
+    _count++;
+  }
+
+  var getCount = function() {
+    return _count;
+  }
+  return {
+    incrementCount: incrementCount,
+    getCount: getCount
+  };
+
+})();</code></pre>
+
+<p>Firstly I create the variable <code>_count</code>, with the underscore denoting that it&#8217;s private. The underscore means <em>nothing programmatically</em> in JavaScript&#8217;s case, but it&#8217;s a common notation used to denote private variables, and one I like to stick to. You can then see the functions that manipulate &amp; return that variable.</p>
+
+<p>However, you&#8217;ll notice I&#8217;ve wrapped the entire library in a self-invoking anonymous function. This is a function that&#8217;s executed immediately at runtime. The function runs, defines the variables &amp; functions and then hits the <code>return {}</code> statement, telling this function what to return to the variable <code>jspy</code>, or in other words, what <em>to expose to the user</em>. I chose to expose the two functions but <strong>not</strong> the <code>_count</code> variable, which means I can do this:</p>
+
+<pre><code>jspy.incrementCount();
+jspy.getCount();</code></pre>
+
+<p>But if I attempt:</p>
+
+<pre><code>jspy._count; //undefined</code></pre>
+
+<p>It returns <code>undefined</code>.</p>
+
+<p>There are a couple of different approaches to the way I&#8217;ve done things above. Some people like to define the function in the return statement:</p>
+
+<pre><code>var jspy = (function() {
+	var _count = 0;
+
+	return {
+	  incrementCount: function() {
+	    _count++;
+	  },
+	  getCount: function() {
+	    return _count;
+	  }
+	};
+})();</code></pre>
+
+<p>And following on from that, Christian Heilmann coined the <em>Revealing Module Pattern</em>. His approach is to define all methods privately, that is, not in the <code>return</code> block, but expose them there instead, like so:</p>
+
+<pre><code>var jspy = (function() {
+  var _count = 0;
+  var incrementCount = function() {
+    _count++;
+  };
+  var resetCount = function() {
+    _count = 0;
+  };
+  var getCount = function() {
+    return _count;
+  };
+  return {
+    add: incrementCount,
+    reset: resetCount,
+    get: getCount
+  };
+})();</code></pre>
+
+<p>The two advantages of this are:</p>
+
+<ul>
+<li>It&#8217;s easier to see at a glace the methods that get exposed; when you&#8217;re not defining all your methods within <code>return {}</code> it means it&#8217;s one exposed function per line, making it easier to scan.</li>
+
+<li>You can expose methods via shorter names (eg <code>add</code>) but define them slightly more verbosely in your definition (eg <code>incrementCount</code>).</li>
+</ul>
+
+<p>In future tutorials we&#8217;ll be looking at other types of patterns and putting these to use in a real world context. For now if you&#8217;re looking for further reading, I highly recommend <a href='http://addyosmani.com/resources/essentialjsdesignpatterns/book/'>Addy Osmani&#8217;s online book, JavaScript Design Patterns</a>.</p>
