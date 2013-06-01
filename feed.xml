@@ -1,0 +1,22 @@
+---
+layout: none
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The JavaScript Playground</title>
+    <description>JavaScript Tutorials and Screencasts</description>
+    <link>{{ site.url }}</link>
+    <atom:link href="http://javascriptplayground.com/feed.xml" rel="self" type="application/rss+xml" />
+    {% for post in site.posts limit:10 %}
+    <item>
+      <title>{{ post.title }}</title>
+      <description>{{ post.content | xml_escape }}</description>
+      <pubDate>{{ post.date | date: "%a, %d %b %Y" }}</pubDate>
+      <link>http://javascriptplayground.com{{ post.url }}</link>
+      <guid isPermaLink="true">http://javascriptplayground.com{{ post.url }}</guid>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
+

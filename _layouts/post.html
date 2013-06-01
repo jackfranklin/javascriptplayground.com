@@ -4,7 +4,13 @@ layout: default
 <div class="container blog_single">
   <section class="latest-article article">
     <h1> {{ page.title }} </h1>
-    <p class="post_date"><span>Posted: </span>{{ page.date | date: "%d %B %Y" }}</p>
+    <p class="post_date"><span>Posted: </span>{{ page.date | date: "%d %B %Y" }} by
+      {% if page.author %}
+        <a href="http://twitter.com/{{page.author_twitter}}">{{ page.author }}</a>
+      {% else %}
+        <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>
+      {% endif %}
+    </p>
     <div class="post_body">
       {{ content }}
     </div>

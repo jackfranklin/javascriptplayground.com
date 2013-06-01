@@ -1,0 +1,21 @@
+---
+layout: default
+title: Archives
+---
+
+<h3>Archives</h3>
+<p>Below are all the posts from the JavaScript Playground. <em>A better, more structured, searchable archives page is coming soon.</em></p>
+<ul class="archives">
+  {% for post in site.posts %}
+    <li>
+      <h4><a href="{{post.url}}">{{post.title}}</a></h4>
+      <p class="post_date">{{ post.date | date: "%d %B %Y" }} by
+      {% if post.author %}
+        <a href="http://twitter.com/{{post.author_twitter}}">{{ post.author }}</a>
+      {% else %}
+        <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>
+      {% endif %}
+    </p>
+      </li>
+  {% endfor %}
+</ul>

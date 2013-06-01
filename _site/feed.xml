@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The JavaScript Playground</title>
+    <description>JavaScript Tutorials and Screencasts</description>
+    <link></link>
+    <atom:link href="http://javascriptplayground.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introduction to AngularJS</title>
+      <description>&lt;p&gt;This is the first guest post on JS Playground from JavaScript developer &lt;a href=&quot;http://phuu.net/&quot;&gt;Tom Ashworth&lt;/a&gt;, who can be found on Twitter as &lt;a href=&quot;http://twitter.com/phuunet&quot;&gt;@phuunet&lt;/a&gt;. Thanks so much to Tom for taking the time to write for the blog. If you'd like to write for JS Playground, get in touch.&lt;/p&gt;
+
+&lt;p&gt;AngularJS is an open-source, client-side Javascript framework currently being developed at Google. It does things a little differently to other Javascript frameworks like Backbone, so here's a simple introduction.&lt;/p&gt;
+
+&lt;h3 id=&quot;extending-html&quot;&gt;Extending HTML&lt;/h3&gt;
+&lt;p&gt;Angular's philosophy is all about extending HTML by teaching it new tricks.&lt;/p&gt;
+&lt;p&gt;Using HTML as its templating language, Angular takes care of many tasks that would normally be up to you, like DOM manipulation and setting up event listeners.&lt;/p&gt;
+&lt;h3 id=&quot;getting-angular&quot;&gt;Getting Angular&lt;/h3&gt;
+&lt;p&gt;Angular's core consists of one Javascript file which is hosted on a number of CDN services, so beginning to use Angular is as simple as dropping a script tag onto the page:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also download uncompressed (and latest, unstable) versions from &lt;a href=&quot;http://angularjs.org&quot;&gt;angularjs.org&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;baby-steps&quot;&gt;Baby steps&lt;/h3&gt;
+&lt;p&gt;Here's your first Angular example, without a single line of custom Javascript – just drop this into an html page and fire it up in your browser, or view it &lt;a href=&quot;http://jsbin.com/enisaf/1/edit&quot;&gt;on JS Bin&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html ng-app&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
+  &amp;lt;title&amp;gt;ng-model&amp;lt;/title&amp;gt;
+
+  &amp;lt;style&amp;gt;
+    body { font: 14px/1.5 sans-serif; color: #222; margin: 3em; }
+    input { font: 14px/1.5 sans-serif; padding: 0 0.3em; }
+  &amp;lt;/style&amp;gt;
+
+  &amp;lt;script src=&amp;quot;http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+
+  &amp;lt;div class=&amp;quot;main&amp;quot;&amp;gt;
+    &amp;lt;input ng-model=&amp;quot;name&amp;quot; placeholder=&amp;quot;world&amp;quot;&amp;gt;
+    &amp;lt;h1&amp;gt;Hello, &amp;#123;{ name || &amp;#39;world&amp;#39; }}.&amp;lt;/h1&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So what's going on here?&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html ng-app&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first thing to notice is the &lt;code&gt;ng-app&lt;/code&gt; attribute on the opening HTML tag. This attribute is the simplest way to tell Angular to initialize itself on the page. Without this attirbute, Angular will do nothing.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input ng-model=&amp;quot;name&amp;quot; placeholder=&amp;quot;world&amp;quot;&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, notice the &lt;code&gt;ng-model&lt;/code&gt; attribute on the &lt;code&gt;input&lt;/code&gt; tag. &lt;code&gt;ng-model&lt;/code&gt; is a &lt;strong&gt;directive&lt;/strong&gt; that binds the value of the input to the &lt;code&gt;name&lt;/code&gt; model. You don't need to declare the model anywhere else – if Angular doesn't find it elsewhere, it will create and update it for you.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;directive&lt;/strong&gt; is the way you teach behaviour to HTML. Angular has a number of useful ones built in, but in building full-scale Angular apps you'll often create your own.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1&amp;gt;Hello, &amp;#123;{ name || &amp;#39;world&amp;#39; }}.&amp;lt;/h1&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Lastly, the braces contain a JavaScript expression that Angular will replace with the result of the expression, like a Mustache template. In this example, it will swap the braces for the value of the &lt;code&gt;name&lt;/code&gt; model (taken from the input), unless name has no value (is an empty string), when it will use the string &amp;quot;world&amp;quot; instead. In other words, the content of the braces is &lt;strong&gt;bound&lt;/strong&gt; to the value of the name model.&lt;/p&gt;
+&lt;p&gt;If you've fired this example up and tried it out, you'll have spotted that the bound text updates automatically as you type into the input. That's becuase the ng-model attribute told Angular to listen for key events on the input and update the page's bindings (the braces, in this example) accordingly.&lt;/p&gt;
+&lt;p&gt;Angular is an MVC framework, and in simple examples the models and views are very closely tied. One of Angular's strengths lies in making it very simple to bind a view and a model, with a controller mediating that connection.&lt;/p&gt;
+&lt;h3 id=&quot;controllers&quot;&gt;Controllers&lt;/h3&gt;
+&lt;p&gt;Controllers in Angular are simply Javascript functions. Each controller has a &lt;strong&gt;scope&lt;/strong&gt; that corresponds to an area of the DOM, and models can be created to exist only within that scope – much like Javascript's function scope.&lt;/p&gt;
+&lt;p&gt;To have Angular initialise a controller, and to set up the controller's scope, the &lt;code&gt;ng-controller&lt;/code&gt; attribute is used. The mode on which this attribute is set is the root node of the controller's scope.&lt;/p&gt;
+&lt;p&gt;Here's an example with a shopping list (you'll need the same &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; as in the last example) – or view it on &lt;a href=&quot;http://jsbin.com/enisaf/2/edit&quot;&gt;JS Bin&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;main&amp;quot; ng-controller=&amp;quot;ListCtrl&amp;quot;&amp;gt;
+  &amp;lt;ul&amp;gt;
+    &amp;lt;li ng-repeat=&amp;quot;item in shopping.list&amp;quot;&amp;gt;
+      &amp;#123;{ item }}
+    &amp;lt;/li&amp;gt;
+  &amp;lt;/ul&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;script&amp;gt;
+  var ListCtrl = function ($scope) {
+    $scope.shopping = {
+      list: [&amp;#39;Milk&amp;#39;, &amp;#39;Bread&amp;#39;, &amp;#39;Biscuits&amp;#39;]
+    };
+  };
+&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The controller, &lt;code&gt;ListCtrl&lt;/code&gt; is defined in the script tag. You can see it's not being called anywhere, but takes an argument, &lt;code&gt;$scope&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$scope&lt;/code&gt; gives the controller access to the models of it's scope, which can then be reflected in the views.&lt;/p&gt;
+&lt;p&gt;The above example sets up a &lt;code&gt;shopping&lt;/code&gt; model with a &lt;code&gt;list&lt;/code&gt; property. The &lt;code&gt;ng-repeat&lt;/code&gt; attirbute on the list item repeats over the items in the shopping list, outputting their names.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ng-repeat&lt;/code&gt; is another directive built into Angular. It repeats a template according to an expression you pass it. In the above example, the template is the &lt;code&gt;li&lt;/code&gt; and the expression is &lt;code&gt;item in shopping.list&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;this-is-just-the-start...&quot;&gt;This is just the start...&lt;/h3&gt;
+&lt;p&gt;That's been a very swift, and hopefully interesting, introduction to AngularJS. It's nothing groundbreaking, but hints at the power of Angular. One of the main advantages I've found is that Angular lets me code the way that I think, which is in very useful with have a complex data problem to solve. Maybe you'll find the same.&lt;/p&gt;
+&lt;p&gt;If you'd like to delve deeper, you can find further documentation on the Angular website, at &lt;a href=&quot;http://angularjs.org&quot;&gt;angularjs.org&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <pubDate>Wed, 24 Apr 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/04/introduction-angular-js</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/04/introduction-angular-js</guid>
+    </item>
+    
+    <item>
+      <title>jQuery CSS Hooks</title>
+      <description>&lt;p&gt;Did you know that jQuery gives you a way to write your own custom CSS methods? I didn&amp;#8217;t until recently and I&amp;#8217;d like to show you why they are useful in this short tutorial.&lt;/p&gt;
+
+&lt;p&gt;How many times have you wanted to do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$(&amp;quot;div&amp;quot;).css(&amp;quot;margin&amp;quot;, &amp;quot;1px 2px 3px 4px&amp;quot;);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But have to set each individual direction value separately? I know I have. Using CSS Hooks, we can easily add the above functionality to jQuery.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A word of warning: CSS Hooks were added in jQuery 1.4.3, so if you&amp;#8217;re stuck on an older version (you really shouldn&amp;#8217;t be by now) then this wont work.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Lets set up the wrapper for our new margin CSS hook. What we&amp;#8217;ll need to do is split the user&amp;#8217;s input into 4 values, one for each direction. First, I can set up an array containing the four directions. You&amp;#8217;ll see why this is important shortly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var directions = [&amp;quot;Top&amp;quot;, &amp;quot;Right&amp;quot;, &amp;quot;Bottom&amp;quot;, &amp;quot;Left&amp;quot;];&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, lets define our new &amp;#8220;margin&amp;#8221; hook. The hooks are stored as objects with two methods, &lt;code&gt;get&lt;/code&gt; and &lt;code&gt;set&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.cssHooks.margin = {
+	get: function(elem) {
+	},
+	set: function(elem, value) {
+	}
+};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the &lt;code&gt;get&lt;/code&gt; method does take more arguments, including the computed value of the specific CSS property it&amp;#8217;s being asked for. &lt;a href='http://api.jquery.com/jQuery.cssHooks/'&gt;The jQuery documentation discusses this in more detail&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#8217;s write the &lt;code&gt;set&lt;/code&gt; method first. This take two arguments, the element to set the CSS properties on, and the value the user passed. In our case this will be a string of values, eg &amp;#8220;1px 2px 3px 4px&amp;#8221;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set: function(elem, value) {
+  $.each(value.split(&amp;quot; &amp;quot;), function(i, val) {
+    elem.style[&amp;quot;margin + directions[i]&amp;quot;] = val;
+  });
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we split the values at a space, and loop over them. We use the directions array so for each value the relevant direction property is set. So here we loop over, first setting &lt;code&gt;marginTop&lt;/code&gt;, then &lt;code&gt;marginRight&lt;/code&gt;, and so on.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;get&lt;/code&gt; method will essentially do the reverse, getting each of the individual values and then joining them together into a string:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;get: function(elem, value) {
+  var res = [];
+  $.each(directions, function(i, dir) {
+    res.push($.css(elem, &amp;quot;margin&amp;quot; + dir));
+  });
+  return res.join(&amp;quot; &amp;quot;);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can use &lt;code&gt;$.css&lt;/code&gt; to pull out a CSS setting. All this method does is grab the four individual values and add them to an array, which I then join at the end to return a string.&lt;/p&gt;
+
+&lt;p&gt;Now there&amp;#8217;s obviously some problems. In CSS we can do &lt;code&gt;margin: 5px 10px&lt;/code&gt; to set top/bottom to 5px and left/right to 10px. Currently our implementation doesn&amp;#8217;t do this. Thankfully someone else has already done this. Brandon Aaron&amp;#8217;s &lt;a href='https://github.com/brandonaaron/jquery-cssHooks'&gt;CSS Hooks project&lt;/a&gt; has a number of hooks, including a more feature-complete margin implementation.&lt;/p&gt;
+
+&lt;p&gt;As I said in the opening, this was a jQuery feature I&amp;#8217;d managed to completely miss, and I bet I&amp;#8217;m not the only one, hence writing this post. &lt;a href='http://jsbin.com/enixej/2/edit'&gt;My margin implementation is up on JSBin&lt;/a&gt; if you&amp;#8217;d like to have a play with it, and if you write any interesting CSS Hooks yourself, do let me know in the comments. I can think of a number of scenarios in which they could be very useful.&lt;/p&gt;</description>
+      <pubDate>Mon, 08 Apr 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/04/jquery-css-hooks</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/04/jquery-css-hooks</guid>
+    </item>
+    
+    <item>
+      <title>Building an App with Express and Backbone: Part 3</title>
+      <description>&lt;p&gt;In the &lt;a href=&quot;http://javascriptplayground.com/blog/2013/02/building-an-app-with-express-and-backbone-part-2&quot;&gt;second part of the series&lt;/a&gt; we did some refactoring and also created the route for viewing a specific book. Today is a small episode with one main task, the ability for the user to make a POST request with JSON that gets saved as a new book.
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/63083580&quot; width=&quot;600&quot; height=&quot;338&quot; frameborder=&quot;0&quot; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt; &lt;p&gt;&lt;a href=&quot;http://vimeo.com/63083580&quot;&gt;Express JS &amp; Backbone: Episode 3&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/javascript&quot;&gt;The JavaScript Playground&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;
+	As always the &lt;a href=&quot;https://github.com/javascript-playground/express-backbone-library-app&quot;&gt;code is on Github&lt;/a&gt;, and I highly recommend playing the video in HD so it's clearer to see (I record at my laptop's resolution so everything should be crystal clear).&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, leave a comment and I'll either reply with a comment or answer in the next video.&lt;/p&gt;
+
+&lt;p&gt;Next time we'll leave Express to one side and start up our Backbone application.&lt;/p&gt;
+</description>
+      <pubDate>Thu, 04 Apr 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/04/building-an-app-with-express-and-backbone-part-3</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/04/building-an-app-with-express-and-backbone-part-3</guid>
+    </item>
+    
+    <item>
+      <title>Custom jQuery Builds with Grunt</title>
+      <description>&lt;p&gt;A lot has been made of how, in the future versions of jQuery, it will be possible to easily build your own version of jQuery, without the parts you know you&amp;#8217;re not going to use.&lt;/p&gt;
+
+&lt;p&gt;What a lot of people don&amp;#8217;t realise is that you can do this today, if you&amp;#8217;re prepared to install Grunt and grab the raw jQuery repository from Github. This quick tip will show you how.&lt;/p&gt;
+
+&lt;p&gt;First you&amp;#8217;re going to need Node and npm installed. Then get Grunt installed too. Note that since Grunt 0.4.0 the way of doing this has changed slightly. In the future I&amp;#8217;ll be covering Grunt in more detail but for now, follow the below instructions to get it going:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you&amp;#8217;ve ever previously installed Grunt 0.3.0, get rid of it: &lt;code&gt;npm uninstall -g grunt&lt;/code&gt;.&lt;/li&gt;
+
+&lt;li&gt;Now install the Grunt-CLI tool globally: &lt;code&gt;npm install -g grunt-cli&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This means each project on your machine can use a different version of Grunt, if it so desires. The Grunt CLI tool will use the first local version of Grunt it can find, so you can have specific version numbers on a project by project basis.&lt;/p&gt;
+
+&lt;p&gt;Next, lets clone the jQuery repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone git@github.com:jquery/jquery.git&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now navigate into that directory and install all dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd jquery
+npm install&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first time you clone the repository, you need to run Grunt once. This includes a number of tasks that update sub modules before running the tests and building jQuery:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will give you the full jQuery source minified into the &lt;code&gt;dist/&lt;/code&gt; folder. But say you wanted to build jQuery without any of the Ajax built in, as your current project is not going to need it. Try:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt custom:-ajax&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should get an output similar to this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Running &amp;quot;custom:-ajax&amp;quot; (custom) task
+Creating custom build...
+
+Running &amp;quot;build:all:*:-ajax&amp;quot; (build) task
+Excluding ajax             (src/ajax.js)
+Excluding ajax/script      (src/ajax/script.js)
+Excluding ajax/jsonp       (src/ajax/jsonp.js)
+Excluding ajax/xhr         (src/ajax/xhr.js)
+File &amp;#39;dist/jquery.js&amp;#39; created.
+
+Running &amp;quot;uglify:all&amp;quot; (uglify) task
+Source Map &amp;quot;dist/jquery.min.map&amp;quot; created.
+File &amp;quot;dist/jquery.min.js&amp;quot; created.
+Uncompressed size: 209152 bytes.
+Compressed size: 16767 bytes gzipped (73066 bytes minified).
+
+Running &amp;quot;dist&amp;quot; task
+
+
+
+Done, without errors.&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And there you go! It&amp;#8217;s not only the Ajax module you can remove, &lt;a href='https://github.com/jquery/jquery#modules'&gt;The jQuery Repository documents all of them&lt;/a&gt;. If you&amp;#8217;re going to be working on a project where file size is important, and you know there&amp;#8217;s parts of jQuery you wont use, it&amp;#8217;s certainly worth doing a custom build this way to save a few bytes.&lt;/p&gt;</description>
+      <pubDate>Tue, 02 Apr 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/04/custom-jquery-builds-with-grunt</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/04/custom-jquery-builds-with-grunt</guid>
+    </item>
+    
+    <item>
+      <title>The .net Awards</title>
+      <description>&lt;p&gt;Recently I found out that I had been nominated for two of &lt;a href='http://www.thenetawards.com/'&gt;.net awards&lt;/a&gt;. I&amp;#8217;ve been nominated for &amp;#8220;Young Developer of the Year&amp;#8221; and &amp;#8220;Brilliant Newcomer of the Year&amp;#8221;.&lt;/p&gt;
+
+&lt;p&gt;Firstly, you have to be nominated by people to be involved in the first place, so thanks to anyone who put my name forward. It means a lot that people would take the time to do that.&lt;/p&gt;
+
+&lt;p&gt;However, that&amp;#8217;s only half the battle! I&amp;#8217;m up against some incredibly clever people and need all the votes I can get! If you can find a spare moment to navigate &lt;a href='http://thenetawards.com'&gt;to the awards site&lt;/a&gt;, locate my face and click &amp;#8220;vote&amp;#8221;, that would be awesome.&lt;/p&gt;
+
+&lt;p&gt;Finally, I know content has been slow recently, but that&amp;#8217;s not for much longer. Next weekend, on April 6th, the JS Playground turns 1 year old and I&amp;#8217;ve plenty planned to celebrate. There will be lots of new content hitting your screens very soon.&lt;/p&gt;
+
+&lt;p&gt;Thanks,&lt;/p&gt;
+
+&lt;p&gt;Jack.&lt;/p&gt;</description>
+      <pubDate>Fri, 29 Mar 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/03/the-net-awards</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/03/the-net-awards</guid>
+    </item>
+    
+    <item>
+      <title>Building an App with Express and Backbone: Part 2</title>
+      <description>&lt;p&gt;In the &lt;a href=&quot;http://javascriptplayground.com/blog/2013/02/express-backbone-application-part1&quot;&gt;first part of the series&lt;/a&gt; we created our ExpressJS app and served up all the books from our Mongo database. Today we'll accomplish the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Refactor our /books URL into the routes/index.js file&lt;/li&gt;
+&lt;li&gt;Move our database code into its own module&lt;/li&gt;
+&lt;li&gt;Set up a route to serve up an individual book's JSON&lt;/li&gt;
+&lt;li&gt;Learn about Mongo's ObjectID&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apologies for the slightly duller and quieter voice this time around - illness and a cold have played their part!&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/59717433&quot; width=&quot;600&quot; height=&quot;338&quot; frameborder=&quot;0&quot; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt; &lt;p&gt;&lt;a href=&quot;http://vimeo.com/59717433&quot;&gt;Express JS &amp; Backbone: Episode 2&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/javascript&quot;&gt;The JavaScript Playground&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;
+	As always the &lt;a href=&quot;https://github.com/javascript-playground/express-backbone-library-app&quot;&gt;code is on Github&lt;/a&gt;, and I highly recommend playing the video in HD so it's clearer to see (I record at my laptop's resolution so everything should be crystal clear).&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, leave a comment and I'll either reply with a comment or answer in the next video.&lt;/p&gt;
+</description>
+      <pubDate>Fri, 15 Feb 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/02/building-an-app-with-express-and-backbone-part-2</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/02/building-an-app-with-express-and-backbone-part-2</guid>
+    </item>
+    
+    <item>
+      <title>Building an App with Express and Backbone: Part 1</title>
+      <description>&lt;p&gt;
+In this series we'll first focus on building a server side application. This will be an Express app, with a MongoDB backing. This will serve us up JSON. Once we've set up all of that side, we'll then switch to the client side, and use Backbone to create the client side application.&lt;/p&gt;
+
+&lt;p&gt;The application is based on one we created internally at work, a library app. All of us have lots of technical books in the office, and we wanted a way of keeping track of them, so we built a small internal app that kept track of books, who had borrowed what, and so on. Over the course of 10 or so episodes, we'll build this up&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/59510662&quot; width=&quot;600&quot; height=&quot;338&quot; frameborder=&quot;0&quot; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt; &lt;p&gt;&lt;a href=&quot;http://vimeo.com/59510662&quot;&gt;Express JS &amp; Backbone: Episode 1&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/javascript&quot;&gt;The JavaScript Playground&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;
+	As always the &lt;a href=&quot;https://github.com/javascript-playground/express-backbone-library-app&quot;&gt;code is on Github&lt;/a&gt;, and I recommend clicking the Vimeo link so you can watch the video on Vimeo in HD. Any questions, leave a comment and I will respond in the next episode.&lt;/p&gt;
+</description>
+      <pubDate>Tue, 12 Feb 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/02/express-backbone-application-part1</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/02/express-backbone-application-part1</guid>
+    </item>
+    
+    <item>
+      <title>Exploring Backbone.js - Part 3</title>
+      <description>&lt;p&gt;Way back in June last year I published &lt;a href='http://javascriptplayground.com/blog/2012/06/exploring-backbone-js-part-2'&gt;part two of my Backbone series&lt;/a&gt; and today, at long last, it&amp;#8217;s time to pick up the pieces. I apologise for such a lull between articles and hopefully it wont be quite so long between this and the next episode! I recommend you go back and skim &lt;a href='http://javascriptplayground.com/blog/2012/04/backbone-js-tutorial-1'&gt;Part 1&lt;/a&gt; and &lt;a href='http://javascriptplayground.com/blog/2012/06/exploring-backbone-js-part-2'&gt;Part 2&lt;/a&gt; first just to get up to speed.&lt;/p&gt;
+
+&lt;p&gt;Last time I left off we had just written the code to add a new item to our collection. What I&amp;#8217;d like to do today is look at how we might filter down items in a collection. This will set us up nicely for the next article, which will look at Backbone&amp;#8217;s Router in more detail.&lt;/p&gt;
+
+&lt;p&gt;Firstly, lets set up the HTML needed to allow a user to filter down by price.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;form id=&amp;quot;filter&amp;quot;&amp;gt;
+  &amp;lt;label&amp;gt;Less Than&amp;lt;/label&amp;gt;
+  &amp;lt;input type=&amp;quot;text&amp;quot; id=&amp;quot;less-than&amp;quot; /&amp;gt;
+  &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;Filter&amp;quot; /&amp;gt;
+&amp;lt;/form&amp;gt;
+&amp;lt;a href=&amp;quot;#&amp;quot; id=&amp;quot;clear-filter&amp;quot;&amp;gt;Clear Filter&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For now we will keep it simple and just let the user search for items less than a particular price.&lt;/p&gt;
+
+&lt;p&gt;Next we need to set up some events on our &lt;code&gt;CartCollectionView&lt;/code&gt;. If you remember, this view encompasses the entire of our application (its &lt;code&gt;el&lt;/code&gt; property is set to &lt;code&gt;&amp;quot;body&amp;quot;&lt;/code&gt;), so this is where a lot of our events are set up. If you&amp;#8217;re thinking perhaps this isn&amp;#8217;t the best way, you&amp;#8217;re right. In a future episode when we add a couple more views, we will tidy this up. Add two more events to the &lt;code&gt;events&lt;/code&gt; property:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;events: {
+   &amp;quot;submit #add&amp;quot;: &amp;quot;addItem&amp;quot;,
+   &amp;quot;submit #filter&amp;quot;: &amp;quot;filterItems&amp;quot;,
+   &amp;quot;click #clear-filter&amp;quot;: &amp;quot;clearFilter&amp;quot;
+ }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The methods we need to add to the cart collection view are very straight forward. All they will do is cancel the default action and then call methods on &lt;code&gt;itemView&lt;/code&gt;, which is the view that all our items sit within.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;filterItems: function(e) {
+  e.preventDefault();
+  this.itemView.filterByPrice();
+},
+clearFilter: function(e) {
+  e.preventDefault();
+  this.itemView.clearFilter();
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To filter the items down to those lower than a specific price, here&amp;#8217;s what we need to do:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Loop through every element in the collection and see if it matches the filter.&lt;/li&gt;
+
+&lt;li&gt;Re-render the item collection view with just those items in.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here&amp;#8217;s the entire code. Give it a read, and I&amp;#8217;ll explain it in depth below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;filterByPrice: function() {
+  // first reset the collection
+  // but do it silently so the event doesn&amp;#39;t trigger
+  this.collection.reset(items, { silent: true });
+  var max = parseFloat($(&amp;quot;#less-than&amp;quot;).val(), 10);
+  var filtered = _.filter(this.collection.models, function(item) {
+    return item.get(&amp;quot;price&amp;quot;) &amp;lt; max;
+  });
+  // trigger reset again
+  // but this time trigger the event so the collection view is rerendered
+  this.collection.reset(filtered);
+},&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing we do is &lt;code&gt;this.collection.reset(items, { silent: true })&lt;/code&gt;. This will reset the collection, which is a way of completely changing the items in a collection. Here I reset it to the original array of items, which was stored in &lt;code&gt;items&lt;/code&gt;. By passing in &lt;code&gt;{ silent: true }&lt;/code&gt;, it means it wont trigger the &lt;code&gt;reset&lt;/code&gt; event on the collection. We&amp;#8217;ll use this event later, and then you&amp;#8217;ll see why it&amp;#8217;s important not to trigger it there.&lt;/p&gt;
+
+&lt;p&gt;After that we grab the value from the input. I&amp;#8217;m not doing any validation here which is obviously not sensible - but for the purposes of demonstrating Backbone it will do just fine. Then we can use Underscore&amp;#8217;s &lt;code&gt;filter&lt;/code&gt; method. This takes an array of items, in this case all the models in the collection, and loops over them. Any that return &lt;code&gt;true&lt;/code&gt; from the callback are returned. Therefore after running &lt;code&gt;filter&lt;/code&gt;, only elements with a price less than the maximum will be returned. Then we can reset the collection again, but this time to just the filtered items.&lt;/p&gt;
+
+&lt;p&gt;Head up to the &lt;code&gt;initialize&lt;/code&gt; method of the &lt;code&gt;ItemCollectionView&lt;/code&gt; and at the bottom add a binding to the &lt;code&gt;reset&lt;/code&gt; method that&amp;#8217;s called on the collection.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;initialize: function() {
+  this.collection = cartCollection;
+  this.render();
+  this.collection.on(&amp;quot;reset&amp;quot;, this.render, this);
+},&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This means when a &amp;#8220;reset&amp;#8221; event is triggered on this view&amp;#8217;s collection, it will call the &lt;code&gt;render&lt;/code&gt; method, with the context bound to &lt;code&gt;this&lt;/code&gt;, which is the &lt;code&gt;ItemCollectionView&lt;/code&gt;. Therefore when we detect the collection has been reset, we can re-render the view. This is why when we reset the collection to contain all elements, we passed in &lt;code&gt;{ silent: true }&lt;/code&gt;. Else, we would re-render the item view to all elements just before we filtered it again, which wouldn&amp;#8217;t be very efficient.&lt;/p&gt;
+
+&lt;p&gt;Finally, we need to add the code for clearing the filter. The &lt;code&gt;clearFilter&lt;/code&gt; method on the &lt;code&gt;ItemCollectionView&lt;/code&gt; is very straight forward:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;clearFilter: function() {
+  $(&amp;quot;#less-than&amp;quot;).val(&amp;quot;&amp;quot;);
+  this.collection.reset(items);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All it does is clear the input, and reset the collection back to all items.&lt;/p&gt;
+
+&lt;p&gt;With that, filtering and clearing the filter should work! There is a pretty big bug though. If you add a new item, and then do some filtering, that new item will not appear. This is because we reset the controller to contain &lt;code&gt;items&lt;/code&gt;, which is our original set of items, and doesn&amp;#8217;t include any new items the user added. What we need to do is keep track of when we add a new item, and update our &lt;code&gt;items&lt;/code&gt; array to contain those new items. When a collection&amp;#8217;s &lt;code&gt;add&lt;/code&gt; method is called, it triggers an &lt;code&gt;add&lt;/code&gt; event. Lets use this to solve our bug. Head to where we set up &lt;code&gt;var Cart&lt;/code&gt; as our collection of items, and edit it so it looks like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var Cart = Backbone.Collection.extend({
+  model: Item,
+  initialize: function() {
+    this.on(&amp;quot;add&amp;quot;, this.updateSet, this);
+  },
+  updateSet: function() {
+    items = this.models;
+  }
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;#8217;s just a case of updating the original set of items when a new one is added. Now new items that are added can be filtered, and are not lost when we filter and then clear the filter.&lt;/p&gt;
+
+&lt;p&gt;The code for this tutorial and the entire series is available &lt;a href='https://github.com/javascript-playground/backbone-beginners/tree/tutorial3'&gt;on Github&lt;/a&gt;. Please note that this repository is no longer on my personal account but on the &lt;a href='https://github.com/javascript-playground'&gt;JavaScript Playground&lt;/a&gt; organisation, which is where all future code will live.&lt;/p&gt;</description>
+      <pubDate>Sun, 03 Feb 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/02/exploring-backbone-js-part-3</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/02/exploring-backbone-js-part-3</guid>
+    </item>
+    
+    <item>
+      <title>ECMAScript 5 Array Methods</title>
+      <description>&lt;p&gt;Something I&amp;#8217;ve not covered much so far is some of the newer parts of JavaScript. That is, methods in ECMASscript 5 that are not so commonly used due to browser support, and of course the new features in ECMAScript 6. Today I want to take a look at the new Array methods in ES5, such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;#8217;d like to know the browser support for these methods, it&amp;#8217;s actually pretty good. &lt;a href='http://kangax.github.com/es5-compat-table/'&gt;This site shows the support&lt;/a&gt;, and for most the only blip is IE 8 and lower. And if you do need to support older browsers, &lt;a href='https://github.com/kriskowal/es5-shim'&gt;shims are available&lt;/a&gt;. Let&amp;#8217;s have a look at the Array methods introduced in ES5. This wont be an in-depth look exploring the ins and outs of every method, but more a quick summary over them.&lt;/p&gt;
+
+&lt;p&gt;The first is &lt;code&gt;indexOf&lt;/code&gt;. As you might suspect, it searches the array to find the index of the passed in element:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3 ,4];
+console.log(arr.indexOf(2)); // 1
+console.log(arr.indexOf(5)); // -1&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the element doesn&amp;#8217;t exist, &lt;code&gt;-1&lt;/code&gt; is returned. Be aware that &lt;code&gt;indexOf&lt;/code&gt; finds the &lt;strong&gt;first&lt;/strong&gt; index, if the element is in the array more than once:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3 ,4, 2];
+console.log(arr.indexOf(2)); // 1&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is also &lt;code&gt;lastIndexOf&lt;/code&gt; that finds the last index:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3 ,4, 2];
+console.log(arr.lastIndexOf(2)); // 4&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next is &lt;code&gt;every&lt;/code&gt;. The &lt;a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/every'&gt;mdn documentation&lt;/a&gt; sums it up best:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;#8221;&lt;code&gt;every&lt;/code&gt; executes the provided callback function once for each element present in the array until it finds one where callback returns a false value. If such an element is found, the &lt;code&gt;every&lt;/code&gt; method immediately returns &lt;code&gt;false&lt;/code&gt;. Otherwise, if callback returned a &lt;code&gt;true&lt;/code&gt; value for all elements, &lt;code&gt;every&lt;/code&gt; will return &lt;code&gt;true&lt;/code&gt;.&amp;#8221;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lets take a look at an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+console.log(arr.every(function(x) {
+  console.log(x);
+}));
+
+// 1
+// false&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here the callback function logs one, but then doesn&amp;#8217;t return a truthy value, so &lt;code&gt;every&lt;/code&gt; exists and returns false. It will loop over every element if our callback function returns true:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+console.log(arr.every(function(x) {
+  console.log(x);
+  return true;
+}));
+
+// 1
+// 2
+// 3
+// 4
+// true&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we have &lt;a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/some'&gt;&lt;code&gt;some&lt;/code&gt;&lt;/a&gt;. &lt;code&gt;some&lt;/code&gt; executes a callback function once for every element present in the array until it finds a value for which the callback returns true, at which point &lt;code&gt;some&lt;/code&gt; returns &lt;code&gt;true&lt;/code&gt;. If no value is found, &lt;code&gt;some&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. Here I use &lt;code&gt;some&lt;/code&gt; to test if any elements in the array are even:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3 ,4];
+console.log(arr.some(function(x) {
+  return x % 2 == 0
+}));
+
+// true&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It returns &lt;code&gt;true&lt;/code&gt; because at least one element made the callback function return &lt;code&gt;true&lt;/code&gt;. If none of them do, it returns &lt;code&gt;false&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 3, 5, 7];
+console.log(arr.some(function(x) {
+  return x % 2 == 0
+}));&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next is &lt;code&gt;forEach&lt;/code&gt;, which is very straight forward. It takes a function and calls that function for each element in the array:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+arr.forEach(function(x) {
+  console.log(x);
+});
+// 1
+// 2
+// 3
+// 4&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;map&lt;/code&gt; is similar to &lt;code&gt;forEach&lt;/code&gt; in that in loops over all elements in the set and calls the callback function on them, however &lt;code&gt;map&lt;/code&gt; will return an array which is the result of the callback function for each element. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+var newArr = arr.map(function(x) {
+  return x * x;
+});
+console.log(newArr);
+// [1, 4, 9, 16]&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here I use &lt;code&gt;map&lt;/code&gt; to square each number in the array, and it then returns that new array.&lt;/p&gt;
+
+&lt;p&gt;We can use &lt;code&gt;filter&lt;/code&gt; to trim down our arrays to elements that only match specific criteria. &lt;code&gt;filter&lt;/code&gt; executes the callback function on each element, and will only add that element to the new array if the callback function returns &lt;code&gt;true&lt;/code&gt;. Below I filter out any numbers that are not even:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+var newArr = arr.filter(function(x) {
+  return x % 2 == 0;
+});
+console.log(newArr);
+// [2, 4]&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The callback function only returns true for the even numbers, so the array &lt;code&gt;filter&lt;/code&gt; returns contains just those.&lt;/p&gt;
+
+&lt;p&gt;Next is the slightly more complex &lt;code&gt;reduce&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;#8220;Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.&amp;#8221;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Taken from &lt;a href='https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/Reduce'&gt;the MDN&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The callback function for &lt;code&gt;reduce&lt;/code&gt; is usually used with two arguments. The first is the previous value in the array, and the second is the next value. I find I understand this best with an example, so here is how we would use &lt;code&gt;reduce&lt;/code&gt; to sum all the elements in an array:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+console.log(arr.reduce(function(x, y) {
+  return x + y;  
+}));
+// 10&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the arguments are passed through like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(0, 1), (1, 2), (3, 3), (6, 4)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To give us an answer of ten. The MDN article on &lt;code&gt;reduce&lt;/code&gt; is very thorough, so I highly recommend giving that a read if you&amp;#8217;re slightly confused.&lt;/p&gt;
+
+&lt;p&gt;Finally there is &lt;code&gt;reduceRight&lt;/code&gt;, which is the same as &lt;code&gt;reduce&lt;/code&gt; but starts on the right hand side, not the left.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var arr = [1, 2, 3, 4];
+console.log(arr.reduceRight(function(x, y) {
+  return x + y;  
+}));
+// 10&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here the arguments are processed from right to left:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(0, 4), (4, 3), (7, 2), (9, 1)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I hope this article has helped, if like me you&amp;#8217;d not taken the time to explore some of these newer features, or perhaps had mistakenly dismissed them because you didn&amp;#8217;t realise how comprehensive the browser support is (other than our old friend IE8, of course).&lt;/p&gt;</description>
+      <pubDate>Sun, 27 Jan 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/01/ecmascript-5-array-methods</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/01/ecmascript-5-array-methods</guid>
+    </item>
+    
+    <item>
+      <title>Talking RequireJS at TakeOff Conf</title>
+      <description>&lt;p&gt;So this week I attended my first conference outside of the UK and travelled to a freezing Lille, in Northern France (it&amp;#8217;s been below freezing every day!) and spoke on &lt;a href='http://requirejs.org'&gt;RequireJS&lt;/a&gt;, something I have &lt;a href='http://javascriptplayground.com/blog/category/requirejs'&gt;written about before&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the future I will be doing a screencast on RequireJS in detail but for now I wanted to post up the slides and talk about the talk a little. &lt;a href='https://speakerdeck.com/jackfranklin/requirejs-take-off-conf'&gt;You can view my slides on SpeakerDeck&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The main thing I said in my talk with RequireJS that I wanted to reiterate is that when you first start it, you&amp;#8217;ll probably get frustrated. I know I did. The tipping point for me was when I figured out how to shim. When you first use Require it&amp;#8217;s tempting to just ditch it when you encounter a non-AMD compliant library (such as Underscore), but shimming it is so simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require.config({
+	shim: {
+		&amp;#39;lib/underscore&amp;#39;: {
+			&amp;#39;exports&amp;#39;: &amp;#39;_&amp;#39;
+		}
+	}
+});&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Something &lt;a href='http://twitter.com/mheap'&gt;@mheap&lt;/a&gt; pointed out to me that once you have an optimised JS file, you can swap out the RequireJS source for &lt;a href='https://github.com/jrburke/almond'&gt;Almond&lt;/a&gt;, a much more minimal AMD API that you can include into your build file - check the Github link for instructions on how to use.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;m a huge fan of RequireJS and it&amp;#8217;s now very rare that I start a new JS project without utilising it.&lt;/p&gt;</description>
+      <pubDate>Sat, 19 Jan 2013</pubDate>
+      <link>http://javascriptplayground.com/blog/2013/01/talking-requirejs-at-takeoff-conf</link>
+      <guid isPermaLink="true">http://javascriptplayground.com/blog/2013/01/talking-requirejs-at-takeoff-conf</guid>
+    </item>
+    
+  </channel>
+</rss>
+
