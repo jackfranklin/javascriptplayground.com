@@ -22,6 +22,10 @@ body {
   width: 960px;
 }
 
+.container p {
+  margin-bottom: 10px;
+}
+
 header {
   width: 100%;
   background: url(../img/header-bg.png) repeat-x 49px 0;
