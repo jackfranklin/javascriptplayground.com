@@ -66,7 +66,7 @@ Something that I won't cover here is changing this code into a jQuery plugin. In
 
 ### Breaking code down
 
-This code is largely split into two parts. The first activates a specific tab if it is in the url. For example, if `http://foo.com/#tab2` is hit, the second tab will be activated. The second part adds click handlers to all the tab links so we can click to swap betweem them.
+This code is largely split into two parts. The first activates a specific tab if it is in the URL. For example, if `http://foo.com/#tab2` is hit, the second tab will be activated. The second part adds click handlers to all the tab links so we can click to swap between them.
 
 The first thing I like to do in this case is write some tests. I decided to use QUnit to do so. I won't go into great detail on QUnit ([I've written an intro to it before](http://javascriptplayground.com/blog/2012/04/javascript-testing-qunit-1/)), but you can [see the test JS on Github](https://github.com/javascript-playground/refactoring-js/blob/master/test/tests.js). I won't paste it in here as it's pretty long. Essentially I wrote tests that test:
 
@@ -241,7 +241,7 @@ Is it longer? __Yes__. Is it cleaner, more DRY and easier to follow? In my opini
 ### Better Structure
 There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object.
 
-I'm not going to go through it here, as this tutorial is long enough already, but have written and commited a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into.
+I'm not going to go through it here, as this tutorial is long enough already, but have written and committed a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into.
 
 ### To conclude
 
