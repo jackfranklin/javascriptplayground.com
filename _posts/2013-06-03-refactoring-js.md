@@ -178,6 +178,16 @@ That's a nicer way of doing things, even if it is quite a long line. I'd be temp
 
 Although it adds a line, it makes it cleaner, in my opinion. Remember, line count is not a measure of a good or bad refactoring. Our tests are green, and [here's that commit](https://github.com/javascript-playground/refactoring-js/commit/3caea006cef342269981e9ae2fabb205064fcfdb).
 
+__Update__. As [Michael](http://twitter.com/mheap) pointed out, there's no need to use `filter` here, we can just simply attach the attribute selector to the class selector:
+
+    var link = $(".tab-link[href='" + active + "']").parent();
+    
+With that being shorter, you could then miss out the temporary variable:
+
+    activateLink($(".tab-link[href='" + active + "']").parent());
+    
+This change isn't reflected in the Git commits as it was made after I made them, but feel free to make this change yourself.
+
 ### The `transition` method
 
 Now our two parts look identical. Both call `activateTab` and `activateLink`. Seems like that could become a method too:
