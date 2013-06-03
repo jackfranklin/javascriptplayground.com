@@ -212,7 +212,7 @@ Now all we have to do is pass a hash, like `"#tab1"` to `transition`, and everyt
     }
     tabLinks.on("click", function(e) {
       e.preventDefault();
-      transition($(this).attr("href"));
+      transition(this.href.hash);
     });
 
 Now, in my opinion, that's much nicer than when we started. [Here's that commit](https://github.com/javascript-playground/refactoring-js/commit/07e063a4ceddca8aa4093c3bad9a4aecf4a088b6).
@@ -253,6 +253,24 @@ As a recap, here's what the JS looks like now:
     };
 
 Is it longer? __Yes__. Is it cleaner, more DRY and easier to follow? In my opinion, __Yes it is__. We've gone from a mess of spaghetti JavaScript with ugly selectors being reused, code being duplicated and the meaning obfuscated to a easier to follow, more organised structure.
+
+### Two more quick wins
+[Elijah](http://twitter.com/elijahmanor) was kind enough to point out a couple of enhancements. The first is to limit the scope when we search for `.active` to within the `tabWrapper`, which makes sense. Simply swap out:
+
+    $(".active")
+    
+for:
+
+    tabWrapper.find(".active");
+    
+Similarly, using `parent()` to find the link's `li` is more brittle to simple HTML changes. What if an extra `span` tag is wrapped round a link? Better to use `closest("li")`, which will still work even if the HTML changes slightly.
+
+    var transition = function(hash) {
+      activateTab(hash);
+      activateLink($(".tab-link[href='" + hash + "']").closest("li"));
+    };
+    
+Those commits are documented [on the master branch](https://github.com/javascript-playground/refactoring-js/commits/master).
 
 ### Better Structure
 There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object. It's also bad practice to have functions contained within functions, which is why my next step would be refactoring into an object (or what you might call a JS "class").
