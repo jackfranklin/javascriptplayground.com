@@ -190,6 +190,11 @@ This change isn't reflected in the Git commits as it was made after I made them,
 
 __Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function:
 
+    $(".tab-link").filter(function() { return this.href.hash === active });
+    
+> I’d expect (not tested) .filter(function(){ return this.href === active; }) to be just as fast (if not faster, as no parsing)
+
+
 ### The `transition` method
 
 Now our two parts look identical. Both call `activateTab` and `activateLink`. Seems like that could become a method too:
@@ -251,9 +256,9 @@ As a recap, here's what the JS looks like now:
 Is it longer? __Yes__. Is it cleaner, more DRY and easier to follow? In my opinion, __Yes it is__. We've gone from a mess of spaghetti JavaScript with ugly selectors being reused, code being duplicated and the meaning obfuscated to a easier to follow, more organised structure.
 
 ### Better Structure
-There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object.
+There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object. It's also bad practice to have functions contained within functions, which is why my next step would be refactoring into an object (or what you might call a JS "class").
 
-I'm not going to go through it here, as this tutorial is long enough already, but have written and committed a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into.
+I'm not going to go through it here, as this tutorial is long enough already, but have written and committed a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into. I will also try to write about it in a future post.
 
 ### To conclude
 
