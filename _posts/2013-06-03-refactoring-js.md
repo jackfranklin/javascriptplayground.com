@@ -155,6 +155,7 @@ That's easy to write, and use:
 
 And sure enough, we're green. [Here's that commit](https://github.com/javascript-playground/refactoring-js/commit/9ae8424b4cf99a097f6ef545e88bf578ee450450).
 
+### Finding the active link
 Now you can see the code for the URL hash and the event handler are very similar. In fact, the only difference is that the first has to search through all the links to find the one that should be active:
 
     $(".tab-link").each(function() {
@@ -177,6 +178,8 @@ That's a nicer way of doing things, even if it is quite a long line. I'd be temp
 
 Although it adds a line, it makes it cleaner, in my opinion. Remember, line count is not a measure of a good or bad refactoring. Our tests are green, and [here's that commit](https://github.com/javascript-playground/refactoring-js/commit/3caea006cef342269981e9ae2fabb205064fcfdb).
 
+### The `transition` method
+
 Now our two parts look identical. Both call `activateTab` and `activateLink`. Seems like that could become a method too:
 
     var transition = function(hash) {
@@ -198,6 +201,7 @@ Now all we have to do is pass a hash, like `"#tab1"` to `transition`, and everyt
 
 Now, in my opinion, that's much nicer than when we started. [Here's that commit](https://github.com/javascript-playground/refactoring-js/commit/07e063a4ceddca8aa4093c3bad9a4aecf4a088b6).
 
+### Post Refactor
 As a recap, here's what the JS looks like now:
 
     var tabularize = function() {
@@ -233,3 +237,9 @@ As a recap, here's what the JS looks like now:
     };
 
 Is it longer? __Yes__. Is it cleaner, more DRY and easier to follow? In my opinion, __Yes it is__. We've gone from a mess of spaghetti JavaScript with ugly selectors being reused, code being duplicated and the meaning obfuscated to a easier to follow, more organised structure.
+
+### Better Structure
+There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object.
+
+I'm not going to go through it here, as this tutorial is long enough already, but have written and commited a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into.
+
