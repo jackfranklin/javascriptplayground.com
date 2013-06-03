@@ -188,6 +188,8 @@ With that being shorter, you could then miss out the temporary variable:
     
 This change isn't reflected in the Git commits as it was made after I made them, but feel free to make this change yourself.
 
+__Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function:
+
 ### The `transition` method
 
 Now our two parts look identical. Both call `activateTab` and `activateLink`. Seems like that could become a method too:
