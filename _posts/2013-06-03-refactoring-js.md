@@ -60,7 +60,7 @@ Hopefully you're already starting to spot problems here. Here's a list of things
 * __Not very DRY (Don't repeat yourself)__. There's plenty of duplication here across the two parts.
 * Use of `click()`, rather than the preferred `on()`.
 * Using `return false` rather than `e.preventDefault()`.
-* It's very much tied to a specific DOM Structure. Often it's best to try to generalize your jQuery selectors and DOM traversal so smmall HTML changes (renaming a class, etc) don't break all your behaviour.
+* It's very much tied to a specific DOM Structure. Often it's best to try to generalize your jQuery selectors and DOM traversal so small HTML changes (renaming a class, etc) don't break all your behaviour.
 
 Something that I wont cover here is changing this code into a jQuery plugin. In reality I probably would do this, but in this instance I'd rather discuss specific refactorings within this system, so the moving to a plugin is just an abstraction too many.
 
