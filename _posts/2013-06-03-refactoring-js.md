@@ -243,3 +243,16 @@ There's a bit more to be done here. There's also a big bug in the way tabs are a
 
 I'm not going to go through it here, as this tutorial is long enough already, but have written and commited a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into.
 
+### To conclude
+
+Refactoring is fun! It's probably my favourite part of being a developer. Things that I try to do as typical refactorings are:
+
+1. Put things in variables if you reference them often.
+2. Remove temporary variables, or variables that are only used once (some exceptions to this).
+3. Don't be afraid to make more functions. The best functions are small functions.
+4. Don't be afraid to add a bit more structure at the expense of line count (which is very rarely a good measure of code).
+5. Have some tests to back up if your refactoring is going well and hasn't broken functionality.
+6. Take lots of small steps. Move very slowly, and resist the urge to immediately refactor everything at once. Be methodical.
+
+I hope this was a useful post. If you've any queries or questions, leave a comment and I'll endeavour to get back to you. Alternatively, you can drop me a tweet (@Jack_Franklin) or feel free to email me too.
+
