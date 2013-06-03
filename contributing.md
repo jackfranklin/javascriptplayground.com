@@ -11,12 +11,12 @@ If you're planning to write an article, I suggest you contact me first (@Jack_Fr
 
 The post you write should have a block of YAML at the front that looks like this:
 
-  ---
-  layout: post
-  title: "My Post Title"
-  author: Jack Franklin
-  author_twitter: jack_franklin
-  ---
+    ---
+    layout: post
+    title: "My Post Title"
+    author: Jack Franklin
+    author_twitter: jack_franklin
+    ---
   
 By adding the `author` and `author_twitter` fields, you post will be accredited to you, and not to me!
   
