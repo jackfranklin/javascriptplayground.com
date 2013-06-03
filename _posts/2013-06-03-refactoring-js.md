@@ -86,7 +86,7 @@ First we should tackle the reusing of selectors. This one is easy to fix, just s
 Now you've done that, you can go through and replace all instances of `$(".tabs")` with `tabsWrapper`, and so on. Rerunning my tests after [that commit](https://github.com/javascript-playground/refactoring-js/commit/6db02d7847330bc6bbd861cc7757806fb7d16205) shows us as all green. Great! The secret to refactoring is lots of little steps. No big steps at once.
 
 ### Spotting Duplication
-Now lets look at the duplication. Across the code, there's a fair bit that is similar. The first is the process for marking the tab link as active. There's two bits to this:
+Now lets look at the duplication. We're doing the same work in more than one place right now and this can be tidied up. The first is the process for marking the tab link as active. There's two bits to this:
 
 1. Remove the `active` class from the current link.
 2. Add the `active` class to the new link.
