@@ -181,18 +181,29 @@ Although it adds a line, it makes it cleaner, in my opinion. Remember, line coun
 __Update__. As [Michael](http://twitter.com/mheap) pointed out, there's no need to use `filter` here, we can just simply attach the attribute selector to the class selector:
 
     var link = $(".tab-link[href='" + active + "']").parent();
-    
+
 With that being shorter, you could then miss out the temporary variable:
 
     activateLink($(".tab-link[href='" + active + "']").parent());
-    
+
 This change isn't reflected in the Git commits as it was made after I made them, but feel free to make this change yourself.
 
 __Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function, which may also bring speed benefits:
 
     $(".tab-link").filter(function() { return this.href.hash === active });
-    
+
 As Rodney explains: "I'd expect (not tested) `filter(function(){ return this.href === active; })` to be just as fast (if not faster, as no parsing)"
+
+__Update 3__. What we should be doing here is using our `tabLinks` variable. We can combine that with the `filter` method and use it like Rodney suggests, passing it a function:
+
+    var transition = function(hash) {
+      activateTab(hash);
+      activateLink(tabLinks.filter(function() {
+        return $(this).attr("href") === hash;
+      }).parent());
+    };
+
+We have to use `$(this).attr("href")` instead of the shorter `this.href` as `this.href` gives us the full URL, including the domain, even though the link is just `#tab1`. jQuery normalises this, returning just the link within the anchor tag.
 
 
 ### The `transition` method
@@ -201,7 +212,9 @@ Now our two parts look identical. Both call `activateTab` and `activateLink`. Se
 
     var transition = function(hash) {
       activateTab(hash);
-      activateLink($(".tab-link[href='" + active + "']").parent());
+      activateLink(tabLinks.filter(function() {
+        return $(this).attr("href") === hash;
+      }).parent());
     };
 
 Now all we have to do is pass a hash, like `"#tab1"` to `transition`, and everything is taken care of. I can update the code to reflect this:
@@ -256,7 +269,9 @@ As a recap, here's what the JS looks like now:
 
       var transition = function(hash) {
         activateTab(hash);
-        activateLink($(".tab-link[href='" + hash + "']").closest("li"));
+        activateLink(tabLinks.filter(function() {
+          return $(this).attr("href") === hash;
+        }).closest("li"));
       };
 
       var active = location.hash;
