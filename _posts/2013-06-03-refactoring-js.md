@@ -194,8 +194,7 @@ Now our two parts look identical. Both call `activateTab` and `activateLink`. Se
 
     var transition = function(hash) {
       activateTab(hash);
-      var link = $(".tab-link").filter("[href='" + hash + "']").parent();
-      activateLink(link);
+      activateLink($(".tab-link[href='" + active + "']").parent());
     };
 
 Now all we have to do is pass a hash, like `"#tab1"` to `transition`, and everything is taken care of. I can update the code to reflect this:
