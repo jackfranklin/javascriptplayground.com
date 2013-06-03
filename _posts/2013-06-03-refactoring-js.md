@@ -304,3 +304,5 @@ Refactoring is fun! It's probably my favourite part of being a developer. Things
 
 I hope this was a useful post. If you've any queries or questions, leave a comment and I'll endeavour to get back to you. Alternatively, you can drop me a tweet (@Jack_Franklin) or feel free to email me too.
 
+_Some of the links to Git commits have become slightly out of sync with the code, mainly due to tweaks following great feedback from folks on Twitter. You can see all the commits and the process I took [here](https://github.com/javascript-playground/refactoring-js/commits/master)._
+
