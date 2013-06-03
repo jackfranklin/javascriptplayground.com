@@ -62,13 +62,13 @@ Hopefully you're already starting to spot problems here. Here's a list of things
 * Using `return false` rather than `e.preventDefault()`.
 * It's very much tied to a specific DOM Structure. Often it's best to try to generalize your jQuery selectors and DOM traversal so small HTML changes (renaming a class, etc) don't break all your behaviour.
 
-Something that I wont cover here is changing this code into a jQuery plugin. In reality I probably would do this, but in this instance I'd rather discuss specific refactorings within this system, so the moving to a plugin is just an abstraction too many.
+Something that I won't cover here is changing this code into a jQuery plugin. In reality I probably would do this, but in this instance I'd rather discuss specific refactorings within this system, so the moving to a plugin is just an abstraction too many.
 
 ### Breaking code down
 
 This code is largely split into two parts. The first activates a specific tab if it is in the url. For example, if `http://foo.com/#tab2` is hit, the second tab will be activated. The second part adds click handlers to all the tab links so we can click to swap betweem them.
 
-The first thing I like to do in this case is write some tests. I decided to use QUnit to do so. I wont go into great detail on QUnit ([I've written an intro to it before](http://javascriptplayground.com/blog/2012/04/javascript-testing-qunit-1/)), but you can [see the test JS on Github](https://github.com/javascript-playground/refactoring-js/blob/master/test/tests.js). I wont paste it in here as it's pretty long. Essentially I wrote tests that test:
+The first thing I like to do in this case is write some tests. I decided to use QUnit to do so. I won't go into great detail on QUnit ([I've written an intro to it before](http://javascriptplayground.com/blog/2012/04/javascript-testing-qunit-1/)), but you can [see the test JS on Github](https://github.com/javascript-playground/refactoring-js/blob/master/test/tests.js). I won't paste it in here as it's pretty long. Essentially I wrote tests that test:
 
 * When we visit the page, the 1st tab is visible.
 * When I click the link for tab 2, the 2nd tab is activated.
