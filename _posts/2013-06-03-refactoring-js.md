@@ -188,11 +188,11 @@ With that being shorter, you could then miss out the temporary variable:
     
 This change isn't reflected in the Git commits as it was made after I made them, but feel free to make this change yourself.
 
-__Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function:
+__Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function, which may also bring speed benefits:
 
     $(".tab-link").filter(function() { return this.href.hash === active });
     
-> I’d expect (not tested) .filter(function(){ return this.href === active; }) to be just as fast (if not faster, as no parsing)
+As Rodney explains: "I'd expect (not tested) `filter(function(){ return this.href === active; })` to be just as fast (if not faster, as no parsing)"
 
 
 ### The `transition` method
