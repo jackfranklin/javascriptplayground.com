@@ -5,9 +5,9 @@ author: Tom Ashworth
 author_twitter: phuunet
 ---
 
-Humans are no good a multitasking, especially not with things going off all over the place. We deal with just one thing at a time and I'm glad, becuase do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
+Humans are no good at multitasking, especially not with things going off all over the place. We deal with just one thing at a time and I'm glad, because do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
 
-Unfortunately &ndash; or perhaps fortunately &ndash; humans brains don't run on Javascript, becuase if we did we'd have access to the topic of this article: **async**, a library  by Caolan McMahon that helps you write asynchronous code.
+Unfortunately &ndash; or perhaps fortunately &ndash; humans brains don't run on Javascript, because if we did we'd have access to the topic of this article: **async**, a library  by Caolan McMahon that helps you write asynchronous code.
 
 By the way, to get something out of this article I'd say that you need some experience with [Node.js](http://nodejs.org), and the ES5 array methods like `forEach` and `map`. They all feature heavily in this article, but in a more complicated form than you might be used to!
 
@@ -54,7 +54,7 @@ Lovely!
 
 ### A small example
 
-To show the idea, here's a small async example using Node which we'll build it up to be more useful. I've saved it as `example-1.js` in the [code examples](http://i.phuu.net/OkuP).
+To show the idea, here's a small async example using Node which we'll build up to be more useful. I've saved it as `example-1.js` in the [code examples](http://i.phuu.net/OkuP).
 
     var async = require('async');
 
@@ -84,17 +84,17 @@ So what's going on with `async.each`?
 
 The first argument is an array of items to be iterated over.
 
-The second argument is the **iterator** function &ndash; in this case, that's `square`. With `async.each` the interator takes two arguments - the current **item** and a **done callback**. The iterator can do what it likes to the item so long as it calls the done callback at some point, with or without an error.
+The second argument is the **iterator** function &ndash; in this case, that's `square`. With `async.each` the iterator takes two arguments - the current **item** and a **done callback**. The iterator can do what it likes to the item so long as it calls the done callback at some point, with or without an error.
 
 The last argument to `async.each` is the **finished callback**, which is only called when the done callback has been called for every item in the array.
 
-The important thing to note is that async ensures that the finished callback is called **only when the iterators are done**. That's what a lot of async is all about &ndash; manging asynchronous tasks carried out on arrays.
+The important thing to note is that async ensures that the finished callback is called **only when the iterators are done**. That's what a lot of async is all about &ndash; managing asynchronous tasks carried out on arrays.
 
 ### Getting values back
 
 But wait... "Bah!" I hear you cry, "that's no use to me!"
 
-You're so right. The above example isn't much use &ndash; the finished callback doesnt't get at the values generated from `square`, which is pretty pointless if you ask me. But fear not, for we have `async.map` at our disposal. This is `example-2.js`.
+You're so right. The above example isn't much use &ndash; the finished callback doesn't get at the values generated from `square`, which is pretty pointless if you ask me. But fear not, for we have `async.map` at our disposal. This is `example-2.js`.
 
     var async = require('async');
 
@@ -131,7 +131,7 @@ Finally, the finished callback now expects two arguments. The new one is `result
 
 So far we've actually cheated and use an iterator function that isn't *actually* asynchronous &ndash; it just calls the `doneCallback` straight away without doing any work. Lazy.
 
-To demonstrate the that the iterator can really be asynchronous, I've put togther an example where the squaring takes a random amount of time. It's `example-3.js`.
+To demonstrate the that the iterator can really be asynchronous, I've put together an example where the squaring takes a random amount of time. It's `example-3.js`.
 
     var async = require('async');
 
@@ -152,7 +152,7 @@ To demonstrate the that the iterator can really be asynchronous, I've put togthe
       console.log(results);
     });
 
-    // Becuase the callbacks are asynchronous, this line
+    // Because the callbacks are asynchronous, this line
     // is called before the finished callback.
     console.log("This line happens first!");
 
@@ -167,7 +167,7 @@ Running this example will give you a slightly different output every time, but i
     Finished!
     [ 1, 4, 9, 16 ]
 
-The comments explan this example but just notice that, although the square happens in a random order, the results come out in the right order. Async is handling that for us. How nice of it.
+The comments explain this example but just notice that, although the square happens in a random order, the results come out in the right order. Async is handling that for us. How nice of it.
 
 ### Real-world example
 
@@ -206,7 +206,7 @@ To get the file sizes we run `fs.stat` on each of the file names. This uses `asy
       });
     });
 
-This works becuase `fs.stat` takes the file path and a callback as a parameter. That's is exactly what `async.map` gives it, so it knows to call the callback with an error, or the data it collects.
+This works because `fs.stat` takes the file path and a callback as a parameter. That's is exactly what `async.map` gives it, so it knows to call the callback with an error, or the data it collects.
 
 The (reduced) output looks something like this:
 
@@ -220,7 +220,7 @@ The (reduced) output looks something like this:
         nlink: 1,
         ... } ]
 
-Things don't need to be asynchrous now &ndash; we've got all the information we need. We  use each of these stats objects to determine if the file is indeed a file, then filter out the other children and display a size-ordered list of the files. Simples. This is `files-3.js`.
+Things don't need to be asynchronous now &ndash; we've got all the information we need. We  use each of these stats objects to determine if the file is indeed a file, then filter out the other children and display a size-ordered list of the files. Simples. This is `files-3.js`.
 
     var async = require('async'),
         fs = require('fs');
