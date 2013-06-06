@@ -5,7 +5,7 @@ author: Tom Ashworth
 author_twitter: phuunet
 ---
 
-Humans are no good a multitasking, with things going on all over the place. We deal with just one thing at a time and I'm glad, becuase do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
+Humans are no good a multitasking, especially not with things going off all over the place. We deal with just one thing at a time and I'm glad, becuase do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
 
 Unfortunately &ndash; or perhaps fortunately &ndash; humans brains don't run on Javascript, becuase if we did we'd have access to the topic of this article: **async**, a library  by Caolan McMahon that helps you write asynchronous code.
 
@@ -175,7 +175,7 @@ Asynchronously squaring small numbers isn't particularly useful, but what about 
 
 Let's say you're building a file size tool. You want to use Node's filesystem module (`fs`) to grab the names and sizes of each of the files in the current directory, and list them in order.
 
-With Node, that can be a bit tricky. Luckily, we've got async up are code, uh, sleeves.
+With Node, that can be a bit tricky. Luckily, we've got async up our code, uh, sleeves.
 
 First, let's grab the names of the children of the current directory. This is `files-1.js`.
 
