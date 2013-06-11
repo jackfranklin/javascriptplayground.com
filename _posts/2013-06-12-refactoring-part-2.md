@@ -41,7 +41,7 @@ Here's the code we ended up with at the end:
     };
 
 
-_(If you haven't already, I recommend reading [the first post](http://javascriptplayground.com/blog/2013/06/refactoring-js/). This wont make much sense on its own)_
+_(If you haven't already, I recommend reading [the first post](http://javascriptplayground.com/blog/2013/06/refactoring-js/). This won't make much sense on its own)_
 
 At that point, I ended the post with:
 
