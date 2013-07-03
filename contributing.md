@@ -3,15 +3,14 @@ layout: default
 title: Contributing
 ---
 
-### Contributing to the JS Playground
 The JavaScript Playground used to run under a CMS, but now runs on Jekyll, the static site generator. The site is hosted [in a Github repository](https://github.com/jackfranklin/javascriptplayground.com) which means anyone can submit changes or even new articles through the means of a pull request.
 
 To do this, you should create your own fork of the repository, make your changes, and then create a pull request.
 
-#### Check the content!
+### Check the content!
 If you're planning to write an article, I suggest you contact me first (@Jack_Franklin, jack at jackfranklin dot net). I'm always open to contributions but I am always working on new posts of my own, so it's a good idea to check so you don't write something I'm about to publish and hence your effort be wasted.
 
-#### Forking on Github
+### Forking on Github
 You should fork the [github repository](https://github.com/jackfranklin/javascriptplayground.com) and then add your post. Posts are added in the `_posts` folder and follow the naming convention:
 
 ```
@@ -34,7 +33,7 @@ jekyll serve
 
 And visit `http://localhost:4000` to see the site live.
 
-#### YAML Syntax
+### YAML Syntax
 
 The post you write should have a block of YAML at the front that looks like this:
 
