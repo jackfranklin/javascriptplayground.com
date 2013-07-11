@@ -31,7 +31,7 @@ header {
   width: 100%;
   background: url(../img/header-bg.png) repeat-x 49px 0;
   height: 113px;
-  margin-bottom: 3.5%;
+  margin-bottom: 3%;
 }
 
 header nav {
@@ -159,7 +159,6 @@ header h3 {
 /** HOME PAGE SECONDARY CONTENT **/
 
 .secondary-content {
-  margin-top: 6%;
   overflow: hidden;
   margin-bottom: 50px;
 }
@@ -602,14 +601,14 @@ pre .regexp {
 
   }
   header nav ul {
-    width:95%;
+    width:99%;
     margin-right:0;
     padding-right:0;
   }
   header nav li {
     font-size:79%;
     margin-left:0;
-    margin-right: 22px;
+    margin-right: 26px;
   }
   .recent-posts {
     width:100%;
@@ -622,6 +621,9 @@ pre .regexp {
     margin-top: 0;
     padding-top: 20px;
     border-top: 1px solid rgba(0,0,0,0.5);
+  }
+  .blog_single {
+    width:100%;
   }
   .blog_single .post_date {
     text-align:left;
@@ -636,12 +638,6 @@ pre .regexp {
 }
 @media screen and (max-height: 320px) and (max-width: 568px) and (min-width:321px) {
 
-  .container {
-    width:90%;
-  }
-  header nav ul {
-    width:90%;
-  }
   .blog_single {
     width:90%;
   }
