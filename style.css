@@ -8,6 +8,7 @@ h1,h2,h3,h4,h5 {font-weight: normal; }
 a:link,
 a:visited {
   color: #000;
+  text-decoration: underline;
 }
 a:hover {
   text-decoration: none;
@@ -239,7 +240,7 @@ p>code, li>code {
 .latest-article a:link,
 .latest-article a:visited {
   color: #2a2a2a;
-  text-decoration: none;
+  font-weight: bold;
 }
 .blog_archives a:hover,
 .latest-article a:hover {
