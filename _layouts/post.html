@@ -1,34 +1,31 @@
 ---
 layout: default
 ---
-<div class="container blog_single">
-  <section class="latest-article article">
-    <h1> {{ page.title }} </h1>
-    <p class="post_date"><span>Posted: </span>{{ page.date | date: "%d %B %Y" }} by
+<article class="entry hentry">
+  <header class="entry-header">
+    <img src="http://gravatar.com/avatar/aea964cf59c0c81fff752896f070cbbb?s=100" alt="" class="author-avatar" />
+    <h1 class="entry-title">{{ page.title }}</h1>
+    <p><time class="published" datetime="2013-07-03">{{ page.date | date: "%d %B %Y" }}</time> by
       {% if page.author %}
-        <a href="http://twitter.com/{{page.author_twitter}}">{{ page.author }}</a>
+        <span class="author">{{ page.author }}</span>
       {% else %}
-        <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>
+        <span class="author">Jack Franklin</span>
       {% endif %}
     </p>
-    <div class="post_body">
-      {{ content }}
-    </div>
+  </header>
+  <section class="entry-content">
+    {{ content }}
   </section>
-  <div id="disqus_thread" style="margin-top: 30px"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'jsplayground'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
+</article>
+<div id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+      var disqus_shortname = 'jsplayground';
+      (function() {
           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-  </div>
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
 </div>
