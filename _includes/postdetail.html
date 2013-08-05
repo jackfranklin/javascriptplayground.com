@@ -1,0 +1,28 @@
+<article class="entry hentry">
+  <header class="entry-header">
+    <img src="http://gravatar.com/avatar/aea964cf59c0c81fff752896f070cbbb?s=100" alt="" class="author-avatar" />
+    <h1 class="entry-title">{{ post.title }}</h1>
+    <p><time class="published" datetime="2013-07-03">{{ post.date | date: "%d %B %Y" }}</time> by
+      {% if post.author %}
+        <span class="author">{{ post.author }}</span>
+      {% else %}
+        <span class="author">Jack Franklin</span>
+      {% endif %}
+    </p>
+  </header>
+  <section class="entry-content">
+    {{ content }}
+  </section>
+</article>
+<div id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+      var disqus_shortname = 'jsplayground';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
+</div>
