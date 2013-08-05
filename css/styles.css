@@ -47,14 +47,16 @@ p, .entry-content ul {
 
 code, pre {
   font-family: Monaco, Consolas, monospace;
-  font-size: 1em;
 }
+code { font-size: 1em; }
 
 pre {
   color: #fff;
   background: #1a1a1a;
-  margin: 1.5em -2em 1.5em -3em;
+  margin: 1.5em -1.1em 1.5em -3em;
   padding: 1em 2em 1em 3em;
+  word-wrap: break-word;
+  font-size: 0.9em;
 }
 
 .nav-primary {
