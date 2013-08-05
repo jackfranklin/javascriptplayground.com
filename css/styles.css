@@ -41,7 +41,7 @@ h1 {
   font-size: 1.5em;
 }
 
-p {
+p, .entry-content ul {
   margin-bottom: 1.5em;
 }
 
@@ -215,6 +215,8 @@ pre {
 .entry-title {
   margin-bottom: 0.25em;
 }
+
+.entry-content li { list-style: disc; }
 
 @media (min-width: 60em) {
   .nav-primary {
