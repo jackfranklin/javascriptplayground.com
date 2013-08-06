@@ -233,13 +233,24 @@ pre {
   }
 
   .site-header {
-    max-width: 52.5em;
-    margin-left: 13.125em;
+    /* max-width: 52.5em; */
+    max-width: 67.6em;
+    /* margin-left: 13.125em; */
+    margin-left: 0;
   }
 
+  .menu-icon {
+    float: left;
+    margin: 5px 10px;
+  }
+  .menu-icon img { width: 32px; }
+
+
   .main-wrapper {
-    max-width: 50.5em;
-    margin-left: 13.125em;
+    /* max-width: 50.5em; */
+    max-width: 65.625em;
+    /* margin-left: 13.125em; */
+    margin-left: 0;
   }
 
   .site-footer {
