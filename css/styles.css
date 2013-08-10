@@ -222,7 +222,25 @@ pre {
 
 .menu-icon { display: none; }
 
+.home-intro,
+.home-post { border-bottom: 1px solid #ddd; }
+
+.home-small-entry a:link,
+.home-small-entry a:visited {
+  color: #1d3c4f;
+  text-decoration: none;
+}
+
 @media (min-width: 60em) {
+
+  .home-small-entry-wrap {
+    overflow: auto;
+  }
+  .home-small-entry {
+    width: 30%;
+    float: left;
+  }
+
   .nav-primary {
     float: left;
   }

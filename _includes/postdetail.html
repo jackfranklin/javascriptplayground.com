@@ -2,7 +2,7 @@
   <header class="entry-header">
     <img src="http://gravatar.com/avatar/aea964cf59c0c81fff752896f070cbbb?s=100" alt="" class="author-avatar" />
     <h1 class="entry-title">{{ post.title }}</h1>
-    <p><time class="published" datetime="2013-07-03">{{ post.date | date: "%d %B %Y" }}</time> by
+    <p><time class="published" datetime="{{ post.date }}">{{ post.date | date: "%d %B %Y" }}</time> by
       {% if post.author %}
         <span class="author">{{ post.author }}</span>
       {% else %}

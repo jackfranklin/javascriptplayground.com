@@ -3,18 +3,32 @@ layout: default
 title: The JavaScript Playground
 ---
 
-<article class="entry hentry">
+<article class="entry hentry home-intro">
   <header class="entry-header">
     <h1 class="entry-title">Welcome to the JavaScript Playground</h1>
   </header>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </article>
 {% assign post = site.posts.first %}
-<article class="entry hentry">
+<article class="entry hentry home-post">
   <header class="entry-header">
     <h1 class="entry-title">Latest Post: {{ post.title }}</h1>
   </header>
+  <div class="entry-intro">
+    <p> {{ post.intro }} </p>
+    <a href="{{ post.url }}">Read More</a>
+  </div>
 </article>
 
-{% for post in site.posts limit:3 offset:1 %}
-{% endfor %}
+<article class="entry hentry home-small-entry-wrap">
+  <header class="entry-header">
+    <h1>Recent Posts</h2>
+    <p>Or see all past content on the <a href="/archives.html">archives page</a>.</p>
+  </header>
+  {% for post in site.posts limit:3 offset:1 %}
+    <div class="home-small-entry">
+      <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+      <p>{{ post.date | date: "%d %B %Y" }}</p>
+    </div>
+  {% endfor %}
+</article>
