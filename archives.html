@@ -1,10 +1,16 @@
 ---
-layout: default
+layout: page
 title: Archives
 ---
 
 <h3>Archives</h3>
-<p>Below are all the posts from the JavaScript Playground. <em>A better, more structured, searchable archives page is coming soon.</em></p>
+<p>Below are all the posts on the JavaScript Playground.</p>
+<p>You can use the search box below to find what you're looking for.</p>
+
+<form class="search-form">
+  <input type="text" name="searchterm" placeholder="backbone" />
+</form>
+
 <ul class="archives">
   {% for post in site.posts %}
     <li>

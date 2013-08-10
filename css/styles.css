@@ -247,6 +247,16 @@ pre {
   text-decoration: none;
 }
 
+.search-form {
+  margin-bottom: 1.5em;
+}
+
+.search-form input {
+  font-size: 16px;
+  padding: 5px;
+  width: 50em;
+}
+
 @media (min-width: 60em) {
 
   .home-small-entry-wrap {
