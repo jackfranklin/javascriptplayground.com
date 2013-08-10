@@ -220,6 +220,8 @@ pre {
 
 .entry-content li { list-style: disc; }
 
+.menu-icon { display: none; }
+
 @media (min-width: 60em) {
   .nav-primary {
     float: left;
@@ -242,6 +244,7 @@ pre {
   .menu-icon {
     float: left;
     margin: 5px 10px;
+    display: block;
   }
   .menu-icon img { width: 32px; }
 
