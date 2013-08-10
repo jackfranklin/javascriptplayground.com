@@ -252,9 +252,9 @@ pre {
 }
 
 .search-form input {
-  font-size: 16px;
+  font-size: 22px;
   padding: 5px;
-  width: 50em;
+  width: 20em;
 }
 
 @media (min-width: 60em) {
