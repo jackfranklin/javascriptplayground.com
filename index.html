@@ -15,8 +15,7 @@ title: The JavaScript Playground
     <h1 class="entry-title">Latest Post: {{ post.title }}</h1>
   </header>
   <div class="entry-intro">
-    <p> {{ post.intro }} </p>
-    <a href="{{ post.url }}">Read More</a>
+    <p> {{ post.intro }} <a href="{{ post.url }}">Read More</a></p>
   </div>
 </article>
 
@@ -25,7 +24,7 @@ title: The JavaScript Playground
     <h1>Recent Posts</h2>
     <p>Or see all past content on the <a href="/archives.html">archives page</a>.</p>
   </header>
-  {% for post in site.posts limit:3 offset:1 %}
+  {% for post in site.posts limit:6 offset:1 %}
     <div class="home-small-entry">
       <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
       <p>{{ post.date | date: "%d %B %Y" }}</p>

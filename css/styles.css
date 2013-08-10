@@ -255,6 +255,7 @@ pre {
   .home-small-entry {
     width: 30%;
     float: left;
+    height: 100px;
   }
 
   .nav-primary {
