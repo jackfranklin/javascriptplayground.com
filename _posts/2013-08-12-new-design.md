@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A new look
+intro: The JavaScript Playground gets a fresh lick of paint.
 ---
 
 Today I'm happy to go live with the new design of the JavaScript Playground! My thanks go hugely to [Ben Howdle](http://twitter.com/benhowdle) and [Martin Bean](http://twitter.com/martinbean). The beautiful new design is the work of Ben, and Martin did a lot of the hard work turning it into HTML and CSS. I just added some final touches and moved it into Jekyll. This is also a good point to once again thank [Toby Howarth](http://twitter.com/tobyhowarth) who's original design lasted 16 months. Toby came up with the yellow which is now pretty much the most recognisable trait of the website.

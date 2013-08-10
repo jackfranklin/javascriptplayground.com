@@ -3,6 +3,7 @@ layout: post
 title: Think Async
 author: Tom Ashworth
 author_twitter: phuunet
+author_img: "https://secure.gravatar.com/avatar/2d14a381625b7875acde74c8cafdc718?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
 ---
 
 Humans are no good at multitasking, especially not with things going off all over the place. We deal with just one thing at a time and I'm glad, because do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
