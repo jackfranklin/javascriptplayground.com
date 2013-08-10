@@ -225,6 +225,16 @@ pre {
 .home-intro,
 .home-post { border-bottom: 1px solid #ddd; }
 
+.main-wrapper a:link,
+.main-wrapper a:visited {
+  color: #1d3c4f;
+  text-decoration: underline;
+}
+
+.main-wrapper a:hover {
+  text-decoration: none;
+}
+
 .home-small-entry a:link,
 .home-small-entry a:visited {
   color: #1d3c4f;
