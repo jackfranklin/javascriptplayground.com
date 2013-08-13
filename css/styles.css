@@ -43,6 +43,7 @@ h1 {
 
 p, .entry-content ul {
   margin-bottom: 1.5em;
+  line-height: 1.95;
 }
 
 code, pre {
@@ -185,7 +186,7 @@ pre {
   padding-left: 32px;
 }
 .site-footer .latest-posts li {
-  margin-bottom: 0.75em;
+  margin-bottom: 1.75em;
 }
 .site-footer .latest-posts li:last-child {
   margin-bottom: 0;
