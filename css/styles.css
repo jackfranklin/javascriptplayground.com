@@ -307,6 +307,7 @@ pre {
   }
   .site-footer .about-the-site,
   .site-footer .latest-posts {
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
   .site-footer .about-the-site {
