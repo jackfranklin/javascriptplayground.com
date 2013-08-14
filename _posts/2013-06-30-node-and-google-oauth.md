@@ -3,6 +3,7 @@ layout: post
 title: Google OAuth2 in Node
 author: Gabor Javorszky
 author_twitter: javorszky
+author_img: "https://secure.gravatar.com/avatar/3ab39057319da4733d14635fa3f327a6?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
 ---
 
 This guest post deals with hooking up Google's service libraries and OAuth2 authentication framework. We're going to build a node application that successfully authenticates with a google account requesting (and being granted) permission to see and manage the user's calendar. We will then also pull in some calendar data. I'll also try to outline how I figure stuff out along the way. It might not be the best process out there, but hey! It works. The application will output data to the website (running on localhost:3000), but will not be styled with any css.
