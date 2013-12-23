@@ -89,7 +89,7 @@ Now, `person.age = 99;` will have the desired effect.
 
 ### Overuse
 
-Remember: just because a feature exists, it doesn't need to be used all the time. Getters and Setters have their use cases, but don't go over the top, or you'll most likely end up with a design that's confusing for those interacting with your objects. Used carefully, they're very powerful. But with great power...
+Remember: just because a feature exists, it doesn't need to be used all the time. Getters and Setters have their use cases, but don't go over the top, or you'll most likely end up with a design that's confusing for those interacting with your objects. Used carefully, they're very powerful. But with great power comes great responsibility.
 
 ### Browser support?
 
