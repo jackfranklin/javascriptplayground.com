@@ -131,7 +131,7 @@ You can see that the first two arguments refer to how the script is executed and
 	
 And then get our argument as the first argument of `userArgs`:
 
-	var searchTerm = userArgs[0];
+	var searchParam = userArgs[0];
 	
 Rather than do the implementation step by step, as it's only six lines, I'll show you and then explain:
 
