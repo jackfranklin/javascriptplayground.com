@@ -55,12 +55,18 @@ And if I make a file break a JSHint rule (such as missing a semi-colon), I'll se
 
     1 error
 
-One thing I personally don't like about Gulp is its output; I think Grunt's is more clear, but you can see that gulp reported the problem to us.
-
 Gulp also has a default task, which will run when you run just `gulp` on your command line:
 
-    gulp.task("default", function() {
-        gulp.run("lint");
-    });
+    gulp.task("default", ["lint"]);
 
 Here I set up the default task to just run our "lint" task.
+
+We can also add a `watch` task that will automatically run specific tasks when specific files change:
+
+    gulp.task('watch', function() {
+        gulp.watch("src/*.js", ["lint"]);
+    });
+
+Now you can run `gulp watch` in your command line, and the lint task will run whenever a JS file within the `src` directory changes.
+
+Now, the big question here is which is best, Gulp or Grunt? The answer, as always, is that _it depends_. I think it's good for more than one tool to occupy this space, for a while it was only Grunt, but now for there to be more than one tool to choose between is good. As for which is superior, that very much depends, not only on the project but also on your personal preference. A lot of people have been drawn to Gulp due to the fact that it feels more like just writing JavaScript, whereas Grunt takes the approach of configuration over code, and nearly all code written in a Gruntfile is settings for plugins. If you've not tried either, I advise you to try out both before making a decision, and I'm also excited to see how they develop over time.
