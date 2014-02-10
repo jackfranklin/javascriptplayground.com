@@ -37,7 +37,7 @@ Let's look at an example of a task. Here I've written a "lint" task that will ru
 
 Firstly, `gulp.src` will return a representation of files that match the glob, that can be piped directly into plugins. Hence, we can take all those files and pipe them directly into `jshint()`, which is the function made available by the `gulp-jshint` plugin. This runs each file one by one through JSHint, and we then pipe the result of that through to the JSHint reporter, which is responsible for showing us the results.
 
-We can now run `grunt lint` to see the result of this:
+We can now run `gulp lint` to see the result of this:
 
     git/jsplayground/gulp-intro gulp lint
     [gulp] Using file /Users/jackfranklin/git/jsplayground/gulp-intro/Gulpfile.js
