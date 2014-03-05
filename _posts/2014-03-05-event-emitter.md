@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Pub Sub with Event Emitter
+intro: The Publish and Subscribe pattern is great for building large apps, and in this post I'll show you how to achieve it with Node's EventEmitter.
 ---
 
 I'm a big fan of the Pub Sub (Publish, Subscribe) design pattern, and it's one that I tend to reach for often. I've [written previously](/blog/2012/04/a-jquery-pub-sub-implementation/) about it, but that was using jQuery and was frontend specific. Today I'd like to swap and look at using this pattern in Node.js environments.
@@ -60,7 +61,7 @@ We can also create modules that inherit from the EventEmitter. This means that y
     var foo = new ModuleA();
     foo.doSomething(); // => logs 'done'
 
-To do this, we can use Node's `util.inherits`, which will in this case cause `ModuleA` to inherit from `EventEmitter`. Notice we can then call `this.on` and `this.emit` from within `ModuleA`. This is a nice pattern to use if you've got a module that's going to be firing a lot of events. You may chose to create your own EventEmitter object that extends Node's and adds some extra shared functionality relevant to the context of your application.
+To do this, we can use Node's `util.inherits`, which will in this case cause `ModuleA` to inherit from `EventEmitter`. Notice we can then call `this.on` and `this.emit` from within `ModuleA`. This is a nice pattern to use if you've got a module that's going to be firing a lot of events. You may chose to create your own EventEmitter object that extends Node's and adds some extra shared functionality relevant to the context of your application. As an additional bonus, you can also use Browserify on this code and run it in the browser, so if you're building a front end app and would like to use EventEmitters, you can.
 
 I highly encourage you to play with EventEmitters and the publish and subscribe pattern; once you're comfortable with it I find it's a great way to keep your code organised, decoupled and extensible with very little effort.
 
