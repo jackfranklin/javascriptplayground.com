@@ -1,1 +1,3 @@
 permalink: /blog/:year/:month/:title
+markdown: redcarpet
+pygments: true
