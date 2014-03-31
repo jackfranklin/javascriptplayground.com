@@ -319,3 +319,5 @@ If you'd like to go further into the world of Yeoman, the below resources should
 - [The Yeoman.io side](http://yeoman.io/). This should always be your starting point. There's plenty of documentation, help and links to other resources available.
 - [GitHub](http://github.com/yeoman). If you happen to stumble upon a bug in Yeoman or a generator, the best place to report that is on the relevant GitHub repository. It's also a good place to see if the issue you've found is already known.
 - [@yeoman](https://twitter.com/yeoman). For the latest updates, new generators and other information, the Yeoman Twitter account is definitely worth following. Similarly, there is also the [Yeoman community](https://plus.google.com/101063139999404044459) on Google Plus.
+
+_Thanks to Addy Osmani, Sindre Sorhus and Pascal Hartig for their help reviewing and tweaking this article._
