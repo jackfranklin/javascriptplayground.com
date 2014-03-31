@@ -122,18 +122,20 @@ yo backbone:model book
 
 This will create the file `app/scripts/models/book.js`, which looks like this:
 
-    /*global app, Backbone*/
+```javascript
+/*global app, Backbone*/
 
-    app.Models = app.Models || {};
+app.Models = app.Models || {};
 
-    (function () {
-        'use strict';
+(function () {
+    'use strict';
 
-        app.Models.BookModel = Backbone.Model.extend({
+    app.Models.BookModel = Backbone.Model.extend({
 
-        });
+    });
 
-    })();
+})();
+```
 
 Notice it attaches onto the `app` global which is created within the `scripts/main.js` file. Our `app` object contains a blank object called `Models` too, so we add `BookModel` into that. Grunt takes care of loading this file in too, so we don't have to worry about that.
 
@@ -141,46 +143,50 @@ Notice it attaches onto the `app` global which is created within the `scripts/ma
 
 Yeoman sets up everything you need to get started testing your Backbone entities. Let's write some tests for our new model. Load up `test/index.html`, and add in `<script>` tags to load your application files. While we're here, I'll also add a `script` tag for our spec file, which we'll create in a minute. Your `index.html` file should look like so:
 
-    <!doctype html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Mocha Spec Runner</title>
-        <link rel="stylesheet" href="lib/mocha/mocha.css">
-    </head>
-    <body>
-        <div id="mocha"></div>
-        <script src="lib/mocha/mocha.js"></script>
-        <script>mocha.setup('bdd')</script>
-        <!-- assertion framework -->
-        <script src="lib/chai.js"></script>
-        <script>var expect = chai.expect</script>
-        <script src="bower_components/jquery/jquery.js"></script>
-        <script src="bower_components/underscore/underscore.js"></script>
-        <script src="bower_components/backbone/backbone.js"></script>
+```html
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mocha Spec Runner</title>
+    <link rel="stylesheet" href="lib/mocha/mocha.css">
+</head>
+<body>
+    <div id="mocha"></div>
+    <script src="lib/mocha/mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <!-- assertion framework -->
+    <script src="lib/chai.js"></script>
+    <script>var expect = chai.expect</script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
 
-        <!-- include source files here... -->
-        <script src="../scripts/main.js"></script>
-        <script src="../scripts/models/book.js"></script>
+    <!-- include source files here... -->
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/models/book.js"></script>
 
-        <!-- include spec files here... -->
-        <script src="spec/book_model.js"></script>
+    <!-- include spec files here... -->
+    <script src="spec/book_model.js"></script>
 
-        <script>mocha.run()</script>
-    </body>
-    </html>
+    <script>mocha.run()</script>
+</body>
+</html>
+```
 
 Now let's write our test. Create the file `test/spec/book_model.js` and add write your test. You'll need to leave some comments at the top to tell JSHint which variables it should expect to be global too. For now, we'll write the typical starting test, and make sure 2 + 2 really is 4.
 
-    /*global describe, it, app */
-    'use strict';
-    (function () {
-        describe('BookModel', function () {
-            it('should pass', function () {
-                expect(2+2).to.equal(4)
-            });
+```javascript
+/*global describe, it, app */
+'use strict';
+(function () {
+    describe('BookModel', function () {
+        it('should pass', function () {
+            expect(2+2).to.equal(4)
         });
-    })();
+    });
+})();
+```
 
 Now you should be able to run `grunt test` on your command line and see that you have 1 spec which is passing! Just for completeness' sake, change `4` to `5` and run it again. You'll see this time you get a failure reported. Grunt's `test` command is used in the default Grunt command which Yeoman set up for us, so it's impossible to ever fully build your app if the tests aren't working. I won't explictly talk about testing and what tests to write, but I encourage you to write tests as you develop.
 
@@ -188,32 +194,36 @@ Now you should be able to run `grunt test` on your command line and see that you
 
 Let's continue on and define some properties in our model. I'm expecting each book to have a `title` and an `author` property, and as such I'd like to define a summary method, which returns a string summarising the book. It's effectively just the title and the author, joined with the word "by":
 
-    /*global app, Backbone*/
+```javascript
+/*global app, Backbone*/
 
-    app.Models = app.Models || {};
+app.Models = app.Models || {};
 
-    (function () {
-        'use strict';
+(function () {
+    'use strict';
 
-        app.Models.BookModel = Backbone.Model.extend({
-            summary: function() {
-                return this.get('title') + ' by ' + this.get('author');
-            }
-        });
+    app.Models.BookModel = Backbone.Model.extend({
+        summary: function() {
+            return this.get('title') + ' by ' + this.get('author');
+        }
+    });
 
-    })();
+})();
+```
 
 We can write a test too, to make sure the summary method returns what we expect:
 
-    describe('BookModel', function () {
-        it('should have a summary method', function () {
-            var book = new app.Models.BookModel({
-                title: 'JavaScript: The Good Parts',
-                author: 'Douglas Crockford'
-            });
-            expect(book.summary()).to.equal('JavaScript: The Good Parts by Douglas Crockford');
+```javascript
+describe('BookModel', function () {
+    it('should have a summary method', function () {
+        var book = new app.Models.BookModel({
+            title: 'JavaScript: The Good Parts',
+            author: 'Douglas Crockford'
         });
+        expect(book.summary()).to.equal('JavaScript: The Good Parts by Douglas Crockford');
     });
+});
+```
 
 Running `grunt test` confirms the good news, we're all green! Now we can write a view so we can start to display this information on screen. Just like with our model, we can use Yeoman to generate it for us:
 
@@ -222,15 +232,17 @@ Running `grunt test` confirms the good news, we're all green! Now we can write a
 This creates two files. The first is `scripts/views/book.js`, which contains the boilerplate around our book:
 
 
-    /*global app, Backbone, JST*/
-    app.Views = app.Views || {};
+```javascript
+/*global app, Backbone, JST*/
+app.Views = app.Views || {};
 
-    (function () {
-        'use strict';
-        app.Views.BookView = Backbone.View.extend({
-            template: JST['app/scripts/templates/book.ejs']
-        });
-    })();
+(function () {
+    'use strict';
+    app.Views.BookView = Backbone.View.extend({
+        template: JST['app/scripts/templates/book.ejs']
+    });
+})();
+```
 
 Notice, however, that it links to another file, a template. If you head to `scripts/templates/book.ejs`, you'll see the following:
 
@@ -240,50 +252,54 @@ What's happening here is that Yeoman has made us a template, and it also has con
 
 Now we'll write a `render` method for our book view, and then get something appearing in the browser.
 
-    /*global app, Backbone, JST*/
+```javascript
+/*global app, Backbone, JST*/
 
-    app.Views = app.Views || {};
+app.Views = app.Views || {};
 
-    (function () {
-        'use strict';
+(function () {
+    'use strict';
 
-        app.Views.BookView = Backbone.View.extend({
+    app.Views.BookView = Backbone.View.extend({
 
-            template: JST['app/scripts/templates/book.ejs'],
-            render: function() {
-                var html = this.template(this.model.attributes);
-                this.$el.html(html);
-                return this;
-            }
+        template: JST['app/scripts/templates/book.ejs'],
+        render: function() {
+            var html = this.template(this.model.attributes);
+            this.$el.html(html);
+            return this;
+        }
 
-        });
+    });
 
-    })();
+})();
+```
 
 Our `render` method is very straight forward. It compiles the template by passing in the attributes of the model, then sets the HTML content of the view's element, before returning the view itself. Now we have this set up, we can render it on the page! Head to `scripts/main.js` and add in some code to get everything going:
 
-    /* global app*/
-    window.app = {
-        Models: {},
-        Collections: {},
-        Views: {},
-        Routers: {},
-        init: function() {
-            'use strict';
-            var book = new this.Models.BookModel({
-                title: 'JavaScript The Good Parts',
-                author: 'Douglas Crockford'
-            });
-
-            var view = new this.Views.BookView({model: book});
-            $('body').append(view.render().el);
-        }
-    };
-
-    $(function() {
+```javascript
+/* global app*/
+window.app = {
+    Models: {},
+    Collections: {},
+    Views: {},
+    Routers: {},
+    init: function() {
         'use strict';
-        app.init();
-    });
+        var book = new this.Models.BookModel({
+            title: 'JavaScript The Good Parts',
+            author: 'Douglas Crockford'
+        });
+
+        var view = new this.Views.BookView({model: book});
+        $('body').append(view.render().el);
+    }
+};
+
+$(function() {
+    'use strict';
+    app.init();
+});
+```
 
 Here we just create a new book and a new view instance. We pass that book into the view instance, and then append it to the body.
 
@@ -299,9 +315,11 @@ The opening `<%=` and closing `%>` signify to the templating engine that it shou
 
 Finally, let's use the `summary` method we wrote earlier. To do this, we need to make one quick change to the book model. We need to add an `initialize` method, which is called when we create the model, that will set a `summary` attribute:
 
-    initialize: function() {
-        this.set('summary', this.summary());
-    },
+```javascript
+initialize: function() {
+    this.set('summary', this.summary());
+},
+```
 
 We can then update our template to simply be:
 
@@ -316,7 +334,7 @@ I hope you've seen in this tutorial the power that Yeoman can provide, and the t
 
 If you'd like to go further into the world of Yeoman, the below resources should provide you with all you need.
 
-- [The Yeoman.io side](http://yeoman.io/). This should always be your starting point. There's plenty of documentation, help and links to other resources available.
+- [The Yeoman.io site](http://yeoman.io/). This should always be your starting point. There's plenty of documentation, help and links to other resources available.
 - [GitHub](http://github.com/yeoman). If you happen to stumble upon a bug in Yeoman or a generator, the best place to report that is on the relevant GitHub repository. It's also a good place to see if the issue you've found is already known.
 - [@yeoman](https://twitter.com/yeoman). For the latest updates, new generators and other information, the Yeoman Twitter account is definitely worth following. Similarly, there is also the [Yeoman community](https://plus.google.com/101063139999404044459) on Google Plus.
 
