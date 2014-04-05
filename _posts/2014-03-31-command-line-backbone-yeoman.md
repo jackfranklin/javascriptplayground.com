@@ -30,11 +30,8 @@ Once you've got that far, it's time to install Yo. Yo is a node module which we 
 
 The `--global` flag instructs npm to install the module _globally_. By installing it globally, it will be available to use from everywhere on your machine, so you can run `yo` regardless of the directory you are currently in. When you run that command you'll get a whole load of output, but once it's done Yo will be installed. To test it, run this command:
 
-    $ yo --help
-
-You should see a rather large output that includes the Yeoman himself:
-
-![](/img/yobb-image1.png)
+    $ yo --version
+    1.1.2
 
 If you see that, you can be confident that Yeoman is installed properly.
 
@@ -44,13 +41,12 @@ Generators are at the heart of Yo - they are what you run run to generate files 
 
     $ npm install --global generator-backbone
 
-
 However, before we run the Backbone generator, let's see what happens if you simply run `yo` on your command line. You'll see Yo give you a prompt, asking you what to do. It will list the generators you have installed, allow you to update your generators, search for a new generator, or get some help. If you ever forget what generators you have available, or want to update your installed generators, the `yo` command is the easiest way to do this.
 
 ### Yo Backbone
 
 Yo will detect that the generator has been installed and we can now use it. So let's scaffold our new application! Create a new directory to host your application, navigate into it and then run this command in your terminal:
-
+    
     $ yo backbone library
 
 Yo will then prompt you to ask if you'd like any other functionality. It will ask if you'd like Twitter Bootstrap for Sass, CoffeeScript or RequireJS. To select these options, navigate up and down with your arrow keys and hit 'space' to select the item. For the purposes of this tutorial, I'm going to keep it simple and not use any extras.
