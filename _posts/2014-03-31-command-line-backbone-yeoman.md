@@ -45,7 +45,11 @@ However, before we run the Backbone generator, let's see what happens if you sim
 
 ### Yo Backbone
 
-Yo will detect that the generator has been installed and we can now use it. So let's scaffold our new application! Create a new directory to host your application, navigate into it and then run this command in your terminal:
+Yo will detect that the generator has been installed and we can now use it. So let's scaffold our new application! Create a new directory to host your application and navigate into it with this command:
+
+    $ mkdir my-new-project && cd $_ 
+
+Then run this command in your terminal:
     
     $ yo backbone library
 
