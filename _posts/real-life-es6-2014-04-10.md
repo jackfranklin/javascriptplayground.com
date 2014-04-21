@@ -117,9 +117,9 @@ Today, we can work around this in a few ways. We could have written something li
 
 ```js
 API.prototype.get = function (resource) {
-	var self = this; // a-ha! we'll assign to a local var
+  var self = this; // a-ha! we'll assign to a local var
   return new Promise(function (resolve, reject) {
-		// this doesn't work
+		// this works!
 		http.get(self.uri + resource, function (data) {
 			resolve(data);
 		});
