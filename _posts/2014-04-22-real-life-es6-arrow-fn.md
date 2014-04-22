@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Real Life ES6 - Arrow Functions
+intro: Today we'll look at one of the many new features coming to JavaScript in ES6 Arrow Functions.
 ---
 
 Some of the features soon to be at our fingertips with the growing support for ECMAScript 6 are absolutely fantastic, but often examples shown online are contrived. In this series of blog posts, we'll pick out a few ES6 features and show you some real code that's improved with new features of the language.
