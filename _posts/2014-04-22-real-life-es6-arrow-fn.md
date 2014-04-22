@@ -5,6 +5,8 @@ title: Real Life ES6 - Arrow Functions
 
 Some of the features soon to be at our fingertips with the growing support for ECMAScript 6 are absolutely fantastic, but often examples shown online are contrived. In this series of blog posts, we'll pick out a few ES6 features and show you some real code that's improved with new features of the language.
 
+_This post was written in collaboration with [Adam Yeats](http://twitter.com/adamyeats)._
+
 ## Support
 
 ES6 support is mixed across platforms, so you shouldn't expect to start using this stuff today. Implementations are being added all the time, and I recommend using [The ES6 Compatability Table](http://kangax.github.io/es5-compat-table/es6/) to see the current state of affairs.
