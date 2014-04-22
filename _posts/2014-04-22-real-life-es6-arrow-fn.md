@@ -23,9 +23,11 @@ And then used on a source file like so:
 traceur --out build.js --script my_source_file.js
 ```
 
+You'll also need to include the Traceur runtime in your HTML. The runtime comes as part of the Node module, and is found in the `bin/runtime.js` directory.
+
 ## Arrow Functions
 
-One of the quickest of quick wins, arrow functions allow us to write less and achieve more. Let's take a look at an example of mapping over an array and performing the same task on each element. The code below maps over an array of objects and turns them into an array containing just one particular property from each object:
+Today we'll focus exclusively on Arrown functions. One of the quickest of quick wins, arrow functions allow us to write less and achieve more. Let's take a look at an example of mapping over an array and performing the same task on each element. The code below maps over an array of objects and turns them into an array containing just one particular property from each object:
 
 ```js
 var users = [
@@ -68,7 +70,7 @@ console.log(sum);
 
 Because `reduce` takes two parameters, brackets are required to make it clear that the parameters are for the arrow function, not for the `reduce` call.
 
-Arrow functions can have multiple statements within, in which case you need to use a block:
+Arrow functions can have multiple statements within, in which case you need to use a block. You also need to use the `return` keyword, whereas in the one line examples above, the return was implicit.
 
 ```js
 var users = [
@@ -135,11 +137,11 @@ API.prototype.get = function (resource) {
 		http.get(this.uri + resource, function (data) {
 			resolve(data);
 		});
-  }).bind(this); // wow such bind very this
+  }).bind(this);
 };
 ```
 
-Cool, but this could be a little tidier. If we decide to nest a few callbacks within each other, and they all need access to the outer function's `this` keyword, then we have to affix `.bind()` to every nested function. There are also [performance implications in using `.bind()`](http://stackoverflow.com/questions/18895305/will-function-prototype-bind-always-be-slow), but likely (hopefully) these will be fixed in due time.
+This works, but could be a little tidier. If we decide to nest a few callbacks within each other, and they all need access to the outer function's `this` keyword, then we have to affix `.bind()` to every nested function. There are also [performance implications in using `.bind()`](http://stackoverflow.com/questions/18895305/will-function-prototype-bind-always-be-slow), but likely (hopefully) these will be fixed in due time.
 
 Enter arrow functions! In ES6, the same function above could be defined like this:
 
@@ -153,9 +155,4 @@ API.prototype.get = function (resource) {
 };
 ```
 
-It certainly looks a bit more concise, but what's the arrow doing? Well, it actually binds the context of the Promise's `this` to the context of the function that contains it, so `this.uri` resolves to the value we assigned in the constructor. Awesome!
-
-[add a closing paragraph here]
-
-
-
+It certainly looks a bit more concise, but what's the arrow doing? Well, it actually binds the context of the Promise's `this` to the context of the function that contains it, so `this.uri` resolves to the value we assigned in the constructor. This avoids having to use `bind` or the dreaded `var self = this` trick to keep a reference to the desired scope.
