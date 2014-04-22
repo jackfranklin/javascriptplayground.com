@@ -134,8 +134,8 @@ API.prototype.get = function (resource) {
 		// this works!
 		http.get(this.uri + resource, function (data) {
 			resolve(data);
-		}).bind(this);
-  });
+		});
+  }).bind(this); // wow such bind very this
 };
 ```
 
