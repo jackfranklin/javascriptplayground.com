@@ -1,2 +1,8 @@
-_site/
 .DS_Store
+user_guide/
+application/cache/
+fire
+nbproject/
+httpd.conf
+base.sql
+_site/
