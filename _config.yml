@@ -1,3 +1,25 @@
+safe:        false
+baseurl:     /
+url: http://javascriptplayground.com/
+
+name: The JavaScript Playground
+description: "The JavaScript Playground is a blog dedicated to bringing you top quality JavaScript tutorials, including BackboneJS, FirefoxOS, NodeJS, jQuery and more. It's maintained and primarily written by Jack Franklin, with the help of some awesome contributors."
+url: http://javascriptplayground.com/
+domain: javascriptplayground.com/
+commentlinks: true
+twitter-username: jack_franklin
+
+source:      .
+destination: ./_site
+plugins:     ./_plugins
+
 permalink: /blog/:year/:month/:title
-markdown: redcarpet
+markdown: kramdown
 pygments: true
+
+kramdown:
+  auto_ids: true,
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
