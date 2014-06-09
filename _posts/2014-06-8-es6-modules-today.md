@@ -92,4 +92,45 @@ Once again, the import has been changed into a standard CommonJS `require` call.
 
 Now we can run `node compiled/app.js` and get `8` as our output. It worked!
 
+Let's see what the output would be if we chose AMD support instead. Try running:
+
+```
+compile-modules app.js adder.js --to compiled --type amd
+```
+
+Now, `compiled/adder.js` looks like so:
+
+```js
+define(
+["exports"],
+function(__exports__) {
+  "use strict";
+  var multiplier = function(x) {
+    return function(y) {
+      return x * y;
+    };
+  };
+
+  __exports__.multiplier = multiplier;
+});
+```
+
+
+And `compiled/app.js` looks like this:
+
+```js
+define(
+["./adder"],
+function(__dependency1__) {
+  "use strict";
+  var multiplier = __dependency1__.multiplier;
+
+  var timesTwo = multiplier(2);
+
+  console.log(timesTwo(4));
+});
+```
+
+If we were to setup RequireJS and require `app.js`, this would work just fine in a browser.
+
 If you're not a fan of running the transpiler directly, you can find both [Grunt](https://github.com/joefiorini/grunt-es6-module-transpiler) and [Gulp](https://github.com/ryanseddon/gulp-es6-module-transpiler) plugins. I highly recommend having a play and exploring the module syntax - we've not covered it all in this post and seeing as it will be standard fairly soon, it makes sense to be familiar with it.
