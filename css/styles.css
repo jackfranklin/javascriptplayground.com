@@ -276,6 +276,7 @@ pre {
   .js .nav-primary ul {
     height: auto;
   }
+
   .js .nav-toggle {
     display: none;
   }
@@ -288,18 +289,13 @@ pre {
   }
 
   .menu-icon {
-    float: left;
-    margin: 5px 10px;
-    display: block;
+    display: none;
   }
-  .menu-icon img { width: 32px; }
 
 
   .main-wrapper {
-    /* max-width: 50.5em; */
-    max-width: 65.625em;
-    /* margin-left: 13.125em; */
-    margin-left: 0;
+    max-width: 52.5em;
+    margin-left: 13.125em;
   }
 
   .site-footer {
