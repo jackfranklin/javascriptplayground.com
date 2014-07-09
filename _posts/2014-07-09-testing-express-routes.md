@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 
 The steps to being able to test this are:
 
-- Define each route's function eslewhere, and then pass it into an `app.get` call later. This lets us have access to the route function isolated from Express.
+- Define each route's function elsewhere, and then pass it into an `app.get` call later. This lets us have access to the route function isolated from Express.
 - Because all of my responses call `res.json`, in our tests we will need to fake the method. We can pass in a method called `json`, so the code will work, but in there we can add our own implementation that will test the JSON response is what we expect.
 
 I like to split my routes up into different files, one for each grouping of endpoints. For example, the below code contains routes that will be used under the `/users` endpoint. This is a good example of how I like to define my routes - completely independent of the Express framework.
