@@ -69,5 +69,7 @@ Here we call the function, passing in an empty object for the request (if we nee
 
 If you take just one thing away from this post, isolate your code from your framework as much as possible. Yes, it means a little more work to wire things up, but the speed gains from doing so really pay off, particularly as your app grows.
 
+PS - recently I've created a JSPlayground Twitter account, so if you'd like to be aware when new posts get released, the best way to do so is to [follow the site on Twitter](http://twitter.com/jsplayground_).
+
 
 
