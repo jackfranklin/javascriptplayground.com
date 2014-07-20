@@ -5,7 +5,7 @@ title: The Refactoring Tales
 
 "The Refactoring Tales" is a set of refactoring stories grouped into a small book. It's aim isn't to teach you coding specifics such as functions, objects, or how to use them, but more so to examine techniques for maintaining code and improving it over time. The book is split into a series of chapters, each looking in particular at one piece of code and telling the story of how it was improved with some simple changes and refactorings.
 
-The book is currently a work in progress (a "beta" version, if you will), but three chapters have been fully written, with another soon to follow. The book is expected to be about 6-7 chapters, each containing a refactoring case study, but will grow over time.
+The book is _currently a work in progress_ (a "beta" version, if you will), but three chapters have been fully written, with another soon to follow. The book is expected to be about 6-7 chapters, each containing a refactoring case study, but will grow over time.
 
 The book is entirely __free to read online__, and [can be done so here](refactoring-tales.html). It is also published openly on [GitHub](https://github.com/jackfranklin/the-refactoring-tales). If you find any problems or have any suggestions, please feel free to open an issue on GitHub.
 
