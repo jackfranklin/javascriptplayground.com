@@ -412,6 +412,10 @@ pre {
   vertical-align: middle;
   width: 70%;
 }
+.buynow:hover,
+.buynow:focus {
+  background-color: #276D9F;
+}
 
 a:link.buynow {
   color: #fff;
