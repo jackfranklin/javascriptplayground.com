@@ -9,7 +9,7 @@ The book is currently a work in progress, but three chapters have been fully wri
 
 The book is entirely __free to read online__, and [can be done so here](refactoring-tales.html). It is also published openly on [GitHub](https://github.com/jackfranklin/the-refactoring-tales). If you find any problems or have any suggestions, please feel free to open an issue on GitHub.
 
-If you'd like to support The JavaScript Playground and purchase the PDF, EPUB and MOBI versions, you can do so below for $10. In buying the book you also buy access to __all future editions and updates__ to the book, and your support of the JS Playground is much appreciated. Remember, you can always [read the book online](refactoring-tales.html) before deciding if you'd like the digital download versions.
+If you'd like to support The JavaScript Playground and purchase the PDF, EPUB and MOBI versions, you can do so below for $15. In buying the book you also buy access to __all future editions and updates__ to the book, and your support of the JS Playground is much appreciated. Remember, you can always [read the book online](refactoring-tales.html) before deciding if you'd like the digital download versions.
 
 <a class="buynow" href="https://transactions.sendowl.com/products/64361/A591CEA4/add_to_cart" rel="nofollow">Buy Kindle, iPad and PDF versions for $15</a>
 
