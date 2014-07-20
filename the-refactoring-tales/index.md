@@ -11,6 +11,6 @@ The book is entirely __free to read online__, and [can be done so here](refactor
 
 If you'd like to support The JavaScript Playground and purchase the PDF, EPUB and MOBI versions, you can do so below for $10. In buying the book you also buy access to __all future editions and updates__ to the book, and your support of the JS Playground is much appreciated. Remember, you can always [read the book online](refactoring-tales.html) before deciding if you'd like the digital download versions.
 
-<a class="buynow" href="https://transactions.sendowl.com/products/64361/A591CEA4/add_to_cart" rel="nofollow">Buy Kindle, iPad and PDF versions for $10</a>
+<a class="buynow" href="https://transactions.sendowl.com/products/64361/A591CEA4/add_to_cart" rel="nofollow">Buy Kindle, iPad and PDF versions for $15</a>
 
 If you have any problems with your purchase, or any feedback / queries at all, please either drop me a tweet ([@jack_franklin](http://twitter.com/jack_franklin)), or write an email to jack at jackfranklin.net.
