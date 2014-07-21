@@ -421,3 +421,16 @@ a:link.buynow {
   color: #fff;
   text-decoration: none;
 }
+
+.notification p {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.notification a:link,
+.notification a:visited {
+  color: white;
+}
+.notification a:hover {
+  text-decoration: none;
+}
