@@ -6,10 +6,12 @@ intro: Last weekend I spoke at Front End London on introducting ES6.
 
 I had the pleasure last weekend of speaking at [Epic FEL](http://epic.frontendlondon.co.uk/), a single day, single track conference in the heart of London, run by [Made by Many](http://madebymany.com/). They did an absolutely fantastic job and if you are ever in London, I recommend their monthly [Front End London meetup](http://www.frontendlondon.co.uk/) too.
 
-I spoke on introducing ES6, a topic that I've been writing and speaking about more and more recently. I'm really excited by the evolution of the language and some of the new features. You can find my slides below, and when the videos become available, I'll be adding that to the post too.
+I spoke on introducing ES6, a topic that I've been writing and speaking about more and more recently. I'm really excited by the evolution of the language and some of the new features. You can find my slides below along with the video.
 
 
 <script async class="speakerdeck-embed" data-id="3cffd6802e29013233bc1ac45923d988" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/mPq5S27qWW8" frameborder="0" allowfullscreen></iframe>
 
 Below I have included a list of resources that I used when putting the talk together which may be useful if you'd like to read more on any of the features in particular:
 
