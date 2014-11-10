@@ -15,6 +15,11 @@ I think that ES6 modules are absolutely fantastic, and at [GoCardless](http://ww
 
 Today we will set up a very simple project using jspm, and in further posts we will explore more of its features.
 
+## Why not npm?
+
+jspm is a package manager in the same ilk as npm, but with a key difference: it puts the browser loader first. This means it offers a seamless workflow for installing and using libraries in the browser with very little effort from the developer. The ability to load in modules that have been defined in a number of different syntaxes means it can offer the greatest support for front end libraries and more often than not with jspm, any module you wish to use will just work, with none or very little configuration required.
+
+
 ## Installing jspm
 
 jspm should be installed as a global tool through npm:
