@@ -4,11 +4,12 @@ title: JavaScript Modules and Dependencies with jspm
 intro: In this post I'll show you how to manage your application's dependencies and structure it using JSPM.
 ---
 
-[jspm](http://jspm.io/) is a package manager for JavaScript applications that sits on top of the [SystemJS](https://github.com/systemjs/systemjs). Both were written and are maintained by [Guy Bedford](http://twitter.com/guybedford). SystemJS is a universal module loader that is capable of loading modules specified in a number of formats:
+[jspm](http://jspm.io/) is a package manager for JavaScript applications that sits on top of the [SystemJS](https://github.com/systemjs/systemjs). Both were written and are maintained by [Guy Bedford](http://twitter.com/guybedford). SystemJS builds on top of the [es6-module-loader](https://github.com/ModuleLoader/es6-module-loader) and adds the capability to load in modules that are defined using a variety of syntaxes:
 
 - CommonJS (for example, NodeJS modules)
 - AMD (the spec that RequireJS follows)
 - ES6 modules (using the [ES6 module loader](https://github.com/ModuleLoader/es6-module-loader) and [Traceur](https://github.com/google/traceur-compiler).
+- Modules that export a global variable are also supported via a shim config.
 
 I think that ES6 modules are absolutely fantastic, and at [GoCardless](http://www.gocardless.com), we've structured a large JS heavy application using SystemJS, allowing us to manage our application's modules entirely through ES6. Using jspm is the next logical step up from SystemJS. It manages our dependencies, lets us install third party ones and comes with tooling to build applications into one file for production.
 
@@ -47,9 +48,7 @@ To get this running we now need to create an HTML file, and load in a couple of 
 </html>
 ```
 
-We first load in the SystemJS source, and then the `config.js`, which jspm created for us. Then we can use `System.import`, one of the new module API methods available in ES6, and polyfilled by the es6-module-loader, to import a file, `app.js`.
-
-To make sure everything is working and plugged together, let's create a very simple `app.js`:
+We first load in the SystemJS source, and then the `config.js`, which jspm created for us. Then we can use `System.import`, the proposed browser loader API for dynamically loading ES6 modules, polyfilled by the es6-module-loader, to import the file `app.js`:
 
 ```js
 console.log('hello world');
@@ -66,15 +65,13 @@ So far, jspm hasn't added much to the party. Most of the work to achieve what we
 
      Updating registry cache...
 
-     Use jspm endpoint config github to set this up.
-
      Looking up github:components/jquery
 ok   Installed jquery as github:components/jquery@^2.1.1 (2.1.1)
 
 ok   Install complete
 ```
 
-jspm has searched its registry for "jquery", and found that it is mapped to "github:components/jquery", and has gone and installed jQuery from that repository.
+jspm has searched its registry for "jquery", and found that it is mapped to "github:components/jquery", and has gone and installed jQuery from that repository. Additionally, it has added jQuery to the `package.json`, which means if you were to clone the repository and run `jspm install`, jQuery will be downloaded and installed for you.
 
 If we take a look at `config.js`, we can see jspm has modified it:
 
@@ -100,9 +97,15 @@ System.config({
 });
 ```
 
-These paths and mappings tell SystemJS how to resolve a request for a module. Most of the time jspm will generate this for you and you won't have to edit it too much, however sometimes it can be useful to map a longer package name to a smaller one, as jspm has done with jQuery.
+These paths and mappings tell SystemJS how to resolve a request for a module. Most of the time jspm will generate this for you and you won't have to edit it too much, however sometimes it can be useful to map a longer package name to a smaller one, as jspm has done with jQuery. You can actually generate these mappings automatically when you install a module:
 
-Now we can use jQuery! Head back to `app.js` and load it in:
+```sh
+jspm install j=jquery
+```
+
+Would install jQuery and set up a path so in your code you could load it in as `j`. I don't recommend using such short names, but in some cases it can be useful to save on typing.
+
+Now we can use jQuery in our application. Head back to `app.js` and load it in:
 
 
 ```js
@@ -120,7 +123,6 @@ Let's now look at installing something from npm, namely [LoDash](http://lodash.c
 ```
 > jspm install npm:lodash
 
-Use jspm endpoint config github to set this up.
 
 Updating registry cache...
 Looking up npm:lodash
@@ -150,7 +152,7 @@ console.log($.fn.jquery);
 console.log(_.VERSION);
 ```
 
-You will see the current version on LoDash (`2.4.1` at time of writing) in the console.
+You will see the current version of LoDash (`2.4.1` at time of writing) in the console.
 
 ## ES6 Syntax
 
@@ -166,6 +168,14 @@ console.log(_.VERSION);
 
 If you load your browser again, you'll see that everything still works. If you need a primer on the ES6 module syntax, I covered it [previously on the site](http://javascriptplayground.com/blog/2014/06/es6-modules-today/).
 
+## Advantages over RequireJS or Browserify
+
+This approach of jspm + SystemJS offers a number of advantages over other solutions such as Require or Browserify. With RequireJS, you have to install it through a tool such as Bower, but then manage the mappings and namings of the modules manually. With jspm, you very rarely have to edit the configuration, it is just done for you. In the cases where jspm isn't able to do it all for you, you can manually override and add to the jspm registry, fixing the problem for you and for others.
+
+The primary benefit over Browserify is that you do not need any form of build tool or task running all the time every time you change a file. Because it's all run and compiled (in development, anyway), in the browser, there's much less tooling or set up required. Compilation through Traceur for your ES6 files is all done for you.
+
 ## Conclusion
 
 The combination of jspm and SystemJS is a powerful one, in particular when combined with the new module syntax in ES6. In future tutorials we will look more at structuring applications and defining your own modules and use jspm to bundle our application into one file that can be used in production.
+
+Thank you to [Guy Bedford](http://twitter.com/guybedford), [Oliver Ash](http://twitter.com/oliverjash) and [Sebastien Cevey](http://twitter.com/theefer) for their time spent reviewing this blog post.
