@@ -126,7 +126,7 @@ Remember, SystemJS can deal with modules defined and loaded in using either AMD,
 Let's now look at installing something from npm, namely [LoDash](http://lodash.com/). Typically, if a dependency you need is on npm, you should install it from there rather than on GitHub. We can install it with jspm like so:
 
 ```
-> jspm install npm:lodash
+> jspm install lodash=npm:lodash
 
 
 Updating registry cache...
@@ -145,7 +145,7 @@ ok   Installed lodash as npm:lodash@^2.4.1 (2.4.1)
 ok   Install complete
 ```
 
-Don't worry that a lot of extra files got downloaded - these are dependencies that jspm has in order to install npm modules correctly.
+Don't worry that a lot of extra files got downloaded - these are dependencies that jspm has in order to install npm modules correctly. Notice how we install LoDash with the command `jspm install lodash=npm:lodash`. This gets jspm to install LoDash from npm, but then set up a mapping so we can require it as `lodash`, rather than the slightly more verbose `npm:lodash`, which gets tiring to type very quickly.
 
 Now head into `app.js` and load in LoDash.
 
