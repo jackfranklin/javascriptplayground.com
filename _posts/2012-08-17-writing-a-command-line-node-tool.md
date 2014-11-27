@@ -7,13 +7,27 @@ Today we are going to combine a few different tools and create a simple Node pac
 
 The pre-requisites to this are:
 
-* You have NodeJS installed (and preferably 0.8 up, this is __not__ tested on Node < 0.8)
+* You have NodeJS installed (and preferably 0.10.32 up, this is __not__ tested on Node < 0.10.32)
 * Have the Node Package Manager (npm) installed.
-* Have Grunt installed, or if not, run `npm install -g grunt`. Some basic familiarity is good too, [I've written an introduction to it](http://javascriptplayground.com/blog/2012/04/grunt-js-command-line-tutorial) previously. If you've never used it, go read that and then return.
+* Have Grunt-init and and Grunt-cli installed, or if not, run `npm install -g grunt-init` and `npm install -g grunt-cli` (or sudo npm install -g grunt-cli ). Some basic familiarity is good too, [I've written an introduction to it](http://javascriptplayground.com/blog/2012/04/grunt-js-command-line-tutorial) previously. If you've never used it, go read that and then return.
 
-So the first thing to do is create a new project. Create a directory for it, and then run:
 
-	grunt init:node
+So the first thing to do is create a new project. Create a directory for it and change to the directory you created.
+  - Install the current version of Grunt local to your project
+
+  	npm install grunt --save
+
+This will mark grunt your project's package.json devDependencies section.
+
+  - Add the node grunt-init template 
+
+    git clone https://github.com/gruntjs/grunt-init-node.git ~/.grunt-init/node
+
+(The current version on grunt-init doesn't come with any base templates.  Additional information is avaliable at [Project Scaffolding](http://gruntjs.com/project-scaffolding)
+
+  - Use grunt-init to create a new node project
+
+	grunt-init node
 	
 This will take us through set up to set up our new project. It will ask you some questions. Feel free to deviate, but here's how I answered them:
 
@@ -27,24 +41,33 @@ This will take us through set up to set up our new project. It will ask you some
 	[?] Author name (Jack Franklin) 
 	[?] Author email (jack@jackfranklin.net) 
 	[?] Author url (none) 
-	[?] What versions of node does it run on? (>= 0.6.0) 0.8
+	[?] What versions of node does it run on? (>= 0.8.0) 0.10.32
 	[?] Main module/entry point (lib/filesearch) 
-	[?] Npm test command (grunt test) 
+	[?] Npm test command (grunt nodeunit) 
+	[?] Will this project be tested with Travis CI? (Y/n) n
 	[?] Do you need to make any changes to the above before continuing? (y/N) n
-	
+
 You will see Grunt has got us started:
-	
-	.
-	├── LICENSE-MIT
-	├── README.md
-	├── grunt.js
-	├── lib
-	│   └── filesearch.js
-	├── package.json
-	└── test
-	    └── filesearch_test.js
-	
-	2 directories, 6 files
+
+```	
+Writing .gitignore...OK
+Writing .jshintrc...OK
+Writing Gruntfile.js...OK
+Writing README.md...OK
+Writing lib/filesearch.js...OK
+Writing test/filesearch_test.js...OK
+Writing LICENSE-MIT...OK
+Writing package.json...OK
+
+Initialized from template "node".
+You should now install project dependencies with npm install. After that, you
+may execute project tasks with grunt. For more information about installing
+and configuring Grunt, please see the Getting Started guide:
+
+http://gruntjs.com/getting-started
+
+Done, without errors.
+```
 	
 We wont actually be writing tests for this package as it's very simple. To search for files in a directory, we're just going to execute the shell command:
 
@@ -78,23 +101,31 @@ Load up `package.json` in your editor. It should look like this:
 	  ],
 	  "main": "lib/filesearch",
 	  "engines": {
-	    "node": "0.8"
+	    "node": "0.10.32"
 	  },
 	  "scripts": {
-	    "test": "grunt test"
+	    "test": "grunt nodeunit"
 	  },
 	  "devDependencies": {
-	    "grunt": "~0.3.12"
+	    "grunt-contrib-jshint": "~0.6.4",
+	    "grunt-contrib-nodeunit": "~0.2.0",
+	    "grunt-contrib-watch": "~0.5.3",
+	    "grunt": "~0.4.5"
 	  },
 	  "keywords": []
 	}
 
-We need to add some properties to that. After the last property, add:
+We need to add some properties to that. After the last property, as shown below:
 
-	 "preferGlobal": "true",
+	"Keywords": []
+	```
+	 //Add here this here
+	 ,"preferGlobal": "true",
 	  "bin": {
 	    "filesearch" : "lib/filesearch.js"
 	  }
+	 ```
+	}
 	
 The first line denotes that our package should be installed globally if possible. If the user installs it locally, they will see a message about how it should be done globally. The second object, `bin`, denotes files that should be executable on the command line, and how we should reference them. Here we are saying that when we hit `filesearch` in the command line, it should run `lib/filesearch.js`.
 
@@ -102,15 +133,23 @@ To make this happen, load up `lib/filesearch.js` in your editor, and add this li
 
 	#! /usr/bin/env node
 	
-This says how the script should be executed, in this case through Node. 
+This says how the script should be executed, in this case through Node.
 
-Once that is done, we can run `npm link` to install our package locally so we can test it. Run `npm link` and then you should have access to the `filesearch` command. Of course, right now it does nothing.
+Add an additional line to the end of `lib/filesearch.js`:
 
-Now, delete the rest of the code Grunt gave us, which is:
+	console.log("Success");  
+
+Once that is done, we can run `npm link` to install our package locally so we can test it. Run `npm link` and then you should have access to the `filesearch` command. Of course, right now it only logs success to the console.  To confirm it is working run `filesearch Grunt` and look for the output `success`.
+
+Now, delete the rest of the code from `lib/filesearch`, which is:
+
+	'use strict';
 
 	exports.awesome = function() {
 	  return 'awesome';
 	};
+
+	console.log("Success"); 
 	
 `exports` is a way of exporting methods and variables from your script, that can be used in others. Say if this script was one other developers could use, `exports` is the object that will be returned when a developer includes our module through `var x = require("ourpackage");`. Because ours is a command line tool that's little use, so there's no need to include it. Now, lets implement this. I am envisaging that the use of this module is like so:
 
@@ -161,10 +200,10 @@ The pattern of callback functions taking the error as the first parameter is ver
 		//rest of code
 	}
 
-As a pattern. Now we've done that, running `filesearch grunt` within our project directory should get you what we want:
+As a pattern. Now we've done that, running `filesearch Grunt` within our project directory should get you what we want:
 
-	filesearch grunt
-	grunt.js
+	filesearch Grunt
+	Gruntfile.js
 	
 Of course, this module in practice is useless, but hopefully it has demonstrated how to go about making simple command line tools in Node. If you'd like a more complex example, my [Nodefetch](https://github.com/jackfranklin/nodefetch) tool might make interesting reading. 
 
