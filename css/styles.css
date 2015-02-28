@@ -434,3 +434,8 @@ a:link.buynow {
 .notification a:hover {
   text-decoration: none;
 }
+
+.deprecation-warning {
+  font-style: italic;
+  font-weight: bold;
+}
