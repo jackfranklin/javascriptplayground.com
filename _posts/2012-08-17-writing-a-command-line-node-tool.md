@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Writing a Command Line Node Tool"
+deprecated_by: "/blog/2015/03/node-command-line-tool/"
 ---
 
 Today we are going to combine a few different tools and create a simple Node package that will allow a user to search a directory for files. In this tutorial we will use Grunt  to do a lot of the work for us, see how to to make a Node script executable on the command line, and finally see how we publish it to the Node Package Manager (npm) so anyone can install it.
