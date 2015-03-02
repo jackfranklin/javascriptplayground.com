@@ -19,6 +19,9 @@
     {% endunless %}
   </header>
   <section class="entry-content">
+    {% if post.deprecated_by %}
+    <p class='deprecation-warning'>This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
+    {% endif %}
     {{ content }}
   </section>
 </article>
