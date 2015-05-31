@@ -28,6 +28,9 @@ to provide a better language for:
 - libraries
 - code generation (languages that compile to JS)
 
+These are by no means the most bold of predictions, more so thoughts on what I
+think will happen in the next year or so.
+
 ### 1: Fewer people will write JavaScript without a compilation step
 
 We're seeing this trend already, libraries like
@@ -77,8 +80,7 @@ The previous two thoughts might make you think that I'm predicting the demise of
 Angular, Ember and so on. This is definitely not the case. There will always be
 (and quite rightly so) a use case and need for these larger frameworks.
 
-### 5: The use of compilers (Babel etc.) will be abstracted for us by generic
-build tools
+### 5: The use of compilers (Babel etc.) will be abstracted for us by generic build tools
 
 More and more developers will use compilers like Babel, but they won't do it by
 directly installing and running Babel. Most will use it through some other
