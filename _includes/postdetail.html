@@ -20,22 +20,11 @@
   </header>
   <section class="entry-content">
     {% if post.deprecated_by %}
-    <p class='deprecation-warning'>This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
+      <p class='deprecation-warning'>This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
     {% endif %}
     {{ content }}
+    {% unless is_page %}
+    <p>If you'd like to discuss this post further or ask any questions, please <a href="http://twitter.com/jack_franklin">tweet me</a>.</p>
+    {% endunless %}
   </section>
 </article>
-{% unless is_page %}
-  <div id="comments">
-    <div id="disqus_thread"></div>
-    <script>
-        var disqus_shortname = 'jsplayground';
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus</a>.</noscript>
-  </div>
-{% endunless %}
