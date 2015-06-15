@@ -79,7 +79,7 @@ The first argument is always `node`, and the second is the path to the file that
 
 
 ```javascript
-var userArgs = process.argv.splice(2);
+var userArgs = process.argv.slice(2);
 
 var searchPattern = userArgs[0];
 ```
