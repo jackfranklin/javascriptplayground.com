@@ -82,12 +82,12 @@ If you run the above code (remembering to run it through Traceur), you'll see `"
 
 ## Extending
 
-Say we have some views where we actually just want the `render` method not to return the compiled template, but to simply just `console.log` the resulting rendered HTML. (This is a contrived example, but stick with me!). We might call this view `LogView`, and we can implement it by extending our regular `View` class:
+Say we have some views where we actually just want the `render` method not to return the compiled template, but to simply just `console.log` the resulting rendered HTML. (This is a contrived example, but stick with me!). We might call this view `LogView`, and we can implement it by extending our regular `View` class. I'll explain the call to `super.render()` shortly.
 
 ```js
 class LogView extends View {
   render() {
-    var compiled = super();
+    var compiled = super.render();
     console.log(compiled);
   }
 }
@@ -105,12 +105,12 @@ Instead though, we override the `render` method:
 
 ```js
 render() {
-  var compiled = super();
+  var compiled = super.render();
   console.log(compiled);
 }
 ```
 
-We first call `super()`. This calls the parent class' `render()` method, and returns the result. This means that the `render` method on the `View` class is first called, and the result is stored in the `compiled` variable. We then simply log out the result.
+We first call `super.render()`. This calls the parent class' `render()` method, and returns the result. Using `super`, you can access methods and properties available on the parent class. This means that the `render` method on the `View` class is first called, and the result is stored in the `compiled` variable. We then simply log out the result.
 
 ```js
 var jack = new Model({
