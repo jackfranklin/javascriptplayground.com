@@ -1,12 +1,5 @@
 <article class="entry hentry">
   <header class="entry-header">
-    {% unless is_page %}
-      {% if post.author %}
-        <img src="{{ post.author_img }}" class="author-avatar" />
-      {% else %}
-        <img src="http://gravatar.com/avatar/aea964cf59c0c81fff752896f070cbbb?s=100" alt="" class="author-avatar" />
-      {% endif %}
-    {% endunless %}
     <h1 class="entry-title">{{ post.title }}</h1>
     {% unless is_page %}
     <p><time class="published" datetime="{{ post.date }}">{{ post.date | date: "%d %B %Y" }}</time> by
