@@ -439,3 +439,7 @@ a:link.buynow {
   font-style: italic;
   font-weight: bold;
 }
+
+hr {
+  margin-bottom: 30px;
+}
