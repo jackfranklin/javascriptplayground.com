@@ -1,3 +1,5 @@
 permalink: /blog/:year/:month/:title
 markdown: redcarpet
 highlighter: pygments
+gems:
+  - jekyll-redirect-from

@@ -2,6 +2,7 @@
 layout: post
 title: Authoring JavaScript modules with ES6
 intro: Learn how to be able to write your modules in ES6 before publishing them in a generic way to npm for others to consume.
+redirect_from: "/blog/2016/10/authoring-modules-in-es6/"
 ---
 
 I've spoken and written previously about using tools like [jspm](http://jspm.io) to let you write web applications in ES6 and take care of the details, leaving you free to focus on writing your app and not the tooling around it. Today we're going to talk about how we can author and publish modules written in ES6, but doing so in a way that's generic enough to allow the consumer to use your module in Node or through a client side library like jspm, Webpack or Browserify.
