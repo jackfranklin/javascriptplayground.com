@@ -87,5 +87,5 @@ src/githubby.js -> lib/githubby.js
 + jsplayground-example@1.0.0
 ```
 
-Now we have a module that we've authored entirely in ES6 that is published in a way that makes it usable to as many different consumers as possible. Nothing in our module is specific to the browser or specify to Node, and a person using this module could be using it in the client or on the server, and it will work just as well on both. In a future article I'll look at the different ways we can consume this module. If you'd like to grab the code and check out the module for yourself, [you can check the example repository on GitHub](https://github.com/jackfranklin/authoring-es6-module-example).
+Now we have a module that we've authored entirely in ES6 that is published in a way that makes it usable to as many different consumers as possible. Nothing in our module is specific to the browser or specific to Node, and a person using this module could be using it in the client or on the server, and it will work just as well on both. In a future article I'll look at the different ways we can consume this module. If you'd like to grab the code and check out the module for yourself, [you can check the example repository on GitHub](https://github.com/jackfranklin/authoring-es6-module-example).
 
