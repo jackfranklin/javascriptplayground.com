@@ -5,6 +5,8 @@ intro: Learn how to be able to write your modules in ES6 before publishing them 
 redirect_from: "/blog/2016/10/authoring-modules-in-es6/"
 ---
 
+**Update: this post was updated on 09/11/2015 to use Babel 6, rather than Babel 5.**
+
 I've spoken and written previously about using tools like [jspm](http://jspm.io) to let you write web applications in ES6 and take care of the details, leaving you free to focus on writing your app and not the tooling around it. Today we're going to talk about how we can author and publish modules written in ES6, but doing so in a way that's generic enough to allow the consumer to use your module in Node or through a client side library like jspm, Webpack or Browserify.
 
 The process isn't as complicated as you might imagine; thankfully we can offload most of the work to Babel, and the only requirement on our part is to run our ES6 through Babel before publishing the module to npm.
@@ -13,8 +15,10 @@ Let's get started by first creating a new project, and installing Babel as a dev
 
 ```
 npm init
-npm install --save-dev babel
+npm install --save-dev babel-cli
 ```
+
+As of Babel 6 it's been split into two modules. babel-cli is for using Babel from the command line, and babel-core is for use through NodeJS. We're going to run Babel on the command line, so we'll install the CLI.
 
 The module we're going to build is a tiny one that takes a GitHub username and uses the new [fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) to make a request to the GitHub API for a list of repositories that the user owns. Note that at the time of writing, the fetch API is only supported in Chrome, [but a polyfill exists](https://github.com/github/fetch). If you want a polyfill that works in both Node and in the browser, Matt Andrew's [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) is your best bet.
 
@@ -36,7 +40,21 @@ This code makes use of a few ES6 features, including ES6 modules, block scoping,
 babel -d lib src/
 ```
 
-This tells Babel to take every JavaScript file in the `src` directory, and output a corresponding compiled file into `lib`. If we run that and take a look at `lib/githubby.js`, you'll see a file that looks similar to the below:
+This tells Babel to take every JavaScript file in the `src` directory, and output a corresponding compiled file into `lib`. However, as of Babel 6, this won't do anything by default. Babel doesn't provide any transforms by default, you have to tell it what transforms you want it to perform. Luckily for us Babel also provides a number of presets to quickly configure things. One such preset is `babel-preset-es2015`, which configures Babel 6 to transform our code into ECMAScript 5 code. First, install the preset:
+
+```
+npm install --save-dev babel-preset-es2015
+```
+
+And then create a `.babelrc` file to tell Babel to use that preset:
+
+```js
+{
+  "presets": ["es2015"]
+}
+```
+
+Now when we run Babel 6, our code will be transformed as we expect. If we take a look at `lib/githubby.js`, you'll see a file that looks similar to the below:
 
 ```js
 "use strict";
@@ -45,7 +63,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getReposForUser = getReposForUser;
-
 function getReposForUser(username) {
   var url = "https://api.github.com/users/" + username + "/repos";
 
