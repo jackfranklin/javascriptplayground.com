@@ -443,3 +443,11 @@ a:link.buynow {
 hr {
   margin-bottom: 30px;
 }
+
+#carbonads {
+  max-width: 9em;
+  font-weight: normal;
+  text-transform: none;
+  margin-top: 20px;
+  font-size: 12px;
+}
