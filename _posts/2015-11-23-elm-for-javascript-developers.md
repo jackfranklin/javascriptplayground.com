@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Elm for JavaScript Developers
-intro: In this post we'll explore Elm, a new programming language aimed at frontend developers.
+intro: In this post we'll explore Elm, a new programming language aimed at frontend developers, and some of its major features.
 ---
 
-If you follow me on GitHub or Twitter you'll have noticed that I've been doing a lot of work with [Elm](http://elm-lang.org/) recently. Elm is a new language aimed at making it easier to build more robust, complex applications. It compiles to JavaScript but shares very little in common with the language, and its syntax will look familiar to anyone who's worked with Haskell. In the first of many posts about Elm, I'll talk through some of the major features of the language and why you should consider giving it a try. Don't be put off by its different syntax; once you get used to it you'll realiise that it's a pleasure to work with.
+If you follow me on GitHub or Twitter you'll have noticed that I've been doing a lot of work with [Elm](http://elm-lang.org/) recently. Elm is a new language aimed at making it easier to build more robust, complex applications. It compiles to JavaScript but shares very little in common with the language, and its syntax will look familiar to anyone who's worked with Haskell. In the first of many posts about Elm, I'll talk through some of the major features of the language and why you should consider giving it a try. Don't be put off by its different syntax; once you get used to it you'll realise that it's a pleasure to work with.
 
-## Immutablility and Pure Functions
+## Immutability and Pure Functions
 
 Every single piece of data you have in your Elm application is immutable. This means that it can never be modified, and will always be set to the value it was given when it was created. What this means in practice is that code is much easier to follow, because you know it hasn't changed. As an example, think about the below JavaScript code:
 
@@ -16,20 +16,28 @@ doSomethingWith(person);
 console.log(person);
 ```
 
-Without executing that code, are you able to make any guarantees about the value of `person` once `doSomethingWith` has run? Because objects in JavaScript are mutable, you can't. `doSomethingWith` could have done anything to `person`. In a larger application where objects are frequently passed through functions bugs are often caused by this. Functions that modify the state of the world, by mutating variables given to it, or that are globally available, are functions with __side effects__. Functions like this are difficult to debug and hard to work with. 
+Without executing that code, are you able to make any guarantees about the value of `person` once `doSomethingWith` has executed?
+
+None.
+
+Because objects in JavaScript are mutable, anything could have happened to `person`.
+
+This is a fruitful source of bugs in larger applications. Functions that modify the state of the world, by mutating variables available to it, are functions with __side effects__. Functions like this are difficult to debug and harder to work with.  They are also harder to test and you should aim to avoid them whenever possible.
 
 In Elm, every function is __pure__. This means two things:
 
 - Given an input X, it will always result in output Y. If you give a function the same value, it will always produce the same result.
 - The function has no side effects, and does not mutate anything or change the state of the world around it.
 
-It's of course possible to create functions like this in JavaScript, and you can make it a rule in your application that functions should be pure. Elm enforces it due to its immutable nature, and this means it's impossible for impure functions to sneak into your code base, either through code you write or through code in a 3rd party library you're using.
+It's entirely possible to create functions like this in JavaScript, and you can make it a rule in your application that functions should be pure. Elm enforces it due to its immutable nature, and this means it's impossible for impure functions to sneak into your code base, either through code you write or through code in a 3rd party library you're using.
+
+You might be wondering how you're expected to keep track of state in your application when you can't mutate values. This is entirely possible in Elm using Signals, and we'll visit it in a later article.
 
 ## Types
 
-Elm is a statically typed language. This might sound off putting, but it actually leads to far more robust applications. In Elm every value has a type.
+Elm is a statically typed language. This might sound off-putting, but it actually leads to far more robust applications. In Elm every value has a type.
 
-```elm
+```
 "Hello World" - String Type
 True - Boolean type
 3 - number type
@@ -45,9 +53,11 @@ someMadeUpFn(5) => 'Foo'
 someMadeUpFn({ name: 'Jack' }) => { name: 'jack' }
 ```
 
-There's no restriction on the types of the arguments that `someMadeUpFn` takes, and there's no restrictions on the type of the value it returns either. In Elm we have to explicitly declare all the types (actually, we could leave it up to the compiler to infer the types, but it's best practicse to declare them). The below code creates a function `square` that takes an integer and returns another.
+Additionally, JavaScripts type system is __dynamic__, which means types are only decided at __runtime__, when your code is executed. Elm's type system is __static__, which means the compiler can figure out the types ahead of time. We'll come back to this later.
 
-```elm
+In the code above there are no restrictions on the types of the arguments that `someMadeUpFn` takes, and there's no restrictions on the type of the value it returns either. In Elm we have to explicitly declare all the types (actually, we could leave it up to the compiler to infer the types, but it's best practice to declare them). The below code creates a function `square` that takes an integer and returns another.
+
+```
 square : Int -> Int
 square x = x * x
 ```
@@ -62,7 +72,7 @@ function square(x) {
 
 Notice the first line of our Elm function:
 
-```elm
+```
 square : Int -> Int
 ```
 
@@ -70,9 +80,9 @@ This is a __type annotation__ that tells Elm that this function will take one ar
 
 ## Compiling
 
-Above we discussed how if you try to call a function with the wrong type, you'll get an error. It's better than that though, because you'll get these errors at __compile time__. Elm as a language compiles to JavaScript, and we need to run the compiler to generate JavaScript from our Elm code. Elm's compiler is smart, and is able to check the types of values when it compiles our code into JavaScript. For example, if I take this Elm code and try to compile it, we'll get an error. Don't worry about the specifics of the syntax, but know that this code will call the `square` function with the argument `"Hello"`.
+Above we noted that trying to call a function with the wrong types causes an error. Even better, we get these errors at __compile time__. Elm as a language compiles to JavaScript, and we need to run the compiler to generate JavaScript from our Elm code. Elm's compiler is smart, and is able to check the types of values when it compiles our code into JavaScript. For example, if I take this Elm code and try to compile it, we'll get an error. Don't worry about the specifics of the syntax, but know that this code will call the `square` function with the argument `"Hello"`.
 
-```elm
+```
 square : Int -> Int
 square x = x * x
 
