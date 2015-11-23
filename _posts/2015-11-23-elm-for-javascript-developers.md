@@ -37,7 +37,7 @@ You might be wondering how you're expected to keep track of state in your applic
 
 Elm is a statically typed language. This might sound off-putting, but it actually leads to far more robust applications. In Elm every value has a type.
 
-```elm
+```
 "Hello World" - String Type
 True - Boolean type
 3 - number type
@@ -57,7 +57,7 @@ Additionally, JavaScripts type system is __dynamic__, which means types are only
 
 In the code above there are no restrictions on the types of the arguments that `someMadeUpFn` takes, and there's no restrictions on the type of the value it returns either. In Elm we have to explicitly declare all the types (actually, we could leave it up to the compiler to infer the types, but it's best practice to declare them). The below code creates a function `square` that takes an integer and returns another.
 
-```elm
+```
 square : Int -> Int
 square x = x * x
 ```
@@ -72,7 +72,7 @@ function square(x) {
 
 Notice the first line of our Elm function:
 
-```elm
+```
 square : Int -> Int
 ```
 
@@ -82,7 +82,7 @@ This is a __type annotation__ that tells Elm that this function will take one ar
 
 Above we noted that trying to call a function with the wrong types causes an error. Even better, we get these errors at __compile time__. Elm as a language compiles to JavaScript, and we need to run the compiler to generate JavaScript from our Elm code. Elm's compiler is smart, and is able to check the types of values when it compiles our code into JavaScript. For example, if I take this Elm code and try to compile it, we'll get an error. Don't worry about the specifics of the syntax, but know that this code will call the `square` function with the argument `"Hello"`.
 
-```elm
+```
 square : Int -> Int
 square x = x * x
 
