@@ -28,7 +28,7 @@ Because we'll be converting our source code into code that we then publish, I li
 
 ```js
 export function getReposForUser(username) {
-  let url = `https://api.github.com/users/${username}/repos`;
+  let url = 'https://api.github.com/users/${username}/repos';
 
   return fetch(url).then((response) => response.json());
 }
