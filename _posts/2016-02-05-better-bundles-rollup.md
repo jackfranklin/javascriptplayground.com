@@ -113,6 +113,30 @@ babel-node --presets es2015 rollup-build.js
 
 That generates `dist/rollup-bundle.js`, which comes in at 11.3KB in size, a saving of approximately 4.5KB.
 
+## Update
+
+Rich Harris, the creator of Rollup, pointed out to me that you can indeed have a config file and use the command line version of Rollup. To do this create `rollup.config.js` which looks like so:
+
+```javascript
+import babel from 'rollup-plugin-babel';
+import uglify from 'rollup-plugin-uglify';
+
+export default {
+  // tell rollup our main entry point
+  entry: 'src/app.js',
+  dest: 'dist/rollup-bundle.js',
+  plugins: [
+    babel({
+      exclude: 'node_modules/**',
+      presets: 'es2015-rollup'
+    }),
+    uglify()
+  ]
+}
+```
+
+And then we can run `rollup -c` to achieve the same result.
+
 ## Conclusion
 
 Even on this small project with no external dependencies Rollup's build was able to save 4.5KB on an initial bundle of 15.8KB, which is a saving of over 33%. On a larger project with more dependencies and code I'd be willing to bet Rollup would save more.
