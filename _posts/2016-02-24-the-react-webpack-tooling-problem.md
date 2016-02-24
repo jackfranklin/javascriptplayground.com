@@ -18,7 +18,7 @@ Additionally developers fairly new to React often have this misconception that t
 
 ## Getting started with React
 
-To try to demonstrate this, I wanted to quickly show how I would set up a React project if someone new to the library wanted to get up and running and have a play around.
+To try to demonstrate how this tooling fascination is mostly avoidable when starting out, I want to show how I would set up a React project if someone new to the library wanted to get up and running and have a play around.
 
 In the past I would have done this by dropping Babel into an HTML file as a `script` tag - something that would mean we could get started with no `npm` required - but Babel 6 removed that functionality which means we do have to dive into Node land.
 
@@ -109,9 +109,9 @@ And with that I can run `npm run live-server` to get my app running locally and 
 
 ## Conclusion
 
-Is the above what I'd recommend for someone new to a library wanting to get started? Yes. Is it what I'd recommend for a very experienced JS developer working on a large app? No. The key takeaway from this blog post is that you can _layer tools and functionality_ as you get more comfortable with the tools and the ecosystem you're working with. Whilst I've used React as the example in this post this applies more generally across the board with any fairly modern JS library (with the exception of Ember and Ember CLI).
+Is the above what I'd recommend for someone new to a library wanting to get started? Yes. Is it what I'd recommend for a very experienced JS developer working on a large app? No. The key takeaway from this blog post is that you can __layer tools and functionality__ as you get more comfortable with the tools and the ecosystem you're working with. Whilst I've used React as the example in this post this applies more generally across the board with any fairly modern JS library (with the exception of Ember and Ember CLI).
 
-You should start with nothing, and work your way up, rather than jumping in right at the deep end with some complex boilerplate project. Boilerplates are great if you're familiar with the environment, but a nightmare for a beginner. Taking time to understand exactly what the tools are doing and why we need them will give a greater understanind and appreciation. By introducing beginners with less complex tools we keep the barrier to entry low and hopefully their enjoyment of the language and libraries high.
+You should start with nothing, and work your way up, rather than jumping in right at the deep end with some complex boilerplate project. Boilerplates are great if you're familiar with the environment, but a nightmare for a beginner. Taking time to understand exactly what the tools are doing and why we need them will give a greater understanding and appreciation. By introducing beginners with less complex tools we keep the barrier to entry low and hopefully their enjoyment of the language and libraries high.
 
 Finally, yes our tooling can get better and we can definitely make improvements to keep developers happier and more productive. If you're jumping into a complex React + ES2015 + JSX + whatever else environment, you have to be prepared to deal with the occasional rough edge and tool problem.
 
