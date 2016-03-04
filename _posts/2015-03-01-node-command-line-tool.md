@@ -10,15 +10,15 @@ We're going to build the same tool, one that's used to search a directory for fi
 
 ## Creating the Project
 
-First things first, let's create a new project. Create a project and run `npm init` to initialise a new project with a `package.json` file. Answer the prompts if you wish, or just hit enter a bunch of times to get a template `package.json` file that you can fill out at your own leisure.
+First things first: let's create a new project. Create a directory for the project, enter it and run `npm init` to initialise the new project with a `package.json` file. Answer the prompts if you wish, or just hit enter a bunch of times to get a template `package.json` file that you can fill out at your own leisure.
 
 ## Editing package.json
 
 The `package.json` file is used by npm, Node's package manager, to know about your project, its dependencies and how it works. We need to make a couple of edits to it.
 
-- remove the `main` entry: this is only used for modules that will be used through the module system (eg `var _ = require('underscore');`).
+- remove the `main` entry: this is only used for modules that will be used through the module system (e.g. `var _ = require('underscore');`).
 - add `preferGlobal` and set it to true, which means if someone installs this module through npm and doesn't use the `--global` option, they will be warned that the module is designed to be installed globally.
-- adding the `bin` object, which maps commands to files. This means when this module is installed, npm will set up the `filesearch` executable to execute `index.js`.
+- add the `bin` object, which maps commands to files. This means when this module is installed, npm will set up the `filesearch` executable to execute `index.js`.
 
 ```javascript
 {
@@ -44,23 +44,23 @@ Create `index.js` and add this to the top:
 ```js
 #! /usr/bin/env node
 
-console.log('filesearch');
+console.log('This is the filesearch script.');
 ```
 
 ## Installing the Script
 
-Now in your project you can run `npm link` to install the script on your system. This creates a symmlink from your project so that you can run the project whilst working on it, with no need to keep reinstalling it over and over again.
+Now in your project you can run `npm link` to install the script on your system. This creates a symlink to your project so that you can run the project whilst working on it, with no need to keep reinstalling it over and over again.
 
-Once `npm link` has run, you should be able to run `filesearch` on the command line and see `filesearch` logged back:
+Once `npm link` has run, you should be able to run `filesearch` on the command line and see the string printed back:
 
 ```
 ~/git/filesearch > filesearch
-filesearch
+This is the filesearch script.
 ```
 
 ## Processing Arguments
 
-`filesearch` is going to be called with one argument, which is going to be the pattern to search through files for. We need to get at that argument. When a JS script is executed on the command line, the `process.argv` array contains all the arguments used to call that script.
+`filesearch` is going to be called with one argument, which is going to be the pattern to search through files for. We need to get at that argument. When a Node.js script is executed on the command line, the `process.argv` array contains all the arguments used to call that script.
 
 Change `index.js` so it instead logs out this array:
 
@@ -77,7 +77,6 @@ And now run the script again, this time with an argument:
 
 The first argument is always `node`, and the second is the path to the file that has been executed. Any following arguments are ones that the user has called your script with, and those are the ones we care about. We can use `slice` to get an array of just the arguments we need:
 
-
 ```javascript
 var userArgs = process.argv.slice(2);
 
@@ -86,7 +85,7 @@ var searchPattern = userArgs[0];
 
 Now we have the one argument we need.
 
-## Searching for files
+## Searching for Files
 
 We'll hand the actual searching of the files over to a combination of two Unix commands, `ls` and `grep`. We can use `ls -a` to list all files in the current directory, and pass them to `grep` to search for our actual pattern.
 
