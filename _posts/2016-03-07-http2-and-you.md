@@ -7,7 +7,7 @@ author_twitter: adamhenson1979
 author_img: "https://www.gravatar.com/avatar/0af18cf327acab3a0a5146bf0a256b09?s=420"
 ---
 
-Twenty years ago (March of 1996), Internet Explorer 2.0 was "cutting edge" in it's early adoption of pre-standard HTTP/1.1. In May of 2015 the HTTP/2 specification was published as [RFC 7540](http://httpwg.org/specs/rfc7540.html).
+Twenty years ago (March of 1996), Internet Explorer 2.0 was "cutting edge" in its early adoption of pre-standard HTTP/1.1. In May of 2015 the HTTP/2 specification was published as [RFC 7540](http://httpwg.org/specs/rfc7540.html).
 
 Although nearly two decades have passed since the previous release of the world wide web's protocol, there are some exciting improvements that may impact the way you architect applications. Companies like Facebook, Google, and Twitter are already using HTTP/2 ([W3Techs](http://w3techs.com/technologies/details/ce-http2/all/all)). Surprised?
 
