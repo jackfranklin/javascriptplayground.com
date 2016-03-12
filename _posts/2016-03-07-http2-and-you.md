@@ -9,7 +9,7 @@ author_img: "https://www.gravatar.com/avatar/0af18cf327acab3a0a5146bf0a256b09?s=
 
 Twenty years ago (March of 1996), Internet Explorer 2.0 was "cutting edge" in its early adoption of pre-standard HTTP/1.1. In May of 2015 the HTTP/2 specification was published as [RFC 7540](http://httpwg.org/specs/rfc7540.html).
 
-Although nearly two decades have passed since the previous release of the world wide web's protocol, there are some exciting improvements that may impact the way you architect applications. Companies like Facebook, Google, and Twitter are already using HTTP/2 ([W3Techs](http://w3techs.com/technologies/details/ce-http2/all/all)). Surprised?
+Although nearly two decades have passed since the previous release of the world wide web's protocol, there are exciting improvements that may impact the way you architect applications. Companies like Facebook, Google, and Twitter are already using HTTP/2 ([W3Techs](http://w3techs.com/technologies/details/ce-http2/all/all)). Surprised?
 
 In this article I'm not delving too much into the history of the protocol, but we should note HTTP/2 is based on another protocol called SPDY (pronounced speedy). SPDY started in 2012 mainly by people from Google. 
 
@@ -19,7 +19,7 @@ As web and/or software developers in our constantly evolving landscape, we are b
 
 ## What Does This Mean for Us?
 
-Don't worry, there's no pressure to change immediately - HTTP/2 is backwards compatible with HTTP/1.1. If you just launched a brand new mobile website without HTTP/2 compatibility, don't freak out - there's plenty of time to remedy this mistake. If you're in the process of building a new website now or will be in the future - it would be wise to consider using HTTP/2. Similar to other new and exciting techology we want to embrace - there are a couple catches. Although supported by most modern browsers, [HTTP/2 is not currently supported by most older browsers](http://caniuse.com/#feat=http2). Also, to use this version of the protocol now - a secure connection **is** necessary. There have been mixed signals on this topic, and perhaps things could change - but currently no browser supports HTTP/2 unencrypted ([HTTP/2 Frequently Asked Questions](https://http2.github.io/faq)).
+Don't worry, there's no pressure to change immediately - HTTP/2 is backwards compatible with HTTP/1.1. If you just launched a mobile website without HTTP/2 compatibility, don't freak out - there's plenty of time to remedy this mistake. If you're in the process of building a website now or will be in the future - it would be wise to consider using HTTP/2. Similar to other new and exciting techology we want to embrace - there are a couple catches. Although supported by most modern browsers, [HTTP/2 is not currently supported by most older browsers](http://caniuse.com/#feat=http2). Also, to use this version of the protocol now - a secure connection **is** necessary. There have been mixed signals on this topic, and perhaps things could change - but currently no browser supports HTTP/2 unencrypted ([HTTP/2 Frequently Asked Questions](https://http2.github.io/faq)).
 
 ## Features
 
@@ -84,7 +84,7 @@ There are many tools available in debugging performance. [This CloudFlare articl
 
 ## Conclusion
 
-It's a lot to digest - I know, but ultimately not only will our websites be faster... I believe HTTP/2 will make our lives as developers more simple. Once we've established the server-side configurations and functionality support, front-end development should especially be easier. We'll be able to cut the following activities out of our regular routines:
+It's much to digest - I know, but ultimately not only will our websites be faster... I believe HTTP/2 will make our lives as developers more simple. Once we've established the server-side configurations and functionality support, front-end development should especially be easier. We'll be able to cut the following activities out of our regular routines:
 
 - Concatinating CSS and JavaScript. Organizing your assets during development according to the sections of your application they are used will make much more sense, because HTTP requests are cheap on HTTP/2.
 - Generating sprites. It was fun while it lasted, but we'll see you later "background-position". Similar to above, we can be liberal with HTTP requests.
