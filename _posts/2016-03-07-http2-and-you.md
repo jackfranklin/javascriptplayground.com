@@ -71,13 +71,41 @@ While logging (via bunyan), the output for the image push looks like the followi
 ```bash
 19:29:19.398Z  INFO server/http: Promising push stream (e=1, s=12, method=GET, scheme=https, authority=localhost:8080, path=/public/images/nyc.jpg)
 19:29:19.398Z  INFO server/http: Sending server response (e=1, s=14, status=200)
-    headers: {
-      "content-type": "image/jpeg",
-      "date": "Sun, 06 Mar 2016 19:29:19 GMT"
-    }
+  headers: {
+    "content-type": "image/jpeg",
+    "date": "Sun, 06 Mar 2016 19:29:19 GMT"
+  }
 ```
 
-Someone could write an article about the details of what's happening under the hood here. The server is actually pushing a promise, and then it sends the accompanying response. Grey areas exist in the subject of caching, and communication between client and server in the case of browser caching. In the protocol's current state, results could vary by implementation, but theoretically the browser cache should be honored. This answer from [Stack Overflow](http://stackoverflow.com/questions/29352282/do-browser-cancel-server-push-when-resource-is-in-cache) summarizes it pretty well - "When the client receives the PUSH_PROMISE, it can look at the URI, and figure out the cache status of this resource. Browsers typically use different caches for normally received resources and pushed resources. If the cache is still valid, the client may cancel the pushed stream by sending a RST_STREAM frame to the server for that stream." ([sbordet](http://stackoverflow.com/users/1215076/sbordet))
+Someone could write an article about the details of what's happening under the hood here... oh, wait someone did ([HTTP/2 Server Push by Arnout Engelen](http://blog.xebia.com/http2-server-push)). The server is actually pushing a promise, and then it sends the accompanying response if the client doesn't stop it. Let's break this down, shall we. In our code we use the HTTP/2 specific response `push` method (via [http2 public API](https://github.com/molnarg/node-http2/wiki/Public-API)) to transmit a promise of a file to be served in the response.
+
+```javascript
+response.push(file.path)
+```
+
+The server makes this promise to the client (a browser in this case) of the stream we created.
+
+```javascript
+fs.createReadStream(path.join(__dirname, file.path)).pipe(push)
+```
+
+While logging info, upon page request - we can see this transaction as the first line in the output.
+
+```bash
+Promising push stream (e=1, s=12, method=GET, scheme=https, authority=localhost:8080, path=/public/images/nyc.jpg)
+```
+
+The client can [specify it does not want to receive any pushed resources](https://tools.ietf.org/html/rfc7540#section-6.5.1), or [cancel an individual push after receiving the push promise](https://tools.ietf.org/html/rfc7540#section-8.2.2)... otherwise the server sends the accompanying response.
+
+```bash
+Sending server response (e=1, s=14, status=200)
+  headers: {
+    "content-type": "image/jpeg",
+    "date": "Sun, 06 Mar 2016 19:29:19 GMT"
+  }
+```
+
+Grey areas exist in the subject of caching, and communication between client and server in the case of browser caching. In the protocol's current state, results could vary by implementation, but theoretically the browser cache should be honored. This answer from [Stack Overflow](http://stackoverflow.com/questions/29352282/do-browser-cancel-server-push-when-resource-is-in-cache) summarizes it pretty well - "When the client receives the PUSH_PROMISE, it can look at the URI, and figure out the cache status of this resource. Browsers typically use different caches for normally received resources and pushed resources. If the cache is still valid, the client may cancel the pushed stream by sending a RST_STREAM frame to the server for that stream." ([sbordet](http://stackoverflow.com/users/1215076/sbordet))
 
 ## Debugging Tools
 
