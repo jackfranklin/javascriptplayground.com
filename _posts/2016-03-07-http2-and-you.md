@@ -19,7 +19,7 @@ As web and/or software developers in our constantly evolving landscape, we are b
 
 ## What Does This Mean for Us?
 
-Don't worry, there's no pressure to change immediately - HTTP/2 is backwards compatible with HTTP/1.1. If you just launched a mobile website without HTTP/2 compatibility, don't freak out - there's plenty of time to remedy this mistake. If you're in the process of building a website now or will be in the future - it would be wise to consider using HTTP/2. Similar to other new and exciting techology we want to embrace - there are a couple catches. Although supported by most modern browsers, [HTTP/2 is not currently supported by most older browsers](http://caniuse.com/#feat=http2). Also, to use this version of the protocol now - a secure connection **is** necessary. There have been mixed signals on this topic, and perhaps things could change - but currently no browser supports HTTP/2 unencrypted ([HTTP/2 Frequently Asked Questions](https://http2.github.io/faq)).
+Don't worry, there's no pressure to change immediately - HTTP/2 is backwards compatible with HTTP/1.1. If you just launched a mobile website without HTTP/2 compatibility, don't freak out - there's plenty of time to remedy this mistake. If you're in the process of building a website now or will be in the future - it would be wise to consider using HTTP/2. Similar to other new and exciting technology we want to embrace - there are a couple catches. Although supported by most modern browsers, [HTTP/2 is not currently supported by most older browsers](http://caniuse.com/#feat=http2). Also, to use this version of the protocol now - a secure connection **is** necessary. There have been mixed signals on this topic, and perhaps things could change - but currently no browser supports HTTP/2 unencrypted ([HTTP/2 Frequently Asked Questions](https://http2.github.io/faq)).
 
 ## Features
 
@@ -77,7 +77,9 @@ While logging (via bunyan), the output for the image push looks like the followi
   }
 ```
 
-Someone could write an article about the details of what's happening under the hood here... oh, wait someone did ([HTTP/2 Server Push by Arnout Engelen](http://blog.xebia.com/http2-server-push)). The server is actually pushing a promise, and then it sends the accompanying response if the client doesn't stop it. Let's break this down, shall we. In our code we use the HTTP/2 specific response `push` method (via [http2 public API](https://github.com/molnarg/node-http2/wiki/Public-API)) to transmit a promise of a file to be served in the response.
+([HTTP/2 Server Push by Arnout Engelen](http://blog.xebia.com/http2-server-push)) does a great job of explaining how http2's server push works. The server is actually pushing a promise, and then it sends the accompanying response if the client doesn't stop it.
+
+In our code we use the HTTP/2 specific response `push` method (via [http2 public API](https://github.com/molnarg/node-http2/wiki/Public-API)) to transmit a promise of a file to be served in the response.
 
 ```javascript
 response.push(file.path)
@@ -117,7 +119,7 @@ There are many tools available in debugging performance. [This CloudFlare articl
 
 It's much to digest - I know, but ultimately not only will our websites be faster... I believe HTTP/2 will make our lives as developers more simple. Once we've established the server-side configurations and functionality support, front-end development should especially be easier. We'll be able to cut the following activities out of our regular routines:
 
-- Concatinating CSS and JavaScript. Organizing your assets during development according to the sections of your application they are used will make much more sense, because HTTP requests are cheap on HTTP/2.
+- Concatenating CSS and JavaScript. Organizing your assets during development according to the sections of your application they are used will make much more sense, because HTTP requests are cheap on HTTP/2.
 - Generating sprites. It was fun while it lasted, but we'll see you later "background-position". Similar to above, we can be liberal with HTTP requests.
 - Splitting resources between hosts (sharding). Unlike HTTP/1.1, with HTTP/2 you aren't restricted to the number of open connections.
 
