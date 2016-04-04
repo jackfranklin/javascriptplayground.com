@@ -1,5 +1,5 @@
 permalink: /blog/:year/:month/:title/
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 gems:
   - jekyll-redirect-from
