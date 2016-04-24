@@ -50,7 +50,7 @@ A natural improvement to this repo would be to add JSX support, but I'll leave t
 
 Because this repo avoids ES2015 and any transpilation there is no module system available. Instead we just have a global variable, `app`, that contains all of our application. This isn't great, but storing everything in one global variable isn't particularly bad practice, and it means that no module system is required.
 
-## No dependency management?
+## No dependency management
 
 All dependencies are stored in `vendor` and commited into Git, to avoid any package management confusions or overhead.
 
