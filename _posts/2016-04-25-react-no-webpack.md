@@ -16,7 +16,7 @@ To get started, clone the repository and run `npm install` to get Gulp setup. Yo
 
 JSX is great and I like using it on projects; but it's another step that can get in the way of focusing on React concepts when getting started. Because JSX gets converted into `React.createElement` calls, we can just use that directly instead:
 
-```jsx
+```js
 <Foo name='jack' />
 // equivalent:
 React.createElement(Foo, { name: 'jack' }, null);
@@ -30,7 +30,7 @@ React.createElement('p', null, React.createElement('span', null, 'Hello'));
 
 However, this gets pretty verbose quickly, so I included in the repository a global function `h` that is a shorthand:
 
-```jsx
+```js
 <Foo name='jack' />
 // equivalent:
 h(Foo, { name: 'Jack' });
