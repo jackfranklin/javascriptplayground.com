@@ -78,7 +78,7 @@ The final step is to set up our module such that when we publish it to npm, we f
 
 Firstly, we can add an npm script called `prepublish` in our `package.json` file:
 
-```js
+```json
 "scripts": {
   "prepublish": "./node_modules/.bin/babel -d lib src/"
 },
@@ -88,7 +88,7 @@ There's a very good reason that we call this script `prepublish`. When we want t
 
 To tell npm which file it should load by default, we need to edit the `main` property in our `package.json` file to point to our generated `lib/githubby.js` file:
 
-```js
+```json
 "main": "lib/githubby.js",
 ```
 
