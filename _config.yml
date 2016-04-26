@@ -1,4 +1,3 @@
 permalink: /blog/:year/:month/:title/
-markdown: kramdown
 gems:
   - jekyll-redirect-from
