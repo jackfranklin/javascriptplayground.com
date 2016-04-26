@@ -26,13 +26,13 @@ It's up to you if you want to include the polyfill in the module, or suggest to 
 
 Because we'll be converting our source code into code that we then publish, I like to create a directory, typically named `src`, that holds our source code. Let's create `src/githubby.js`, that exports the function I mentioned previously:
 
-```js
+{% highlight javascript %}
 export function getReposForUser(username) {
   let url = `https://api.github.com/users/${username}/repos`;
 
   return fetch(url).then((response) => response.json());
 }
-```
+{% endhighlight %}
 
 This code makes use of a few ES6 features, including ES6 modules, block scoping, template literals and arrow functions. This code won't run in many environments right now, and that makes our module pretty useless. We can use Babel's command line tool to convert this code:
 
