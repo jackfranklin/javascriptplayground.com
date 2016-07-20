@@ -24,3 +24,16 @@ title: Archives
       </li>
   {% endfor %}
 </ul>
+
+<script>
+  // eventually I might decide to do something with this data
+  window.__JSPLAYGROUND_POSTS = [
+    {% for post in site.posts %}
+      {
+        "title"    : "{{ post.title | escape }}",
+        "url"      : "{{ post.url }}",
+        "date"     : "{{ post.date }}"
+      } {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+</script>
