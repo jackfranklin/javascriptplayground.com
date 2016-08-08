@@ -19,7 +19,7 @@ Useful thing when you need to work with es6 models in front-end, especially when
 ## Bower 
 Some libraries are getting updates regularly (yep, like *whitestorm.js*). For them i need front-end package manager like bower (You can use npm too, but bower will be enough). For tweening i used [**GSAP**](http://greensock.com/gsap) library, because of it’s performance and also we need [**basket.js**](https://addyosmani.com/basket.js/) to keep such a large library as WhitestormJS in *localStorage*.
 
-…And also i wrote a small bower plugin that will help me make preloading. Check it out there.
+…And also i wrote a small bower plugin that will help me make preloading. [Check it out there](https://github.com/sasha240100/ProgressLoader).
 
 ```bash
 
