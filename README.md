@@ -1,1 +1,1 @@
-The code for javascriptplayground.com
+The code for javascriptplayground.com.
