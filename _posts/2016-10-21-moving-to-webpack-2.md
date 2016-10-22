@@ -155,5 +155,5 @@ We've seen a good file size saving by doing this, and hopefully this will contin
 
 ## Fin
 
-Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that thte code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.
+Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.
 
