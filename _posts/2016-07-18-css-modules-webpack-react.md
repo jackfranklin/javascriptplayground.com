@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Setting up CSS Modules with React and Webpack
-intro: In this post I'll discuss how I used Webpack to add CSS Modules to an existing ReactJS application.
+intro: In this post we'll look at how to use CSS Modules in React using Webpack. We'll configure Webpack and the CSS Loader to parse CSS and load it in the browser. By keeping the CSS scoped to each component we can avoid any CSS conflicts and make CSS much easier to deal with.
 ---
 
 One of the biggest problems that developers face with CSS is that CSS is global. Each CSS class gets exposed globally and it’s very easy to inadvertently break a piece of your site when editing or adding CSS for a new feature. In an era where many developers are building websites as components with a framework such as React, CSS is an even bigger problem.

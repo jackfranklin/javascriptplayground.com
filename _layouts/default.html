@@ -3,54 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ page.title }}</title>
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon" />
     <link href="/favicon.ico" rel="shortcut icon" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
   </head>
   <body>
     <header class="site-header clearfix" role="banner">
-      <a href="#" class="menu-icon"><img src="/img/menu.png" /></a>
-      <h1 class="brand-name"><a href="/">JavaScript Playground</a></h1>
+      <div class="content-container clearfix">
+        <h1 class="brand-name">
+          <a href="/">JavaScript Playground</a>
+        </h1>
+        <p>A blog dedicated to providing top quality JavaScript tutorials and screencasts on a range of topics including React, Webpack, ES2015, Testing and more.</p>
+      </div>
     </header>
     <nav class="nav-primary" role="navigation">
-      <button type="button" class="btn nav-toggle">
-        <span>Menu</span>
-      </button>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/speaking">Speaking</a></li>
-        <li><a href="/contributing">Contribute</a></li>
-        <li><a href="/archives">Archive</a></li>
-        <li><a href="/the-refactoring-tales">Refactoring Book</a></li>
-        <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
-        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=javascriptplaygroundcom" id="_carbonads_js"></script>
-      </ul>
+      <div class="content-container clearfix">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/archives">Archives</a></li>
+          <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
+          <li class="twitter-li"><a class="twitter-follow-button"
+          href="https://twitter.com/Jack_Franklin">
+          Follow @Jack_Franklin</a></li>
+        </ul>
+      </div>
     </nav>
-    <div class="main-wrapper">
-      <section role="main">
+
+    <div class="clearfix content-container">
+      <section role="main" class="main">
         {{ content }}
       </section>
     </div>
+
     <footer class="site-footer" role="contentinfo">
-      <div class="latest-posts">
-        <h1>Latest Posts</h1>
-        <ul class="hfeed">
-          {% for post in site.posts limit:3 %}
-          <li class="hentry"><a href="{{ post.url }}" rel="bookmark">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
       <div class="about-the-site">
-        <h1>About The Site</h1>
-        <p>The JavaScript Playground is a blog dedicated to producing top quality JavaScript tutorials on a number of subjects.</p>
-        <p>To see all past posts, take a look at the <a href="/archives.html">archives</a>, or find out how you could <a href="/contributing">contribute</a>.
-          You can also subscribe to the <a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS feed</a>, or <a href="http://twitter.com/jsplayground_">follow the site on Twiter</a>.</p>
-        <p class="copyright">&copy; 2012-16 JavaScript Playground</p>
+
+        <ul>
+          <li><a href="/archives">Archives</a></li>
+          <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS</a></li>
+          <li><a href="http://twitter.com/Jack_Franklin">Twitter</a></li>
+          <li><a href="http://github.com/jackfranklin/javascriptplayground.com">GitHub</a></li>
+        </ul>
+        <p class="copyright">&copy; 2012-16 Jack Franklin</p>
       </div>
     </footer>
     <script type="text/javascript">
@@ -65,6 +76,6 @@
       })();
 
     </script>
-    <script src="/js/app.js"></script>
-  </body>
+  <script src="/js/app.js"></script>
+</body>
 </html>
