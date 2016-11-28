@@ -1,17 +1,20 @@
 <article class="entry hentry">
   <header class="entry-header">
     <h1 class="entry-title">{{ post.title }}</h1>
-    <div class="carbon">
+    <p class="entry-meta">
+      Published on <time class="published" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      {% if post.author %}
+        by <span class="author"><a href="http://twitter.com/{{ post.author_twitter }}">{{ post.author }}</a></span>
+      {% endif %}
+      {% if post.githubPath %}
+      -
+      <a href="https://github.com/jackfranklin/javascriptplayground.com/blob/gh-pages/_posts/{{post.githubPath}}.md" target="_blank">Edit this page on GitHub</a>
+      {% endif %}
+    </p>
+    <div class="carbon clearfix">
       <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=javascriptplaygroundcom" id="_carbonads_js"></script>
     </div>
     {% unless is_page %}
-    <p><time class="published" datetime="{{ post.date }}">{{ post.date | date: "%d %B %Y" }}</time> by
-      {% if post.author %}
-        <span class="author"><a href="http://twitter.com/{{ post.author_twitter }}">{{ post.author }}</a></span>
-      {% else %}
-        <span class="author"><a href="http://twitter.com/jack_franklin">Jack Franklin</a></span>
-      {% endif %}
-    </p>
     {% endunless %}
   </header>
   <section class="entry-content">
