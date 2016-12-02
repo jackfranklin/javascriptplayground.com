@@ -53,7 +53,8 @@ h1 {
 }
 
 .brand-name img {
-  max-height: 100px;
+  max-height: 70px;
+  margin-top: 15px;
 }
 
 .site-header p {
@@ -103,7 +104,7 @@ h1 {
 }
 
 p, .entry-content ul {
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   line-height: 1.95;
 }
 
@@ -112,12 +113,23 @@ code, pre {
 }
 code { font-size: 1em; }
 
+p > code, li > code {
+  background: #ddd;
+  padding: 3px;
+}
+
+.entry-content ul {
+  list-style: disc;
+  padding: 5px 0 0 20px;
+}
+
 pre {
   color: #fff;
   background: #212121;
-  padding: 1em 2em 1em 3em;
+  padding: 15px 5px 15px 10px;
   word-wrap: break-word;
   font-size: 0.9em;
+  margin-bottom: 1em;
 }
 
 .main {
@@ -182,12 +194,10 @@ footer a:hover {
 
 
 .entry-date {
-  position: absolute;
-  bottom: 0;
-  right: 0;
   font-size: .7em;
   color: #7e7e7e;
-  text-align: right;
+  display: block;
+  margin-top: 10px;
 }
 
 .home-archives-link {
@@ -239,7 +249,7 @@ footer a:hover {
 }
 
 .carbon-text {
-  padding: 10px;
+  padding: 6px;
 }
 
 .entry-content img {
