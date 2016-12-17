@@ -6,7 +6,7 @@ intro: I documented my experience updating a project from Webpack 1 to 2.
 
 [Webpack](http://webpack.js.org) is on the verge of having its latest major version released, and it's expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I'd document the steps taken for anyone else who wants to make the move.
 
-You can also check out the [migration guide on the Webpack documentation](https://webpack.js.org/how-to/upgrade-from-webpack-1/).
+You can also check out the [Migrating from V1 to V2 guide on the Webpack documentation](https://webpack.js.org/guides/migrating/).
 
 ## Install Webpack 2
 
