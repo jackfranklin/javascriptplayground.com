@@ -2,7 +2,7 @@
 layout: post
 title: Migrating to Webpack 2
 intro: I documented my experience updating a project from Webpack 1 to 2.
-githubPath: 2016-07-21-webpack-html-plugin
+githubPath: 2016-10-21-moving-to-webpack-2
 ---
 
 [Webpack](http://webpack.js.org) is on the verge of having its latest major version released, and it's expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I'd document the steps taken for anyone else who wants to make the move.
