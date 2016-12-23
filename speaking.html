@@ -1,0 +1,26 @@
+---
+layout: page
+title: Speaking
+---
+
+<p>I have a lot of speaking at industry conferences, meet-ups and events. I'm always keen to get involved with events and normally fit best into technical events with a focus on JavaScript or front end development generally.</p>
+
+<p>If you'd like to have me speak at your event please do get in touch. You can email jack@jackfranklin.net or <a href="http://twitter.com/Jack_Franklin">DM me on Twitter</a>.</p>
+
+<p>Below you can find a list of recent talks I've done, with links to slides and/or videos where possible.</p>
+
+<ul class="archives">
+  {% for talk in site.data.speaking %}
+    <li>
+      <h4>{{ talk.title }}</h4>
+      <p>{{ talk.date }}, {{ talk.location }}</p>
+      <p>
+        {% if talk.video %}
+          <a href="{{talk.video}}">Video</a>
+        {% endif %}
+        {% if talk.slides %}
+          <a href="{{talk.slides}}">Slides</a>
+        {% endif %}
+    </li>
+  {% endfor %}
+</ul>
