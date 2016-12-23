@@ -7,7 +7,7 @@ title: Archives
 <p>You can use the search box below to find what you're looking for.</p>
 
 <form class="search-form">
-  <input type="text" name="searchterm" placeholder="backbone" />
+  <input type="text" name="searchterm" placeholder="webpack" />
 </form>
 
 <ul class="archives">
@@ -15,12 +15,13 @@ title: Archives
     <li>
       <h4><a href="{{post.url}}">{{post.title}}</a></h4>
       <p class="post_date">{{ post.date | date: "%d %B %Y" }} by
-      {% if post.author %}
-        <a href="http://twitter.com/{{post.author_twitter}}">{{ post.author }}</a>
-      {% else %}
-        <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>
-      {% endif %}
-    </p>
+        {% if post.author %}
+          <a href="http://twitter.com/{{post.author_twitter}}">{{ post.author }}</a>
+        {% else %}
+          <a href="http://twitter.com/Jack_Franklin">Jack Franklin</a>
+        {% endif %}
+      </p>
+      <p class="archives-intro"> {{ post.intro }}</p>
       </li>
   {% endfor %}
 </ul>

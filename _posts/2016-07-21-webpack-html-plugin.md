@@ -2,6 +2,7 @@
 layout: post
 title: Using the HTML Webpack Plugin for generating HTML files
 intro: Today we'll set up the HTML Webpack Plugin to dynamically generate the HTML files for our production builds.
+githubPath: 2016-07-21-webpack-html-plugin
 ---
 
 Whilst most people use Webpack primarily for their JS scripts, there's always one final part of deploying that is forgotten: the HTML. In production we often have extra scripts we want to insert (such as Google Analytics) and also we want to insert a `script` tag to the minified JavaScript and CSS, which probably will have a different filename each time as we generate files with a hash on the end.

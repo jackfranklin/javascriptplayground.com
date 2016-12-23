@@ -1,12 +1,5 @@
 document.body.classList.add('js');
 
-var navToggle = document.querySelector('.nav-toggle');
-
-navToggle.addEventListener('click', function(e) {
-  e.preventDefault();
-  document.querySelector('.nav-primary ul').classList.toggle('open');
-});
-
 var searchForm = document.querySelector('.search-form');
 
 // code below is for the archives page only
