@@ -308,6 +308,45 @@ ul.archives {
   font-style: italic;
 }
 
+@media all and (max-width: 750px) {
+  .content-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .nav-primary {
+    height: auto;
+  }
+
+  .nav-primary a:link {
+    width: auto;
+  }
+
+  .nav-primary li {
+    float: none;
+    text-align: center;
+    width: 100%;
+  }
+
+  .twitter-li {
+    margin-bottom: 10px;
+  }
+
+  .brand-name img {
+    padding-left: 10px;
+    max-width: 80%;
+  }
+
+  #carbonads {
+    width: 90%;
+  }
+
+  .search-form input {
+    border: 1px solid #111;
+    width: 80%;
+  }
+}
+
 
 /**
  * Syntax (monokai)
