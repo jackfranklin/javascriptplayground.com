@@ -308,6 +308,26 @@ ul.archives {
   font-style: italic;
 }
 
+.notification {
+  height: 30px;
+  line-height: 30px;
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  padding: 0 0 0 10px;
+  text-align: center;
+}
+
+.notification a:link,
+.notification a:visited {
+  color: #fff;
+}
+
+.notification a:hover {
+  text-decoration: none;
+}
+
+
 @media all and (max-width: 750px) {
   .content-container {
     width: 100%;
@@ -344,6 +364,12 @@ ul.archives {
   .search-form input {
     border: 1px solid #111;
     width: 80%;
+  }
+
+  .notification {
+    padding: 5px;
+    height: auto;
+    margin: 0;
   }
 }
 
