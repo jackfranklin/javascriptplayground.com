@@ -30,12 +30,12 @@ This is not a breaking change because `module.loaders` will continue to be suppo
 ```js
 // before
 modules: {
-  loaders: {...}
+  loaders: [...]
 }
 
 // after
 modules: {
-  rules: {...}
+  rules: [...]
 }
 ```
 
