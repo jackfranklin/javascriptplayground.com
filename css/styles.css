@@ -134,6 +134,7 @@ pre {
   word-wrap: break-word;
   font-size: 0.9em;
   margin-bottom: 1em;
+  overflow: scroll;
 }
 
 .main {
