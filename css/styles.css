@@ -39,6 +39,10 @@ h1 {
   font-size: 1.5em;
 }
 
+h2 {
+  font-size: 1.35em;
+}
+
 .content-container {
   max-width: 860px;
   width: 90%;
@@ -130,6 +134,7 @@ pre {
   word-wrap: break-word;
   font-size: 0.9em;
   margin-bottom: 1em;
+  overflow: scroll;
 }
 
 .main {
