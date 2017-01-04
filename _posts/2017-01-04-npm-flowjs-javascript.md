@@ -11,7 +11,7 @@ I started with Flow primarily because it's used a lot in the React community (un
 
 ## Writing Typed JavaScript
 
-To start with I needed an example project to work with; I picked [util-fns](https://github.com/jackfranklin/util-fns). `util-fns` is a small project I started working on that contains a bunch of tiny utility functions (much like Lodash or Underscore, but much smaller and less optimised!). It's primarily a dummy project for the sake of learning Flow and experimenting. I also chose this because it's a module that I have published to npm, and as such could explore how to publish the module in such a way that the types are not lost. This means any developers who run `npm install util-fns` can access the type information.
+To start with I needed an example project to work with; I picked [util-fns](https://github.com/jackfranklin/util-fns). `util-fns` is a small project I started working on that contains a bunch of tiny utility functions (much like Lodash or Underscore, but much smaller and less optimised!). It's primarily a dummy project for the sake of learning Flow and experimenting. I also chose this because it's a module that I have published to npm, and as such could explore how to publish the module in such a way that the types are not lost. This means any developers who run `npm install util-fns` can access the type information and be notified if they use the library with the one arguments, assume incorrect return types, and so on.
 
 ### Installing Flow
 
@@ -126,7 +126,7 @@ Flow is really good generally at picking up silly mistakes like this and you'll 
 
 What's even nicer about Flow is that once you've annotated a function with types, Flow can spot when you then use that function wrong in other places in your codebase.
 
-Let's say in 6 months time you're using the `sum` function that we wrote earlier and you forget that you have to pass an array of numbers. Instead of `sum([1, 2, 3])` you call `sum(1, 2, 3)`. An easy mistake to make but it will have you digging in the command line for an error, or digging into the source code to see what `sum` expects. With Flow checking our code though, we get a much nicer errror:
+Let's say in 6 months time you're using the `sum` function that we wrote earlier and you forget that you have to pass an array of numbers. Instead of `sum([1, 2, 3])` you call `sum(1, 2, 3)`. An easy mistake to make but it will have you digging in the browser console or digging into the source code to see what `sum` expects. With Flow checking our code though, we get a much nicer errror:
 
 ```
 8: sum(1, 2, 3)
@@ -135,7 +135,7 @@ Let's say in 6 months time you're using the `sum` function that we wrote earlier
                        ^^^^^^^^^^^^^ array type
 ```
 
-This saves a lot of time and energy digging into hard to follow console errors, and enables you to spot mistakes as soon as they happen.
+This saves a lot of time and energy digging into hard to follow console errors, and enables you to spot mistakes as soon as they happen. There are also plugins available for Flow and most popular code editors, so you can have these errors appear the moment you type the incorrect code.
 
 This tutorial has barely even begun to scratch the surface of the type system in Flow and what it can do, but for now we're going to move on and look at how we can publish code to npm that's written in Flow. The [Flow docs](https://flowtype.org/docs/getting-started.html#_) have much more information on all that Flow can do for you, and be sure to keep an eye out for future articles on Flow.
 
@@ -241,6 +241,7 @@ Finally, we're ready to publish our module! I can run `npm publish` to push a mo
 > babel src/ -d lib
 
 src/index.js -> lib/index.js
+...and so on
 src/sum.js -> lib/sum.js
 
 > util-fns@0.1.3 flow-prepublish /Users/jackfranklin/git/util-fns
@@ -283,7 +284,6 @@ console.log(utils.sum(1, 2, 3))
 ```
 
 Flow will pick up on this too, but _only_ because we included those extra `.flow` files in our package. Notice that it also tells us which file to go and look in to find the source for the `sum` function if we want to dig into the types:
-
 
 ```
 4: console.log(utils.sum(1, 2, 3))
