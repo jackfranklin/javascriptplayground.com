@@ -332,6 +332,20 @@ ul.archives {
   text-decoration: none;
 }
 
+.about-author img {
+  float: left;
+  width: 150px;
+}
+
+.about-author-content {
+  padding-top: 5px;
+  margin-left: 20px;
+}
+
+.thank-you, .about-author {
+  margin: 1.5em 0;
+}
+
 
 @media all and (max-width: 750px) {
   .content-container {
