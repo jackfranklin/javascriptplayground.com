@@ -19,7 +19,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   line-height: 1.5;
   background: #ededed;
 }
@@ -344,6 +344,41 @@ ul.archives {
 
 .thank-you, .about-author {
   margin: 1.5em 0;
+}
+
+#mc_embed_signup {
+  background: #fff;
+  clear: left;
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+#mc_embed_signup form {
+  text-align: left;
+}
+
+#mc_embed_signup h4 {
+  margin-top: 1.5em;
+}
+
+#mc_embed_signup .button,
+#mc_embed_signup input.email {
+  padding: 10px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+#mc_embed_signup .button {
+  color: #fff;
+  padding: 10px 20px;
+  background: #212121;
+  text-transform: uppercase;
+  line-height: inherit;
+}
+
+#mc_embed_signup input.email {
+  width: 70%;
+  margin-right: 10px;
 }
 
 
