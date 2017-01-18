@@ -430,6 +430,16 @@ ul.archives {
     height: auto;
     margin: 0;
   }
+
+  #mc_embed_signup input.email,
+  #mc_embed_signup button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
 }
 
 
