@@ -386,6 +386,45 @@ ul.archives {
   margin-right: 10px;
 }
 
+.pagination {
+  overflow: auto;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.pagination ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  margin: 20px auto 20px auto;
+}
+
+.pagination li {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ccc;
+}
+
+.pagination a:link,
+.pagination a:visited {
+  text-decoration: none;
+  color: #111;
+}
+
+.pagination li:hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.pagination li.pagination-current-page {
+  background: #ccc;
+}
+
+
 
 @media all and (max-width: 750px) {
   .content-container {
@@ -439,6 +478,13 @@ ul.archives {
 
   iframe {
     max-width: 100%;
+  }
+
+  .pagination li {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px;
   }
 }
 

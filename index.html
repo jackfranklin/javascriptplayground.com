@@ -3,7 +3,7 @@ layout: default
 title: The JavaScript Playground
 ---
 
-{% for post in site.posts limit:6 %}
+{% for post in paginator.posts %}
 <article class="entry hentry home-post">
   <header class="entry-header">
     <h1 class="entry-title clearfix">
@@ -18,5 +18,47 @@ title: The JavaScript Playground
 </article>
 
 {% endfor %}
-<p class="home-archives-link">To see all past content head to the <a href="/archives">archives page</a>.</p>
 
+<div class="pagination clearfix">
+  <ul>
+    <li id="pagination-prev">
+      {% if paginator.previous_page %}
+        <a class="pagination-button" href="{{ paginator.previous_page_path }}">
+          &lt;&lt;
+        </a>
+      {% else %}
+        <span>
+          &lt;&lt;
+        </span>
+      {% endif %}
+    </li>
+
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <li class="pagination-current-page">
+          <span id="current-page">{{ page }}</span>
+        </li>
+      {% elsif page == 1 %}
+        <li>
+          <a href="/">{{ page }}</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    <li id="pagination-next">
+      {% if paginator.next_page %}
+        <a class="pagination-button" href="{{ paginator.next_page_path }}">
+          &gt;&gt;
+        </a>
+      {% else %}
+        <span>
+          &gt;&gt;
+        </span>
+      {% endif %}
+    </li>
+  </ul>
+</div>
