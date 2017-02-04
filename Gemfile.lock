@@ -136,6 +136,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-redirect-from
+  jekyll-seo-tag
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

@@ -1,3 +1,6 @@
 permalink: /blog/:year/:month/:title/
 gems:
   - jekyll-redirect-from
+  - jekyll-seo-tag
+twitter:
+  username: Jack_Franklin
