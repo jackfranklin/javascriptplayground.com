@@ -120,9 +120,59 @@ It's similar to the problem when you work in an object oriented language and inh
 
 #### 2. Binds components to a specific parent
 
+A component that expects only properties (or no properties at all) can be used anywhere. It is entirely reusable and a component wanting to render it need only pass in the properties that it expects. If you need to use the component elsewhere in your application you can do easily;  just  by supplying the right properties.
+
+However, if you have a component that needs specific context, you couple it to having to be rendered by a parent that supplies some context. It's then harder to pick up and move, because you have to move the original component and then make sure that its new parent (or one of its parents) provides the context required.
+
 #### 3. Harder to test
 
+Related to the previous point, components that need context are much harder to test. Here's a test, using [Enzyme](http://airbnb.io/enzyme/), that tests a component that expects a `foo` prop:
+
+```js
+const wrapper = mount(<SomeComponent foo='bar' />)
+```
+
+And here's that same test when we need `SomeComponent` to have a specific piece of context:
+
+```js
+class ParentWithContext extends React.Component {
+  getChildContext() {...}
+
+  render() {
+    return <SomeComponent />
+  }
+}
+ParentWithContext.childContextTypes = {...}
+
+const wrapper = mount(<ParentWithContext />)
+```
+
+It's harder here because we have to build the right parent component - it's messier and quite verbose just to set up the component in the right context for testing.
+
+> You can actually use Enzyme's [setContext](http://airbnb.io/enzyme/docs/api/ReactWrapper/setContext.html) to set context for these tests - but I tend to try to avoid any methods like this that breaks the React abstraction. You also wouldn't be able to do this so easily in other testing frameworks.
+
 #### 4. Unclear semantics around context value changes and rerenders.
+
+With properties and state, it's very clear to React when it should rerender a component:
+
+1. When a component's properties change.
+2. When `this.setState` is called.
+
+The `getChildContext` function is called whenever state or properties change, so in theory you can rely on components that use `context` values reliably updating. The problem though is `shouldComponentUpdate`. Any component can define `shouldComponentUpdate`, making it return `false` if it knows that it doesn't need to be re-rendered. If an interim component does this, a child component won't update, even if a context value changes:
+
+```
+TopLevelComponent
+- defines context.foo
+
+    MidLevelComponent
+    - defines `shouldComponentUpdate` to return `false`
+
+        ChildComponent
+        - renders `context.foo` into the DOM
+
+```
+
+In the above example, if `context.foo` changes, `ChildComponent` will not render, because its parent returned `false` from `shouldComponentUpdate`. This makes bugs possible and leaves us with no reliable way to update context and ensure renders, so this is a very good reason to avoid using `context`.
 
 ## When to use context
 
