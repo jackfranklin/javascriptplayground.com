@@ -176,7 +176,71 @@ In the above example, if `context.foo` changes, `ChildComponent` will not render
 
 ## When to use context
 
+If you're a library author, context is useful. Libraries like [React Router use context](https://github.com/ReactTraining/react-router/blob/v4/packages/react-router/modules/Router.js#L13) to allow the components that they provide application developers to communicate. When you're writing a library that provides components that need to talk to each other, or pass values around, `context` is perfect.
+
+Let's build our own router library, `RubbishRouter`. It will define two components: `Router` and `Route`. The `Router` component needs to expose a `router` object onto the context, so our `Route` components can pick up on it and use it to function as expected.
+
+First, `Router`. It exposes the `router` object on the context, and other than that it simply renders the children that it's given:
+
+```js
+const { Component, PropTypes } = React
+
+class Router extends Component {
+  getChildContext() {
+    const router = { register(url) { console.log('registered route!', url) } }
+    return { router: router }
+  }
+  render() { return <div>{this.props.children}</div> }
+}
+Router.childContextTypes = {
+  router: PropTypes.object.isRequired,
+}
+```
+
+`Route` expects to find `this.context.router`, and it registers itself when it's rendered:
+
+```js
+class Route extends Component {
+  componentWillMount() {
+    this.context.router.register(this.props.path)
+  }
+  render() {
+    return <p>I am the route for {this.props.path}</p>
+  }
+}
+Route.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
+```
+
+Finally, we can use the `Router` and `Route` components in our own app:
+
+```js
+const App = () => (
+  <div>
+    <Router>
+      <div>
+        <Route path="/foo" />
+        <Route path="/bar" />
+        <div>
+          <Route path="/baz" />
+        </div>
+      </div>
+    </Router>
+  </div>
+)
+```
+
+The beauty of context in this situation is that as library authors we can provide components that can work in any situation, regardless of where they are rendered. As long as all `Route` components are within a `Router`, it doesn't matter at what level, and we don't tie application developers to a specific structure.
+
 ## Conclusion
+
+Hopefully this blog post has shown you how and when to use context in React, and why more often than not you'd be better eschewing it in favour of props.
+
+Thank you to the following blog posts and documentation for providing great material whilst putting this blog post together:
+
+- [React docs on context](https://facebook.github.io/react/docs/context.html)
+- [How to safely use React context](https://medium.com/@mweststrate/how-to-safely-use-react-context-b7e343eff076) by Michel Weststrate.
 
 
 
