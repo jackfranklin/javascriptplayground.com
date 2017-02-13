@@ -256,7 +256,7 @@ Thank you to the following blog posts and documentation for providing great mate
 - [React docs on context](https://facebook.github.io/react/docs/context.html)
 - [How to safely use React context](https://medium.com/@mweststrate/how-to-safely-use-react-context-b7e343eff076) by Michel Weststrate.
 
-Thank you also to Arnaud Rinquin for taking the time to review this post.
+Thank you also to [Arnaud Rinquin](https://twitter.com/ArnaudRinquin) for taking the time to review this post.
 
 
 
