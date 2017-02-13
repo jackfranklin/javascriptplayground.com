@@ -112,9 +112,21 @@ h2 {
   float: right;
 }
 
-p, .entry-content ul {
+p, .entry-content ul, .entry-content ol {
   margin-bottom: 1em;
   line-height: 1.95;
+}
+
+blockquote p {
+  margin-bottom: 0.2em;
+}
+
+.entry-content blockquote {
+  padding: 10px 5px 5px 45px;
+  margin-bottom: 1em;
+  background: url(/img/info.png) no-repeat #eee;
+  background-size: 30px;
+  background-position: 10px 15px;
 }
 
 code, pre {
@@ -195,6 +207,14 @@ footer a:visited {
 .entry-intro a:hover,
 footer a:hover {
   color: #696969;
+}
+
+.credits {
+  font-size: 12px;
+}
+
+.copyright {
+  margin-bottom: 0.1em;
 }
 
 .entry-read-more {
