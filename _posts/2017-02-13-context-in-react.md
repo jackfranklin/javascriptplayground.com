@@ -51,7 +51,7 @@ The key thing about this communication is that it's _explicit_. Looking at the c
 
 This property of React, its explicitness of data passing between components, is one of its best features. React is very explicit as a rule, and this is in my experience leads to clearer code that's much easier to maintain and debug when something goes wrong. You simply have to follow the path of props to find the problem.
 
-As you might have guessed, context is a way to break this explictness. When a component defines some data onto its _context_, any of its descendants can access that data. That means any child further down in the component tree can access data from it, without being passed it as a property. Let's take a look at context in action.
+As you might have guessed, context is a way to break this explicitness. When a component defines some data onto its _context_, any of its descendants can access that data. That means any child further down in the component tree can access data from it, without being passed it as a property. Let's take a look at context in action.
 
 First, on the _parent component_, we define two things:
 
