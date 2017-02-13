@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Context in React
+title: Context in ReactJS Applications
 intro: Today we'll dive into context in ReactJS, a feature that's often misunderstood and not used correctly by developers.
-githubPath: 2017-02-13-context-in-react
+githubPath: 2017-02-13-context-in-reactjs-applications
 ---
 
 There is a lot of confusion amongst React developers on what context is, and why it exists. It's also a feature that's been hidden in the React documentation in the past and, [although it is now documented on the React site](https://facebook.github.io/react/docs/context.html) I thought a post on its usage and when to use it would be of use.
@@ -14,30 +14,30 @@ The short answer is that you should __very rarely, if ever__ use context in your
 In React the primary mechanism for communication between your components is through properties, or `props`, for short. Parent components can pass properties down to their children:
 
 ```js
-const SomeParentComponent = () => {
+const ParentComponent = () => {
   const foo = 2
   return (
-    <SomeChildComponent foo={foo} />
+    <ChildComponent foo={foo} />
   )
 }
 ```
 
-Here, the parent component `SomeParentComponent` passes the prop `foo` through to its child, `SomeChildComponent`.
+Here, the parent component `ParentComponent` passes the prop `foo` through to its child, `ChildComponent`.
 
 > Here, a _child component_ is a component that another component renders. A _parent component_ is a component that directly renders another.
 
 If a child component wants to communicate back to its parent, it can do so through props, most commonly by its parent providing a _callback property_ that the child can call when some event happens:
 
 ```js
-const SomeParentComponent = () => {
+const ParentComponent = () => {
   const letMeKnowAboutSomeThing = () => console.log('something happened!')
 
   return (
-    <SomeChildComponent letMeKnowAboutSomeThing={letMeKnowAboutSomeThing} />
+    <ChildComponent letMeKnowAboutSomeThing={letMeKnowAboutSomeThing} />
   )
 }
 
-const SomeChildComponent = props => {
+const ChildComponent = props => {
   const onClick = e => {
     e.preventDefault()
     props.letMeKnowAboutSomeThing()
@@ -51,45 +51,57 @@ The key thing about this communication is that it's _explicit_. Looking at the c
 
 This property of React, its explicitness of data passing between components, is one of its best features. React is very explicit as a rule, and this is in my experience leads to clearer code that's much easier to maintain and debug when something goes wrong. You simply have to follow the path of props to find the problem.
 
-As you might have guessed, context is a way to break this explicitness. When a component defines some data onto its _context_, any of its descendants can access that data. That means any child further down in the component tree can access data from it, without being passed it as a property. Let's take a look at context in action.
+This diagram shows how props keep communication clear but can get a little excessive as you gain many layers in your application; each component has to explictly pass props down to any children.
+
+![](/img/posts/context-in-react/props.png)
+
+One issue you might find in big apps is that you might need to pass props from a top level `ParentComponent` to a deeply nested `ChildComponent`. The components in between will probably have no use the these props and should probably not even know about them. When this situation arises, you can consider using React's context feature.
+
+Context acts like a portal in your application in which components can place data that can be accessed without being passed through explictly.
+
+![](/img/posts/context-in-react/context.png)
+
+When a component defines some data onto its _context_, any of its descendants can access that data. That means any child further down in the component tree can access data from it, without being passed it as a property. Let's take a look at context in action.
+
+## How to use `context` in React applications
 
 First, on the _parent component_, we define two things:
 
 1. A function, `getChildContext`, which defines what context is exposed to its descendants.
 2. A static property, `childContextTypes`, which defines the types of the objects that `getChildContext` returns.
 
-For a component to provide context to its descendants, it must define both of the above. Here, `SomeParentComponent` exposes the property `foo` on its context:
+For a component to provide context to its descendants, it must define both of the above. Here, `ParentComponent` exposes the property `foo` on its context:
 
 ```js
-class SomeParentComponent extends React.Component {
+class ParentComponent extends React.Component {
   getChildContext() {
     return { foo: 'bar' }
   }
   
   render() {
-    return <SomeChildComponent />
+    return <ChildComponent />
   }
 }
 
-SomeParentComponent.childContextTypes = {
+ParentComponent.childContextTypes = {
   foo: React.PropTypes.string
 }
 ```
 
-`SomeChildComponent` can now gain access to the `foo` property by defining a static property `contextTypes`:
+`ChildComponent` can now gain access to the `foo` property by defining a static property `contextTypes`:
 
 ```js
-const SomeChildComponent = (props, context) => {
+const ChildComponent = (props, context) => {
   return <p>The value of foo is: { context.foo }</p>
 }
-SomeChildComponent.contextTypes = {
+ChildComponent.contextTypes = {
   foo: React.PropTypes.string
 }
 ```
 
 > In a functional, stateless component, `context` is accessed via the second argument to the function. In a standard class component, it's available as `this.context`.
 
-What's important here though is that any component that `SomeChildComponent` renders, or any component its children render, and so on, are able to access the same context just by defining `contextTypes`.
+What's important here though is that any component that `ChildComponent` renders, or any component its children render, and so on, are able to access the same context just by defining `contextTypes`.
 
 ## Why you should avoid context
 
@@ -241,6 +253,8 @@ Thank you to the following blog posts and documentation for providing great mate
 
 - [React docs on context](https://facebook.github.io/react/docs/context.html)
 - [How to safely use React context](https://medium.com/@mweststrate/how-to-safely-use-react-context-b7e343eff076) by Michel Weststrate.
+
+Thank you also to Arnaud Rinquin for taking the time to review this post.
 
 
 
