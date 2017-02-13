@@ -57,7 +57,7 @@ This diagram shows how props keep communication clear but can get a little exces
 
 One issue you might find in big apps is that you might need to pass props from a top level `ParentComponent` to a deeply nested `ChildComponent`. The components in between will probably have no use the these props and should probably not even know about them. When this situation arises, you can consider using React's context feature.
 
-Context acts like a portal in your application in which components can place data that can be accessed without being passed through explictly.
+Context acts like a portal in your application in which components can make data available to other components further down the tree without being passed through explictly as props.
 
 ![](/img/posts/context-in-react/context.png)
 
@@ -188,9 +188,11 @@ In the above example, if `context.foo` changes, `ChildComponent` will not render
 
 ## When to use context
 
-If you're a library author, context is useful. Libraries like [React Router use context](https://github.com/ReactTraining/react-router/blob/v4/packages/react-router/modules/Router.js#L13) to allow the components that they provide application developers to communicate. When you're writing a library that provides components that need to talk to each other, or pass values around, `context` is perfect.
+If you're a library author, context is useful. Libraries like [React Router use context](https://github.com/ReactTraining/react-router/blob/v4/packages/react-router/modules/Router.js#L13) to allow the components that they provide application developers to communicate. When you're writing a library that provides components that need to talk to each other, or pass values around, `context` is perfect. Another famous library that makes use of context is [react-redux](https://github.com/reactjs/react-redux/blob/master/src/components/Provider.js#L23). I encourage you to look through the source code for both React Router and React Redux, you can learn a lot about React by doing so.
 
 Let's build our own router library, `RubbishRouter`. It will define two components: `Router` and `Route`. The `Router` component needs to expose a `router` object onto the context, so our `Route` components can pick up on it and use it to function as expected.
+
+`Router` will be used to wrap our entire application, and the user will use multiple `Route` components to define parts of the app that should only render if the URL matches. To do this, each `Route` will take a `path` property, indicating the path that they should match before rendering.
 
 First, `Router`. It exposes the `router` object on the context, and other than that it simply renders the children that it's given:
 
