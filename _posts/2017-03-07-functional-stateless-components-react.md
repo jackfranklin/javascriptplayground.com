@@ -145,3 +145,5 @@ On the whole I advise mostly against context, for reasons documented in the abov
 ## Conclusion
 
 To conclude, I would actively encourage you to think about using FSCs for as much of your application as you can. They are cleaner, have the potential to be more performant as React develops, and encourage good patterns in your React codebase that will lead to a more maintainable application as it grows.
+
+_Huge thanks to [Mark Erikson](https://twitter.com/acemarke) for taking time to review this blog post.
