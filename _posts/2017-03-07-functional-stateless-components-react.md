@@ -47,10 +47,19 @@ const Username = ({ username }) => <p>The logged in user is: {username}</p>
 
 FSCs not only provide a cleaner syntax but also have some other benefits that I'd like to talk about today, along with a couple of gotchas and things to look out for.
 
+It's also important to note that you can have stateless class components, and that in the future we might be able to have functional, _stateful_ components. [Tyler McGinnis' post on the different types of components](https://tylermcginnis.com/functional-components-vs-stateless-functional-components-vs-stateless-components/) does a great job of laying out all the different terminology.
+
+ I think the primary benefit of FSCs is simplicity, and to me they act as a visual signal: "this component is solely props in, rendered UI out". If I see a class component, I do have to scan through to see what lifecycle methods it may be using, and what callbacks it may have. If I see an FSC, I know it isn't doing anything fancy. There are definitely times I'll write a stateless class component so I can define callback methods as class properties (especially if I'm passing prop values into a callback prop), but I'll write FSCs to signal that "this is a very straightforward rendering component".
+
+## FSCs lead to simplicity and offer visual cues
+
+[Mark](http://www.twitter.com/acemarke), who I asked to review this post, made a [great point in his review](https://github.com/jackfranklin/javascriptplayground.com/pull/70#issuecomment-284192694) that FSCs offer visual cues that a component is solely taking some props and rendering output. If you have a class component, you have to read through the code to see if it deals with state, has lifecycle hooks, and so on. FSCs by definition have to be simple and that can save you time as a developer.
+
+If you do have a component that doesn't have any state, but needs to define lifecycle methods, or have many event handlers, you should still prefer class components, even if they don't use state, but for presentational components FSCs are a perfect fit.
+
 ## The syntax of FSCs encourages stateless components
 
 Stateless components (also known as presentational components) should make up the bulk of your React applications. As a general rule of thumb, the less stateful components your application has, the better. Stateless components are easier to test, because you never have to interact or set up state. You can pass them props and assert on their output, and never have to test user interactions. They will generally have fewer bugs in them; in my experience components that have and change state over time are where most bugs will occur.
-
 
 ## It's hard to convert a FSC to a stateful component
 
@@ -99,9 +108,9 @@ const SomeButton = props => {
 }
 ```
 
-It's important to note that this isn't the most efficient way of doing this; every time the component is run to potentially be rerendered, the `onClick` function will be redefined. This is work that you might want to avoid - and in some performance critical applications you might see this make a small difference. You'll find many blog posts online saying you should never do this, but the reality is for most applications that the optimisations will not be noticed. You should be aware of this and know that in certain situations it might wreally hurt performance, but don't shy away from adding an event handler in an FSC because of it.
+It's important to note that this isn't the most efficient way of doing this; every time the component is run to potentially be rerendered, the `onClick` function will be redefined. This is work that you might want to avoid - and in some performance critical applications you might see this make a small difference. You'll find many blog posts online saying you should never do this, but the reality is for most applications that the optimisations will not be noticed. You should be aware of this and know that in certain situations it might really hurt performance, but don't shy away from adding an event handler in an FSC because of it.
 
-If you do want to use an event handler, you have two choices. You either need to turn the component into a full component, or you can pull the event handler out of the FSC:
+If you do really want to avoid this, you have two choices. You either need to turn the component into a full component, or you can pull the event handler out of the FSC (only if you don't want to refer to the component's `props`, which means this often isn't feasible):
 
 ```js
 const onClick = e => (...)
@@ -146,4 +155,4 @@ On the whole I advise mostly against context, for reasons documented in the abov
 
 To conclude, I would actively encourage you to think about using FSCs for as much of your application as you can. They are cleaner, have the potential to be more performant as React develops, and encourage good patterns in your React codebase that will lead to a more maintainable application as it grows.
 
-_Huge thanks to [Mark Erikson](https://twitter.com/acemarke) for taking time to review this blog post.
+_Huge thanks to [Mark Erikson](https://twitter.com/acemarke) for taking time to review this blog post._
