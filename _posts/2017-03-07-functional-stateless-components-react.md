@@ -51,7 +51,7 @@ It's also important to note that you can have stateless class components, and th
 
  I think the primary benefit of FSCs is simplicity, and to me they act as a visual signal: "this component is solely props in, rendered UI out". If I see a class component, I do have to scan through to see what lifecycle methods it may be using, and what callbacks it may have. If I see an FSC, I know it isn't doing anything fancy. There are definitely times I'll write a stateless class component so I can define callback methods as class properties (especially if I'm passing prop values into a callback prop), but I'll write FSCs to signal that "this is a very straightforward rendering component".
 
-## FSCs lead to simplicity and offer visual cues
+## FSCs lead to simplicity and offer visual cues
 
 [Mark](http://www.twitter.com/acemarke), who I asked to review this post, made a [great point in his review](https://github.com/jackfranklin/javascriptplayground.com/pull/70#issuecomment-284192694) that FSCs offer visual cues that a component is solely taking some props and rendering output. If you have a class component, you have to read through the code to see if it deals with state, has lifecycle hooks, and so on. FSCs by definition have to be simple and that can save you time as a developer.
 
@@ -76,12 +76,16 @@ In the world of JavaScript a new framework comes and goes every day; we've all s
 In smaller projects, or small hack days, I've found that I will often use FSCs to very quickly create components that are used purely for styling:
 
 ```js
-const MyBlueButton = props => (
-  <button
-    {...props}
-    style={{ background: 'blue', color: 'white', border: '1px solid black', padding: '10px' }}
-  />
-)
+const MyBlueButton = props => {
+  const styles = { background: 'blue', color: 'white' }
+
+  return (
+    <button
+      {...props}
+      style={styles}
+    />
+  )
+}
 ```
 
 ## In the future, FSCs may be optimised for performance by React
