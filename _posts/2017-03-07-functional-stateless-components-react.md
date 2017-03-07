@@ -67,7 +67,7 @@ Imagine you have a component that you think you might need to add state to. It's
 
 To be clear; there are times when you can convert a FSC to a stateful component with good reason, but make sure you have that reason first and you've fully thought it through.
 
-## FSCs are not bound to React
+## FSCs are not bound to React
 
 In the world of JavaScript a new framework comes and goes every day; we've all seen the satirical blog posts about frameworks and version numbers of frameworks. But a FSC is not tied to React at all, other than the fact that it uses the JSX syntax. If you wanted to switch to another framework, or one day React stopped being worked on, it would be easy for another framework to add support for FSCs and make the adoption path easy. There's no reason React will cease to exist - but in general I've found the less code in your app that's bound to a specific framework, the better.
 
