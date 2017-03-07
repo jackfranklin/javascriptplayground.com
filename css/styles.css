@@ -150,7 +150,8 @@ pre {
   padding: 15px 5px 15px 10px;
   word-wrap: break-word;
   font-size: 0.9em;
-  margin-bottom: 1em;
+  margin-top: 2em;
+  margin-bottom: 2em;
   overflow: scroll;
 }
 
