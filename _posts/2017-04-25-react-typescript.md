@@ -72,3 +72,61 @@ person.age.increment()
 ```
 
 With `strictNullChecks`, if TypeScript thinks that `person` or `person.age` might be `undefined`, it will error and make sure you deal with it. This prevents runtime errors so it seems like a pretty good option to enable from the get go.
+
+## Setting up Webpack, Babel and TypeScript
+
+I'm a big Webpack fan; I enjoy the ecosystem of plugins available, I like the developer workflow and it's good at managing complex applications and their build pipeline. Therefore, even though we could just use TypeScript's compiler, I'd still like to add Webpack in. We'll also need Babel because the TypeScript compiler is going to output ES2015 + React for us, so we'll get Babel to do the work. Let's install Webpack, Babel and the relevant presets, along with [ts-loader](https://github.com/TypeStrong/ts-loader), the Webpack plugin for TypeScript.
+
+There is also [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader), but I found `ts-loader` first and so far it's been great. I would love to hear from anyone who uses the `awesome-typescript-loader`, and how it compares.
+
+```
+yarn add webpack babel-core babel-loader babel-preset-es2015 babel-preset-react ts-loader webpack-dev-server
+```
+
+At this point I have to thank Tom Duncalf, whose [blog post on TypeScript 1.9 + React](http://blog.tomduncalf.com/posts/setting-up-typescript-and-react/) was a brilliant starting point for me and I highly recommend it.
+
+There's nothing too surprising in the Webpack config, but I've left some comments in the code to explain it:
+
+```js
+const webpack = require('webpack')
+const path = require('path')
+
+module.exports = {
+  // put sourcemaps inline
+  devtool: 'eval',
+
+  // entry point of our application, within the `src` directory (which we add to resolve.modules below):
+  entry: [
+    'index.tsx'
+  ],
+
+  // configure the output directory and publicPath for the devServer
+  output: {
+    filename: 'app.js',
+    publicPath: 'dist',
+    path: path.resolve('dist')
+  },
+
+  // configure the dev server to run 
+  devServer: {
+    port: 3000,
+    historyApiFallback: true,
+    inline: true,
+  },
+
+  // tell Webpack to load TypeScript files
+  resolve: {
+    // Look for modules in .ts(x) files first, then .js
+    extensions: ['.ts', '.tsx', '.js'],
+    // Add 'src' to our modulesDirectories, as all our app code will live in there, so Webpack should look in there for modules
+    modules: ['src', 'node_modules'],
+  },
+
+  module: {
+    loaders: [
+      // .ts(x) files should first pass through the Typescript loader, and then through babel
+      { test: /\.tsx?$/, loaders: ['babel-loader', 'ts-loader'], include: path.resolve('src') }
+    ]
+  },
+}
+```
