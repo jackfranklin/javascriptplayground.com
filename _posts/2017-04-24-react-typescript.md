@@ -2,7 +2,7 @@
 layout: post
 title: Getting started with TypeScript and React
 intro: I've recently been learning TypeScript and today I'll take you through how I set up a TypeScript project using React, Babel and Webpack.
-githubPath: 2017-04-25-react-typescript
+githubPath: 2017-04-24-react-typescript
 ---
 
 I've recently been getting into TypeScript following a lot of positive blogs about it from [Tom Dale](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0) and others. Today I'll show you how I've set up a TypeScript project from scratch that uses React, and Webpack for managing the build process. I'll also discuss my initial impressions of TypeScript and in particular working with TypeScript and ReactJS.
@@ -312,7 +312,7 @@ You can configure TSLint via a `tslint.json` file and mine is below. I use both 
 }
 ```
 
-I can then run `tslint 'src/**/*.t*'` to lint my project. I have to use `.t*` so it runs on both `.ts` and `.tsx` files.
+I can then run `tslint --project tsconfig.json` to lint my project.
 
 
 ## Conclusion
