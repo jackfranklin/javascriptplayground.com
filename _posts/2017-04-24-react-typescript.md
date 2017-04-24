@@ -185,8 +185,7 @@ yarn add @types/react-dom
 
 And with that the errors go away. Whenever you install a dependency you can always try installing the `@types` package too, or if you want to see if it has types available, you can use the [TypeSearch](https://microsoft.github.io/TypeSearch/) website to do so.
 
-
-## Running the app locally
+## Running the app locally
 
 To run the app locally we just run the `webpack-dev-server` command. I set up a script, `start`, that will do just that:
 
@@ -263,7 +262,7 @@ declare module 'react-ace' {
 
 I first create a TypeScript interface for the properties that the component takes, and then the line `export = ReactAce` declares that the component is the object exported by the module. By typing the properties, TypeScript will tell me if I typo a property or forget to pass one, which is really valuable.
 
-## Testing
+## Testing
 
 Finally, I also wanted to have a good testing set up with TypeScript. I'm a huge fan of Facebook's [Jest](https://facebook.github.io/jest/), and did some googling to find out if I could run it with TypeScript. Turns out it's very possible, and there's even the [ts-jest](https://www.npmjs.com/package/ts-jest) package available which does all the heavy lifting. In addition, there is a `@types/jest` package so you can have all your tests type-checked too.
 
@@ -287,7 +286,7 @@ The first setting tells Jest to look for `.ts` and `.tsx` files. The `transform`
 
 With this, I can just run `jest` and have everything work as expected.
 
-## TSLint
+## Linting with TSLint
 
 Although TypeScript gives you a lot of checks on your code, I still wanted a linter to enforce some code style and quality checks. Much like ESLint to JavaScript, [TSLint](https://palantir.github.io/tslint/) is the best option for checking TypeScript files. It works in the same way as ESLint - with a set of rules that you enable or disable, and there's also a [TSLint-React](https://github.com/palantir/tslint-react) package to add React specific rules.
 
@@ -314,13 +313,8 @@ You can configure TSLint via a `tslint.json` file and mine is below. I use both 
 
 I can then run `tslint --project tsconfig.json` to lint my project.
 
-
 ## Conclusion
 
 In summary, I've found TypeScript to be a joy to work with so far. I'll definitely be blogging more about the specifics of the language and how I'm using it, but in terms of setting up a build process, configuring all the tools and getting started with types, it's been a real joy. I'd highly recommend giving it a go if you're looking for a bit more structure in your JS applications and want a strong compiler to help you avoid mistakes and spend less time debugging.
 
 If you'd like to browse the code or get started from what I created in this post, I [pushed an example repo to GitHub](https://github.com/javascript-playground/react-typescript-jest-demo) that you can use as a starting point. Feel free to raise an issue on that repo if you have any questions about it.
-
-
-
-
