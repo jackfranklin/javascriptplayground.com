@@ -54,9 +54,9 @@ This happens when you import, for example, React, whose code is not written in E
 
 #### `noImplicitAny`
 
-Often when you want to add TypeScript to an existing project TypeScript makes it easy by not erroring when you don't declare the types of variables. However, when I'm creating a new TypeScript project from scratch I'd like the compiler to be as strict as possible.
+Often when you want to add TypeScript to an existing project TypeScript makes it easy by not throwing an error when you don't declare the types of variables. However, when I'm creating a new TypeScript project from scratch I'd like the compiler to be as strict as possible.
 
-One of the things TypeScript does by default is implicity add the `any` type to variables. `any` is effectively an escape hatch in TypeScript to say "don't typecheck this, it can be any value". That's useful when you're porting JavaScript, but it's better to be strict when you can. With this setting set to `true`, you can't miss any declarations. For example, this code will error when `noImplicitAny` is set to `true`:
+One of the things TypeScript does by default is implicitly add the `any` type to variables. `any` is effectively an escape hatch in TypeScript to say "don't type-check this, it can be any value". That's useful when you're porting JavaScript, but it's better to be strict when you can. With this setting set to `true`, you can't miss any declarations. For example, this code will error when `noImplicitAny` is set to `true`:
 
 ```
 function log(thing) {
@@ -68,7 +68,7 @@ You can read more about this in the [TypeScript Deep Dive](https://basarat.gitbo
 
 #### `strictNullChecks`
 
-This is another option that makes TypeScript's compiler stricter. The TypeScript Deep Dive book has a [great section on this option](https://basarat.gitbooks.io/typescript/docs/options/strictNullChecks.html). With this option on, TypeScript will spot more occassions where you're referencing a value that might be undefined, it will error at you. For example:
+This is another option that makes TypeScript's compiler stricter. The TypeScript Deep Dive book has a [great section on this option](https://basarat.gitbooks.io/typescript/docs/options/strictNullChecks.html). With this option on, TypeScript will spot more occasions where you're referencing a value that might be undefined, it will error at you. For example:
 
 ```js
 person.age.increment()
@@ -235,7 +235,7 @@ You should see `Hello world!` on port 3000, and we have TypeScript working!
 
 For a project I was working on I wanted to use the [React Ace module](https://github.com/securingsincity/react-ace) to include a code editor in my project. However, the module doesn't provide types for it, and there is no `@types/react-ace` either. In this case, we have to add the types to our application so TypeScript knows how to type it. Whilst this can seem annoying, the benefits of having TypeScript at least know a little about all your third party dependencies will save you debugging time.
 
-To define a file that has just types in, you suffix it `.d.ts` (the 'd' is for 'declaration') and you can read more about them on the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction). TypeScript will automatically find thiese files in your project, you don't need to explicitly import them.
+To define a file that has just types in, you suffix it `.d.ts` (the 'd' is for 'declaration') and you can read more about them on the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction). TypeScript will automatically find these files in your project, you don't need to explicitly import them.
 
 I created the file `react-ace.d.ts`, and added the following code that creates the module and defines its default export as a React component:
 
@@ -265,7 +265,7 @@ I first create a TypeScript interface for the properties that the component take
 
 ## Testing
 
-Finally, I also wanted to have a good testing set up with TypeScript. I'm a huge fan of Facebook's [Jest](https://facebook.github.io/jest/), and did some googling to find out if I could run it with TypeScript. Turns out it's very possible, and there's even the [ts-jest](https://www.npmjs.com/package/ts-jest) package available which does all the heavy lifting. In addition, there is a `@types/jest` package so you can have all your tests typechecked too.
+Finally, I also wanted to have a good testing set up with TypeScript. I'm a huge fan of Facebook's [Jest](https://facebook.github.io/jest/), and did some googling to find out if I could run it with TypeScript. Turns out it's very possible, and there's even the [ts-jest](https://www.npmjs.com/package/ts-jest) package available which does all the heavy lifting. In addition, there is a `@types/jest` package so you can have all your tests type-checked too.
 
 Huge thanks to RJ Zaworski, [whose post on TypeScript and Jest](https://rjzaworski.com/2016/12/testing-typescript-with-jest) got me started on this topic. Once you install `ts-jest`, you just have to configure Jest, which is done in the `package.json`, with some settings:
 
@@ -291,7 +291,7 @@ With this, I can just run `jest` and have everything work as expected.
 
 Although TypeScript gives you a lot of checks on your code, I still wanted a linter to enforce some code style and quality checks. Much like ESLint to JavaScript, [TSLint](https://palantir.github.io/tslint/) is the best option for checking TypeScript files. It works in the same way as ESLint - with a set of rules that you enable or disable, and there's also a [TSLint-React](https://github.com/palantir/tslint-react) package to add React specific rules.
 
-You can configure TSLint via a `tslint.json` file and mine is below. I use both the `tslint:latest` and `tslint-react` presets, which enables a bunch of rules. I disagree with some of the defaults sthough so I override them - you might choose to do differently - this is up to you!
+You can configure TSLint via a `tslint.json` file and mine is below. I use both the `tslint:latest` and `tslint-react` presets, which enables a bunch of rules. I disagree with some of the defaults though so I override them - you might choose to do differently - this is up to you!
 
 ```js
 {
