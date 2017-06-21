@@ -9,6 +9,8 @@ I've recently been getting into TypeScript following a lot of positive blogs abo
 
 I won't be going into detail on the specifics of TypeScript's syntax, but you can read either the [TypeScript handbook](https://www.typescriptlang.org/docs/tutorial.html) or the free book [TypeScript Deep Dive](https://basarat.gitbooks.io/typescript/content/docs/getting-started.html) which will also give you a great introduction to the language.
 
+__Update:__ If you'd like to read this post in German, you can do so [thanks to the awesome folks at Reactx.de](https://reactx.de/artikel/reactjs-typescript/).
+
 ## Installing TypeScript and configuring it
 
 The first thing to do was install TypeScript locally into my `node_modules` directory, which I did using Yarn, first using `yarn init` to create a new project:
