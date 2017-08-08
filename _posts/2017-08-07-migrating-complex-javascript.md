@@ -11,7 +11,7 @@ This blog post is a write up of a talk I've gave at Front Trends in Poland, May 
 
 You can also [find the slides on SpeakerDeck](https://speakerdeck.com/jackfranklin/front-trends-migrating-complex-software),
 
-## Background
+## Background
 
 The application I worked on was a business critical ticketing platform that sold tickets to music gigs. You don't need to know any more about it to enjoy this blog post; the most important thing to note is that we had to be in a position to deal with sudden bug reports and new features that might be needed. This immediately ruled out any big bang rewrite, and instead we decided to build new components in React, and migrate existing Angular ones to React one by one. Since starting this project a year ago, I've learned a lot across a lot of different areas and that's what the talk and this blog post are about.
 
@@ -47,7 +47,7 @@ Throughout the process we needed to ensure that we didn't break the application.
 
 We were even able to run these tests in IE11, checking that we were supporting IE correctly and not inadvertently causing cross browser bugs during the migration. The advantage of these tests is that they are entirely decoupled from the code; they care not if the UI they are interacting with is Angular or React based and that's the best thing about them. The downside of these tests is that they are slow - so we stuck to having five tests that covered the core user journey and interactions. It's important to find a balance of test coverage versus test speed.
 
-## Team
+## Team
 
 One of the biggest areas of learning for me in this project - and one that I don't tend to blog about much - was the lessons learned about working in a team on one project for such a long period of time. Working for an entire year on the same project was a new experience - normally I work on teams that work on a particular goal for 2-3 weeks and then move onto the next.
 
@@ -69,7 +69,7 @@ One key to keeping the team motivated was to ensure we kept our momentum up at a
 
 To help us visualise the change we had a variety of scripts that would give us very rough metrics on the codebase. One would grep the codebase for files that imported React, and another did the same for Angular. This gave us an (incredibly rough) overview of our progress, and whilst not scientific, it was great as a team to see the numbers change as we worked.
 
-## Talking
+## Talking
 
 When we first started considering a large software migration we communicated throughout the tech team as to the reasons why and how long it would take. When communicating amongst the tech team, it's natural to use specific terminology and discuss to a fairly in-depth technical level. Where we made a mistake initially was not communicating clearly with the teams outside of engineering. These teams are arguably more important to get onside; they are the ones who deal with angry customers who couldn't buy tickets, or deal with management teams who want to use our product. They are the ones who get regular feedback on the negative aspects to our product, and they are the ones who get angry phone calls if a certain feature doesn't work right. Early on we didn't communicate our motivations for the migration in a clear manner, and as such didn't get much support outside of engineering. Most people were (understandably) frustrated when they were told that for a year we would primarily be keeping our product the same and just changing the underlying code.
 
