@@ -2,7 +2,7 @@
 layout: post
 title: Migrating complex JavaScript applications
 intro: A write up of a conference talk given about lessons learned migrating complex JavaScript applications.
-githubPath: 2017-08-07-migrating-complex-javascript
+githubPath: 2017-08-08-migrating-complex-javascript-angular-react
 ---
 
 This blog post is a write up of a talk I've gave at Front Trends in Poland, May 2017. You can find the slides and video below, along with a full write up of the talk, if you'd rather read than watch.
