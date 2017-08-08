@@ -1,5 +1,5 @@
 permalink: /blog/:year/:month/:title/
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-paginate

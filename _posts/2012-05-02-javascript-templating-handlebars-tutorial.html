@@ -140,7 +140,7 @@ commentWrap.append(newComment);
 <pre><code>Handlebars.registerPartial("social", $("#social-partial").html());
 </code></pre>
 
-<p>That means we can then reference the partial in our other template through <code>{%raw}{% > social}{%endraw%}</code>. The <code>&gt;</code> denotes a partial, and I refer to it as <code>social</code> as that was the first argument of the call I made to <code>registerPartial</code>. Now, our main template looks like so:</p>
+<p>That means we can then reference the partial in our other template through <code>&#123;% > social}</code>. The <code>&gt;</code> denotes a partial, and I refer to it as <code>social</code> as that was the first argument of the call I made to <code>registerPartial</code>. Now, our main template looks like so:</p>
 
 <pre><code>&lt;script id="ajax-comment" type="text/x-handlebars-template"&gt;
   &lt;li&gt;
