@@ -37,7 +37,7 @@ There's another benefit of incremental migrations: you start to add value immedi
 
 This approach of migrating from the inside out was made possible by [ngReact](https://github.com/ngReact/ngReact), an Angular plugin that lets you render React from within Angular applications. Our approach was to start with very small components, and then work our way up the tree of components, replacing each part as we went.
 
-![](img/posts/migrating/tree.png)
+![](/img/posts/migrating/tree.png)
 
 By taking this approach, we were able to ship aggressively - the first part of our codebase to be written in React was shipped on day two of the migration.
 
