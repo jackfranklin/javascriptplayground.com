@@ -22,7 +22,7 @@ It's split up into the four t's: Tech, Tests, Team and Talking.
 The first decision we made was the one to move away from the existing Angular 1 codebase in the first place. We did not do this because we actively disliked Angular; I've worked with it before and very much enjoyed it, and Angular 2+ has made a lot of improvements. Our reasons for considering the migration were:
 
 - Lack of expertise; both developers who had built the Angular app had moved on from the company.
-- Lack of confidence; because we hadn't build the app, it was hard to have confidence that when we changed code we weren't introducing new bugs or breaking other features.
+- Lack of confidence; because we hadn't built the app, it was hard to have confidence that when we changed code we weren't introducing new bugs or breaking other features.
 - Angular 1 is not the latest version of Angular and although it is going to be maintained by the Angular team for a while yet, it does not have the longevity we were looking for.
 
 We picked React primarily because we all knew it well, but also because it fits the component model that we were betting on; that we could build our app incrementally, starting with very small components and then moving into larger ones as we gained confidence.
