@@ -7,7 +7,7 @@ githubPath: 2017-10-03-navigation-routing-in-elm
 
 In today's video I took an existing Elm application and add first class URL support via [Elm's Navigation package](https://github.com/elm-lang/navigation).
 
-<iframe width="853" height="480" src="https://www.youtube.com/embed/uDsBr2YiIcw?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/uDsBr2YiIcw?rel=0" frameborder="0" allowfullscreen></iframe>
 
 You can find all the source code [on the GitHub repo](https://github.com/jackfranklin/do-you-even-elm), and [the pull request I made after this video](https://github.com/jackfranklin/do-you-even-elm/pull/5) is also available.
 
