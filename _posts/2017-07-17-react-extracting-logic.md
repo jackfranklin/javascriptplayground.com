@@ -137,7 +137,7 @@ export const getCurrencyData = currency => {
 }
 ```
 
-But wait! There's a bug - the function takes in a `currency` argument but actually completely ignores it in favour of `this.props.currency`. This is entirely accidental but shows the value of separating business logic from component UI logic. In a React component it's too easy to refer to `this.props` or `this.state` and it becomes hard to track which functions use which values. Pulling them out into their own modules forces you to pass arguments through, which in trun helps clarify the API and help you think about what data the function really needs.
+But wait! There's a bug - the function takes in a `currency` argument but actually completely ignores it in favour of `this.props.currency`. This is entirely accidental but shows the value of separating business logic from component UI logic. In a React component it's too easy to refer to `this.props` or `this.state` and it becomes hard to track which functions use which values. Pulling them out into their own modules forces you to pass arguments through, which in turn helps clarify the API and help you think about what data the function really needs.
 
 Once I fix up that bug by making sure we call `getCurrencyData` with the right value, and update the function to refer to the `currency` argument, not `this.props.currency`, we can make `Money`'s `getCurrencyData` delegate to the new function:
 
@@ -251,7 +251,7 @@ I am a huge fan of FSCs; they encourage simple components and the separation of 
 
 ## Conclusion
 
-By looking through our components and finding standalone functions that we can pull out, we've greatly simplified our component whilst increasing our test coverage and clarity of our application greatly. I highly encourage you to think twice about adding arbitary methods onto React components; it's too easy to refer to `this.props.X`.
+By looking through our components and finding standalone functions that we can pull out, we've greatly simplified our component whilst increasing our test coverage and clarity of our application greatly. I highly encourage you to think twice about adding arbitrary methods onto React components; it's too easy to refer to `this.props.X`.
 
 By pulling the functions into their own modules you are forced to consider which props are needed and how your function will work. It makes code clearer,  it's easier to see which props are used where and it means as your business logic gets more complex you can test it without having to get your UI components involved.
 
