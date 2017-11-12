@@ -224,27 +224,27 @@ lib
 
 ### Building when publishing
 
-We're almost there now and ready to publish the module to npm, but the final step is to make sure that when publishing we don't forget any of the above steps. I can define a `prepublish` script in my `package.json` that npm will run automatically when I run `npm publish`. By doing this I'll ensure my project is all up to date and fully built when I publish new versions to the repository. Typically I'll split up my npm scripts into smaller ones, so I create a new script for running Babel, and another for running flow-copy-source, and make `prepublish` run the both of them:
+We're almost there now and ready to publish the module to npm, but the final step is to make sure that when publishing we don't forget any of the above steps. I can define a `prepack` script in my `package.json` that npm will run automatically when I run `npm publish`. By doing this I'll ensure my project is all up to date and fully built when I publish new versions to the repository. Typically I'll split up my npm scripts into smaller ones, so I create a new script for running Babel, and another for running flow-copy-source, and make `prepack` run the both of them:
 
 ```js
-"prepublish": "npm run babel-prepublish && npm run flow-prepublish",
-"babel-prepublish": "babel src/ -d lib",
-"flow-prepublish": "flow-copy-source src lib",
+"prepack": "npm run prepack:babel && npm run prepack:flow",
+"prepack:babel": "babel src/ -d lib",
+"prepack:flow": "flow-copy-source src lib",
 ```
 
-Finally, we're ready to publish our module! I can run `npm publish` to push a module to the repository, and when I do npm will run my `prepublish` script and generate the compiled files and the `.flow` files:
+Finally, we're ready to publish our module! I can run `npm publish` to push a module to the repository, and when I do npm will run my `prepack` script and generate the compiled files and the `.flow` files:
 
 ```
-> npm run babel-prepublish && npm run flow-prepublish
+> npm run prepack:babel && npm run prepack:flow
 
-> util-fns@0.1.3 babel-prepublish /Users/jackfranklin/git/util-fns
+> util-fns@0.1.3 prepack:babel /Users/jackfranklin/git/util-fns
 > babel src/ -d lib
 
 src/index.js -> lib/index.js
 ...and so on
 src/sum.js -> lib/sum.js
 
-> util-fns@0.1.3 flow-prepublish /Users/jackfranklin/git/util-fns
+> util-fns@0.1.3 prepack:flow /Users/jackfranklin/git/util-fns
 > flow-copy-source src lib
 ```
 
