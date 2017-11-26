@@ -2,7 +2,7 @@
 layout: post
 title: Test driving React components
 intro: In today's post I'll look at how it's possible to build React components following the test driven development methodology, where tests are written first.
-githubPath: 2017-05-31-test-driving-react-components
+githubPath: 2017-11-27-test-driving-react-components
 ---
 
 In today's post I'm going to look further into how you might build React components by following a test driven development (TDD) approach. That is, we'll write the tests first, watch them fail, and then build the React component out to fix the tests, before then writing more. We'll then consider how we can refactor code and pull logic out of components into plain old JavaScript objects (POJOs).
@@ -27,7 +27,7 @@ Let's first build a component that takes a `name` prop and renders `<p>Hello, na
 
 
 ```jsx
-import React from 'react';
+import React from 'react'
 import Hello from './Hello';
 import { shallow } from 'enzyme';
 
@@ -159,6 +159,3 @@ And all our tests are still passing.
 Now let's move on to testing something a little more complex - a `<Todo>` component that can take and render a todo. Let no one say I'm not unique with my code examples!
 
 Once we've done this we'll then look at how we might test a component that renders a list of `<Todo>` components.
-
-
-
