@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Test driving React components
-intro: In today's post I'll look at how it's possible to build React components following the test driven development methodology, where tests are written first.
-githubPath: 2017-11-27-test-driving-react-components
+title: An introduction to testing React components with Enzyme 3
+intro: In today's post we'll introduce Enzyme and look at how to use it to test a basic React component.
+githubPath: 2017-12-12-introduction-to-react-tests-enzyme
 ---
 
-In today's post I'm going to look further into how you might build React
-components by following a test driven development (TDD) approach. That is, we'll
-write the tests first, watch them fail, and then build the React component out
-to fix the tests, before then writing more. We'll then consider how we can
-refactor code and pull logic out of components into plain old JavaScript objects
-(POJOs).
+In today's post we'll introduce the AirBnB library Enzyme for testing React
+applications. We'll do this using a test driven development (TDD) approach. That
+is, we'll write the tests first, watch them fail, and then build the React
+component out to fix the tests, before then writing more. We'll then consider
+how we can refactor code whilst running the tests to confirm we haven't made any
+errors.
 
 > In reality, I don't often write components from scratch in a TDD way, however
 > I will often use TDD to replicate an existing bug in a component to first see
@@ -61,15 +61,29 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 ```
 
-## First component
+> If you're using an older version of React in your projects but still want to
+> use Enzyme, make sure you use the right Enzyme adapter for the version of
+> React you're using. You can find more on the
+> [Enzyme installation docs](https://github.com/airbnb/enzyme#installation).
 
-Let's first build a component that takes a `name` prop and renders `<p>Hello,
+create-react-app is configured to run this file for us automatically when we run
+`yarn test`, so before our tests are run it will be executed and set up Enzyme
+correctly.
+
+> If you're not using create-react-app, you can configure Jest yourself to run
+> this file using the
+> [`setupTestFrameworkScriptFile`](https://facebook.github.io/jest/docs/en/configuration.html#setuptestframeworkscriptfile-string)
+> configuration option.
+
+## The `Hello` component
+
+Let's build a component that takes a `name` prop and renders `<p>Hello,
 name!</p>` onto the screen. As we're writing tests first, I'll create
 `src/Hello.test.js`, following the convention for test files that
 `create-react-app` uses (in your own apps you can use whichever convention you
 prefer). Here's our first test:
 
-```jsx
+```js
 import React from 'react'
 import Hello from './Hello'
 import { shallow } from 'enzyme'
@@ -96,7 +110,7 @@ Cannot find module './Hello' from 'Hello.test.js'
 
 So let's at least define the component and give it a shell that renders nothing:
 
-```jsx
+```js
 import React from 'react'
 
 const Hello = props => {
@@ -108,7 +122,7 @@ export default Hello
 
 Now we get a slightly cryptic error:
 
-```jsx
+```js
 Method “text” is only meant to be run on a single node. 0 found instead.
 ```
 
@@ -117,13 +131,13 @@ happening because we're calling `wrapper.find('p')` and then calling `text()` on
 that to get the text, but the component is not rendering a paragraph. Let's fix
 that:
 
-```jsx
+```js
 const Hello = props => {
   return <p>Hello World</p>
 }
 ```
 
-Now we're mucuh closer!
+Now we're much closer!
 
 ```
 expect(received).toEqual(expected)
@@ -136,7 +150,7 @@ Received:
 
 And we can make the final leap to a green test:
 
-```jsx
+```js
 const Hello = props => {
   return <p>Hello, {props.name}!</p>
 }
@@ -151,7 +165,7 @@ your test suite, you should make sure you keep things organised.
 
 With our second test, we're failing again:
 
-```jsx
+```js
 it('renders the name given', () => {...})
 
 it('uses "Unknown" if no name is passed in', () => {
@@ -171,7 +185,7 @@ Received:
 
 But we can now write our first pass at the implementation to fix it:
 
-```jsx
+```js
 const Hello = props => {
   return <p>Hello, {props.name || 'Unknown'}!</p>
 }
@@ -181,7 +195,7 @@ And now the test is green we're free to refactor. The above is perfectly fine
 but not the way it's usually done in React. Some might choose to destructure the
 `props` argument and give `name` a default value:
 
-```jsx
+```js
 const Hello = ({ name = 'Unknown' }) => {
   return <p>Hello, {name}!</p>
 }
@@ -191,7 +205,7 @@ But most of the time when working with React components I'll use the
 `defaultProps` object to define the defaults. I'll also set the component's
 `propTypes`:
 
-```jsx
+```js
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -212,8 +226,8 @@ export default Hello
 
 And all our tests are still passing.
 
-## Testing interactive components
+## Conclusion
 
-Now let's move on to testing something a little more complex - a `<Todo>`
-component that can take and render a todo that a user can interact with. Let no
-one say I'm not unique with my code examples!
+That brings our first look at testing React with Enzyme 3 to an end. In future
+tutorials we'll dive further into what Enzyme has to offer and see how we can
+test components of increasing complexity.
