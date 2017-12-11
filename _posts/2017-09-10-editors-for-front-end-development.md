@@ -33,7 +33,7 @@ The main challenge for me is getting used to not having the terminal so accessib
 
 I'll try to blog again in a few weeks once I've had more time to explore Atom and learn its quirks, but in the mean time if you have any recommendations please do let me know!
 
-[dotfiles]: https://github.com/javascript-playground/styled-components-screencast
-[tilvim]: https://github.com/styled-components/styled-components
+[dotfiles]: https://github.com/jackfranklin/dotfiles
+[tilvim]: http://tilvim.com
 [atom]: https://atom.io/
 [vim-mode-plus]: https://github.com/t9md/atom-vim-mode-plus
