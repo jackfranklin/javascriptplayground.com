@@ -20,19 +20,18 @@ title: The JavaScript Playground
 {% endfor %}
 
 <div class="pagination clearfix">
+  <div class="pagination-prev-btn">
+    {% if paginator.previous_page %}
+      <a class="pagination-button" href="{{ paginator.previous_page_path }}">
+        &lt;&lt;
+      </a>
+    {% else %}
+      <span>
+        &lt;&lt;
+      </span>
+    {% endif %}
+  </div>
   <ul>
-    <li id="pagination-prev">
-      {% if paginator.previous_page %}
-        <a class="pagination-button" href="{{ paginator.previous_page_path }}">
-          &lt;&lt;
-        </a>
-      {% else %}
-        <span>
-          &lt;&lt;
-        </span>
-      {% endif %}
-    </li>
-
     {% for page in (1..paginator.total_pages) %}
       {% if page == paginator.page %}
         <li class="pagination-current-page">
@@ -49,16 +48,16 @@ title: The JavaScript Playground
       {% endif %}
     {% endfor %}
 
-    <li id="pagination-next">
-      {% if paginator.next_page %}
-        <a class="pagination-button" href="{{ paginator.next_page_path }}">
-          &gt;&gt;
-        </a>
-      {% else %}
-        <span>
-          &gt;&gt;
-        </span>
-      {% endif %}
-    </li>
   </ul>
+  <div class="pagination-next-btn">
+    {% if paginator.next_page %}
+      <a class="pagination-button" href="{{ paginator.next_page_path }}">
+        &gt;&gt;
+      </a>
+    {% else %}
+      <span>
+        &gt;&gt;
+      </span>
+    {% endif %}
+  </div>
 </div>
