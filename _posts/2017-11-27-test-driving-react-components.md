@@ -32,14 +32,34 @@ for testing React that makes it incredibly easy to render, search and make
 assertions on your components, and we'll use it extensively today. Enzyme also
 needs `react-test-renderer` to be installed (it doesn't have it as an explicit
 dependency because it only needs it for apps using React 15.5 or above, which we
-are), so install that too:
+are). In addition, the newest version of Enzyme uses an adapter based system
+where we have to install the adapter for our version of React. We're rocking
+React 16 so I'll install the adapter too:
 
 ```
-yarn add -D enzyme react-test-renderer
+yarn add -D enzyme react-test-renderer enzyme-adapter-react-16
 ```
 
 > The `-D` argument tells Yarn to save these dependencies as developer
 > dependencies.
+
+You can read more about
+[installing Enzyme in the docs](http://airbnb.io/enzyme/docs/installation/index.html).
+
+## Enzyme setup
+
+You also need to perform a small amount of setup for Enzyme to configure it to
+use the right adapter. This is all documented in the link above; but when we're
+working with an application created by create-react-app, all we have to do is
+create the file `src/setupTests.js`. create-react-app is automatically
+configured to run this file before any of our tests.
+
+```js
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
+configure({ adapter: new Adapter() })
+```
 
 ## First component
 
@@ -192,11 +212,8 @@ export default Hello
 
 And all our tests are still passing.
 
-## Rendering a Todo
+## Testing interactive components
 
 Now let's move on to testing something a little more complex - a `<Todo>`
-component that can take and render a todo. Let no one say I'm not unique with my
-code examples!
-
-Once we've done this we'll then look at how we might test a component that
-renders a list of `<Todo>` components.
+component that can take and render a todo that a user can interact with. Let no
+one say I'm not unique with my code examples!
