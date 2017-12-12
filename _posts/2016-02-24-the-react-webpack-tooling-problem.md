@@ -8,7 +8,6 @@ I wrote back in 2015 about the [state of front end tooling](http://javascriptpla
 
 A library that seems to see this problem most of any is React. I think [Scott Riley](http://twitter.com/scott_riley) put this best:
 
-
 <blockquote class="twitter-tweet" data-lang="en-gb"><p lang="en" dir="ltr"><a href="https://twitter.com/Jack_Franklin">@Jack_Franklin</a> People need to talk about this more; React is becoming synonymous with ‘spending a week in Webpack before you write any code’</p>&mdash; Scott ☠ (@scott_riley) <a href="https://twitter.com/scott_riley/status/697833161292701697">February 11, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -47,13 +46,10 @@ I'd then create a folder `src`, and create `src/app.js`. Note that there's no ES
 var App = React.createClass({
   render: function() {
     return <p>Hello World</p>;
-  }
+  },
 });
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
 Now we need to install the Babel CLI tool and run it on the files in the `src` directory to produce `bundle.js`. First I'd install `babel-cli` and `babel-preset-react` locally. I always install CLI tools locally such that different projects are able to use different versions of tools if they need.
@@ -78,8 +74,8 @@ At this point we could stop now and tell the developer that every time they chan
 
 Firstly, let's move this call into a `package.json` script, which has two benefits:
 
-- we can run it more easily with `npm run <name>`
-- `npm` will look in `./node_modules/.bin` for us, so we can shorten the command a little
+* we can run it more easily with `npm run <name>`
+* `npm` will look in `./node_modules/.bin` for us, so we can shorten the command a little
 
 ```json
 "scripts": {
@@ -109,9 +105,8 @@ And with that I can run `npm run live-server` to get my app running locally and 
 
 ## Conclusion
 
-Is the above what I'd recommend for someone new to a library wanting to get started? Yes. Is it what I'd recommend for a very experienced JS developer working on a large app? No. The key takeaway from this blog post is that you can __layer tools and functionality__ as you get more comfortable with the tools and the ecosystem you're working with. Whilst I've used React as the example in this post this applies more generally across the board with any fairly modern JS library (with the exception of Ember and Ember CLI).
+Is the above what I'd recommend for someone new to a library wanting to get started? Yes. Is it what I'd recommend for a very experienced JS developer working on a large app? No. The key takeaway from this blog post is that you can **layer tools and functionality** as you get more comfortable with the tools and the ecosystem you're working with. Whilst I've used React as the example in this post this applies more generally across the board with any fairly modern JS library (with the exception of Ember and Ember CLI).
 
 You should start with nothing, and work your way up, rather than jumping in right at the deep end with some complex boilerplate project. Boilerplates are great if you're familiar with the environment, but a nightmare for a beginner. Taking time to understand exactly what the tools are doing and why we need them will give a greater understanding and appreciation. By introducing beginners with less complex tools we keep the barrier to entry low and hopefully their enjoyment of the language and libraries high.
 
 Finally, yes our tooling can get better and we can definitely make improvements to keep developers happier and more productive. If you're jumping into a complex React + ES2015 + JSX + whatever else environment, you have to be prepared to deal with the occasional rough edge and tool problem.
-

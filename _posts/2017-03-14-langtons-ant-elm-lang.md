@@ -25,12 +25,11 @@ I used [create-elm-app](https://github.com/halfzebra/create-elm-app) to quickly 
 
 When working in Elm the first thing I always do is define the types for the key concepts of the application. Looking through Langton's ant, we could see we'd need to model:
 
-- The concept of an `Ant`.
-- `Cell`s on a game `Board`.
-- `Coord`s which cells are positioned at on the board.
-- The `Direction` of the ant.
-- The `Colour` of a cell.
-
+* The concept of an `Ant`.
+* `Cell`s on a game `Board`.
+* `Coord`s which cells are positioned at on the board.
+* The `Direction` of the ant.
+* The `Colour` of a cell.
 
 Starting with the easier ones, a `Direction` is a union type that can be one of `Up`, `Down`, `Left` or `Right`:
 
@@ -73,11 +72,9 @@ type alias Ant =
     { position : Coord
     , direction : Direction
     }
-
 ```
 
 The board is then a dictionary (quite similar to a JavaScript object, or a Ruby hash) that has coordinates as its keys, and then `Cell`s as its values. There's a bit of duplication here because you're using the coordinates for the keys of the dictionary, and then storing the keys in the cell, but we left it like that because it's nice to be able to have a cell tell you its position, without having to keep a reference to the coordinates around.
-
 
 ```haskell
 type alias Board =
@@ -142,7 +139,6 @@ type Msg
 
 When `Time.every` sends a `Tick` it will also send the current time with it, which we'll ignore, but we have to define our `Msg` type as `Tick Time` to keep the compiler happy. In our `update` function we'll simply hand off to a `tick` function that will run the actual game:
 
-
 ```haskell
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -185,7 +181,6 @@ tick { ant, board } =
 
 Where `flipColour` just swaps `Black` to `White` and vice-versa:
 
-
 ```haskell
 flipColour : Colour -> Colour
 flipColour colour =
@@ -208,7 +203,6 @@ newBoard =
 ```
 
 Next, we need to deal with the ant. Depending on the colour of the cell when the ant arrived on it, it needs to either flip itself 90 degrees left or right, so we can update the ant and change its direction:
-
 
 ```haskell
 newAnt1 =
@@ -254,7 +248,6 @@ Finally, now we have the ant facing the right direction, we need to update its p
 newAnt2 =
     { newAnt1 | position = getCoordInFront newAnt1 }
 ```
-
 
 Where `getCoordInFront` maps the ant's positional coordinates, changing either the `x` or `y` by one, positively or negatively depending on the direction:
 
@@ -307,7 +300,6 @@ Rather than use HTML, we chose to use [elm-lang/svg](http://package.elm-lang.org
 
 Our `view` function looks like so:
 
-
 ```haskell
 view : Model -> Html Msg
 view { board, ant } =
@@ -338,7 +330,7 @@ Notice how we use the SVG element `g` to group elements up. `g` is really handy 
 
 `renderCell` calls the generic `renderItem` function, passing in the position of the cell and the colour. `colourToSvgFill` just maps the type `Black` to `"black"`, and the same with `White`.
 
-`renderCell` produces an SVG `rect `element with the right width, height and positions applied:
+`renderCell` produces an SVG `rect`element with the right width, height and positions applied:
 
 ```haskell
 renderItem : Coord -> String -> Svg Msg
@@ -356,7 +348,6 @@ renderItem ( xPos, yPos ) colour =
 
 The `renderAnt` function also uses `renderItem`, just passing in a different colour depending on the ant's direction (which you don't need to do, we just did it so we could see the direction the ant was heading). `colourForAnt` just maps the ant's colour to a direction.
 
-
 ```haskell
 renderAnt : Ant -> Svg Msg
 renderAnt { position, direction } =
@@ -370,15 +361,3 @@ And with that, we have our ant!
 ![](/img/posts/langtons-ant/langtons-ant.png)
 
 If you'd like to find the full code, you can [find it on Github](https://github.com/jackfranklin/langtons-ant-elm). I'd encourage you to have a try at building Langton's Ant, it's a well defined, contained challenge that has some really interesting parts. Elm's type system makes it a perfect fit for a challenge like this, and it was a neat way to explore and learn more about the language.
-
-
-
-
-
-
-
-
-
-
-
-

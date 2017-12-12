@@ -6,9 +6,9 @@ intro: How to test Node modules that make lots of API requests.
 
 Recently I sat down with my [Pulldown Project](https://github.com/jackfranklin/pulldown), aiming to rewrite the tests. The problem with them was that they were network dependent. Each test would hit the real API and download the real file. This was not good for a number of reasons:
 
-- I couldn't run the tests without an internet connection
-- the tests were slow
-- the tests were unreliable, they would sometimes pass, and other times not
+* I couldn't run the tests without an internet connection
+* the tests were slow
+* the tests were unreliable, they would sometimes pass, and other times not
 
 Unreliable tests are worse than no tests, so I ripped them out and started again.
 
@@ -70,5 +70,3 @@ The best place to start is the [nock README](https://github.com/flatiron/nock). 
 If you'd like to see a real project that uses nock, we use it extensively in the [Pulldown tests](https://github.com/jackfranklin/pulldown/tree/master/test).
 
 If you've ever used an alternative to Nock, or use other tools with it that you think I should mention here, please leave a comment.
-
-

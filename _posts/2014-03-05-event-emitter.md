@@ -27,13 +27,13 @@ In a system with multiple modules, I've taken the approach of passing in my Even
     var emitter = new EventEmitter();
 
     moduleA.init({
-       emitter: emitter 
+       emitter: emitter
     });
 
     moduleB.init({
-       emitter: emitter 
+       emitter: emitter
     });
-    
+
 That way the two can publish and subscribe to the same instance.
 
 We can also create modules that inherit from the EventEmitter. This means that you can call EventEmitter methods like `on` and `emit` directly on your own modules:
@@ -64,6 +64,3 @@ We can also create modules that inherit from the EventEmitter. This means that y
 To do this, we can use Node's `util.inherits`, which will in this case cause `ModuleA` to inherit from `EventEmitter`. Notice we can then call `this.on` and `this.emit` from within `ModuleA`. This is a nice pattern to use if you've got a module that's going to be firing a lot of events. You may chose to create your own EventEmitter object that extends Node's and adds some extra shared functionality relevant to the context of your application. As an additional bonus, you can also use Browserify on this code and run it in the browser, so if you're building a front end app and would like to use EventEmitters, you can.
 
 I highly encourage you to play with EventEmitters and the publish and subscribe pattern; once you're comfortable with it I find it's a great way to keep your code organised, decoupled and extensible with very little effort.
-
-
-

@@ -34,12 +34,16 @@ Today we'll focus exclusively on Arrow functions. One of the quickest of quick w
 
 ```js
 var users = [
-    { name: 'Jack', age: 21 },
-    { name: 'Ben', age: 23 },
-    { name: 'Adam', age: 22 }
+  { name: 'Jack', age: 21 },
+  { name: 'Ben', age: 23 },
+  { name: 'Adam', age: 22 },
 ];
 
-console.log(users.map(function(user) { return user.age; }));
+console.log(
+  users.map(function(user) {
+    return user.age;
+  })
+);
 // [21, 23, 22]
 ```
 
@@ -47,9 +51,9 @@ That's really nice, but also feels a little verbose having to type all that. Wit
 
 ```js
 var users = [
-    { name: 'Jack', age: 21 },
-    { name: 'Ben', age: 23 },
-    { name: 'Adam', age: 22 }
+  { name: 'Jack', age: 21 },
+  { name: 'Ben', age: 23 },
+  { name: 'Adam', age: 22 },
 ];
 
 console.log(users.map(user => user.age));
@@ -60,9 +64,9 @@ Notice how much nicer that feels to read, as well as to type? It's much less cod
 
 ```js
 var users = [
-    { name: 'Jack', age: 21 },
-    { name: 'Ben', age: 23 },
-    { name: 'Adam', age: 22 }
+  { name: 'Jack', age: 21 },
+  { name: 'Ben', age: 23 },
+  { name: 'Adam', age: 22 },
 ];
 
 var ages = users.map(user => user.age);
@@ -77,14 +81,14 @@ Arrow functions can have multiple statements within, in which case you need to u
 
 ```js
 var users = [
-    { name: 'Jack', age: 21 },
-    { name: 'Ben', age: 23 },
-    { name: 'Adam', age: 22 }
+  { name: 'Jack', age: 21 },
+  { name: 'Ben', age: 23 },
+  { name: 'Adam', age: 22 },
 ];
 
 var agesDoubled = users.map(user => {
-    var age = user.age;
-    return age * 2;
+  var age = user.age;
+  return age * 2;
 });
 ```
 
@@ -93,40 +97,42 @@ However, once you get to this stage it's a good sign that you probably want to b
 Another handy feature of arrow functions is the lexical binding of `this` to a function. As you'll probably know already, when you create a new function, the `this` keyword is set to a value depending on the way a function is called, and the rules as to what `this` might be defined as [are notoriously convoluted](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). Let's see how arrow functions might help us out here, using a trivial example of creating an API wrapper that returns a Promise (another great ES6 feature that we'll cover very soon). Consider the following example:
 
 ```js
-function API () {
+function API() {
   this.uri = 'http://www.my-hipster-api.io/';
 }
 
 // let's pretend this method gets all documents at
 // a specific RESTful resource...
-API.prototype.get = function (resource) {
-  return new Promise(function (resolve, reject) {
-		// this doesn't work
-		http.get(this.uri + resource, function (data) {
-			resolve(data);
-		});
+API.prototype.get = function(resource) {
+  return new Promise(function(resolve, reject) {
+    // this doesn't work
+    http.get(this.uri + resource, function(data) {
+      resolve(data);
+    });
   });
 };
 
 var api = new API();
 
-// by calling this method, we should be making a request to 
+// by calling this method, we should be making a request to
 // http://www.my-hipster-api.io/nuggets
-api.get('nuggets').then(function (data) { console.log(data); }); 
+api.get('nuggets').then(function(data) {
+  console.log(data);
+});
 ```
 
-So what's wrong here? Well, aside from not being the best example of Promise usage in the world (it's generally considered  a bit of an anti-pattern to wrap a callback function in this way), `this.uri` is `undefined` so when we come to call our `http.get()` method that we're wrapping, we can't properly form the URL we need. Why would this be? Well, when we call `new Promise()`, we're calling a constructor of another object, which creates a new lexical `this` in turn. Put simply, `this.uri` is not in scope.
+So what's wrong here? Well, aside from not being the best example of Promise usage in the world (it's generally considered a bit of an anti-pattern to wrap a callback function in this way), `this.uri` is `undefined` so when we come to call our `http.get()` method that we're wrapping, we can't properly form the URL we need. Why would this be? Well, when we call `new Promise()`, we're calling a constructor of another object, which creates a new lexical `this` in turn. Put simply, `this.uri` is not in scope.
 
 Today, we can work around this in a few ways. We could have written something like this:
 
 ```js
-API.prototype.get = function (resource) {
+API.prototype.get = function(resource) {
   var self = this; // a-ha! we'll assign to a local var
-  return new Promise(function (resolve, reject) {
-		// this works!
-		http.get(self.uri + resource, function (data) {
-			resolve(data);
-		});
+  return new Promise(function(resolve, reject) {
+    // this works!
+    http.get(self.uri + resource, function(data) {
+      resolve(data);
+    });
   });
 };
 ```
@@ -134,13 +140,15 @@ API.prototype.get = function (resource) {
 ...and, lo and behold, it works! By creating a variable that points to `this`, we can access it from any of our inner functions. In fact, if we were to use Traceur to transpile our ES6 into ES5 compatible code, it actually outputs something very similar to the above pattern. But we shouldn't have to do this, right? Surely there must be a way for us to define `this` ourselves? If we're working inside an environment where we have ES5 features (IE9 or above), we could use `.bind()`, which is a [method on the `Function` prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) that allows us to "bind" (funnily enough) a value a function's lexical `this`.
 
 ```js
-API.prototype.get = function (resource) {
-  return new Promise(function (resolve, reject) {
-		// this works!
-		http.get(this.uri + resource, function (data) {
-			resolve(data);
-		});
-  }.bind(this));
+API.prototype.get = function(resource) {
+  return new Promise(
+    function(resolve, reject) {
+      // this works!
+      http.get(this.uri + resource, function(data) {
+        resolve(data);
+      });
+    }.bind(this)
+  );
 };
 ```
 
@@ -149,11 +157,11 @@ This works, but could be a little tidier. If we decide to nest a few callbacks w
 Enter arrow functions! In ES6, the same function above could be defined like this:
 
 ```js
-API.prototype.get = function (resource) {
+API.prototype.get = function(resource) {
   return new Promise((resolve, reject) => {
-		http.get(this.uri + resource, function (data) {
-			resolve(data);
-		});
+    http.get(this.uri + resource, function(data) {
+      resolve(data);
+    });
   });
 };
 ```

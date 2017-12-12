@@ -16,9 +16,9 @@ First things first: let's create a new project. Create a directory for the proje
 
 The `package.json` file is used by npm, Node's package manager, to know about your project, its dependencies and how it works. We need to make a couple of edits to it.
 
-- remove the `main` entry: this is only used for modules that will be used through the module system (e.g. `var _ = require('underscore');`).
-- add `preferGlobal` and set it to true, which means if someone installs this module through npm and doesn't use the `--global` option, they will be warned that the module is designed to be installed globally.
-- add the `bin` object, which maps commands to files. This means when this module is installed, npm will set up the `filesearch` executable to execute `index.js`.
+* remove the `main` entry: this is only used for modules that will be used through the module system (e.g. `var _ = require('underscore');`).
+* add `preferGlobal` and set it to true, which means if someone installs this module through npm and doesn't use the `--global` option, they will be warned that the module is designed to be installed globally.
+* add the `bin` object, which maps commands to files. This means when this module is installed, npm will set up the `filesearch` executable to execute `index.js`.
 
 ```javascript
 {
@@ -93,7 +93,11 @@ To run a command in the system we can use the `exec` method of the `child_proces
 
 ```javascript
 var exec = require('child_process').exec;
-var child = exec('ls -a | grep ' + searchPattern, function(err, stdout, stderr) {
+var child = exec('ls -a | grep ' + searchPattern, function(
+  err,
+  stdout,
+  stderr
+) {
   console.log(stdout);
 });
 ```
@@ -109,8 +113,8 @@ package.json
 
 If this was a real module that I was working on publishing there's a couple of things I'd do before hitting `npm publish`:
 
-- ensure a good, well written README
-- decide on an initial version number (I tend to go for `0.1.0`) and then follow [semver](http://semver.org/)
+* ensure a good, well written README
+* decide on an initial version number (I tend to go for `0.1.0`) and then follow [semver](http://semver.org/)
 
 When your module is ready, simply run `npm publish` to push it onto npm. If you've not registered on npm, you can run `npm adduser` and follow the prompts to set up and authenticate yourself.
 

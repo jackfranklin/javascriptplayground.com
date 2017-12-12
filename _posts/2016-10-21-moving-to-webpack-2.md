@@ -116,16 +116,16 @@ var loaders = [
   {
     loader: 'css-loader',
     options: {
-      modules: true
-    }
+      modules: true,
+    },
   },
   {
-    loader: 'postcss-loader'
+    loader: 'postcss-loader',
   },
   {
-    loader: 'sass-loader'
-  }
-]
+    loader: 'sass-loader',
+  },
+];
 ```
 
 Whereas in Webpack 1 we used the key `query` for configuring loaders, we now use `options`. `ExtractTextPlugin` can now take this array, rather than only allowing the string form:
@@ -135,7 +135,7 @@ Whereas in Webpack 1 we used the key `query` for configuring loaders, we now use
 ExtractTextPlugin.extract({
   fallbackLoader: 'style-loader',
   loader: loaders,
-})
+});
 ```
 
 ## Stop Babel from compiling ES2015 modules
@@ -157,4 +157,3 @@ We've seen a good file size saving by doing this, and hopefully this will contin
 ## Fin
 
 Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.
-

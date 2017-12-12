@@ -6,7 +6,7 @@ intro: In this post we'll look at how to use CSS Modules in React using Webpack.
 
 One of the biggest problems that developers face with CSS is that CSS is global. Each CSS class gets exposed globally and it’s very easy to inadvertently break a piece of your site when editing or adding CSS for a new feature. In an era where many developers are building websites as components with a framework such as React, CSS is an even bigger problem.
 
-CSS Modules allow us to write _scoped_ CSS, just like a variable in JavaScript or any other programming language. We can write CSS for a component and be certain that it won’t leak into other components. You can also have confidence that adding a new component to your application won’t interfere with any other components on the system. 
+CSS Modules allow us to write _scoped_ CSS, just like a variable in JavaScript or any other programming language. We can write CSS for a component and be certain that it won’t leak into other components. You can also have confidence that adding a new component to your application won’t interfere with any other components on the system.
 
 CSS Modules are a fantastic idea and play particularly nicely with React, but at the time of writing there isn’t a good resource for getting started and setting up React, CSS Modules and Webpack to build everything correctly. In this article I’ll show you how I took a React application and added CSS modules, which Webpack plugins I used for this, and an example of CSS modules in action. If you’d like to get this running yourself you’ll find all the [code available on GitHub](https://github.com/jackfranklin/react-css-modules-webpack). We’ll also look at how we can generate a production `bundle.css` file which has all our CSS together and fully minified.
 
@@ -44,8 +44,8 @@ To set this up we’re going to dive into the wonderful world of Webpack loaders
 
 There’s two we need to use:
 
-- [`style-loader`](https://github.com/webpack/style-loader) is a Webpack loader that can load some CSS and inject it into the document via a `<link>` tag.
-- [`css-loader`](https://github.com/webpack/css-loader) is the loader that can parse a CSS file and apply various transforms to it. Crucially it has a CSS Modules mode that can take our CSS and hash the classes as mentioned above.
+* [`style-loader`](https://github.com/webpack/style-loader) is a Webpack loader that can load some CSS and inject it into the document via a `<link>` tag.
+* [`css-loader`](https://github.com/webpack/css-loader) is the loader that can parse a CSS file and apply various transforms to it. Crucially it has a CSS Modules mode that can take our CSS and hash the classes as mentioned above.
 
 In the project that I’m adding CSS Modules to we already have one loader defined for our JavaScript:
 
@@ -79,8 +79,8 @@ What we need to do is add another configuration for `.css` files where we first 
 
 First we configure the `style-loader`, which needs no extra configuration, so we’re set. Then we have to configure `css-loader`. The important bit to this is the `query` object, which defines two properties:
 
-- `modules: true` turns on the CSS modules mode
-- `localIdentName: '[name]__[local]___[hash:base64:5]'` defines the structure of the generated CSS class should be. You don’t need to worry too much about this, other than knowing that this maps to the generated output. For example, our CSS from above with the class of `app` will end up as `app__app___2x3cr` in the browser.
+* `modules: true` turns on the CSS modules mode
+* `localIdentName: '[name]__[local]___[hash:base64:5]'` defines the structure of the generated CSS class should be. You don’t need to worry too much about this, other than knowing that this maps to the generated output. For example, our CSS from above with the class of `app` will end up as `app__app___2x3cr` in the browser.
 
 ## Running Webpack
 
@@ -94,7 +94,7 @@ One thing that irks me about the Webpack configuration in its current state is t
 
 ```js
 {
-    test: /\.css$/, 
+    test: /\.css$/,
     loader: 'style-loader!css-loader?modules=true&localIdentName=[name]__[local]___[hash:base64:5]'
 }
 ```
@@ -124,7 +124,7 @@ I think this is cleaner because it’s clearer that we’re using both `style-lo
 
 ## Deploying to Production
 
-The final step is to update the production Webpack build to parse all our CSS and generate an outputted CSS file that contains all our CSS. We don’t want to have our CSS injected through Webpack in production, and we don’t want the CSS module transformations to run in the browser; instead we want to simply deploy a  generated stylesheet that contains all our styles.
+The final step is to update the production Webpack build to parse all our CSS and generate an outputted CSS file that contains all our CSS. We don’t want to have our CSS injected through Webpack in production, and we don’t want the CSS module transformations to run in the browser; instead we want to simply deploy a generated stylesheet that contains all our styles.
 
 To do this we can use the [`extract-text-plugin`](https://github.com/webpack/extract-text-webpack-plugin) for Webpack that will take all files that match a regular expression (in our case we’ll look for CSS files as we did previously) and bundle them all into one file. We can also run them through the CSS Modules transform just like we did in our development config.
 
@@ -175,11 +175,10 @@ module: {
 
 Now when we run Webpack with this configuration we’ll have a JavaScript and a CSS file that we can use in production with CSS Modules fully transformed.
 
-
 ## Conclusion
 
 There’s a few final pieces we could do to tidy up, but I’m going to leave those as exercises for the reader. The main issue now is that we’re duplicating configuration for the CSS Loader across our development Webpack setup and our production Webpack setup. You might consider extracting a file that contains that configuration, rather than duplicating it.
 
-CSS Modules are a great way to organise your CSS in a component based system. Here I’ve used them with React but you’ll notice that none of the code in this tutorial is React specific - this approach can be used with other frameworks with no extra effort. 
+CSS Modules are a great way to organise your CSS in a component based system. Here I’ve used them with React but you’ll notice that none of the code in this tutorial is React specific - this approach can be used with other frameworks with no extra effort.
 
 If you’d like to use this tutorial as a starting point, don’t forget that you can [find the repository on GitHub](https://github.com/jackfranklin/react-css-modules-webpack), and please get in touch if you have any questions. You can find more information on the [CSS Modules repository](https://github.com/css-modules/css-modules) and Glenn Maddern’s [“CSS Modules: Welcome to the Future”](http://glenmaddern.com/articles/css-modules) blog post.

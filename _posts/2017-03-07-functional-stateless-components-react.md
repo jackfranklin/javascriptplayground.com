@@ -14,17 +14,13 @@ Prior to React 0.14, writing a presentational component (that is, one that just 
 ```js
 const Username = React.createClass({
   render() {
-    return (
-      <p>The logged in user is: {this.props.username}</p>
-    )
-  }
-})
+    return <p>The logged in user is: {this.props.username}</p>;
+  },
+});
 // OR:
 class Username extends React.Component {
   render() {
-    return (
-      <p>The logged in user is: {this.props.username}</p>
-    )
+    return <p>The logged in user is: {this.props.username}</p>;
   }
 }
 ```
@@ -33,23 +29,21 @@ React 0.14 introduced functional stateless components (or, from now on, FSCs), w
 
 ```js
 const Username = function(props) {
-  return (
-    <p>The logged in user is: {props.username}</p>
-  )
-}
+  return <p>The logged in user is: {props.username}</p>;
+};
 ```
 
 Which, via ES2015 arrow functions, destructuring and implicit returns can be cut down really nicely:
 
 ```js
-const Username = ({ username }) => <p>The logged in user is: {username}</p>
+const Username = ({ username }) => <p>The logged in user is: {username}</p>;
 ```
 
 FSCs not only provide a cleaner syntax but also have some other benefits that I'd like to talk about today, along with a couple of gotchas and things to look out for.
 
 It's also important to note that you can have stateless class components, and that in the future we might be able to have functional, _stateful_ components. [Tyler McGinnis' post on the different types of components](https://tylermcginnis.com/functional-components-vs-stateless-functional-components-vs-stateless-components/) does a great job of laying out all the different terminology.
 
- I think the primary benefit of FSCs is simplicity, and to me they act as a visual signal: "this component is solely props in, rendered UI out". If I see a class component, I do have to scan through to see what lifecycle methods it may be using, and what callbacks it may have. If I see an FSC, I know it isn't doing anything fancy. There are definitely times I'll write a stateless class component so I can define callback methods as class properties (especially if I'm passing prop values into a callback prop), but I'll write FSCs to signal that "this is a very straightforward rendering component".
+I think the primary benefit of FSCs is simplicity, and to me they act as a visual signal: "this component is solely props in, rendered UI out". If I see a class component, I do have to scan through to see what lifecycle methods it may be using, and what callbacks it may have. If I see an FSC, I know it isn't doing anything fancy. There are definitely times I'll write a stateless class component so I can define callback methods as class properties (especially if I'm passing prop values into a callback prop), but I'll write FSCs to signal that "this is a very straightforward rendering component".
 
 ## FSCs lead to simplicity and offer visual cues
 
@@ -77,15 +71,10 @@ In smaller projects, or small hack days, I've found that I will often use FSCs t
 
 ```js
 const MyBlueButton = props => {
-  const styles = { background: 'blue', color: 'white' }
+  const styles = { background: 'blue', color: 'white' };
 
-  return (
-    <button
-      {...props}
-      style={styles}
-    />
-  )
-}
+  return <button {...props} style={styles} />;
+};
 ```
 
 ## In the future, FSCs may be optimised for performance by React
@@ -98,7 +87,7 @@ Whilst this is still work that is on going, clearly the React team are heavily b
 
 > This pattern is designed to encourage the creation of these simple components that should comprise large portions of your apps.
 
-Not only should you use FSCs because the React team encourages it, but in a future release of React you may see good performance increases by doing so. __Note that currently there is no optimisations done on FSCs__. Whilst it is planned after the work on React Fiber, there is currently no difference in performance.
+Not only should you use FSCs because the React team encourages it, but in a future release of React you may see good performance increases by doing so. **Note that currently there is no optimisations done on FSCs**. Whilst it is planned after the work on React Fiber, there is currently no difference in performance.
 
 ## Event handlers and FSCs
 
@@ -129,15 +118,15 @@ const SomeButton = props => {
 When using FSCs, you define `propTypes` and `defaultProps` on the function itself:
 
 ```js
-const Username = props => <p>...</p>
+const Username = props => <p>...</p>;
 
 Username.propTypes = {
   username: React.PropTypes.string.isRequired,
-}
+};
 
 Username.defaultProps = {
   username: 'Jack',
-}
+};
 ```
 
 ## Context in FSCs
@@ -145,15 +134,14 @@ Username.defaultProps = {
 Although you should generally be wary of context in React, [as I blogged about recently](http://javascriptplayground.com/blog/2017/02/context-in-reactjs-applications/), FSCs do still support context if you need them to. When using context, it's simply passed in as the second argument:
 
 ```js
-const Username = (props, context) => <p>Username is {context.name}</p>
+const Username = (props, context) => <p>Username is {context.name}</p>;
 
 FooComponent.contextTypes = {
   name: React.PropTypes.string.isRequired,
-}
+};
 ```
 
 On the whole I advise mostly against context, for reasons documented in the above blog post, but it's good to know that if you need it, you are able to use it.
-
 
 ## Conclusion
 

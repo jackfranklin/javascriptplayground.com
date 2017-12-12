@@ -56,8 +56,8 @@ The corresponding HTML looks like this:
 
 Hopefully you're already starting to spot problems here. Here's a list of things I found that I'd like to change:
 
-* __Selector reuse__. Notice how the code is full of `$(".tab")` or similar. This is bad, not just for efficiency, but just for the pain of having to update all these references if the class changes.
-* __Not very DRY (Don't repeat yourself)__. There's plenty of duplication here across the two parts.
+* **Selector reuse**. Notice how the code is full of `$(".tab")` or similar. This is bad, not just for efficiency, but just for the pain of having to update all these references if the class changes.
+* **Not very DRY (Don't repeat yourself)**. There's plenty of duplication here across the two parts.
 * Use of `click()`, rather than the preferred `on()`.
 * Using `return false` rather than `e.preventDefault()`.
 * It's very much tied to a specific DOM Structure. Often it's best to try to generalize your jQuery selectors and DOM traversal so small HTML changes (renaming a class, etc) don't break all your behaviour.
@@ -77,6 +77,7 @@ The first thing I like to do in this case is write some tests. I decided to use 
 I am a big fan of having these tests as it means I can refactor with confidence that I'm not breaking things. Of course, I'll always manually test too, but having tests to back me up is great.
 
 ### Selector Reuse
+
 First we should tackle the reusing of selectors. This one is easy to fix, just scan through the code and find any selectors, or DOM traversal methods, that are used lots. I've pulled out three, for now:
 
     var tabsWrapper = $(".tabs");
@@ -86,6 +87,7 @@ First we should tackle the reusing of selectors. This one is easy to fix, just s
 Now you've done that, you can go through and replace all instances of `$(".tabs")` with `tabsWrapper`, and so on. Rerunning my tests after [that commit](https://github.com/javascript-playground/refactoring-js/commit/6db02d7847330bc6bbd861cc7757806fb7d16205) shows us as all green. Great! The secret to refactoring is lots of little steps. No big steps at once.
 
 ### Spotting Duplication
+
 Now lets look at the duplication. We're doing the same work in more than one place right now and this can be tidied up. The first is the process for marking the tab link as active. There's two bits to this:
 
 1. Remove the `active` class from the current link.
@@ -119,6 +121,7 @@ And then use that in both places:
 Don't worry if right now you're spotting some code that doesn't look right (I know I am). Refactoring is all about going slowly, even if you end up undoing some of your work later on. Once again, the tests are green. [You can see the commit on Github](https://github.com/javascript-playground/refactoring-js/commit/eeab097e8070673fd8f39c5bfb1db69e43d8d0de).
 
 ### Quick wins
+
 Now I want to do a couple of quick fixes in the event handler for the links. I'm going to swap out `click` for an `on` call, and swap `return false` for `e.preventDefault()`:
 
     tabLinks.on("click", function(e) {
@@ -131,6 +134,7 @@ Now I want to do a couple of quick fixes in the event handler for the links. I'm
 If you're wondering why `return false` is bad, [give this post by Doug Neiner a read](http://fuelyourcoding.com/jquery-events-stop-misusing-return-false/). I've also moved the `preventDefault` call to the top, as I like for it to be immediately apparent that the default action is cancelled. Once again, we're green and [you can see the commit here](https://github.com/javascript-playground/refactoring-js/commit/29d9db8ab6d5604c8a20a0f45b8ff2d43de8b3c1).
 
 ### More duplication
+
 There's some more duplication across the two parts of the code here. Similarly to before, the code for activating a new tab is in two places. It can be summed up as:
 
 1. Hide all the tabs
@@ -156,6 +160,7 @@ That's easy to write, and use:
 And sure enough, we're green. [Here's that commit](https://github.com/javascript-playground/refactoring-js/commit/9ae8424b4cf99a097f6ef545e88bf578ee450450).
 
 ### Finding the active link
+
 Now you can see the code for the URL hash and the event handler are very similar. In fact, the only difference is that the first has to search through all the links to find the one that should be active:
 
     $(".tab-link").each(function() {
@@ -178,7 +183,7 @@ That's a nicer way of doing things, even if it is quite a long line. I'd be temp
 
 Although it adds a line, it makes it cleaner, in my opinion. Remember, line count is not a measure of a good or bad refactoring. Our tests are green, and [here's that commit](https://github.com/javascript-playground/refactoring-js/commit/3caea006cef342269981e9ae2fabb205064fcfdb).
 
-__Update__. As [Michael](http://twitter.com/mheap) pointed out, there's no need to use `filter` here, we can just simply attach the attribute selector to the class selector:
+**Update**. As [Michael](http://twitter.com/mheap) pointed out, there's no need to use `filter` here, we can just simply attach the attribute selector to the class selector:
 
     var link = $(".tab-link[href='" + active + "']").parent();
 
@@ -188,13 +193,13 @@ With that being shorter, you could then miss out the temporary variable:
 
 This change isn't reflected in the Git commits as it was made after I made them, but feel free to make this change yourself.
 
-__Update 2__. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function, which may also bring speed benefits:
+**Update 2**. [Rodney](http://twitter.com/rodneyrehm) makes a good point that you might prefer to use `filter`, but pass it a function, which may also bring speed benefits:
 
     $(".tab-link").filter(function() { return this.href.hash === active });
 
 As Rodney explains: "I'd expect (not tested) `filter(function(){ return this.href === active; })` to be just as fast (if not faster, as no parsing)"
 
-__Update 3__. What we should be doing here is using our `tabLinks` variable. We can combine that with the `filter` method and use it like Rodney suggests, passing it a function:
+**Update 3**. What we should be doing here is using our `tabLinks` variable. We can combine that with the `filter` method and use it like Rodney suggests, passing it a function:
 
     var transition = function(hash) {
       activateTab(hash);
@@ -204,7 +209,6 @@ __Update 3__. What we should be doing here is using our `tabLinks` variable. We 
     };
 
 We have to use `$(this).attr("href")` instead of the shorter `this.href` as `this.href` gives us the full URL, including the domain, even though the link is just `#tab1`. jQuery normalises this, returning just the link within the anchor tag.
-
 
 ### The `transition` method
 
@@ -231,6 +235,7 @@ Now all we have to do is pass a hash, like `"#tab1"` to `transition`, and everyt
 Now, in my opinion, that's much nicer than when we started. [Here's that commit](https://github.com/javascript-playground/refactoring-js/commit/07e063a4ceddca8aa4093c3bad9a4aecf4a088b6).
 
 ### Two more quick wins
+
 [Elijah](http://twitter.com/elijahmanor) was kind enough to point out a couple of enhancements. The first is to limit the scope when we search for `.active` to within the `tabWrapper`, which makes sense. Simply swap out:
 
     $(".active")
@@ -249,6 +254,7 @@ Similarly, using `parent()` to find the link's `li` is more brittle to simple HT
 Those commits are documented [on the master branch](https://github.com/javascript-playground/refactoring-js/commits/master).
 
 ### Post Refactor
+
 As a recap, here's what the JS looks like now:
 
     var tabularize = function() {
@@ -284,10 +290,11 @@ As a recap, here's what the JS looks like now:
       });
     };
 
-Is it longer? __Yes__. Is it cleaner, more DRY and easier to follow? In my opinion, __Yes it is__. We've gone from a mess of spaghetti JavaScript with ugly selectors being reused, code being duplicated and the meaning obfuscated to a easier to follow, more organised structure.
+Is it longer? **Yes**. Is it cleaner, more DRY and easier to follow? In my opinion, **Yes it is**. We've gone from a mess of spaghetti JavaScript with ugly selectors being reused, code being duplicated and the meaning obfuscated to a easier to follow, more organised structure.
 
 ### Better Structure
-There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object. It's also __bad practice to have functions contained within functions__, which is why my next step would be refactoring into an object (or what you might call a JS "class").
+
+There's a bit more to be done here. There's also a big bug in the way tabs are activated based on the hash in the URL, but I'm going to leave that one to you to fix. At this point, I would consider moving the tab code into a more structured form, such as an object. Doing it this way also makes it easier to move into a jQuery plugin, as the plugin can just call the object. It's also **bad practice to have functions contained within functions**, which is why my next step would be refactoring into an object (or what you might call a JS "class").
 
 I'm not going to go through it here, as this tutorial is long enough already, but have written and committed a new version to [a branch on Github](https://github.com/javascript-playground/refactoring-js/tree/class-version) for you to fully dive into. I will also try to write about it in a future post.
 
@@ -305,4 +312,3 @@ Refactoring is fun! It's probably my favourite part of being a developer. Things
 I hope this was a useful post. If you've any queries or questions, leave a comment and I'll endeavour to get back to you. Alternatively, you can drop me a tweet (@Jack_Franklin) or feel free to email me too.
 
 _Some of the links to Git commits have become slightly out of sync with the code, mainly due to tweaks following great feedback from folks on Twitter. You can see all the commits and the process I took [here](https://github.com/javascript-playground/refactoring-js/commits/master)._
-

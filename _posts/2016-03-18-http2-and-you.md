@@ -11,7 +11,7 @@ Twenty years ago (March of 1996), Internet Explorer 2.0 was "cutting edge" in it
 
 Although nearly two decades have passed since the previous release of the world wide web's protocol, there are exciting improvements that may impact the way you architect applications. Companies like Facebook, Google, and Twitter are already using HTTP/2 ([W3Techs](http://w3techs.com/technologies/details/ce-http2/all/all)). Surprised?
 
-In this article I'm not delving too much into the history of the protocol, but we should note HTTP/2 is based on another protocol called SPDY (pronounced speedy). SPDY started in 2012 mainly by people from Google. 
+In this article I'm not delving too much into the history of the protocol, but we should note HTTP/2 is based on another protocol called SPDY (pronounced speedy). SPDY started in 2012 mainly by people from Google.
 
 ## Why?
 
@@ -34,17 +34,17 @@ Server push is one feature that could greatly impact our approach moving forward
 ```javascript
 const FILES = [
   {
-    'headers' : {
-      'content-type' : 'text/css'
+    headers: {
+      'content-type': 'text/css',
     },
-    'path' : '/public/css/main.css'
+    path: '/public/css/main.css',
   },
   {
-    'headers' : {
-      'content-type' : 'image/jpeg'
+    headers: {
+      'content-type': 'image/jpeg',
     },
-    'path' : '/public/images/nyc.jpg'
-  }
+    path: '/public/images/nyc.jpg',
+  },
 ];
 ```
 
@@ -53,12 +53,12 @@ And below is the request callback function that loops through the file queue, cr
 ```javascript
 function onRequest(request, response) {
   let html = require('./templates/MainTemplate').HTML;
-  if(response.push) {
+  if (response.push) {
     FILES.forEach((file, index) => {
       let push = response.push(file.path);
       push.writeHead(200, file.headers);
       fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
-      if(index === FILES.length - 1) {
+      if (index === FILES.length - 1) {
         response.end(html);
       }
     });
@@ -82,13 +82,13 @@ While logging (via bunyan), the output for the image push looks like the followi
 In our code we use the HTTP/2 specific response `push` method (via [http2 public API](https://github.com/molnarg/node-http2/wiki/Public-API)) to transmit a promise of a file to be served in the response.
 
 ```javascript
-response.push(file.path)
+response.push(file.path);
 ```
 
 The server makes this promise to the client (a browser in this case) of the stream we created.
 
 ```javascript
-fs.createReadStream(path.join(__dirname, file.path)).pipe(push)
+fs.createReadStream(path.join(__dirname, file.path)).pipe(push);
 ```
 
 While logging info, upon page request - we can see this transaction as the first line in the output.
@@ -119,8 +119,8 @@ There are many tools available in debugging performance. [This CloudFlare articl
 
 It's much to digest - I know, but ultimately not only will our websites be faster... I believe HTTP/2 will make our lives as developers more simple. Once we've established the server-side configurations and functionality support, front-end development should especially be easier. We'll be able to cut the following activities out of our regular routines:
 
-- Concatenating CSS and JavaScript. Organizing your assets during development according to the sections of your application they are used will make much more sense, because HTTP requests are cheap on HTTP/2.
-- Generating sprites. It was fun while it lasted, but we'll see you later "background-position". Similar to above, we can be liberal with HTTP requests.
-- Splitting resources between hosts (sharding). Unlike HTTP/1.1, with HTTP/2 you aren't restricted to the number of open connections.
+* Concatenating CSS and JavaScript. Organizing your assets during development according to the sections of your application they are used will make much more sense, because HTTP requests are cheap on HTTP/2.
+* Generating sprites. It was fun while it lasted, but we'll see you later "background-position". Similar to above, we can be liberal with HTTP requests.
+* Splitting resources between hosts (sharding). Unlike HTTP/1.1, with HTTP/2 you aren't restricted to the number of open connections.
 
 At this point most of us have a variety of module/file loaders, and concatenation tools deeply rooted in our development process. I'm curious to see the way HTTP/2 will impact the tools and frameworks we use.

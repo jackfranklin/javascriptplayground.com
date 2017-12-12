@@ -12,12 +12,12 @@ I've been collecting some examples of this from tutorials I've written and real 
 
 ## Free Online
 
-You can read the book in its entirety [online here](/the-refactoring-tales), and even check out the source [on GitHub](https://github.com/jackfranklin/the-refactoring-tales) if it interests you. Please remember that the book is __not yet finished__, this is somewhat of a beta release. There is more content to come, along with refinements to the existing content too.
+You can read the book in its entirety [online here](/the-refactoring-tales), and even check out the source [on GitHub](https://github.com/jackfranklin/the-refactoring-tales) if it interests you. Please remember that the book is **not yet finished**, this is somewhat of a beta release. There is more content to come, along with refinements to the existing content too.
 
-If you'd like to support the JavaScript Playground, you can purchase a digital download version for $15, which gives you access to the PDF, EPUB and MOBI versions of the book. Buying the book helps me dedicate more time to this site, but also ensures you full access to the current __and all future__ editions of the book.
+If you'd like to support the JavaScript Playground, you can purchase a digital download version for $15, which gives you access to the PDF, EPUB and MOBI versions of the book. Buying the book helps me dedicate more time to this site, but also ensures you full access to the current **and all future** editions of the book.
 
 <a class="buynow" href="https://transactions.sendowl.com/products/64361/A591CEA4/add_to_cart" rel="nofollow">Buy Kindle, iPad and PDF versions for $15</a>
 
 If you'd like to try before you buy, you can read it online, and the content in the downloadable versions is identical to the content online.
 
-For more information, please [see the book's page on this site](/the-refactoring-tales), and if you have any questions please tweet [@jsplayground_](http://twitter.com/jsplayground_) or myself ([@jack_franklin](http://twitter.com/jack_franklin)) and I'll get back to you.
+For more information, please [see the book's page on this site](/the-refactoring-tales), and if you have any questions please tweet [@jsplayground\_](http://twitter.com/jsplayground_) or myself ([@jack_franklin](http://twitter.com/jack_franklin)) and I'll get back to you.

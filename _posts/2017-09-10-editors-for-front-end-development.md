@@ -11,20 +11,20 @@ However, as I've moved more and more into almost exclusively front-end developme
 
 I tried VSCode a couple of months ago and didn't find it quite how I wanted - although I'm willing to give it another go - so for now I've picked [Atom][atom] to trial for a few weeks. If you're an Atom user, I'd love to hear from you with any recommended settings, plugins and so on. Here's the ones I've picked up so far:
 
-- I will never not edit text without Vim keybindings, so [vim-mode-plus][vim-mode-plus] was the first plugin I installed. So far it seems very solid - I haven't found anything I can't do yet.
+* I will never not edit text without Vim keybindings, so [vim-mode-plus][vim-mode-plus] was the first plugin I installed. So far it seems very solid - I haven't found anything I can't do yet.
 
-- I've also set up [sync-settings](https://atom.io/packages/sync-settings) so I can keep everything synced across my work and personal computer. I wish I could do this directly via my dotfiles repo (I may well be able to) but for now this is a low friction way to get it set up.
+* I've also set up [sync-settings](https://atom.io/packages/sync-settings) so I can keep everything synced across my work and personal computer. I wish I could do this directly via my dotfiles repo (I may well be able to) but for now this is a low friction way to get it set up.
 
-- [language-babel](https://atom.io/packages/language-babel) seems like a no brainer - it improves and adds syntax highlighting for a bunch of languages, including Flow and a bunch of JSX features.
+* [language-babel](https://atom.io/packages/language-babel) seems like a no brainer - it improves and adds syntax highlighting for a bunch of languages, including Flow and a bunch of JSX features.
 
-- [git plus](https://atom.io/packages/git-plus) looks like it will make it much easier to do all my `git`ing from within Atom - complemented by [split-diff](https://atom.io/packages/split-diff) to easily see file changes.
+* [git plus](https://atom.io/packages/git-plus) looks like it will make it much easier to do all my `git`ing from within Atom - complemented by [split-diff](https://atom.io/packages/split-diff) to easily see file changes.
 
 There's many more that I've installed, including the obvious ones like plugins for linting code with Prettier, Flow and ESLint.
 
 I've also managed to completely hide scrollbars from this [handy tip on Coderwall](https://coderwall.com/p/h_zpfa/hide-scrollbars-in-atom), and have applied this CSS to remove all the linting output from the gutters (I prefer a more narrow gutter and the linting tools also mostly underline the suspect code anyway):
 
 ```css
-.gutter[gutter-name="linter-ui-default"] {
+.gutter[gutter-name='linter-ui-default'] {
   display: none;
 }
 ```

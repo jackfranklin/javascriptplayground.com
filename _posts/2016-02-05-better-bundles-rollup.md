@@ -54,7 +54,7 @@ Out of the box that project comes with Babel 6 and Browserify for building. To t
 babel src --presets es2015 --out-dir=dist && browserify -t uglifyify dist/app.js | uglifyjs -c > dist/bundle.js
 ```
 
-This runs Babel with the ES2015 preset and then runs the processed code through Browserify, using the Uglifyify transform and then minifying again with UglifyJS to be most effective. __If you have any ideas on how to optimise this further, please let me know and I'll update the post__.
+This runs Babel with the ES2015 preset and then runs the processed code through Browserify, using the Uglifyify transform and then minifying again with UglifyJS to be most effective. **If you have any ideas on how to optimise this further, please let me know and I'll update the post**.
 
 Running this on my machine gives me a file that's 15.8KB in size. Not bad, but can we do better?
 
@@ -68,7 +68,6 @@ npm install --save-dev babel-preset-es2015-rollup rollup rollup-plugin-babel rol
 
 I also can't do everything I need to do with Rollup in a command line call, so I created `rollup-build.js` to contain my code:
 
-
 ```javascript
 import { rollup } from 'rollup';
 
@@ -80,23 +79,25 @@ rollup({
   entry: 'src/app.js',
   plugins: [
     // configure rollup-babel to use the ES2015 Rollup preset
-	// and not transpile any node_modules files
+    // and not transpile any node_modules files
     babel({
       exclude: 'node_modules/**',
-      presets: 'es2015-rollup'
+      presets: 'es2015-rollup',
     }),
-	// minify with uglify
-	uglify()
-  ]
-}).then((bundle) => {
-  // write bundle to a file and use the IIFE format so it executes immediately
-  return bundle.write({
-    format: 'iife',
-    dest: 'dist/rollup-bundle.js'
+    // minify with uglify
+    uglify(),
+  ],
+})
+  .then(bundle => {
+    // write bundle to a file and use the IIFE format so it executes immediately
+    return bundle.write({
+      format: 'iife',
+      dest: 'dist/rollup-bundle.js',
+    });
+  })
+  .then(() => {
+    console.log('Bundle created');
   });
-}).then(() => {
-  console.log('Bundle created');
-});
 ```
 
 To run this code I first need to run it through Babel (this is optional, I could have written the above script using only features Node supports), so I'll install `babel-cli`:
@@ -128,11 +129,11 @@ export default {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      presets: 'es2015-rollup'
+      presets: 'es2015-rollup',
     }),
-    uglify()
-  ]
-}
+    uglify(),
+  ],
+};
 ```
 
 And then we can run `rollup -c` to achieve the same result.
@@ -142,7 +143,3 @@ And then we can run `rollup -c` to achieve the same result.
 Even on this small project with no external dependencies Rollup's build was able to save 4.5KB on an initial bundle of 15.8KB, which is a saving of over 33%. On a larger project with more dependencies and code I'd be willing to bet Rollup would save more.
 
 In a future post I will do more exploring with Rollup and look at how we'd configure it on a much larger project that contains npm dependencies, and modules written in CommonJS (that Rollup, without a plugin) can't parse.
-
-
-
-

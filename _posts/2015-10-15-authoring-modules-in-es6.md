@@ -28,9 +28,9 @@ Because we'll be converting our source code into code that we then publish, I li
 
 {% highlight javascript %}
 export function getReposForUser(username) {
-  let url = `https://api.github.com/users/${username}/repos`;
+let url = `https://api.github.com/users/${username}/repos`;
 
-  return fetch(url).then((response) => response.json());
+return fetch(url).then((response) => response.json());
 }
 {% endhighlight %}
 
@@ -57,16 +57,16 @@ And then create a `.babelrc` file to tell Babel to use that preset:
 Now when we run Babel 6, our code will be transformed as we expect. If we take a look at `lib/githubby.js`, you'll see a file that looks similar to the below:
 
 ```js
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 exports.getReposForUser = getReposForUser;
 function getReposForUser(username) {
-  var url = "https://api.github.com/users/" + username + "/repos";
+  var url = 'https://api.github.com/users/' + username + '/repos';
 
-  return fetch(url).then(function (response) {
+  return fetch(url).then(function(response) {
     return response.json();
   });
 }
@@ -105,4 +105,3 @@ src/githubby.js -> lib/githubby.js
 ```
 
 Now we have a module that we've authored entirely in ES6 that is published in a way that makes it usable to as many different consumers as possible. Nothing in our module is specific to the browser or specific to Node, and a person using this module could be using it in the client or on the server, and it will work just as well on both. In a future article I'll look at the different ways we can consume this module. If you'd like to grab the code and check out the module for yourself, [you can check the example repository on GitHub](https://github.com/jackfranklin/authoring-es6-module-example).
-

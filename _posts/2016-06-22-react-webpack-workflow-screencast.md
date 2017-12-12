@@ -8,11 +8,11 @@ Last week at the [London JavaScript Community Meetup](http://www.meetup.com/Lond
 
 Today I recorded a screencast of me doing this presentation so you can view even if you weren't able to make it to the meetup. In it I do the following:
 
-- Set up Webpack and the Webpack Dev Server.
-- Configure Webpack to transpile ES2015 and JSX through Babel.
-- Add the react-hot-loader plugin to enable hot reloading of React components.
-- Build a small counter application to demonstrate and take advantage of hot loading.
-- Create a production Webpack config that can bundle our application into production.
+* Set up Webpack and the Webpack Dev Server.
+* Configure Webpack to transpile ES2015 and JSX through Babel.
+* Add the react-hot-loader plugin to enable hot reloading of React components.
+* Build a small counter application to demonstrate and take advantage of hot loading.
+* Create a production Webpack config that can bundle our application into production.
 
 <iframe src="https://player.vimeo.com/video/171783550" width="630" height="394" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/171783550">A React and Webpack Workflow</a> from <a href="https://vimeo.com/javascript">The JavaScript Playground</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
@@ -21,8 +21,7 @@ You can find the repository containing all the code [on GitHub](https://github.c
 
 In future videos I'll cover:
 
-- Testing React using Node, JSDOM and Tape
-- Clever bundling using Webpack to create multiple files
-- Quicker rebuilds with the Webpack DLL plugin
-- And whatever else you'd like to see :)
-
+* Testing React using Node, JSDOM and Tape
+* Clever bundling using Webpack to create multiple files
+* Quicker rebuilds with the Webpack DLL plugin
+* And whatever else you'd like to see :)

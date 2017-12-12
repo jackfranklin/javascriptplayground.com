@@ -40,7 +40,6 @@ Here's the code we ended up with at the end:
       });
     };
 
-
 _(If you haven't already, I recommend reading [the first post](http://javascriptplayground.com/blog/2013/06/refactoring-js/). This won't make much sense on its own)_
 
 At that point, I ended the post with:
@@ -50,7 +49,6 @@ At that point, I ended the post with:
 ### The Further Refactoring
 
 And I'd like to talk a bit about that here, as I had a lot of questions about it. Here's my final class version of the tabs code:
-
 
     var Tabularize = function(elem) {
       this.tabsWrapper = $(elem);
@@ -92,6 +90,7 @@ And I'd like to talk a bit about that here, as I had a lot of questions about it
 I have become a massive fan of abstracting things into objects like this in JavaScript. It forces you to structure your code better and positively influences the readability of your code (once you get used to this way of doing things).
 
 ### jQuery Plugin
+
 The beauty of this is how easy it would be to turn into a jQuery Plugin. Rather than write a messy jQuery plugin to do all this tabbing code, all we have to do is create a jQuery plugin that instantiates a new version of the `Tabularize` object, passing in the element. Something like this should suffice:
 
     $.fn.tabularize = function() {
@@ -111,7 +110,3 @@ Comparing the first refactoring to the second, in my opinion the second is defin
 Notice also that every method is very short. In [Ben Orenstein's Refactoring talk](http://www.youtube.com/watch?v=DC-pQPq0acs) at Aloha Ruby, Ben says that shorter methods are far superior, and he's coming round to the idea that every public method should be one line. The talk is on Ruby, but I still think some of the ideas are relevant. Whilst one line per method is perhaps ambitious, I am absolutely with Ben in terms of keeping methods short and this Tabularize object achieves that.
 
 There's a lot of different ways to refactor and restructure, and you should by no means take what I've discussed in these posts as the only way to do things. If you'd have gone about this differently, please leave a comment, I enjoy seeing how others go about this.
-
-
-
-

@@ -4,7 +4,7 @@ title: Using ES6 Modules Today
 intro: Continuing our theme of exploring ES6, today we'll use the Square ES6 transpiler to use the ES6 modules syntax in our applications today.
 ---
 
-Continuing with the theme of playing with new features of ES6, today we're going to look at how we can use the new ES6 module syntax today, using Square's [ES6 Module Transpiler](https://github.com/square/es6-module-transpiler). __Remember, this syntax is not set in stone yet and could change__, but that's no reason to not have a play with the new syntax today.
+Continuing with the theme of playing with new features of ES6, today we're going to look at how we can use the new ES6 module syntax today, using Square's [ES6 Module Transpiler](https://github.com/square/es6-module-transpiler). **Remember, this syntax is not set in stone yet and could change**, but that's no reason to not have a play with the new syntax today.
 
 The transpiler takes the JavaScript and transpiles it into either the CommonJS format (which is what NodeJS uses) or AMD (using RequireJS). This means you write your code using the ES6 syntax, and then run it with CommonJS, RequireJS, or similar.
 
@@ -17,7 +17,7 @@ var multiplier = function(x) {
   };
 };
 
-export { multiplier }
+export { multiplier };
 ```
 
 The `multiplier` function takes an argument and returns a function that will multiply its argument by the initial argument. So `multiplier(2)(2)` will return `4`, and `multiplier(2)(4)` gives us `8`.
@@ -25,7 +25,7 @@ The `multiplier` function takes an argument and returns a function that will mul
 Notice the last line of the function:
 
 ```js
-export { multiplier }
+export { multiplier };
 ```
 
 This uses the new ES6 syntax to export the `multiplier` function from this file.
@@ -33,7 +33,7 @@ This uses the new ES6 syntax to export the `multiplier` function from this file.
 Now let's write a second file, `app.js`, and use our `adder` module:
 
 ```js
-import { multiplier } from "./adder";
+import { multiplier } from './adder';
 
 var timesTwo = multiplier(2);
 
@@ -43,7 +43,7 @@ console.log(timesTwo(4));
 Again, pay particular attention to the top line:
 
 ```js
-import { multiplier } from "./adder";
+import { multiplier } from './adder';
 ```
 
 This is how we import exported objects from modules using the ES6 syntax.
@@ -65,7 +65,7 @@ This instructs the transpiler to transpile `app.js` and `adder.js` into the `com
 Let's take a look at `compiled/adder.js`:
 
 ```js
-"use strict";
+'use strict';
 var multiplier = function(x) {
   return function(y) {
     return x * y;
@@ -80,8 +80,8 @@ Notice how it has updated the exports code to the CommonJS style.
 Now let's check `compiled/app.js`:
 
 ```js
-"use strict";
-var multiplier = require("./adder").multiplier;
+'use strict';
+var multiplier = require('./adder').multiplier;
 
 var timesTwo = multiplier(2);
 
@@ -101,10 +101,8 @@ compile-modules app.js adder.js --to compiled --type amd
 Now, `compiled/adder.js` looks like so:
 
 ```js
-define(
-["exports"],
-function(__exports__) {
-  "use strict";
+define(['exports'], function(__exports__) {
+  'use strict';
   var multiplier = function(x) {
     return function(y) {
       return x * y;
@@ -115,14 +113,11 @@ function(__exports__) {
 });
 ```
 
-
 And `compiled/app.js` looks like this:
 
 ```js
-define(
-["./adder"],
-function(__dependency1__) {
-  "use strict";
+define(['./adder'], function(__dependency1__) {
+  'use strict';
   var multiplier = __dependency1__.multiplier;
 
   var timesTwo = multiplier(2);

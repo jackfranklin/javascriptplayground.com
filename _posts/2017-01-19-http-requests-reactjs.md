@@ -5,7 +5,7 @@ intro: In today's video we'll see how to make HTTP requests in React and show da
 githubPath: 2017-01-19-http-requests-reactjs
 ---
 
-ReactJS is a brilliant framework to work in, and something that I get asked a lot by people new to the framework is how best to deal with loading data from an external source, such as an API. In today's 10 minute video I show you how to create a component that can fetch data from an API and render it onto the page. 
+ReactJS is a brilliant framework to work in, and something that I get asked a lot by people new to the framework is how best to deal with loading data from an external source, such as an API. In today's 10 minute video I show you how to create a component that can fetch data from an API and render it onto the page.
 
 You'll learn about the React lifecycle and which method is best for making HTTP requests, how to use the `fetch` API to get JSON from an API, and how to deal with errors as well as successful responses.
 

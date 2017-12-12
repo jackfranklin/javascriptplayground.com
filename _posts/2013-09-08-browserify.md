@@ -50,8 +50,3 @@ But in Browserify we can just put `require` calls, and they are made synchronous
 The disadvantage is that you have to run Browsify after every single change. There are ways to automate this, of course, but it's still something you'll have to set up - there are plenty of things like this [Grunt plugin](https://github.com/jmreidy/grunt-browserify) that can help with the automation.
 
 I advise you to have a look at Browserify - I admit that I didn't expect to like it or find it worthwhile, but having played with it a bit, I think I'll be using it in the future.
-
-
-
-
-

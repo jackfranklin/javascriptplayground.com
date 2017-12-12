@@ -7,7 +7,7 @@ githubPath: 2017-02-13-context-in-reactjs-applications
 
 There is a lot of confusion amongst React developers on what context is, and why it exists. It's also a feature that's been hidden in the React documentation in the past and, [although it is now documented on the React site](https://facebook.github.io/react/docs/context.html) I thought a post on its usage and when to use it would be of use.
 
-The short answer is that you should __very rarely, if ever__ use context in your own React components. However, if you're writing a library of components, it can come in useful, and we'll discuss why this is later.
+The short answer is that you should **very rarely, if ever** use context in your own React components. However, if you're writing a library of components, it can come in useful, and we'll discuss why this is later.
 
 ## What is context in React, and how does it work?
 
@@ -15,11 +15,9 @@ In React the primary mechanism for communication between your components is thro
 
 ```js
 const ParentComponent = () => {
-  const foo = 2
-  return (
-    <ChildComponent foo={foo} />
-  )
-}
+  const foo = 2;
+  return <ChildComponent foo={foo} />;
+};
 ```
 
 Here, the parent component `ParentComponent` passes the prop `foo` through to its child, `ChildComponent`.
@@ -30,21 +28,19 @@ If a child component wants to communicate back to its parent, it can do so throu
 
 ```js
 const ParentComponent = () => {
-  const letMeKnowAboutSomeThing = () => console.log('something happened!')
+  const letMeKnowAboutSomeThing = () => console.log('something happened!');
 
-  return (
-    <ChildComponent letMeKnowAboutSomeThing={letMeKnowAboutSomeThing} />
-  )
-}
+  return <ChildComponent letMeKnowAboutSomeThing={letMeKnowAboutSomeThing} />;
+};
 
 const ChildComponent = props => {
   const onClick = e => {
-    e.preventDefault()
-    props.letMeKnowAboutSomeThing()
-  }
+    e.preventDefault();
+    props.letMeKnowAboutSomeThing();
+  };
 
-  return <a onClick={onClick}>Click me!</a>
-}
+  return <a onClick={onClick}>Click me!</a>;
+};
 ```
 
 The key thing about this communication is that it's _explicit_. Looking at the code above, you know how the components are communicating, where the `letMeKnowAboutSomeThing` function comes from, who calls it, and which two components are in communication. [You can see this in action on CodePen](http://codepen.io/jackfranklin/pen/vgvYOa?editors=0011).
@@ -75,28 +71,28 @@ For a component to provide context to its descendants, it must define both of th
 ```js
 class ParentComponent extends React.Component {
   getChildContext() {
-    return { foo: 'bar' }
+    return { foo: 'bar' };
   }
-  
+
   render() {
-    return <ChildComponent />
+    return <ChildComponent />;
   }
 }
 
 ParentComponent.childContextTypes = {
-  foo: React.PropTypes.string
-}
+  foo: React.PropTypes.string,
+};
 ```
 
 `ChildComponent` can now gain access to the `foo` property by defining a static property `contextTypes`:
 
 ```js
 const ChildComponent = (props, context) => {
-  return <p>The value of foo is: { context.foo }</p>
-}
+  return <p>The value of foo is: {context.foo}</p>;
+};
 ChildComponent.contextTypes = {
-  foo: React.PropTypes.string
-}
+  foo: React.PropTypes.string,
+};
 ```
 
 > In a functional, stateless component, `context` is accessed via the second argument to the function. In a standard class component, it's available as `this.context`.
@@ -107,7 +103,6 @@ What's important here though is that any component that `ChildComponent` renders
 
 There's a few reasons why you would want to avoid using context in your own code.
 
-
 #### 1. Hard to find the source.
 
 Imagine that you're working on a component on a large application that has hundreds of components. There's a bug in one of them, so you go hunting and you find some component that uses context, and the value it's outputting is wrong.
@@ -115,15 +110,15 @@ Imagine that you're working on a component on a large application that has hundr
 ```js
 const SomeAppComponent = (props, context) => (
   <div>
-    <p>Hey user, the current value of something is { context.value }</p>
+    <p>Hey user, the current value of something is {context.value}</p>
     <a onClick={context.onSomeClick()}>Click here to change it.</a>
   </div>
-)
+);
 
 SomeAppComponent.contextTypes = {
   value: React.PropTypes.number.isRequired,
   onSomeClick: React.PropTypes.func.isRequired,
-}
+};
 ```
 
 The bug is related to the click event not updating the right value, so you now go looking for the definition of that function. If it was being passed as a property, you could go immediately to the place where this component is rendered (which is usually just a case of searching for its name), and start debugging. In the case that you're using context, you have to search for the function name and hope that you find it. This could be found easily, granted, but it also could be a good few components up the chain, and as your apps get larger the chances of you finding the source quickly gets smaller.
@@ -132,7 +127,7 @@ It's similar to the problem when you work in an object oriented language and inh
 
 #### 2. Binds components to a specific parent
 
-A component that expects only properties (or no properties at all) can be used anywhere. It is entirely reusable and a component wanting to render it need only pass in the properties that it expects. If you need to use the component elsewhere in your application you can do easily;  just  by supplying the right properties.
+A component that expects only properties (or no properties at all) can be used anywhere. It is entirely reusable and a component wanting to render it need only pass in the properties that it expects. If you need to use the component elsewhere in your application you can do easily; just by supplying the right properties.
 
 However, if you have a component that needs specific context, you couple it to having to be rendered by a parent that supplies some context. It's then harder to pick up and move, because you have to move the original component and then make sure that its new parent (or one of its parents) provides the context required.
 
@@ -141,7 +136,7 @@ However, if you have a component that needs specific context, you couple it to h
 Related to the previous point, components that need context are much harder to test. Here's a test, using [Enzyme](http://airbnb.io/enzyme/), that tests a component that expects a `foo` prop:
 
 ```js
-const wrapper = mount(<SomeComponent foo='bar' />)
+const wrapper = mount(<SomeComponent foo="bar" />);
 ```
 
 And here's that same test when we need `SomeComponent` to have a specific piece of context:
@@ -181,7 +176,6 @@ TopLevelComponent
 
         ChildComponent
         - renders `context.foo` into the DOM
-
 ```
 
 In the above example, if `context.foo` changes, `ChildComponent` will not render, because its parent returned `false` from `shouldComponentUpdate`. This makes bugs possible and leaves us with no reliable way to update context and ensure renders, so this is a very good reason to avoid using `context`.
@@ -197,18 +191,24 @@ Let's build our own router library, `RubbishRouter`. It will define two componen
 First, `Router`. It exposes the `router` object on the context, and other than that it simply renders the children that it's given:
 
 ```js
-const { Component, PropTypes } = React
+const { Component, PropTypes } = React;
 
 class Router extends Component {
   getChildContext() {
-    const router = { register(url) { console.log('registered route!', url) } }
-    return { router: router }
+    const router = {
+      register(url) {
+        console.log('registered route!', url);
+      },
+    };
+    return { router: router };
   }
-  render() { return <div>{this.props.children}</div> }
+  render() {
+    return <div>{this.props.children}</div>;
+  }
 }
 Router.childContextTypes = {
   router: PropTypes.object.isRequired,
-}
+};
 ```
 
 `Route` expects to find `this.context.router`, and it registers itself when it's rendered:
@@ -216,15 +216,15 @@ Router.childContextTypes = {
 ```js
 class Route extends Component {
   componentWillMount() {
-    this.context.router.register(this.props.path)
+    this.context.router.register(this.props.path);
   }
   render() {
-    return <p>I am the route for {this.props.path}</p>
+    return <p>I am the route for {this.props.path}</p>;
   }
 }
 Route.contextTypes = {
   router: PropTypes.object.isRequired,
-}
+};
 ```
 
 Finally, we can use the `Router` and `Route` components in our own app:
@@ -242,7 +242,7 @@ const App = () => (
       </div>
     </Router>
   </div>
-)
+);
 ```
 
 The beauty of context in this situation is that as library authors we can provide components that can work in any situation, regardless of where they are rendered. As long as all `Route` components are within a `Router`, it doesn't matter at what level, and we don't tie application developers to a specific structure.
@@ -253,13 +253,7 @@ Hopefully this blog post has shown you how and when to use context in React, and
 
 Thank you to the following blog posts and documentation for providing great material whilst putting this blog post together:
 
-- [React docs on context](https://facebook.github.io/react/docs/context.html)
-- [How to safely use React context](https://medium.com/@mweststrate/how-to-safely-use-react-context-b7e343eff076) by Michel Weststrate.
+* [React docs on context](https://facebook.github.io/react/docs/context.html)
+* [How to safely use React context](https://medium.com/@mweststrate/how-to-safely-use-react-context-b7e343eff076) by Michel Weststrate.
 
 Thank you also to [Arnaud Rinquin](https://twitter.com/ArnaudRinquin) for taking the time to review this post.
-
-
-
-
-
-

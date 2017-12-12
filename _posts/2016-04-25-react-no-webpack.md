@@ -31,17 +31,15 @@ React.createElement('p', null, React.createElement('span', null, 'Hello'));
 However, this gets pretty verbose quickly, so I included in the repository a global function `h` that is a shorthand:
 
 ```js
-<Foo name='jack' />
+<Foo name="jack" />;
 // equivalent:
 h(Foo, { name: 'Jack' });
 
 <p>
   <span>Hello</span>
-</p>
+</p>;
 // equivalent:
-h('p', [
-  h('span', 'Hello')
-]);
+h('p', [h('span', 'Hello')]);
 ```
 
 A natural improvement to this repo would be to add JSX support, but I'll leave that as an exercise to the reader.
@@ -57,5 +55,3 @@ All dependencies are stored in `vendor` and commited into Git, to avoid any pack
 ## Should I use this in my big production React app?
 
 No, you shouldn't. Tools like Webpack, ES2015 / JSX transpilation and dependency management are incredibly useful as your app scales, but they are not needed when you're working on a smaller app. If you're building a small React application for learning I recommend starting with my repository and then experimenting with adding ES2015, JSX, Webpack and so on as you get more familiar with the ecosystem.
-
-

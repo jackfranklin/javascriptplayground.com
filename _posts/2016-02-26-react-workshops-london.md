@@ -12,7 +12,7 @@ In addition we'll look at ES2015, Babel, Webpack and more as we dive into buildi
 
 Tickets will cost £299 which includes lots of refreshements and lunch. The workshops are being run on two dates:
 
-- [21st March 2016](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-march-16/)
-- [10th June 2016](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-june-16/)
+* [21st March 2016](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-march-16/)
+* [10th June 2016](http://www.whiteoctoberevents.co.uk/event/reactjs-workshop-june-16/)
 
 If you have any questions about the content please feel free to email me: jack at pusher dot com.

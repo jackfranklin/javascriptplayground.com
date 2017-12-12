@@ -9,6 +9,7 @@ author_img: "https://secure.gravatar.com/avatar/3ab39057319da4733d14635fa3f327a6
 This guest post deals with hooking up Google's service libraries and OAuth2 authentication framework. We're going to build a node application that successfully authenticates with a google account requesting (and being granted) permission to see and manage the user's calendar. We will then also pull in some calendar data. I'll also try to outline how I figure stuff out along the way. It might not be the best process out there, but hey! It works. The application will output data to the website (running on localhost:3000), but will not be styled with any css.
 
 A few assumptions to begin with though:
+
 * I assume you know what Node.js is, and have it set up already to some degree (if not, grab yourself one from [nodejs.org](http://www.nodejs.org) (if you're on a mac, go down the [homebrew route](http://mxcl.github.com/homebrew/) and [install node via that](http://shapeshed.com/setting-up-nodejs-and-npm-on-mac-osx/). That said, I tried to cater for people who are just starting out with Node, so if I'm over-explaining, that's because of this.
 * I assume npm is also installed (usually comes with node, but not always. Try to run `npm` in your terminal of choice. If you get help on how to use `npm`, good, otherwise, try to get it (Google is your friend))
 * I assume you know JavaScript (although, you are on javascriptplayground.com, so... yeah)
@@ -198,7 +199,7 @@ Darn. Fear not, for I have anticipated this. Next chapter.
 
 #### Make sure we can handle Google
 
-The reason we got a 404 is because we don't have routing available for the return URL. In `app.js`, add this bit of code before the `var server = ` part:
+The reason we got a 404 is because we don't have routing available for the return URL. In `app.js`, add this bit of code before the `var server =` part:
 
     app.get('/oauth2callback', function(req, res) {
       var code = req.query.code;

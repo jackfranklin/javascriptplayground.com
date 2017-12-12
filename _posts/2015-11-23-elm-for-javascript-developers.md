@@ -22,12 +22,12 @@ None.
 
 Because objects in JavaScript are mutable, anything could have happened to `person`.
 
-This is a fruitful source of bugs in larger applications. Functions that modify the state of the world, by mutating variables available to it, are functions with __side effects__. Functions like this are difficult to debug and harder to work with.  They are also harder to test and you should aim to avoid them whenever possible.
+This is a fruitful source of bugs in larger applications. Functions that modify the state of the world, by mutating variables available to it, are functions with **side effects**. Functions like this are difficult to debug and harder to work with. They are also harder to test and you should aim to avoid them whenever possible.
 
-In Elm, every function is __pure__. This means two things:
+In Elm, every function is **pure**. This means two things:
 
-- Given an input X, it will always result in output Y. If you give a function the same value, it will always produce the same result.
-- The function has no side effects, and does not mutate anything or change the state of the world around it.
+* Given an input X, it will always result in output Y. If you give a function the same value, it will always produce the same result.
+* The function has no side effects, and does not mutate anything or change the state of the world around it.
 
 It's entirely possible to create functions like this in JavaScript, and you can make it a rule in your application that functions should be pure. Elm enforces it due to its immutable nature, and this means it's impossible for impure functions to sneak into your code base, either through code you write or through code in a 3rd party library you're using.
 
@@ -53,7 +53,7 @@ someMadeUpFn(5) => 'Foo'
 someMadeUpFn({ name: 'Jack' }) => { name: 'jack' }
 ```
 
-Additionally, JavaScripts type system is __dynamic__, which means types are only decided at __runtime__, when your code is executed. Elm's type system is __static__, which means the compiler can figure out the types ahead of time. We'll come back to this later.
+Additionally, JavaScripts type system is **dynamic**, which means types are only decided at **runtime**, when your code is executed. Elm's type system is **static**, which means the compiler can figure out the types ahead of time. We'll come back to this later.
 
 In the code above there are no restrictions on the types of the arguments that `someMadeUpFn` takes, and there's no restrictions on the type of the value it returns either. In Elm we have to explicitly declare all the types (actually, we could leave it up to the compiler to infer the types, but it's best practice to declare them). The below code creates a function `square` that takes an integer and returns another.
 
@@ -76,11 +76,11 @@ Notice the first line of our Elm function:
 square : Int -> Int
 ```
 
-This is a __type annotation__ that tells Elm that this function will take one argument which will be an integer, and return a value that's also an integer. That means if we try to call this function with a different data type, we'll get an error. Although this restriction can take some time to adjust to, it actually leads to much cleaner code that's easier to work with and follow. It also means you realise straight away if you're using a function incorrectly.
+This is a **type annotation** that tells Elm that this function will take one argument which will be an integer, and return a value that's also an integer. That means if we try to call this function with a different data type, we'll get an error. Although this restriction can take some time to adjust to, it actually leads to much cleaner code that's easier to work with and follow. It also means you realise straight away if you're using a function incorrectly.
 
 ## Compiling
 
-Above we noted that trying to call a function with the wrong types causes an error. Even better, we get these errors at __compile time__. Elm as a language compiles to JavaScript, and we need to run the compiler to generate JavaScript from our Elm code. Elm's compiler is smart, and is able to check the types of values when it compiles our code into JavaScript. For example, if I take this Elm code and try to compile it, we'll get an error. Don't worry about the specifics of the syntax, but know that this code will call the `square` function with the argument `"Hello"`.
+Above we noted that trying to call a function with the wrong types causes an error. Even better, we get these errors at **compile time**. Elm as a language compiles to JavaScript, and we need to run the compiler to generate JavaScript from our Elm code. Elm's compiler is smart, and is able to check the types of values when it compiles our code into JavaScript. For example, if I take this Elm code and try to compile it, we'll get an error. Don't worry about the specifics of the syntax, but know that this code will call the `square` function with the argument `"Hello"`.
 
 ```
 square : Int -> Int
@@ -93,7 +93,6 @@ main =
 Here's what the compiler gives me:
 
 ```
-
 The argument to function `square` is causing a mismatch.
 
 5│   square "Hello"
@@ -113,9 +112,8 @@ How great is that?! The compiler detected our mistake, and rather than getting a
 
 I hope that this post has peaked your interest in this language. In the coming weeks I'll be posting more about Elm and how to get started, but if this post has you eager for more here's some resources I'd recommend:
 
-- [Comparison of Elm and JS Syntax](http://elm-lang.org/docs/from-javascript)
-- [Elm syntax introduction](http://elm-lang.org/docs/syntax)
-- [Elm video course ($24 but recommended)](https://pragmaticstudio.com/elm)
-- [My Game of Life implementation in Elm](https://github.com/jackfranklin/elm-game-of-life)
-- [Connect Four in Elm](https://github.com/jackfranklin/elm-connect-four)
-
+* [Comparison of Elm and JS Syntax](http://elm-lang.org/docs/from-javascript)
+* [Elm syntax introduction](http://elm-lang.org/docs/syntax)
+* [Elm video course ($24 but recommended)](https://pragmaticstudio.com/elm)
+* [My Game of Life implementation in Elm](https://github.com/jackfranklin/elm-game-of-life)
+* [Connect Four in Elm](https://github.com/jackfranklin/elm-connect-four)

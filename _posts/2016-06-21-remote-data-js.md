@@ -8,10 +8,10 @@ One of the things that most of us have to do in our applications is fetch data f
 
 However, something that's less obvious is how to deal with all the different states that a piece of remote data can be in. I reckon there's four distinct states:
 
-- Not requested: no request has yet been made
-- Pending: a request has been made, but no data has been returned
-- Succeeded: a request has succeeded, and we have some data back
-- Failed: a request was made, it went wrong, and we have an error
+* Not requested: no request has yet been made
+* Pending: a request has been made, but no data has been returned
+* Succeeded: a request has succeeded, and we have some data back
+* Failed: a request was made, it went wrong, and we have an error
 
 Dealing with all of those states in your application is tricky, and it's also dull. No one wants to deal with the error case, and writing the logic to show a spinner when a request is pending is really dull.
 
@@ -71,14 +71,15 @@ Your `onChange` callback will then be called twice, first as the request transit
 The `fetch` call also returns a promise, and will throw if it fails:
 
 ```js
-githubPerson.fetch('jackfranklin')
-	.then(/*success!*/)
-	.catch(/*fail!*/);
+githubPerson
+  .fetch('jackfranklin')
+  .then(/*success!*/)
+  .catch(/*fail!*/);
 ```
 
 ## Avoiding Mutation
 
-Every time your `onChange` function is called, or you chain to the promise returned by `fetch`, the argument that is passed to your function is a __brand new `RemoteData` instance__. Rather than mutate the existing instance, `RemoteData` constructs a new instance of itself, copying all its callback functions and information across, but defining the new state. This means nothing gets mutated and you can avoid weird mutation bugs.
+Every time your `onChange` function is called, or you chain to the promise returned by `fetch`, the argument that is passed to your function is a **brand new `RemoteData` instance**. Rather than mutate the existing instance, `RemoteData` constructs a new instance of itself, copying all its callback functions and information across, but defining the new state. This means nothing gets mutated and you can avoid weird mutation bugs.
 
 ## With React
 
@@ -127,5 +128,3 @@ click() {
 I hope the above gives you some context and reasoning about why I think `RemoteDataJS` can clear up your data fetching logic and make it easier for you to deal with requests across all states that they can find themselves in.
 
 If you want to start using it you can [check out the GitHub repository](https://github.com/jackfranklin/remote-data-js) to find more thorough documentation and information. RemoteDataJS is available as `remote-data-js` on npm for you to install. I'd love to hear your feedback, bug reports and anything else, so please feel free to raise an issue.
-
-

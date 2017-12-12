@@ -17,7 +17,7 @@ Of course, there's no one definitive workflow for everyone, but I've been asked 
 As there's a lot to cover, these will be split over multiple screencasts. What I'm looking for from you lovely readers is two things:
 
 * What should I code up? If there's a plugin you'd like to see created or a library made, then let me know! I'll do it for free, as long as you're happy that it gets put on Github in all its glory.
-* What specifically would you like me to talk about? 
+* What specifically would you like me to talk about?
 
 In these screencasts I wont be explaining how every line of code works, I'll explain bits but I'll focus more on the tools I'm using, tricks & tips I've picked up, and so on.
 

@@ -25,7 +25,7 @@ You could install this globally, but I like to have all project dependencies ins
 
 You then need to run `./node_modules/.bin/flow init`.
 
-__Note:__ I have the `./node_modules/.bin` directory on my `$PATH`, [which you can find in my dotfiles](https://github.com/jackfranklin/dotfiles/blob/master/zsh/zshrc#L101). This is _slightly_ risky, as I could accidentally run any executable that's in that directory, but I'm willing to take that risk because I know what's installed locally and it saves a lot of typing!
+**Note:** I have the `./node_modules/.bin` directory on my `$PATH`, [which you can find in my dotfiles](https://github.com/jackfranklin/dotfiles/blob/master/zsh/zshrc#L101). This is _slightly_ risky, as I could accidentally run any executable that's in that directory, but I'm willing to take that risk because I know what's installed locally and it saves a lot of typing!
 
 By running `flow init` you'll create a `.flowconfig` file which will look like so:
 
@@ -64,17 +64,16 @@ This means you can incrementally move files over to Flow, which is a big plus po
 
 One final piece of admin: Flow is only a type checker, it won't strip the types out of your code and produce JavaScript for production. To do this I recommend using the Babel plugin [`transform-flow-strip-types`](https://babeljs.io/docs/plugins/transform-flow-strip-types/), which tells Babel to remove the types when you compile the code. We'll look at how we then deploy this code to npm later.
 
-
 ### Writing some Flow!
 
 We're now ready to write some code! Let's start with a `sum` function. It can take an array of numbers and will produce the sum of all of these numbers. Here's the JavaScript implementation I came up with:
 
 ```js
 const sum = input => {
-  return input.reduce((a, b) => a + b)
-}
+  return input.reduce((a, b) => a + b);
+};
 
-export default sum
+export default sum;
 ```
 
 There's nothing too crazy going on here - by using `reduce` we can iterate through the array and add up the numbers as we go. Now I'll use Flow's type annotations to annotate this function. First let's annotate the arguments that this function takes, by declaring that the input argument should be an `Array` of type `number`. This means that `input` will be an array where all the values are of type `number`, and the syntax for this in Flow is `Array<number>`:
@@ -82,10 +81,10 @@ There's nothing too crazy going on here - by using `reduce` we can iterate throu
 ```js
 // @flow
 const sum = (input: Array<number>) => {
-  return input.reduce((a, b) => a + b)
-}
+  return input.reduce((a, b) => a + b);
+};
 
-export default sum
+export default sum;
 ```
 
 Note that I've also added the `// @flow` comment so that Flow will start type checking my code. I'll now declare that the return type of this function is a `number`:
@@ -93,10 +92,10 @@ Note that I've also added the `// @flow` comment so that Flow will start type ch
 ```js
 // @flow
 const sum = (input: Array<number>): number => {
-  return input.reduce((a, b) => a + b)
-}
+  return input.reduce((a, b) => a + b);
+};
 
-export default sum
+export default sum;
 ```
 
 If you run `flow` again, you'll see that there are still no errors. This means that Flow has confirmed that our code is conforming to the types we told it about.
@@ -106,8 +105,8 @@ Let's say we make a mistake (obvious to spot on this small code - but imagine if
 ```js
 // @flow
 const sum = (input: Array<number>): number => {
-  return input.reduce((a, b) => a + 'b')
-}
+  return input.reduce((a, b) => a + 'b');
+};
 ```
 
 Now when you run `flow`, you will see an error (you may need to scroll the codebox to see the full error):
@@ -148,22 +147,21 @@ Instead, I'd like developers who are using Flow to be able to see the type infor
 The solution here is to publish two versions of the code within one module. One version will be fully compiled with Babel and have all types stripped. The other will be the original code, with all the types left in it. When researching approaches for publishing types to npm, I discovered that when a file is imported, Flow will look not only for that file but for the same file name with `.flow` added on the end. That is, if my code has:
 
 ```js
-import foo from './my-module'
+import foo from './my-module';
 ```
 
 Flow will first see if `my-module.js.flow` exists, and use that if it does, before using `my-module.js`. Of course, all other tools will use `my-module.js`, and ignore the file with the `.flow` extension.
 
 What we need to do is publish two versions of each file in our project. So, for the file `sum.js`, we should publish:
 
-- `lib/sum.js`, which is compiled with Babel and stripped of types.
-- `lib/sum.js.flow`, which is the original file, with types left in it.
+* `lib/sum.js`, which is compiled with Babel and stripped of types.
+* `lib/sum.js.flow`, which is the original file, with types left in it.
 
 ### Configuring Babel
 
 Configuring Babel to strip Flow types is a matter of creating a `.babelrc` with the `transform-flow-strip-types` plugin enabled, along with any others you might be using.
 
 ```js
-
   "presets": ["es2015"],
   "plugins": [
     "transform-flow-strip-types",
@@ -260,9 +258,9 @@ Now let's say we've gotten confused about the API again, and we try to use a met
 
 ```js
 // @flow
-import utils from 'util-fns'
+import utils from 'util-fns';
 
-utils.getSum([1, 2, 3])
+utils.getSum([1, 2, 3]);
 ```
 
 Flow can detect that `getSum` isn't a function that exists in the module:
@@ -278,9 +276,9 @@ And now imagine I remember that the function is called `sum`, but I forget that 
 
 ```js
 // @flow
-import utils from 'util-fns'
+import utils from 'util-fns';
 
-console.log(utils.sum(1, 2, 3))
+console.log(utils.sum(1, 2, 3));
 ```
 
 Flow will pick up on this too, but _only_ because we included those extra `.flow` files in our package. Notice that it also tells us which file to go and look in to find the source for the `sum` function if we want to dig into the types:

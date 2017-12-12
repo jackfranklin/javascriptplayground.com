@@ -69,8 +69,3 @@ I also include the [EditorConfig vim plugin](https://github.com/editorconfig/edi
 ## Conclusion
 
 Everyone has a different preference with editors, and Vim in particular is hugely configurable. If you've got any suggestions or different plugins that you like to use, please let me know, and I hope this post helps you speed up your Vim and JavaScript workflow.
-
-
-
-
-

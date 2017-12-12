@@ -9,7 +9,7 @@ I've recently been getting into TypeScript following a lot of positive blogs abo
 
 I won't be going into detail on the specifics of TypeScript's syntax, but you can read either the [TypeScript handbook](https://www.typescriptlang.org/docs/tutorial.html) or the free book [TypeScript Deep Dive](https://basarat.gitbooks.io/typescript/content/docs/getting-started.html) which will also give you a great introduction to the language.
 
-__Update:__ If you'd like to read this post in German, you can do so [thanks to the awesome folks at Reactx.de](https://reactx.de/artikel/reactjs-typescript/).
+**Update:** If you'd like to read this post in German, you can do so [thanks to the awesome folks at Reactx.de](https://reactx.de/artikel/reactjs-typescript/).
 
 ## Installing TypeScript and configuring it
 
@@ -22,7 +22,7 @@ yarn add typescript
 
 When you install TypeScript you get the `tsc` command line tool which can compile TypeScript but also create a starting `tsconfig.json` for you to edit. You can get this by running `tsc --init` - if you've installed TypeScript locally you'll need to run `./node_modules/.bin/tsc --init`.
 
-__Note:__ I have the `./node_modules/.bin` directory on my `$PATH`, [which you can find in my dotfiles](https://github.com/jackfranklin/dotfiles/blob/master/zsh/zshrc#L101). This is _slightly_ risky, as I could accidentally run any executable that's in that directory, but I'm willing to take that risk because I know what's installed locally and it saves a lot of typing!
+**Note:** I have the `./node_modules/.bin` directory on my `$PATH`, [which you can find in my dotfiles](https://github.com/jackfranklin/dotfiles/blob/master/zsh/zshrc#L101). This is _slightly_ risky, as I could accidentally run any executable that's in that directory, but I'm willing to take that risk because I know what's installed locally and it saves a lot of typing!
 
 `tsc --init` generates a `tsconfig.json` which is where all the config for TypeScript's compiler lives. There's a few changes I've made to the default config, and the one I'm using is below:
 
@@ -73,7 +73,7 @@ You can read more about this in the [TypeScript Deep Dive](https://basarat.gitbo
 This is another option that makes TypeScript's compiler stricter. The TypeScript Deep Dive book has a [great section on this option](https://basarat.gitbooks.io/typescript/docs/options/strictNullChecks.html). With this option on, TypeScript will spot more occasions where you're referencing a value that might be undefined, it will error at you. For example:
 
 ```js
-person.age.increment()
+person.age.increment();
 ```
 
 With `strictNullChecks`, if TypeScript thinks that `person` or `person.age` might be `undefined`, it will error and make sure you deal with it. This prevents runtime errors so it seems like a pretty good option to enable from the get go.
@@ -93,26 +93,24 @@ At this point I have to thank Tom Duncalf, whose [blog post on TypeScript 1.9 + 
 There's nothing too surprising in the Webpack config, but I've left some comments in the code to explain it:
 
 ```js
-const webpack = require('webpack')
-const path = require('path')
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   // put sourcemaps inline
   devtool: 'eval',
 
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
-  entry: [
-    'index.tsx'
-  ],
+  entry: ['index.tsx'],
 
   // configure the output directory and publicPath for the devServer
   output: {
     filename: 'app.js',
     publicPath: 'dist',
-    path: path.resolve('dist')
+    path: path.resolve('dist'),
   },
 
-  // configure the dev server to run 
+  // configure the dev server to run
   devServer: {
     port: 3000,
     historyApiFallback: true,
@@ -131,10 +129,14 @@ module.exports = {
   module: {
     loaders: [
       // .ts(x) files should first pass through the Typescript loader, and then through babel
-      { test: /\.tsx?$/, loaders: ['babel-loader', 'ts-loader'], include: path.resolve('src') }
-    ]
+      {
+        test: /\.tsx?$/,
+        loaders: ['babel-loader', 'ts-loader'],
+        include: path.resolve('src'),
+      },
+    ],
   },
-}
+};
 ```
 
 We configure the loaders so that any `.ts(x)` file is first passed through `ts-loader`. This compiles it with TypeScript using the settings in our `tsconfig.json` - and emits `ES2015`. We then use Babel to convert that down to ES5. To do this I create a `.babelrc` that contains the presets that we need:
@@ -152,18 +154,18 @@ And with that, we're now ready to write our TypeScript application.
 Now we are ready to create `src/index.tsx`, which will be our application's entry point. For now we can create a dummy component and render it to check it's all working.
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const App = () => {
   return (
     <div>
       <p>Hello world!</p>
     </div>
-  )
-}
+  );
+};
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
 If you run Webpack now against this code you'll see some errors:

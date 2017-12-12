@@ -21,9 +21,9 @@ It's split up into the four t's: Tech, Tests, Team and Talking.
 
 The first decision we made was the one to move away from the existing Angular 1 codebase in the first place. We did not do this because we actively disliked Angular; I've worked with it before and very much enjoyed it, and Angular 2+ has made a lot of improvements. Our reasons for considering the migration were:
 
-- Lack of expertise; both developers who had built the Angular app had moved on from the company.
-- Lack of confidence; because we hadn't built the app, it was hard to have confidence that when we changed code we weren't introducing new bugs or breaking other features.
-- Angular 1 is not the latest version of Angular and although it is going to be maintained by the Angular team for a while yet, it does not have the longevity we were looking for.
+* Lack of expertise; both developers who had built the Angular app had moved on from the company.
+* Lack of confidence; because we hadn't built the app, it was hard to have confidence that when we changed code we weren't introducing new bugs or breaking other features.
+* Angular 1 is not the latest version of Angular and although it is going to be maintained by the Angular team for a while yet, it does not have the longevity we were looking for.
 
 We picked React primarily because we all knew it well, but also because it fits the component model that we were betting on; that we could build our app incrementally, starting with very small components and then moving into larger ones as we gained confidence.
 
@@ -55,9 +55,9 @@ One of the most important aspects of this was knowing what to work on. We had a 
 
 After we'd got rid of all the code we didn't need, we based prioritising components on three factors:
 
-- the bug rate - a buggier feature got higher priority as we could fix bugs as part of the migration.
-- the code quality - code that we didn't understand was higher priority; getting rid of code no one understood was a large motivation for the entire migration.
-- the churn rate - that is, how many times per week that a particular part of the codebase was used. Code that is touched more by more developers is more important to migrate - we want to spend as little time as possible working with or maintaining old Angular code.
+* the bug rate - a buggier feature got higher priority as we could fix bugs as part of the migration.
+* the code quality - code that we didn't understand was higher priority; getting rid of code no one understood was a large motivation for the entire migration.
+* the churn rate - that is, how many times per week that a particular part of the codebase was used. Code that is touched more by more developers is more important to migrate - we want to spend as little time as possible working with or maintaining old Angular code.
 
 Given these three factors we could prioritise work:
 
@@ -77,17 +77,17 @@ To fix this it's important to switch your communication to be from their team's 
 
 Our method for prioritising migrations based on bugs also paid off here - we were able to take long-standing bugs that had caused customer support (and our customers) pain, and fix them whilst migrating from Angular to React. One such bug that caused us issues constantly had existed for nearly a year, unable to be hunted down, and was eradicated when we migrated the relevant components over to React. This made us happy and made customer support even happier! Fixing bugs that caused other teams pain clearly presented to them the benefits of doing this work, and why the downside of not building as many new features was worth it in the long run.
 
-Another area of communication that we put a lot of time and effort into was communicating when things went wrong. Ultimately on a complex project over a relatively long time period there would be bugs caused by the migration. 
+Another area of communication that we put a lot of time and effort into was communicating when things went wrong. Ultimately on a complex project over a relatively long time period there would be bugs caused by the migration.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">There are two types of ops people: those who have fucked up production, and those who are about to. <a href="https://twitter.com/petecheslock">@petecheslock</a> <a href="https://twitter.com/hashtag/monitorama?src=hash">#monitorama</a> <a href="https://t.co/TMpdvW1Wqs">pic.twitter.com/TMpdvW1Wqs</a></p>&mdash; (╯°□°）╯︵ ┻━┻ sdoɹǝǝq (@beerops) <a href="https://twitter.com/beerops/status/866808660030345218">May 23, 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 This is frustrating to everyone but the artist services team who get phone calls from angry clients about the site being down really get it more than anyone else, so would understandably be very upset when this happened. Every time we caused an issue we did a full internal retrospective and discussed how it happened. We asked:
 
-- __What__ went wrong?
-- __Why__ did we not catch it before deployment?
-- __How__ did we fix it?
-- __How__ will we prevent this happening again?
+* **What** went wrong?
+* **Why** did we not catch it before deployment?
+* **How** did we fix it?
+* **How** will we prevent this happening again?
 
 Importantly this was entirely blameless - if a bug made it out to production it wasn't the responsibility of the person who wrote the code, but the entire team. Often we'd find that bugs highlighted a gap in our testing, or some manual testing that needed to be done before certain deploys (one particular date bug only showed itself on the New York time zone, so tracking that down in London was hard!).
 
@@ -106,5 +106,3 @@ In summary, there are 7 key lessons learned that you should have in mind if you'
 7. Don't expect to migrate perfectly the first time - you can refactor after migrating.
 
 If you have any questions, I'd love to answer them! Feel free to [grab me on Twitter](http://twitter.com/Jack_Franklin) or [open an issue on GitHub](https://github.com/jackfranklin/angular-react-talk).
-
-

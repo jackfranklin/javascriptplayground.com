@@ -65,8 +65,8 @@ The advantage here isn't immediately apparent. Other than being able to add prop
 
 When you define a property this way, you can do much more than just define a setter or getter. You may also pass following keys:
 
-- `configurable` (`false` by default): if this is true, the property's configuration will be modifiable in future. 
-- `enumerable` (`false` by default): if true, the property will appear when looping over the object (`for (var key in obj)`).
+* `configurable` (`false` by default): if this is true, the property's configuration will be modifiable in future.
+* `enumerable` (`false` by default): if true, the property will appear when looping over the object (`for (var key in obj)`).
 
 We can also define properties that don't have explicit getters or setters:
 
@@ -74,7 +74,7 @@ We can also define properties that don't have explicit getters or setters:
         value: 42
     });
 
-This will create `person.age`, and set it to the value 42. It's important to note that this property isn't writable. Calling `person.age = 99` will __have no effect__. In this way you can create read-only properties. If a property has a `value` key set, it __cannot__ have a getter or setter. Properties can have values or accessors, not both.
+This will create `person.age`, and set it to the value 42. It's important to note that this property isn't writable. Calling `person.age = 99` will **have no effect**. In this way you can create read-only properties. If a property has a `value` key set, it **cannot** have a getter or setter. Properties can have values or accessors, not both.
 
 Not only that, but because the `enumerable` property defaults to `false`, this property will not appear when we loop over the object's keys.
 
@@ -96,6 +96,3 @@ Remember: just because a feature exists, it doesn't need to be used all the time
 IE9 and above have full support for `Object.defineProperty`, along with Safari 5+, Firefox 4+, Chrome 5+ and Opera 12+. If you’re working with Node.js, there's full support. Don't you just love Node?!
 
 This article was co-authored with [Tom Ashworth](http://twitter.com/phuunet). Thanks to Tom for all his help putting this together.
-
-
-

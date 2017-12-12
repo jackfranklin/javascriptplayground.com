@@ -4,7 +4,6 @@ title: An introduction to ES6 classes.
 intro: Today we'll look at another new feature of ES6, classes.
 ---
 
-
 ## Support
 
 ES6 support varies across environments and platforms, implementations get updated all the time and it's important to also note that the spec is in draft, so everything below has the potential to change. I recommend using [The ES6 Compatability Table](http://kangax.github.io/es5-compat-table/es6/) to see the current state of affairs.
@@ -12,7 +11,6 @@ ES6 support varies across environments and platforms, implementations get update
 ## Traceur
 
 All the code examples seen in this post were run through [Traceur](https://github.com/google/traceur-compiler), a tool for compiling ES6 code into ES5 code which has much better browser support. The beauty of Traceur is that it allows you to write ES6, compile it and use the result in environments where ES6 features are not implemented. Traceur is installed through npm:
-
 
 ```sh
 npm install --global traceur
@@ -65,12 +63,12 @@ We can now use these to output some HTML:
 
 ```js
 var jack = new Model({
-  name: 'jack'
+  name: 'jack',
 });
 
 var view = new View({
   model: jack,
-  template: 'Hello, <%= name %>'
+  template: 'Hello, <%= name %>',
 });
 
 console.log(view.render());
@@ -93,7 +91,7 @@ class LogView extends View {
 }
 ```
 
-Using the `extends` keyword to extend a class is a great example of where the simplicity of the class syntax shines.  Extending `View` means that `LogView` inherits everything that `View` has. If we were to just have:
+Using the `extends` keyword to extend a class is a great example of where the simplicity of the class syntax shines. Extending `View` means that `LogView` inherits everything that `View` has. If we were to just have:
 
 ```js
 class LogView extends View {}
@@ -114,12 +112,12 @@ We first call `super.render()`. This calls the parent class' `render()` method, 
 
 ```js
 var jack = new Model({
-  name: 'jack'
+  name: 'jack',
 });
 
 var view = new LogView({
   model: jack,
-  template: 'Hello, <%= name %>'
+  template: 'Hello, <%= name %>',
 });
 
 view.render();
@@ -134,5 +132,3 @@ I hope that serves as a nice introduction to ES6 classes. Just because they exis
 The code I used in this post is [on GitHub](https://github.com/javascript-playground/es6-classes), so feel free to check it out and have a play around.
 
 _Thanks to [@toddmotto](http://twitter.com/toddmotto) for his help reviewing a draft of this piece._
-
-

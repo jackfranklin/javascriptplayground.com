@@ -55,10 +55,10 @@ create the file `src/setupTests.js`. create-react-app is automatically
 configured to run this file before any of our tests.
 
 ```js
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() })
+configure({ adapter: new Adapter() });
 ```
 
 > If you're using an older version of React in your projects but still want to
@@ -77,21 +77,20 @@ correctly.
 
 ## The `Hello` component
 
-Let's build a component that takes a `name` prop and renders `<p>Hello,
-name!</p>` onto the screen. As we're writing tests first, I'll create
+Let's build a component that takes a `name` prop and renders `<p>Hello, name!</p>` onto the screen. As we're writing tests first, I'll create
 `src/Hello.test.js`, following the convention for test files that
 `create-react-app` uses (in your own apps you can use whichever convention you
 prefer). Here's our first test:
 
 ```js
-import React from 'react'
-import Hello from './Hello'
-import { shallow } from 'enzyme'
+import React from 'react';
+import Hello from './Hello';
+import { shallow } from 'enzyme';
 
 it('renders', () => {
-  const wrapper = shallow(<Hello name="Jack" />)
-  expect(wrapper.find('p').text()).toEqual('Hello, Jack!')
-})
+  const wrapper = shallow(<Hello name="Jack" />);
+  expect(wrapper.find('p').text()).toEqual('Hello, Jack!');
+});
 ```
 
 We use Enzyme's
@@ -111,13 +110,13 @@ Cannot find module './Hello' from 'Hello.test.js'
 So let's at least define the component and give it a shell that renders nothing:
 
 ```js
-import React from 'react'
+import React from 'react';
 
 const Hello = props => {
-  return null
-}
+  return null;
+};
 
-export default Hello
+export default Hello;
 ```
 
 Now we get a slightly cryptic error:
@@ -133,8 +132,8 @@ that:
 
 ```js
 const Hello = props => {
-  return <p>Hello World</p>
-}
+  return <p>Hello World</p>;
+};
 ```
 
 Now we're much closer!
@@ -152,8 +151,8 @@ And we can make the final leap to a green test:
 
 ```js
 const Hello = props => {
-  return <p>Hello, {props.name}!</p>
-}
+  return <p>Hello, {props.name}!</p>;
+};
 ```
 
 Next up, let's write a test to ensure that if we don't pass in a name, it
@@ -187,8 +186,8 @@ But we can now write our first pass at the implementation to fix it:
 
 ```js
 const Hello = props => {
-  return <p>Hello, {props.name || 'Unknown'}!</p>
-}
+  return <p>Hello, {props.name || 'Unknown'}!</p>;
+};
 ```
 
 And now the test is green we're free to refactor. The above is perfectly fine
@@ -197,8 +196,8 @@ but not the way it's usually done in React. Some might choose to destructure the
 
 ```js
 const Hello = ({ name = 'Unknown' }) => {
-  return <p>Hello, {name}!</p>
-}
+  return <p>Hello, {name}!</p>;
+};
 ```
 
 But most of the time when working with React components I'll use the
@@ -206,22 +205,22 @@ But most of the time when working with React components I'll use the
 `propTypes`:
 
 ```js
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Hello = props => {
-  return <p>Hello, {props.name}!</p>
-}
+  return <p>Hello, {props.name}!</p>;
+};
 
 Hello.propTypes = {
   name: PropTypes.string,
-}
+};
 
 Hello.defaultProps = {
   name: 'Unknown',
-}
+};
 
-export default Hello
+export default Hello;
 ```
 
 And all our tests are still passing.

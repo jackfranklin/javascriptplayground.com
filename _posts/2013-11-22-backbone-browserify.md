@@ -3,6 +3,7 @@ layout: post
 title: "Using Browserify with npm modules"
 intro: "Today we will look at using Browserify for working with npm modules on the front end to build client-side JS applications."
 ---
+
 Recently I covered [Browserify](http://javascriptplayground.com/blog/2013/09/browserify/) in another post, but did not go into much detail. I discussed how to use Browserify with your own modules, but what I didn't discuss was how Browserify can work with modules that have been published to npm too. In short: you can use Node modules on the client side.
 
 In this tutorial, using a Backbone app as the example, I'll show you how to use Browserify to use npm modules, meaning you can use npm to manage your front end dependencies. This example uses Backbone, but you could use this with anything you like. Backbone just happens to be a good example in this case.

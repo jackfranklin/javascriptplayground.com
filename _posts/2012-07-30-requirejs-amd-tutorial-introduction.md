@@ -9,7 +9,6 @@ The basic use case for RequireJS is as a basic script loader, but in this tutori
 
 To do this, we are going to build an app (sort of - it's all very basic snippets of code) that has dependencies. It depends on both Underscore and jQuery. We could just include this as a whole host of `<script>` tags, but that's absolutely no fun and is also not efficient, when loading all those in a browser the rest of the page load will be blocked. We could minify them, but then we have to minify them and maintain order of the code, and it just becomes a nightmare. With RequireJS, we include the RequireJS source, and from there can get it to load in files.
 
-
 Firstly, create your project directory and the structure within. Mine looks like this:
 
     ├── app.js
@@ -67,7 +66,7 @@ It will pull in jQuery from the Google CDN. Note that I've removed ".js" from th
       }
     });
 
-Now we  have our set up sorted, lets write our first AMD module, called `template.js`. This will provide a method that will compile a basic Underscore template and display it on the page. The functionality is very easy, as the idea here is to look more at the AMD side of things. To define a method, we use the `define()` function. As we saw, we can explicitly name our module, like jQuery did, or we can let it be done based on the filename, which is fine. We need to pass `define()` two things, an array of dependencies, and a function that will have our implementation in it. This module is going to depend on Underscore and jQuery:
+Now we have our set up sorted, lets write our first AMD module, called `template.js`. This will provide a method that will compile a basic Underscore template and display it on the page. The functionality is very easy, as the idea here is to look more at the AMD side of things. To define a method, we use the `define()` function. As we saw, we can explicitly name our module, like jQuery did, or we can let it be done based on the filename, which is fine. We need to pass `define()` two things, an array of dependencies, and a function that will have our implementation in it. This module is going to depend on Underscore and jQuery:
 
     define(['underscore', 'jquery'], function() {});
 
@@ -101,7 +100,6 @@ And with that, our entire module looks like so:
 The great thing about this is that you can have functions in your modules that are useful for internal use but avoid exposing them, and by dividing your app into multiple modules it's a great way to organise your code.
 
 Finally, all that's left to do is require our module in `app.js` and then call `showName()` on it:
-
 
     require(['lib/modules/template'], function(template) {
       template.showName("Jack");

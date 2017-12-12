@@ -6,10 +6,10 @@ intro: In this post I'll show you how to manage your application's dependencies 
 
 [jspm](http://jspm.io/) is a package manager for JavaScript applications that sits on top of the [SystemJS](https://github.com/systemjs/systemjs). Both were written and are maintained by [Guy Bedford](http://twitter.com/guybedford). SystemJS builds on top of the [es6-module-loader](https://github.com/ModuleLoader/es6-module-loader) and adds the capability to load in modules that are defined using a variety of syntaxes:
 
-- CommonJS (for example, NodeJS modules)
-- AMD (the spec that RequireJS follows)
-- ES6 modules (using the [ES6 module loader](https://github.com/ModuleLoader/es6-module-loader) and [Traceur](https://github.com/google/traceur-compiler).
-- Modules that export a global variable are also supported via a shim config.
+* CommonJS (for example, NodeJS modules)
+* AMD (the spec that RequireJS follows)
+* ES6 modules (using the [ES6 module loader](https://github.com/ModuleLoader/es6-module-loader) and [Traceur](https://github.com/google/traceur-compiler).
+* Modules that export a global variable are also supported via a shim config.
 
 I think that ES6 modules are absolutely fantastic, and at [GoCardless](http://www.gocardless.com), we've structured a large JS heavy application using SystemJS, allowing us to manage our application's modules entirely through ES6. Using jspm is the next logical step up from SystemJS. It manages our dependencies, lets us install third party ones and comes with tooling to build applications into one file for production.
 
@@ -18,7 +18,6 @@ Today we will set up a very simple project using jspm, and in further posts we w
 ## Why not npm?
 
 jspm is a package manager in the same ilk as npm, but with a key difference: it puts the browser loader first. This means it offers a seamless workflow for installing and using libraries in the browser with very little effort from the developer. The ability to load in modules that have been defined in a number of different syntaxes means it can offer the greatest support for front end libraries and more often than not with jspm, any module you wish to use will just work, with none or very little configuration required.
-
 
 ## Installing jspm
 
@@ -30,9 +29,9 @@ npm install --global jspm
 
 Let's create a new project. Create a new directory and run `jspm install`. The CLI will ask you a set of questions about your project, which you should answer. If the default answer is fine, you can just hit enter to continue onto the next question. Once the prompts have been answered, jspm is going to perform the following tasks:
 
-- create a `config.js`, which contains the configuration for your modules. We will look at this in more depth shortly.
-- create a `package.json` file for your project. jspm stores your project's dependencies in here, under the `jspm` key by default.
-- Download some libraries that jspm needs: SystemJS, the es6-module-loader, Traceur and the Traceur runtime.
+* create a `config.js`, which contains the configuration for your modules. We will look at this in more depth shortly.
+* create a `package.json` file for your project. jspm stores your project's dependencies in here, under the `jspm` key by default.
+* Download some libraries that jspm needs: SystemJS, the es6-module-loader, Traceur and the Traceur runtime.
 
 ## Running the App
 
@@ -80,25 +79,24 @@ jspm has searched its registry for "jquery", and found that it is mapped to "git
 
 If we take a look at `config.js`, we can see jspm has modified it:
 
-
 ```js
 System.config({
-  "paths": {
-    "*": "*.js",
-    "github:*": "jspm_packages/github/*.js"
-  }
+  paths: {
+    '*': '*.js',
+    'github:*': 'jspm_packages/github/*.js',
+  },
 });
 
 System.config({
-  "map": {
-    "jquery": "github:components/jquery@^2.1.1"
-  }
+  map: {
+    jquery: 'github:components/jquery@^2.1.1',
+  },
 });
 
 System.config({
-  "versions": {
-    "github:components/jquery": "2.1.1"
-  }
+  versions: {
+    'github:components/jquery': '2.1.1',
+  },
 });
 ```
 
@@ -111,7 +109,6 @@ jspm install j=jquery
 Would install jQuery and set up a path so in your code you could load it in as `j`. I don't recommend using such short names, but in some cases it can be useful to save on typing.
 
 Now we can use jQuery in our application. Head back to `app.js` and load it in:
-
 
 ```js
 var $ = require('jquery');
@@ -165,7 +162,7 @@ To round off this tutorial, let's swap to using the ES6 module syntax:
 
 ```js
 import $ from 'jquery';
-import _ from 'lodash'
+import _ from 'lodash';
 
 console.log($.fn.jquery);
 console.log(_.VERSION);

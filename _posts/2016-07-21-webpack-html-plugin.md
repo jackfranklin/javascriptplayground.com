@@ -25,8 +25,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 Next I'll add an entry to the `plugins` array where I instantiate the plugin with two properties:
 
-- `template` defines the template that the plugin will use to generate the HTML. I'll create this shortly.
-- `inject: body` tells the plugin to inject any JavaScript into the bottom of the page, just before the closing `</body>` tag, rather than into the `<head>`.
+* `template` defines the template that the plugin will use to generate the HTML. I'll create this shortly.
+* `inject: body` tells the plugin to inject any JavaScript into the bottom of the page, just before the closing `</body>` tag, rather than into the `<head>`.
 
 ```js
 plugins: [

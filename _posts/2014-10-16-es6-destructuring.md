@@ -9,7 +9,6 @@ ES6 comes both with huge new features like generators or classes, but also packs
 ## Traceur
 All the code examples seen in this post were run through [Traceur](https://github.com/google/traceur-compiler), a tool for compiling ES6 code into ES5 code which has much better browser support. The beauty of Traceur is that it allows you to write ES6, compile it and use the result in environments where ES6 features are not implemented. Traceur is installed through npm:
 
-
 ```sh
 npm install --global traceur
 ```
@@ -26,19 +25,18 @@ You'll also need to include the Traceur runtime in your HTML. The runtime comes 
 
 The most common destructuring example is to pull values out of an array:
 
-
 ```js
 var [a, b] = [1, 2];
-a //=> 1
-b //=> 2
+a; //=> 1
+b; //=> 2
 ```
 
 You can also miss out parts of the array too:
 
 ```js
 var [a, , b] = [1, 2, 3];
-a //=> 1
-b //=> 3
+a; //=> 1
+b; //=> 3
 ```
 
 This lends itself well to splitting strings:
@@ -46,16 +44,16 @@ This lends itself well to splitting strings:
 ```js
 var fullName = 'Jack Franklin';
 var [first, last] = fullName.split(' ');
-first //=> 'Jack'
-last //=> 'Franklin'
+first; //=> 'Jack'
+last; //=> 'Franklin'
 ```
 
 What is perhaps more useful is that we can perform this same type of destructuring on objects:
 
 ```js
-var {name, age} = { name: 'Jack', age: 22 }
-name //=> 'Jack'
-age //=> '22'
+var { name, age } = { name: 'Jack', age: 22 };
+name; //=> 'Jack'
+age; //=> '22'
 ```
 
 This is useful if you have a function that returns an object, and you want to get certain parts of the object only:
@@ -64,12 +62,12 @@ This is useful if you have a function that returns an object, and you want to ge
 var about = function() {
   return {
     name: 'Jack',
-    age: 22
+    age: 22,
   };
 };
 
-var {name} = about();
-name //=> 'Jack'
+var { name } = about();
+name; //=> 'Jack'
 ```
 
 ## Functions that take objects
@@ -81,9 +79,9 @@ Because we can take in an object as the only argument to a function, we can dest
 ```js
 var someFunc = function({ name: name }) {
   console.log(name);
-}
+};
 
-someFunc({name: 'Jack'});
+someFunc({ name: 'Jack' });
 // 'Jack'
 ```
 
@@ -93,9 +91,9 @@ The above function takes in an object and destructures it, declaring that whatev
 var someFunc = function(opts) {
   var name = opts.name;
   console.log(name);
-}
+};
 
-someFunc({name: 'Jack'});
+someFunc({ name: 'Jack' });
 ```
 
 Into what we had earlier:
@@ -103,9 +101,9 @@ Into what we had earlier:
 ```js
 var someFunc = function({ name: name }) {
   console.log(name);
-}
+};
 
-someFunc({name: 'Jack'});
+someFunc({ name: 'Jack' });
 ```
 
 This may take some getting used to in terms of reading the code, but it makes it much clearer what's going on. You can see exactly what the object expects.
@@ -129,9 +127,9 @@ When you have an object where the value of the property matches a variable of th
 ```js
 var someFunc = function({ name: name }) {
   console.log(name);
-}
+};
 
-someFunc({name: 'Jack'});
+someFunc({ name: 'Jack' });
 ```
 
 Becomes even more concise:
@@ -139,9 +137,9 @@ Becomes even more concise:
 ```js
 var someFunc = function({ name }) {
   console.log(name);
-}
+};
 
-someFunc({name: 'Jack'});
+someFunc({ name: 'Jack' });
 ```
 
 ## Conclusion

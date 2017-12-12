@@ -9,12 +9,12 @@ githubPath: 2017-01-11-contributing-to-webpack-javascript
 
 I invited Webpack core team member [Sean Larkin](http://twitter.com/thelarkinn) onto a Google Hangouts session as we paired on contributing to Webpack. You'll see how to:
 
-- Clone Webpack and get it running locally on your machine.
-- How to find code in the Webpack repository that's good for a pull request.
-- How to run the Webpack tests to ensure your work hasn't broken anything.
-- How to run ESLint to ensure you're following the code standards of the project.
-- How to open a pull request against Webpack.
-- Sean's workflow for reviewing pull requests.
+* Clone Webpack and get it running locally on your machine.
+* How to find code in the Webpack repository that's good for a pull request.
+* How to run the Webpack tests to ensure your work hasn't broken anything.
+* How to run ESLint to ensure you're following the code standards of the project.
+* How to open a pull request against Webpack.
+* Sean's workflow for reviewing pull requests.
 
 Even if you don't want to contribute directly to Webpack, this video should help you contribute to any open source project that you're interested in.
 

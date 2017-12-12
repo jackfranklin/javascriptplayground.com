@@ -17,33 +17,41 @@ You can install the library from npm by running `npm install react-remote-data-j
 
 You have to give the `RemoteData` five props:
 
-- `url`, which is the URL that should be fetched. This can be a function instead, but we'll tackle that later.
+* `url`, which is the URL that should be fetched. This can be a function instead, but we'll tackle that later.
 
 The other four props all map to the states of the API request, which can be one for states:
 
-- `notAsked` - the request has not been made yet
-- `pending` - the request is in progress
-- `success` - the request has succeeded
-- `failure` - the request has failed
+* `notAsked` - the request has not been made yet
+* `pending` - the request is in progress
+* `success` - the request has succeeded
+* `failure` - the request has failed
 
 The `RemoteData` component expects a function for each of these possible states, and it will render the right component based on the right state.
 
 First, let's define a function for the `notAsked` state. This gets called with a prop called `fetch`, which is the function called to trigger the request. Our `notAsked` function looks like so:
 
 ```js
-const notAsked = props => <div><button onClick={props.fetch}>Make Request</button></div>
+const notAsked = props => (
+  <div>
+    <button onClick={props.fetch}>Make Request</button>
+  </div>
+);
 ```
 
 Next, we'll write a function for the `pending` state, which will simply show some loading text (you could render a spinner here, for example):
 
 ```js
-const pending = () => <p>Loading...</p>
+const pending = () => <p>Loading...</p>;
 ```
 
 Next, our `success` case. When a request has succeeded the data will be provided via the `request` prop, which contains all the information about the request, including a `data` key, which has the parsed data as JSON, which we can render:
 
 ```js
-const success = props => <div><p>Name: {props.request.data.login}</p></div>
+const success = props => (
+  <div>
+    <p>Name: {props.request.data.login}</p>
+  </div>
+);
 ```
 
 In this case one of the properties that Github gives us is `login`, so I'll render that onto the screen.
@@ -51,22 +59,27 @@ In this case one of the properties that Github gives us is `login`, so I'll rend
 Finally, we can deal with the failure case by logging an error. In this case, `request.data` will be the HTTP error, and we can output the `message` property:
 
 ```js
-const failure = props => <div><p>Error: {props.request.data.message}</p></div>
+const failure = props => (
+  <div>
+    <p>Error: {props.request.data.message}</p>
+  </div>
+);
 ```
 
 And with that we now have all the properties required to create the `RemoteData` instance:
 
 ```js
-import RemoteData from 'react-remote-data-js'
+import RemoteData from 'react-remote-data-js';
 
 const GithubData = () => (
-  <RemoteData url="http://api.github.com/users/jackfranklin"
+  <RemoteData
+    url="http://api.github.com/users/jackfranklin"
     notAsked={notAsked}
     pending={pending}
     success={success}
     failure={failure}
   />
-)
+);
 ```
 
 Under the hood, `RemoteData` keeps track of the request's state and ensures that the component renders the correct function depending on the state of the HTTP request.

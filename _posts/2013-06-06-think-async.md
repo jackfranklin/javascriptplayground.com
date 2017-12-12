@@ -8,7 +8,7 @@ author_img: "https://secure.gravatar.com/avatar/2d14a381625b7875acde74c8cafdc718
 
 Humans are no good at multitasking, especially not with things going off all over the place. We deal with just one thing at a time and I'm glad, because do you remember the last time you tried to have a bath, browse Facebook and perform open heart surgery? I do, and it didn't end well. People were very cross.
 
-Unfortunately &ndash; or perhaps fortunately &ndash; humans brains don't run on Javascript, because if we did we'd have access to the topic of this article: **async**, a library  by Caolan McMahon that helps you write asynchronous code.
+Unfortunately &ndash; or perhaps fortunately &ndash; humans brains don't run on Javascript, because if we did we'd have access to the topic of this article: **async**, a library by Caolan McMahon that helps you write asynchronous code.
 
 By the way, to get something out of this article I'd say that you need some experience with [Node.js](http://nodejs.org), and the ES5 array methods like `forEach` and `map`. They all feature heavily in this article, but in a more complicated form than you might be used to!
 
@@ -130,7 +130,7 @@ Finally, the finished callback now expects two arguments. The new one is `result
 
 ### Asynchronising
 
-So far we've actually cheated and use an iterator function that isn't *actually* asynchronous &ndash; it just calls the `doneCallback` straight away without doing any work. Lazy.
+So far we've actually cheated and use an iterator function that isn't _actually_ asynchronous &ndash; it just calls the `doneCallback` straight away without doing any work. Lazy.
 
 To demonstrate the that the iterator can really be asynchronous, I've put together an example where the squaring takes a random amount of time. It's `example-3.js`.
 
@@ -221,7 +221,7 @@ The (reduced) output looks something like this:
         nlink: 1,
         ... } ]
 
-Things don't need to be asynchronous now &ndash; we've got all the information we need. We  use each of these stats objects to determine if the file is indeed a file, then filter out the other children and display a size-ordered list of the files. Simples. This is `files-3.js`.
+Things don't need to be asynchronous now &ndash; we've got all the information we need. We use each of these stats objects to determine if the file is indeed a file, then filter out the other children and display a size-ordered list of the files. Simples. This is `files-3.js`.
 
     var async = require('async'),
         fs = require('fs');
@@ -265,6 +265,6 @@ Neat!
 
 ### This is just the beginning...
 
-There's much, *much* more to async than I've covered here, but hopefully I've got you thinking about asynchronous problems and given you an insight into how to deal with them. They can be tricky to get your head around at first, but remember that code is read many more times than it is written, so comment your code well. Your future self will thank you.
+There's much, _much_ more to async than I've covered here, but hopefully I've got you thinking about asynchronous problems and given you an insight into how to deal with them. They can be tricky to get your head around at first, but remember that code is read many more times than it is written, so comment your code well. Your future self will thank you.
 
 You can [download the files](http://i.phuu.net/OkuP) for this article and view the [async documentation on GitHub](https://github.com/caolan/async#asyncjs), and if you have any questions find me on Twitter [@phuunet](http://twitter.com/phuunet).

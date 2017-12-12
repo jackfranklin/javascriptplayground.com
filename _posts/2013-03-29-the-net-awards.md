@@ -3,7 +3,7 @@ layout: post
 title: "The .net Awards"
 ---
 
-Recently I found out that I had been nominated for two of [.net awards](http://www.thenetawards.com/). I've been nominated for "Young Developer of the Year" and "Brilliant Newcomer of the Year". 
+Recently I found out that I had been nominated for two of [.net awards](http://www.thenetawards.com/). I've been nominated for "Young Developer of the Year" and "Brilliant Newcomer of the Year".
 
 Firstly, you have to be nominated by people to be involved in the first place, so thanks to anyone who put my name forward. It means a lot that people would take the time to do that.
 

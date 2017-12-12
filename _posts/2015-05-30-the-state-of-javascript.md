@@ -24,9 +24,9 @@ of these are influenced by the three core goals of ECMAScript 2015 (formerly
 ES6), which hopes
 to provide a better language for:
 
-- complex applications
-- libraries
-- code generation (languages that compile to JS)
+* complex applications
+* libraries
+* code generation (languages that compile to JS)
 
 These are by no means the most bold of predictions, more so thoughts on what I
 think will happen in the next year or so.
@@ -51,7 +51,7 @@ As an aside, I'm really interested to see what becomes of types in JavaScript.
 TypeScript has proven that there's not only a demand but a strong argument for
 having types in the language, and libraries like
 [ImmutableJS](https://facebook.github.io/immutable-js/) have become very popular
-too. 
+too.
 
 ### 2: Smaller libraries (and the composing of) will be preferred over large frameworks
 
