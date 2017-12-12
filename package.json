@@ -16,8 +16,15 @@
   "bugs": {
     "url": "https://github.com/jackfranklin/javascriptplayground.com/issues"
   },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
+  },
   "homepage": "https://github.com/jackfranklin/javascriptplayground.com#readme",
   "dependencies": {
     "uglifycss": "0.0.27"
+  },
+  "devDependencies": {
+    "prettier": "^1.8.2"
   }
 }
