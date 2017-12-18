@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Using React Fragments for the first time
-intro: Today we'll look at a new feature introduced in React 16, fragments
+intro: Today we'll look at a new feature introduced in React 16, fragments, and how we can use them to tidy up the DOM that our components create.
 githubPath: 2017-12-18-react-fragments
 ---
 
