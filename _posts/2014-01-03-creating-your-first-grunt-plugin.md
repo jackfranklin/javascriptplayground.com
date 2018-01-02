@@ -7,7 +7,7 @@ author_twitter: jrcryer
 author_img: https://2.gravatar.com/avatar/473f78620d2f09df591fc90bf3108d2b
 ---
 
-Today we're taking a look at writing your first Grunt plugin. For those unfamiliar with Grunt, Grunt is a JavaScript task runner and you can read Jack's previous [tutorials](/archives.html) to find out more information.
+Today we're taking a look at writing your first Grunt plugin. For those unfamiliar with Grunt, Grunt is a JavaScript task runner and you can read Jack's previous [tutorials](/archives/) to find out more information.
 
 Grunt has a plugin architecture, each plugin having its own responsibility. Combining these plugins, each with their own configuration, offers a powerful tool for building modern web applications. The ecosystem around Grunt is already huge with over 2000+ plugins available for tasks such as compiling [SASS](http://sass-lang.com/), running [JSHint](http://www.jshint.com/) and running [Mocha](http://visionmedia.github.io/mocha/). A Grunt plugin is a Node package that can be published via NPM.
 

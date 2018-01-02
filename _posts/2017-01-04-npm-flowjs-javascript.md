@@ -5,7 +5,7 @@ intro: Today we'll see how we can author and publish JS packages with Flow, addi
 githubPath: 2017-01-04-npm-flowjs-javascript
 ---
 
-[Flow](https://flowtype.org/) is a static type checker for JavaScript which adds the ability to annotate our JavaScript code with extra information on what types we're expecting values to be, what types functions can return, and so on. Having done a lot of work in [Elm](elm-lang.org), a language that is typed, I began to recently explore the popular options for adding types to JavaScript. Along with Flow there is also [TypeScript](https://www.typescriptlang.org/), which is very popular and used extensively in the Angular 2 community.
+[Flow](https://flowtype.org/) is a static type checker for JavaScript which adds the ability to annotate our JavaScript code with extra information on what types we're expecting values to be, what types functions can return, and so on. Having done a lot of work in [Elm](https://elm-lang.org), a language that is typed, I began to recently explore the popular options for adding types to JavaScript. Along with Flow there is also [TypeScript](https://www.typescriptlang.org/), which is very popular and used extensively in the Angular 2 community.
 
 I started with Flow primarily because it's used a lot in the React community (unsurprising given Flow is a Facebook project) and it has built in knowledge of React and its types. Although we won't use Flow with React today, it's easy to do so and I'm sure that I'll cover it in a future blog post. This post _is not_ me stating that I have a strong preference for Flow over TypeScript, or a post claiming Flow is better. I am just sharing my experience with Flow - so far it's been a very positive one.
 

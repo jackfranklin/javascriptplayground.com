@@ -20,17 +20,20 @@ Head into your project's directory and run:
 This will download the latest version of jQuery and put it into `./jam/jquery/jquery.js`. By default all packages are installed to `./jam`. Now, we could just include that script manually, but Jam comes with RequireJS to manage this for us.
 
 Firstly, here's my `index.html`:
+
+```html
 <!DOCTYPE html>
 <html>
-<head>
-<title>Jam JS</title>
-<script src="jam/require.js"></script>
-<script src="app.js"></script>
-</head>
-<body>
-<h2>Using Jam JS</h2>
-</body>
+  <head>
+    <title>Jam JS</title>
+    <script src="jam/require.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <h2>Using Jam JS</h2>
+  </body>
 </html>
+```
 
 The key here is including `jam/require.js`, which pulls in the RequireJS source, all configured to work with Jam's directory structure for packages.
 
