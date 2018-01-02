@@ -110,7 +110,7 @@ It's worth noting that if you need to pass a `Fragment` any props (most likely a
 
 ## A use case for fragments
 
-At [Thread](thread.com) we're building a site for finding and buying clothing and I was working on a component that allows users to select their size from a dropdown. If the item is out of stock or low on stock, we wanted to show that along side their size. So a dropdown might look like so:
+At [Thread](https://thread.com) we're building a site for finding and buying clothing and I was working on a component that allows users to select their size from a dropdown. If the item is out of stock or low on stock, we wanted to show that along side their size. So a dropdown might look like so:
 
 ```
 - S
