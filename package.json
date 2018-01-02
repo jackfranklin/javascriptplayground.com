@@ -26,7 +26,6 @@
   "devDependencies": {
     "assetgraph-builder": "^5.7.0",
     "prettier": "1.9.2",
-    "subfont": "^2.0.1",
     "svgo": "^0.7.2"
   }
 }
