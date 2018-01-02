@@ -10,8 +10,7 @@
     "jekyll": "jekyll serve --incremental --future --limit_posts 30 --watch",
     "prebuild": "rm -rf build_tmp dist",
     "build": "jekyll build -d build_tmp && subfont build_tmp/*.html -i --inline-css",
-    "postbuild": "buildProduction build_tmp/*.html --outroot dist --canonicalroot https://javascriptplayground.com/ --asyncscripts --optimizeimages",
-    "minify-css": "uglifycss _includes/styles.css > _includes/styles_min.css"
+    "postbuild": "buildProduction build_tmp/*.html --outroot dist --canonicalroot https://javascriptplayground.com/ --asyncscripts --optimizeimages"
   },
   "repository": {
     "type": "git",
@@ -24,9 +23,6 @@
     "url": "https://github.com/jackfranklin/javascriptplayground.com/issues"
   },
   "homepage": "https://github.com/jackfranklin/javascriptplayground.com#readme",
-  "dependencies": {
-    "uglifycss": "0.0.27"
-  },
   "devDependencies": {
     "assetgraph-builder": "^5.7.0",
     "prettier": "1.9.2",
