@@ -183,6 +183,8 @@ generateOptionForSize = size => (
 
 This is now easier to follow and allows me to use HTML entities and have them work as expected.
 
+> You could have used a literal mdash here but we prefer to use the `&mdash;` version and hence Fragments provided a nice solution for us.
+
 ## Conclusion
 
 I can already see many more places through our app which could be made more straightforward and easier to work with as a result of `Fragment`s and I'm excited to continue using them. Not only do they clear up a lot of component code, but the fact that they have no output into the DOM should lead to fewer superfluous `div` and `span` elements that a lot of React applications are littered with.
