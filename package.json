@@ -8,9 +8,9 @@
     "prettier-lint": "prettier '_posts/*.md' -l",
     "prettier-write": "prettier '_posts/*.md' --write",
     "jekyll": "jekyll serve --incremental --future --limit_posts 30 --watch",
-    "prebuild": "rm -rf dist",
-    "build": "jekyll build -d dist",
-    "postbuild": "subfont dist/*.html -i --inline-css",
+    "prebuild": "rm -rf build_tmp dist",
+    "build": "jekyll build -d build_tmp && subfont build_tmp/*.html -i --inline-css",
+    "postbuild": "buildProduction build_tmp/*.html --outroot dist --canonicalroot https://javascriptplayground.com/ --asyncscripts --optimizeimages",
     "minify-css": "uglifycss _includes/styles.css > _includes/styles_min.css"
   },
   "repository": {
@@ -28,7 +28,9 @@
     "uglifycss": "0.0.27"
   },
   "devDependencies": {
+    "assetgraph-builder": "^5.7.0",
     "prettier": "1.9.2",
-    "subfont": "^2.0.1"
+    "subfont": "^2.0.1",
+    "svgo": "^0.7.2"
   }
 }

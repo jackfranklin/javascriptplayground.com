@@ -2,5 +2,6 @@ node_modules
 package-lock.json
 _site/
 dist
+build_tmp
 .DS_Store
 .jekyll-metadata
