@@ -358,6 +358,6 @@ renderAnt { position, direction } =
 
 And with that, we have our ant!
 
-![](/img/posts/langtons-ant/langtons-ant.png)
+![](/img/posts/langtons-ant/langtons-ant.png?resize=820,1000&pngquant=64)
 
 If you'd like to find the full code, you can [find it on Github](https://github.com/jackfranklin/langtons-ant-elm). I'd encourage you to have a try at building Langton's Ant, it's a well defined, contained challenge that has some really interesting parts. Elm's type system makes it a perfect fit for a challenge like this, and it was a neat way to explore and learn more about the language.

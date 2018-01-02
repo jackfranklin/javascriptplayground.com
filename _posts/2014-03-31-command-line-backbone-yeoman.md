@@ -104,7 +104,7 @@ There's also some other files here that you might not have noticed because they 
 
 Let's get to work on the application. It's going to be a simple library app, and the bit we'll build today will show a list of books in our library. First, we can see the application running. In your terminal, run `grunt serve` and visit `http://localhost:9000`. Bring up the console too, and you should see something that looks like below:
 
-![](/img/yobb-image3.png)
+![](/img/yobb-image3.png?pngquant=16)
 
 If you see this, Yeoman has set everything up properly and we're all ready to build our application.
 
@@ -297,7 +297,7 @@ Here we just create a new book and a new view instance. We pass that book into t
 
 Now for the moment of truth. Run `grunt server` again and examine the resulting web page. You should see the text "Your content here" on the left hand side:
 
-![](/img/yobb-image4.png)
+![](/img/yobb-image4.png?pngquant=16)
 
 That's great! It means that the view was rendered, it correctly used the template and grabbed the content. Let's change the template to the following:
 

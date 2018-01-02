@@ -33,11 +33,11 @@ We could either do a big bang rewrite, and start again entirely from scratch in 
 
 There's another benefit of incremental migrations: you start to add value immediately. In a big rewrite, you only add value at the end of the migration, when everything is done. If you migrate piece by piece you add value every time you deploy some migrated code. This approach is known as the strangler approach, a term coined by Martin Fowler but one that I became aware of after a talk from [Sabrina Leandro at Lead Dev](https://www.youtube.com/watch?v=1QPEflWn1WU&list=PLBzScQzZ83I81fnpqX2AkYD5c5cKgrqc2&index=10).
 
-![](/img/posts/migrating/value.png)
+![](/img/posts/migrating/value.png?pngquant=16)
 
 This approach of migrating from the inside out was made possible by [ngReact](https://github.com/ngReact/ngReact), an Angular plugin that lets you render React from within Angular applications. Our approach was to start with very small components, and then work our way up the tree of components, replacing each part as we went.
 
-![](/img/posts/migrating/tree.png)
+![](/img/posts/migrating/tree.png?pngquant=16)
 
 By taking this approach, we were able to ship aggressively - the first part of our codebase to be written in React was shipped on day two of the migration.
 
@@ -61,7 +61,7 @@ After we'd got rid of all the code we didn't need, we based prioritising compone
 
 Given these three factors we could prioritise work:
 
-![](/img/posts/migrating/churn.png)
+![](/img/posts/migrating/churn.png?pngquant=16)
 
 We also made sure to mix up different types of work. Some parts of the migration were more visual based - moving one small Angular component to React - and some were more "under the hood", such as moving the HTTP layer from Angular's `$http` service to using the `fetch` API. Others were purely tooling based; we used the migration as a good excuse to bring the tooling up to speed and moved from Browserify to Webpack, and migrated tests from Karma to Jest. We made sure that as a team each developer got as much variety in the work as they could (based on their preferences, too) because otherwise we risked the work becoming very monotonous; there's only so many times you can migrate small components from Angular to React without feeling a bit bored!
 

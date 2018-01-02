@@ -49,13 +49,13 @@ This property of React, its explicitness of data passing between components, is 
 
 This diagram shows how props keep communication clear but can get a little excessive as you gain many layers in your application; each component has to explictly pass props down to any children.
 
-![](/img/posts/context-in-react/props.png)
+![](/img/posts/context-in-react/props.png?resize=820,1000&pngquant=16)
 
 One issue you might find in big apps is that you might need to pass props from a top level `ParentComponent` to a deeply nested `ChildComponent`. The components in between will probably have no use the these props and should probably not even know about them. When this situation arises, you can consider using React's context feature.
 
 Context acts like a portal in your application in which components can make data available to other components further down the tree without being passed through explictly as props.
 
-![](/img/posts/context-in-react/context.png)
+![](/img/posts/context-in-react/context.png?resize=820,1000&pngquant=16)
 
 When a component defines some data onto its _context_, any of its descendants can access that data. That means any child further down in the component tree can access data from it, without being passed it as a property. Let's take a look at context in action.
 
