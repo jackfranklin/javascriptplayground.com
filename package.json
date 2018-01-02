@@ -8,9 +8,9 @@
     "prettier-lint": "prettier '_posts/*.md' -l",
     "prettier-write": "prettier '_posts/*.md' --write",
     "jekyll": "jekyll serve --incremental --future --limit_posts 30 --watch",
-    "prebuild": "rm -rf build_tmp dist",
-    "build": "jekyll build -d build_tmp && subfont build_tmp/*.html -i --inline-css",
-    "postbuild": "buildProduction build_tmp/*.html --outroot dist --canonicalroot https://javascriptplayground.com/ --asyncscripts --optimizeimages"
+    "prebuild": "rm -rf _site dist",
+    "build": "jekyll build && buildProduction _site/*.html --outroot dist --canonicalroot https://javascriptplayground.com/ --asyncscripts --optimizeimages --svgo --subsetfonts",
+    "postbuild": ""
   },
   "repository": {
     "type": "git",
