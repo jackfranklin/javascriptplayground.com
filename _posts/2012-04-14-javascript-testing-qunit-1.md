@@ -28,16 +28,24 @@ The first thing we need to do is include all the QUnit source. QUnit needs 3 thi
 3. It needs a specific HTML structure.
 
 You can find download links for the JS & CSS files [here](http://docs.jquery.com/Qunit#Using_QUnit). You could include them direct but I like to download them & add them locally, putting them into the `qunitsrc` directory.
+
+```html
 <link rel="stylesheet" href="qunitsrc/qunit.css" type="text/css" media="screen">
 <script type="text/javascript" src="qunitsrc/qunit.js"></script>
 <script type="text/javascript" src="app/instagramwrapper.js"></script>
 <script type="text/javascript" src="test/instagramwrapper_tests.js"></script>
+```
+
 And the HTML structure we need:
+
+```html
 <h1 id="qunit-header">QUnit Test Suite</h1>
 <h2 id="qunit-banner"></h2>
 <div id="qunit-testrunner-toolbar"></div>
 <h2 id="qunit-userAgent"></h2>
 <ol id="qunit-tests"></ol>
+```
+
 Most of those are fairly explanatory. If not, don't worry, once we run an actual test it should become more apparent. Before we write our actual code, lets set up a test test just to make sure it works. Load up `instagramwrapper_tests.js` (I'll refer to this as just "the tests file" from now on) and put in:
 
     function saysHi(name) {
