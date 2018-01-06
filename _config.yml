@@ -7,3 +7,4 @@ twitter:
   username: Jack_Franklin
 paginate: 6
 paginate_path: "/blog/page:num/"
+include: ["_redirects"]
