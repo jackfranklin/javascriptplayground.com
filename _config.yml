@@ -1,4 +1,4 @@
-permalink: /blog/:year/:month/:title/
+permalink: /:title/
 plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
@@ -7,3 +7,7 @@ twitter:
   username: Jack_Franklin
 paginate: 6
 paginate_path: "/blog/page:num/"
+include: ["_redirects"]
+sass:
+  sass_dir: _sass
+  style: compressed
