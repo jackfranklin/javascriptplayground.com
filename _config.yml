@@ -11,3 +11,4 @@ include: ["_redirects"]
 sass:
   sass_dir: _sass
   style: compressed
+url: https://javascriptplayground.com
