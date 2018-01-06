@@ -1,4 +1,4 @@
-permalink: /blog/:year/:month/:title/
+permalink: /:title/
 plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag

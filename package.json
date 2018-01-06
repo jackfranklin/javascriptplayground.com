@@ -8,6 +8,7 @@
     "prettier-lint": "prettier '_posts/*.md' -l",
     "prettier-write": "prettier '_posts/*.md' --write",
     "jekyll": "jekyll serve --incremental --future --limit_posts 30 --watch",
+    "deploy": "jekyll build",
     "minify-css": "uglifycss _includes/styles.css > _includes/styles_min.css"
   },
   "repository": {
