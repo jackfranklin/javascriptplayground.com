@@ -12,3 +12,8 @@ sass:
   sass_dir: _sass
   style: compressed
 url: https://javascriptplayground.com
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /img/box.png
