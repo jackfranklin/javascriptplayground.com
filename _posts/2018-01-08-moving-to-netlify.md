@@ -60,8 +60,9 @@ As part of the free Netlify package you are also able to add custom domains. The
 process of moving the domain to being hosted by Netlify was straight forward:
 
 1. Disable Cloudflare on the domain. I used this for SSL, but Netlify provides
-   that out of the box too. In hindsight I should have done this last because it
-   meant for a while there were security warnings on the site.
+   that out of the box too (via [Let's Encrypt](https://letsencrypt.org/)). In
+   hindsight I should have done this last because it meant for a while there
+   were security warnings on the site.
 
 2. Use Netlify's admin panel to create a DNS zone for the domain, which allows
    Netlify to fully control the domain.
