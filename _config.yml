@@ -16,4 +16,4 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /img/box.png
+      image: /img/graph-image.png
