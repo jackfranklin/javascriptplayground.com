@@ -1,0 +1,93 @@
+---
+layout: none
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Testing React with Enzyme and Jest series</title>
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="/styles/testing-react.css" rel="stylesheet" type="text/css">
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+  </head>
+  <body>
+    <header>
+      <div class="tutorial-header">
+        <h1>Testing React with Enzyme and Jest.</h1>
+      </div>
+    </header>
+    <section class="content-block">
+      <div class="container">
+        <h3>A video series to enable you to test React components <strong>thoroughly</strong>, <strong>refactor with confidence</strong> and <strong>abstract logic out of components</strong>.</h3>
+        <h3>If that's not enough all videos are <strong>entirely free</strong> until <strong>January 31st</strong>.</h3>
+      </div>
+    </section>
+    <section class="content-block content-block-a">
+      <div class="container">
+        <div class="who-for">
+          <h3>Is this course for me?</h3>
+          <p>If you're writing React in any capacity, this course if for you! This course assumes a base level understanding of React, but whether you're working on small React side projects or full React applications at the day job, you'll learn how to test a variety of React components.</p>
+
+          <p>No prior knowledge of testing or React specific testing is required; we'll start from scratch and build up our testing knowledge over this set of ten videos.</p>
+
+          <p>Along with how-tos we'll also talk about characteristics of well written tests and how to avoid common pitfalls when writing tests.</p>
+        </div>
+        <div class="what-learn">
+          <h3>What will I learn?</h3>
+
+          <p>See below for a full list of topics covered in the videos of this course, but in a nutshell this course contains all you need to be confident testing a variety of React components. We'll cover:</p>
+
+          <ul>
+            <li>The roles that Jest and Enzyme play in writing React tests.</li>
+            <li>How to test for UI changes in React components using Jest snapshots.</li>
+            <li>Testing React components that make HTTP requests by mocking HTTP requests.</li>
+            <li>Using Jest spies to mock behaviour in React components for testing purposes.</li>
+            <li>Testing React components that are connected to Redux, including how to test dispatching actions.</li>
+            <li>Using Enzyme's mount API to test lifecycle methods like <code>componentDidMount</code> and <code>componentDidUpdate</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="content-block content-block-b">
+      <div class="container">
+        <h3>Who is this course by?</h3>
+        <div class="about-author">
+          <div class="jack-head">
+            <img src="/img/head.png" alt="Headshot of Jack Franklin" />
+          </div>
+          <div class="about-author-content">
+            <p>Jack is JavaScript and React developer in London who has been working with and testing React applications for the past three years.</p>
+            <p>He's released numerous tutorials and videos on <a href="/">The JavaScript Playground</a> and <a href="https://www.youtube.com/channel/UCa6ZNjpXUYfBT9CCucusjvg?view_as=subscriber">his YouTube channel</a>.</p>
+            <p>He's also spoken about React testing at conferences including <a href="https://www.youtube.com/watch?v=KBhHsYlF4mQ">React Amsterdam</a>.</p>
+
+            <a class="twitter-follow-button" href="https://twitter.com/Jack_Franklin">
+              Follow @Jack_Franklin
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a href="/" class="logo">
+      <img src="/img/logo_big.png" alt="the javascript playground" />
+    </a>
+
+    {% include ga.html %}
+</body>
+</html>
