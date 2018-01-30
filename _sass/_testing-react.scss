@@ -11,6 +11,10 @@ body {
   margin: 0;
 }
 
+h1 {
+  text-shadow: 0px 2px 0px #ccc;
+}
+
 header {
   background: #fff;
   box-shadow: 0 1px #fff inset, 0 1px 3px rgba(34, 25, 25, 0.4);
@@ -43,7 +47,6 @@ header h1 {
   text-align: center;
   margin: 0 auto;
   line-height: 65px;
-  text-shadow: 0px 2px 0px #ccc;
 }
 
 header h3 {
@@ -85,6 +88,7 @@ header h3 {
   justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
+  padding: 10px;
 }
 
 .content-block h3 {
@@ -124,11 +128,49 @@ header h3 {
 
 .about-author-content {
   margin-left: 20px;
+
+  > p:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.get-started,
+.watch-now {
+  padding: 1em;
+  display: inline-block;
+  font-size: 20px;
+  text-decoration: none;
+  color: #111;
+  background: #f6dd3b;
+  border: 1px solid #111;
+  transition: all 0.2s;
+  position: relative;
+
+  &:hover {
+    background: #fff;
+  }
 }
 
 @media screen and (max-width: 799px) {
   .who-for,
   .what-learn {
     width: 100%;
+  }
+}
+
+.videos {
+  .video-container {
+    padding: 20px 0;
+
+    &:nth-of-type(odd) {
+      background: #f6dd3b;
+    }
+  }
+
+  h3 {
+    margin: 0;
+  }
+  img {
+    float: left;
   }
 }

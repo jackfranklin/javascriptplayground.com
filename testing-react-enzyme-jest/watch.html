@@ -1,0 +1,78 @@
+---
+layout: none
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Testing React with Enzyme and Jest</title>
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="/styles/testing-react.css" rel="stylesheet" type="text/css">
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+  </head>
+  <body>
+    <header>
+      <div class="tutorial-header">
+        <h1>Testing React with Enzyme and Jest.</h1>
+      </div>
+    </header>
+    <section class="content-block">
+      <div class="container">
+        <h3>A video series to enable you to test React components <strong>thoroughly</strong>, <strong>refactor with confidence</strong> and <strong>abstract logic out of components</strong>.</h3>
+
+        <h3>Watch the first 5 videos <strong>for free</strong>, and pay just <strong>$20</strong> for the rest.</h3>
+      </div>
+    </section>
+    <section class="videos">
+      <div class="video-container content-block">
+        <div class="container">
+          <div class="video-content">
+            <h3>Episode One: Setting up Jest and Enzyme</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <a href="/foo" class="watch-now">Watch Now >></a>
+        </div>
+      </div>
+      <div class="video-container content-block">
+        <div class="container">
+          <div class="video-content">
+            <h3>Episode Two: Setting up Jest and Enzyme</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <a href="/foo" class="watch-now">Watch Now >></a>
+        </div>
+      </div>
+      <div class="video-container content-block">
+        <div class="container">
+          <div class="video-content">
+            <h3>Episode Three: Setting up Jest and Enzyme</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <a href="/foo" class="watch-now">Watch Now >></a>
+        </div>
+      </div>
+    </section>
+    <a href="/" class="logo">
+      <img src="/img/logo_big.png" alt="the javascript playground" />
+    </a>
+
+    {% include ga.html %}
+</body>
+</html>
