@@ -162,6 +162,10 @@ header h3 {
   .video-container {
     padding: 20px 0;
 
+    .container {
+      display: block;
+    }
+
     &:nth-of-type(odd) {
       background: #f6dd3b;
     }
@@ -173,4 +177,37 @@ header h3 {
   img {
     float: left;
   }
+}
+
+.buy-now {
+  a:link,
+  a:visited {
+    color: #111;
+  }
+
+  a:hover {
+    text-decoration: none;
+    background: white;
+  }
+  .content-block:nth-of-type(even) {
+    background: #f6dd3b;
+  }
+  .container {
+    display: block;
+  }
+
+  ul {
+    margin: 10px 0;
+  }
+
+  .get-started {
+    margin-top: 30px;
+  }
+}
+
+.faq li {
+  margin-bottom: 20px;
+}
+.faq strong {
+  display: block;
 }
