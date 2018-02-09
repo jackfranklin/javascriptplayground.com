@@ -28,9 +28,9 @@ layout: none
     }(document, "script", "twitter-wjs"));</script>
     <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
     <script type="text/javascript">
-    Paddle.Setup({
-      vendor: 29460
-    });
+      Paddle.Setup({
+        vendor: 29460
+      });
   </script>
   </head>
   <body>
@@ -51,7 +51,7 @@ layout: none
             <li>Get help and answers from me to questions you might have from watching the videos.</li>
           </ul>
 
-          <a href="watch/" class="get-started">Buy now >></a>
+          <a href="watch/" class="get-started js-buy-now">Buy now with Paddle >></a>
         </div>
       </div>
       <div class="content-block">
@@ -74,5 +74,14 @@ layout: none
     </a>
 
     {% include ga.html %}
+    <script type="text/javascript">
+      document.querySelector('.js-buy-now').addEventListener('click', function(event) {
+        event.preventDefault()
+        Paddle.Checkout.open({
+          product: 524572,
+          quantity: false,
+        });
+      })
+    </script>
   </body>
   </html>
