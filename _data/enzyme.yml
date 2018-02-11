@@ -1,0 +1,48 @@
+- title: "Episode One: Setting up Jest and Enzyme"
+  description: "In this video we create a new sample project and configure Jest to run our tests. We also look at how to set up Enzyme using its adapter system to ensure it works with the version of React that we are using."
+  free: true
+  url: "https://youtu.be/aSQ8v9JH5C8"
+
+- title: "Episode Two: Testing user interactions"
+  description: "In this episode we will use Enzyme's simulate to test components that users are able to interact with."
+  free: true
+  url: "https://youtu.be/KsiuE0IS9AE"
+
+- title: "Episode Three: Refactoring React with tests"
+  description: "Now we have a functioning component and tests that prove its functionality, we can refactor the component's implementation with the confidence that we have not broken any features thanks to our test suite."
+  free: true
+  url: "https://youtu.be/53TBT5wd_C4"
+
+- title: "Episode Four: Testing with Jest snapshots"
+  description: "Rather than test our component's output using multiple assertions, we can more easily test visual changes to components by using snapshots, a built in feature of Jest."
+  free: true
+  url: "https://youtu.be/9liG4PuqKY0"
+
+- title: "Episode Five: Testing trees of components"
+  description: "In this episode we'll look at how to test components that render other components and learn how to know how many tests to write for each component."
+  free: true
+  url: "https://youtu.be/aoEKfXZOB6U"
+
+- title: "Episode Six: Components that talk to APIs"
+  description: "This episode will discuss how to test React components that make network requests to an API. We will look at how to fake the network request in the test environment and assert that the compoennt renders the fetched data correctly."
+  free: false
+
+- title: "Episode Seven: Stubbing modules with Jest"
+  description: "This episode continues looking at dealing with network requests in tests, but this time we'll refactor our async HTTP code into a separate module that we can then mock in tests by using Jest's spy functions."
+  free: false
+
+- title: "Episode Eight: Testing lifecycle methods"
+  description: "Sometimes your component will have logic in a lifecycle hook that you want to test. In this episode we will see how to call lifecycle methods in your tests from Enzyme in order to fully test them."
+  free: false
+
+- title: "Episode Nine: Testing Redux components"
+  description: "Redux is a great tool to manage complex state across large React applications, but can make components harder to test. In this episode we will see how to test components that have to interact with Redux."
+  free: false
+
+- title: "Episode Ten: Testing forms"
+  description: "Using Enzyme we're able to interact with and fill in form elements. In this episode we'll use that functionality to test a React component that contains a form for the user to fill in."
+  free: false
+
+- title: "Episode Eleven: Changes in Jest"
+  description: "This episode discusses some of the small changes to Jest and Enzyme that occured after the videos were recorded."
+  free: false
