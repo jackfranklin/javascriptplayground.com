@@ -34,15 +34,16 @@ layout: none
       </div>
     </header>
     <section class="content-block">
-      <div class="container">
+      <div class="container header-container">
         <h3>A video series to enable you to test React components <strong>thoroughly</strong>, <strong>refactor with confidence</strong> and <strong>abstract logic out of components</strong>.</h3>
 
         <h3>Watch the first 5 videos <strong>for free</strong>, and pay just <strong>$20</strong> for the rest.</h3>
 
-        <a href="watch/" class="get-started">Watch now >></a>
+        <a href="#video-list" class="get-started">Watch now >></a>
+        <a href="#buy-now" class="get-started buy-now">Buy the full bundle >></a>
       </div>
     </section>
-    <section class="content-block content-block-a">
+    <section class="content-block">
       <div class="container">
         <div class="who-for">
           <h3>Is this course for me?</h3>
@@ -68,7 +69,21 @@ layout: none
         </div>
       </div>
     </section>
-    <section class="content-block content-block-b">
+    <section class="content-block" id="video-list">
+      <ul class="videos-list">
+        {% for video in site.data.enzyme %}
+        <li class="container video-container">
+          {{ video.title }}
+          {% if video.free %}
+          <a href="{{ video.url }}" class="call-to-action" target="_blank">Watch Now >></a>
+          {% else %}
+          <a href="#buy-now" class="call-to-action">Buy now >></a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="content-block">
       <div class="container">
         <h3>Who is this course by?</h3>
         <div class="about-author">
@@ -87,10 +102,67 @@ layout: none
         </div>
       </div>
     </section>
+    <section class="content-block" id="buy-now">
+      <div class="container">
+        <h3>Buy the Testing React bundle now and get:</h3>
+
+        <ul>
+          <li>Eleven full HD, DRM free, videos in mp4 format for you to download and watch from any device.</li>
+          <li>Access to the full source code from all eleven videos.</li>
+          <li>Any new videos or updates to old videos in the future, for free.</li>
+          <li>Get help and answers from me to questions you might have from watching the videos.</li>
+        </ul>
+
+        <a href="watch/" class="get-started js-buy-now">Buy now with Paddle for $20 >></a>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <h3>Frequently Asked Questions</h3>
+
+        <ul class="faq">
+          <li><strong>How long are the videos?</strong> Each video is around 5-10 minutes in length. They're designed to be easily watchable in short chunks when you've got a few minutes spare, on the commute to work, or in the evenings.</li>
+          <li><strong>I'm a student, can I get a discount?</strong> Yes! <a href="mailto:jack@javascriptplayground.com">Email me</a> from your school/college/university email address.</li>
+          <li><strong>What format are the videos?</strong> They are MP4 files, filmed in full 1080p high definition. You can download them for watching whenever you like, and they are yours to keep forever.</li>
+          <li><strong>What if I don't like the course?</strong> I want everyone to be fully satisified with the videos. If you aren't happy with them, <a href="mailto:jack@javascriptplayground.com">Email me</a> and I'll sort out a refund for you.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <div id="mc_embed_signup">
+          <h3>Subscribe to keep up to date with the latest content.</h3>
+          <p>Join the JS Playground mailing list to be kept up to date with the latest tutorials, screencasts and video courses. You won't be spammed and you can unsubscribe at any time.</p>
+          <form action="//javascriptplayground.us14.list-manage.com/subscribe/post?u=5935b4febeb6cbf03a8bde89c&amp;id=e5d4b1e488" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5935b4febeb6cbf03a8bde89c_e5d4b1e488" tabindex="-1" value=""></div>
+              <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe">
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
     <a href="/" class="logo">
       <img src="/img/logo_big.png" alt="the javascript playground" />
     </a>
 
     {% include ga.html %}
+    <script src="smooth-scroll.js"></script>
+    <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+    <script>
+      new SmoothScroll('a[href*="#"]');
+      Paddle.Setup({
+        vendor: 29460
+      });
+      document.querySelector('.js-buy-now').addEventListener('click', function(event) {
+        event.preventDefault()
+        Paddle.Checkout.open({
+          product: 524572,
+          quantity: false,
+        });
+      })
+    </script>
 </body>
 </html>

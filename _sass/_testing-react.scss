@@ -1,3 +1,8 @@
+@import 'mailchimp';
+
+$yellow: #f6dd3b;
+$grey: #ededed;
+
 html {
   font-size: 100%;
   text-rendering: optimizeLegibility;
@@ -76,12 +81,12 @@ header h3 {
   padding: 20px;
 }
 
-.content-block-a {
-  background: #f6dd3b;
+.content-block:nth-of-type(even) {
+  background: $yellow;
 }
 
-.content-block-b {
-  background: #fff;
+.content-block:nth-of-type(odd) {
+  background: $grey;
 }
 
 .content-block .container {
@@ -89,6 +94,14 @@ header h3 {
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+
+  &.header-container {
+    display: block;
+
+    .buy-now {
+      margin-left: 10px;
+    }
+  }
 }
 
 .content-block h3 {
@@ -135,7 +148,8 @@ header h3 {
 }
 
 .get-started,
-.watch-now {
+.watch-now,
+#mc-embedded-subscribe {
   padding: 1em;
   display: inline-block;
   font-size: 20px;
@@ -148,6 +162,15 @@ header h3 {
 
   &:hover {
     background: #fff;
+  }
+}
+
+#mc-embedded-subscribe {
+  margin-top: 10px;
+  width: 300px;
+  display: block;
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -210,4 +233,72 @@ header h3 {
 }
 .faq strong {
   display: block;
+}
+
+.videos-list {
+  li {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 23px;
+    height: 50px;
+    line-height: 50px;
+
+    @media (max-width: 650px) {
+      line-height: 30px;
+    }
+
+    padding: 10px;
+    border-bottom: 1px solid $yellow;
+
+    @media (max-width: 860px) {
+      &.container {
+        display: block;
+        height: auto;
+        padding: 20px 0;
+      }
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    .call-to-action {
+      @media (max-width: 860px) {
+        display: block;
+        width: 50%;
+        min-width: 200px;
+        margin-top: 15px;
+        padding-left: 0;
+      }
+      padding: 0 5px;
+      border-radius: 3px;
+    }
+  }
+}
+
+.content-block a {
+  &:link,
+  &:visited {
+    color: #111;
+  }
+
+  &:hover {
+    background-color: #fff;
+    transition: background-color 0.2s ease-in;
+  }
+}
+
+.js-buy-now {
+  margin-top: 20px;
+}
+
+#mc_embed_signup {
+  background: none;
+
+  form {
+    text-align: left;
+    input.email {
+      font-size: 20px;
+      width: 80%;
+    }
+  }
 }
