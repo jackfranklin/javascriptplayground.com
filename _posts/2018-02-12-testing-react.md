@@ -13,7 +13,7 @@ years now and something that I get asked more often than not is how to test
 React components.
 
 There are many great courses out there to help you learn React, but this course
-is specifically for those who have done a bit of React but would like to know
+is specifically for those who have written React components and would like to know
 how best to test them. Not only the specifics of _how_ to test, configuring
 Jest, using Enzyme's API, but also _what_ to test.
 
