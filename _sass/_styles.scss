@@ -356,6 +356,20 @@ ul.archives {
   margin: 1.5em 0;
 }
 
+.thank-you-testing-react {
+  padding: 10px;
+  background: #f6dd3b;
+  a:link,
+  a:visited {
+    color: #111;
+  }
+
+  a:hover {
+    background-color: #fff;
+    transition: background-color 0.2s ease-in;
+  }
+}
+
 .pagination {
   overflow: auto;
   width: 90%;
