@@ -86,21 +86,100 @@ success and error cases, check that it lists the right users, and test that it
 can show a user when you click on them. That's a lot to test. Instead, let's
 imagine we had a suite of components that we could compose together.
 
-### 2. Delegates data processing
+The first component, named something like `UsersContainer`, could be responsible
+for fetching the users and then passing them down into `UserList`, which in turn
+could render a `User` component.
 
-foo
+By doing this you end up with a tree of components, where each one has one job
+and then passes the rest of the work down to the child:
 
-### 3. Has scoped CSS styling
+* `UsersContainer`: fetch data, show loading spinner / errors, pass data down
+* `UserList`: lists the users, delegating the rendering to `User`. Keeps track
+  of the active user.
+* `User` can render an individual user and deal with UI interactions.
 
-### 4. Uses PropTypes consistently (or TypeScript/Flow)
+### 2. Delegates data processing to an external module
 
-### 5. Has a concise `render` method
+As a general rule I like to keep my React components as succinct as they can be,
+and one of the best ways of doing that is to pull logic out into external
+modules. Taking the list of users example from above, imagine the component had
+to make the request and then process the data:
 
-### 6. Does not store state that can be calculated from `props`
+```js
+componentDidMount() {
+  this.fetchUsers().then(users => this.processUsersFromApi(users))
+}
 
-### 7. Has consistently named event handlers
+processUsersFromApi(users) {
+  // some data processing here
+}
 
-### 8. Handles errors gracefully
+render() {
+  ...
+}
+```
+
+To test this code we have to always go through the component. It's also harder
+if we want to reuse this processing logic (you could imagine more than one place
+in our code having to process data from our users API), and makes the React
+component contain a substantial amount of code that isn't specific to UI.
+
+Instead, we're much better off extracting that code into a separate module:
+
+```js
+import processUsersFromApi from './process-users-from-api'
+
+componentDidMount() {
+  this.fetchUsers().then(processUsersFromApi)
+}
+
+render() {
+  ...
+}
+```
+
+And now the component is shorter and we can test our business logic in
+isolation.
+
+### 3. Uses PropTypes consistently (or TypeScript/Flow)
+
+It's tempting when you're writing a component to not use PropTypes. They involve
+extra effort both to write initially, and then to maintain as you develop your
+component. However, they offer a lot of value to people who use your component,
+and other people on your team who have to maintain the code. You'll thank
+yourself if you come back to a component in six months and have to figure out
+how to use it!
+
+Documenting the prop types also means a typo is spotted much quicker than it
+would be otherwise:
+
+```js
+const UserComponent = () => {}
+UserComponent.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+}
+
+// later...
+
+class App extends Component {
+  render() {
+    // causes error about missing prop isAuthenticated in console
+    return (
+      <div>
+        <UserComponent isAuthenticatd={true} />
+      </div>
+    )
+  }
+}
+```
+
+### 4. Has a concise `render` method
+
+### 5. Does not store state that can be calculated from `props`
+
+### 6. Has consistently named event handlers
+
+### 7. Handles errors gracefully
 
 ```
 
