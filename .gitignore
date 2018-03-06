@@ -2,3 +2,7 @@ _site/
 .DS_Store
 .jekyll-metadata
 yarn-error.log
+.sass-cache/
+.bundle/
+node_modules/
+vendor/
