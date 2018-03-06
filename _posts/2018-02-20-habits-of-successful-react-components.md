@@ -175,6 +175,176 @@ class App extends Component {
 
 ### 4. Has a concise `render` method
 
+A good sign that a component is taking on too much responsibility is if its
+render method becomes hard to understand. A component should ideally render a
+small amount of DOM, or delegate parts of its rendering to other components.
+
+For example, let's take a component that shows a user form. It shows a few text
+fields (to keep the example a bit shorter I've omitted some of the fields) and a
+search button. The search button's outputs and classes depend on if we've
+submitted the form or not, and we make use of the excellent
+[classnames](https://github.com/JedWatson/classnames) package to conditionally
+set classes.
+
+```js
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <label>
+            Your name
+            <input
+              type="text"
+              value={this.state.input}
+              placeholder="Enter your name"
+              onChange={this.onChange}
+            />
+          </label>
+          {/* imagine a few more text fields, labels, and so on...*/}
+          <button
+            type="submit"
+            className={classNames('btn', 'btn-primary', {
+              loading: this.state.loading,
+              disabled: this.state.input === '',
+            })}
+          >
+            {this.state.loading ? 'Loading...' : 'Go'}
+          </button>
+        </form>
+      </div>
+    )
+  }
+}
+```
+
+Already, even in this example, this component takes some effort to understand.
+And this is with some of the code omitted to avoid this blog post being too
+long! React and JSX is very expressive and on the whole easy to follow, but once
+your render method has some extra functionality or conditionals, they can
+occasionally become hard to follow.
+
+As a first pass you could pull out another render function to just handle the
+button:
+
+```js
+class App extends Component {
+  renderSubmit() {
+    return (
+      <button
+        type="submit"
+        className={classNames('btn', 'btn-primary', {
+          loading: this.state.loading,
+          disabled: this.state.input === '',
+        })}
+      >
+        {this.state.loading ? 'Loading...' : 'Go'}
+      </button>
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <label>
+            Your name
+            <input
+              type="text"
+              value={this.state.input}
+              placeholder="Enter your name"
+              onChange={this.onChange}
+            />
+          </label>
+          {/* imagine a few more text fields, labels, and so on...*/}
+          {this.renderSubmit()}
+        </form>
+      </div>
+    )
+  }
+}
+```
+
+This works, and is a valid step to take, but now whilst the `render` method is
+smaller, all you've done is move some of it into another function. There are
+times where this is enough to add clarity, but one confusing aspect is that it's
+harder to see what props and/or state the submit button uses. So to make that
+clearer we could pass them in as arguments:
+
+```js
+class App extends Component {
+  renderSubmit(loading, inputValue) {
+    return (
+      <button
+        type="submit"
+        className={classNames('btn', 'btn-primary', {
+          loading: loading,
+          disabled: inputValue === '',
+        })}
+      >
+        {loading ? 'Loading...' : 'Go'}
+      </button>
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <label>
+            Your name
+            <input
+              type="text"
+              value={this.state.input}
+              placeholder="Enter your name"
+              onChange={this.onChange}
+            />
+          </label>
+          {/* imagine a few more text fields, labels, and so on...*/}
+          {this.renderSubmit(this.state.loading, this.state.input)}
+        </form>
+      </div>
+    )
+  }
+}
+```
+
+This is certainly nicer because it's explicit about the values the submit button
+needs, but there's nothing to stop a developer by-passing this mechanism and
+just referring to `this.props` or `this.state` directly.
+
+The final, best step, is to instead embrace React to the fullest and extract a
+submit button component.
+
+```js
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <label>
+            Your name
+            <input
+              type="text"
+              value={this.state.input}
+              placeholder="Enter your name"
+              onChange={this.onChange}
+            />
+          </label>
+          <Button
+            loading={this.state.loading}
+            disabled={this.state.input === ''}
+          />
+        </form>
+      </div>
+    )
+  }
+}
+```
+
+Now we have a smaller component and we've ended up with a reusable button
+component that should be save us time the next time we build out a form.
+
 ### 5. Does not store state that can be calculated from `props`
 
 ### 6. Has consistently named event handlers
