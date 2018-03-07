@@ -19,7 +19,7 @@ a set of guidelines that I tend to follow, and in this post I wanted to share
 those below. I'd love to hear if you disagree with any of these (all of these
 are personal preference) or if you have any more to add to the list.
 
-### 1. Has a single job or responsibility
+## 1. Has a single job or responsibility
 
 If you picked one rule out of this list to follow, it would be this one. The
 approach I try to take here is to have as many React components as I need and to
@@ -100,7 +100,7 @@ and then passes the rest of the work down to the child:
   of the active user.
 * `User` can render an individual user and deal with UI interactions.
 
-### 2. Delegates data processing to an external module
+## 2. Delegates data processing to an external module
 
 As a general rule I like to keep my React components as succinct as they can be,
 and one of the best ways of doing that is to pull logic out into external
@@ -145,7 +145,7 @@ understand to work on it. Another advantage is that we can test our business
 logic in isolation now without having to mount React components in test to do
 so.
 
-### 3. Uses PropTypes consistently (or TypeScript/Flow)
+## 3. Uses PropTypes consistently (or TypeScript/Flow)
 
 It's tempting when you're writing a component to not use PropTypes. They involve
 extra effort both to write initially, and then to maintain as you develop your
@@ -177,7 +177,7 @@ class App extends Component {
 }
 ```
 
-### 4. Has a concise `render` method
+## 4. Has a concise `render` method
 
 A good sign that a component is taking on too much responsibility is if its
 render method becomes hard to understand. A component should ideally render a
@@ -349,7 +349,7 @@ class App extends Component {
 Now we have a smaller component and we've ended up with a reusable button
 component that should be save us time the next time we build out a form.
 
-### 5. Does not store state that can be calculated from `props`
+## 5. Does not store state that can be calculated from `props`
 
 One common mistake that beginners make with React is to set far too many
 attributes onto the state and spend a lot of effort keeping them in sync. A good
@@ -416,7 +416,7 @@ you could look into a technique called "memoization". This
 by Addy Osmani is a good introduction into it. There are plenty of libraries
 available to you too on npm that will help with this.
 
-### 6. Has consistently named event handlers
+## 6. Has consistently named event handlers
 
 A short point, but one that I've fallen foul to many times! It's very easy to
 pick names for event handling methods in your React component with no real
@@ -434,7 +434,7 @@ written components that use `onUserClick` and `userSubmittedForm`, for example)
 makes it harder to work on the code. The exact convention doesn't matter, but
 having one will definitely improve your component's maintainability.
 
-### 7. Uses class properties for event handlers
+## 7. Uses class properties for event handlers
 
 With the [class fields proposal](https://github.com/tc39/proposal-class-fields)
 now at Stage 3 of the ECMA process (meaning it's very likely to end up as part
@@ -468,7 +468,7 @@ into the language, we may end up being able to use a decorator on event handlers
 to bind them to the right scope, but until then arrow functions are a good
 alternative.
 
-### Conclusion
+## Conclusion
 
 By no means an exhaustive list; these are seven traits that I think represent
 React components that tend to be more reliable, more maintainable, more testable
