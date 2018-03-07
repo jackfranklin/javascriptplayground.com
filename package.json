@@ -7,8 +7,8 @@
   "scripts": {
     "prettier-lint": "prettier '_posts/*.md' -l",
     "prettier-write": "prettier '_posts/*.md' --write",
-    "jekyll": "jekyll serve --incremental --future --limit_posts 30 --watch",
-    "deploy": "jekyll build"
+    "jekyll": "bundle exec jekyll serve --incremental --future --limit_posts 30 --watch",
+    "deploy": "bundle exec jekyll build"
   },
   "repository": {
     "type": "git",
