@@ -30,9 +30,9 @@ component doing too much.
 A good indication of this in action is if a component has a very long `render`
 method (see Point 5 for more). That will often hint that it's doing too much
 that could be delegated. A similar indicator is a component with a lot of state
-or props. If you're having to store a tonne of data on a component, or take 10
-props to ensure it can be configured correctly, then maybe you should instead
-have more components that take fewer props.
+or props. If you're having to store a huge amount of data on a component, or
+take 10 props to ensure it can be configured correctly, then maybe you should
+instead have more components that take fewer props.
 
 Take for example, a component that fetches users from an API, lists them and
 lets you click on them to see the active user. It would have three distinct
@@ -64,7 +64,9 @@ renderUsers() {
 And then you'd need the logic for setting the active user in the state:
 
 ```js
-viewUser = userId => this.setState({ activeUser: this.state.users[userId] })
+viewUser(userId) {
+  this.setState({ activeUser: this.state.users[userId] })
+}
 ```
 
 And the relevant logic in the `render` function:
@@ -74,7 +76,7 @@ render() {
   return (
     <div>
       { this.renderUsers() }
-      { this.state.activeUser && <div>...</div>}
+      { this.state.activeUser && <div>output user things here</div>}
     </div>
   )
 }
@@ -115,7 +117,7 @@ processUsersFromApi(users) {
 }
 
 render() {
-  ...
+  // render some things!
 }
 ```
 
@@ -134,12 +136,14 @@ componentDidMount() {
 }
 
 render() {
-  ...
+  // render some things!
 }
 ```
 
-And now the component is shorter and we can test our business logic in
-isolation.
+And now the component is shorter and contains much less logic that we have to
+understand to work on it. Another advantage is that we can test our business
+logic in isolation now without having to mount React components in test to do
+so.
 
 ### 3. Uses PropTypes consistently (or TypeScript/Flow)
 
@@ -347,10 +351,128 @@ component that should be save us time the next time we build out a form.
 
 ### 5. Does not store state that can be calculated from `props`
 
+One common mistake that beginners make with React is to set far too many
+attributes onto the state and spend a lot of effort keeping them in sync. A good
+hint that you're doing this is that you find yourself continuously having to use
+[`componentWillReceiveProps`](https://reactjs.org/docs/react-component.html#componentwillreceiveprops)
+to react to property changes and update your state. To be clear: there are times
+when you will need to use this method, but on the whole you should be trying to
+avoid it.
+
+If you need to do some async work (such as making HTTP requests) when the
+component does update, you should use
+[`componentDidUpdate`](https://reactjs.org/docs/react-component.html#componentdidupdate).
+
+There are a couple of rules I try to follow that help to avoid these issues:
+
+* If a piece of data can be computed purely from properties, it should not be
+  kept in state.
+* Any data that a component has as its state should be data that _the component
+  itself changes_. A hint that you might not have quite the right state is if
+  you find yourself referring to `this.state.userName` without ever having a
+  `this.setState` call within a component.
+
+For the first case, a good example here is a component that takes `firstName`
+and `lastName` properties:
+
+```js
+<UserProfileLink firstName="Jack" lastName="Franklin" />
+```
+
+Inside this component we might decide to store a `fullName`:
+
+```js
+class UserProfileLink extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { fullName: this.props.firstName + this.props.lastName }
+  }
+}
+```
+
+Now in our render method we can refer to `this.state.fullName` to show the
+user's full name, and we now have state that is never changed within our
+component, and we'll have to use `componentWillReceiveProps` to keep it in sync.
+
+Keeping data in sync is hard; and it's a problem that the framework should solve
+for you. Rather than trying to manually do this work, we can instead just
+compute the `fullName` in our `render` call:
+
+```js
+class UserProfileLink extends Component {
+  render() {
+    const fullName = `${this.props.firstName} ${this.props.lastName}`
+
+    return <div>{fullName}</div>
+  }
+}
+```
+
+If the computation is more expensive, and you want to ensure you're not
+regenerating the value even if the properties that make it up haven't changed,
+you could look into a technique called "memoization". This
+[old but still excellent blog post](https://addyosmani.com/blog/faster-javascript-memoization/)
+by Addy Osmani is a good introduction into it. There are plenty of libraries
+available to you too on npm that will help with this.
+
 ### 6. Has consistently named event handlers
 
-### 7. Handles errors gracefully
+A short point, but one that I've fallen foul to many times! It's very easy to
+pick names for event handling methods in your React component with no real
+convention and on a smaller component or app that would not be an issue, but on
+larger apps you'll thank yourself for coming up with a convention that makes
+things easier.
 
+I've taken to prefixing all my event handling methods with `on`, so that it's
+clear when looking through a component which methods are event handlers. It also
+means you can search a file for `on` and find the methods fairly easily.
+
+This is a small point but one that will add up each time you use it in a
+component that you're working on. Having a variety of event handler names (I've
+written components that use `onUserClick` and `userSubmittedForm`, for example)
+makes it harder to work on the code. The exact convention doesn't matter, but
+having one will definitely improve your component's maintainability.
+
+### 7. Uses class properties for event handlers
+
+With the [class fields proposal](https://github.com/tc39/proposal-class-fields)
+now at Stage 3 of the ECMA process (meaning it's very likely to end up as part
+of JavaScript) and there being a
+[babel plugin available for this proposal](https://babeljs.io/docs/plugins/transform-class-properties/),
+it's become very common in the React community to define event handlers as arrow
+functions. This helps differentiate them from regular methods (which compliments
+Point 6 nicely) and ensures that they are bound correctly, so you don't have to
+explicitly call `.bind(this)` to ensure that they are called with the right
+scope.
+
+Coupled with a solid naming convention, this makes event handlers very easy to
+distinguish:
+
+```js
+onUserSubmitForm = event => {
+  event.preventDefault()
+  // do things
+}
+
+otherNonEventMethod() {
+  // do other things
+}
 ```
 
-```
+It's worth noting that there
+[are some issues with arrow functions that it's worth being aware of](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1),
+but in my opinion they present the best option available to us now. If and when
+the [Decorator Proposal](https://tc39.github.io/proposal-decorators/) makes it
+into the language, we may end up being able to use a decorator on event handlers
+to bind them to the right scope, but until then arrow functions are a good
+alternative.
+
+### Conclusion
+
+By no means an exhaustive list; these are seven traits that I think represent
+React components that tend to be more reliable, more maintainable, more testable
+and more fun to work on. I'd love to know if you have any to add to this list,
+or if you have any that you do differently. The great thing about React is that
+it gives you a lot of alternative approaches, so it's always great to see how
+others are doing it.
