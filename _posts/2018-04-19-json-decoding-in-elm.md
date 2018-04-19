@@ -1,22 +1,22 @@
 ---
 layout: post
-title: Adding URL support to an Elm app with elm-lang/navigation
-intro: In this 12 minute video I'll show you how to make your Elm application support URLs with the Navigation package.
-githubPath: 2017-10-03-navigation-routing-in-elm
+title: Getting started with JSON Decoding in Elm
+intro: In this post I'll talk you through getting started with JSON Decoding in Elm and look at breaking down how decoders work.
+githubPath: 2018-04-19-json-decoding-in-elm
 ---
+
+_This post was first published on ElmPlayground.com but has now been updated and
+moved to this blog._
 
 Something that continually trips beginners up in Elm is dealing with JSON
 responses from a third party API. I think this is because it's a completely new
 concept to those picking up Elm from JavaScript. It certainly took me a long
 time to get comfortable with Elm.
 
-**Update on 18/11/16: Code updated to Elm 0.18**
-
-Today, in the first post in a series, we'll look at using JSON decoders in Elm
-to deal with data from an API. I've purposefully made some of the data awkward
-to show some of the more complex parts of decoding JSON. Hopefully the APIs
-you're working with are much better than my fake one, but this post should have
-you covered if not!
+Today, we'll look at using JSON decoders in Elm to deal with data from an API.
+I've purposefully made some of the data awkward to show some of the more complex
+parts of decoding JSON. Hopefully the APIs you're working with are much better
+than my fake one, but this post should have you covered if not!
 
 Before we get into that though, let's go through the basics of Elm decoders.
 
@@ -214,7 +214,29 @@ The first argument to an object decoder is nearly always a constructor for a
 type alias. Just remember, it's a function that takes all the decoded values and
 turns them into the thing we want to end up with.
 
-## Back to the problem at hand
+## An alternative to `Decode.at`
+
+The decoding library also provides `Decode.field`, which reads out the value in
+a particular field.
+
+`Decode.field "foo" Decode.string` is the equivalent of
+`Decode.at ["foo"] Decode.string`, but some find it reads a bit nicer.
+`Decode.at` has the advantage of accepting a list to access nested fields, but
+if you don't need that you could use `Decode.field`.
+
+```elm
+-- these two decoders are equivalent
+
+userDecoder : Decode.Decoder User
+userDecoder =
+    Decode.map User (Decode.at [ "name" ] Decode.string)
+
+userDecoder : Decode.Decoder User
+userDecoder =
+    Decode.map User (Decode.field "name" Decode.string)
+```
+
+## Decoding a more complex JSON structure
 
 Now we're a bit more familiar with decoders, let's look at our API and dealing
 with the data it gives us.
@@ -329,7 +351,7 @@ userDecoder =
         -- we'll decode the sports object here in a mo
 ```
 
-A top tip when you want to test decoders incrementally - you can use
+A top tip when you want to test decoders incrementally is that you can use
 `Decode.succeed` to have a decoder pay no attention to the actual JSON and just
 succeed with the given value. So to finish our decoder we can simply fill in our
 missing fields with `Decode.succeed`:
