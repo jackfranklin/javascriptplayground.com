@@ -28,6 +28,10 @@ h2 {
   font-size: 1.35em;
 }
 
+h3 {
+  font-size: 1.2em;
+}
+
 .content-container {
   max-width: 860px;
   width: 90%;
@@ -127,6 +131,15 @@ li > code {
 .entry-content ul {
   list-style: disc;
   padding: 5px 0 0 20px;
+}
+
+.entry-content h2,
+.entry-content h3 {
+  margin-top: 1.5em;
+}
+
+.entry-content .highlighter-rouge {
+  margin-top: -1em;
 }
 
 pre {
