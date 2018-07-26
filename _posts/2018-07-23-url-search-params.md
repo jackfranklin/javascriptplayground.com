@@ -32,8 +32,13 @@ without the initial `?`). If you've got a full URL that you'd like to parse
 query params from, you can use `location.search` to pull those out:
 
 ```js
+// Working with the current URL
 // URL: buy-shirts-here.com/filter?size=M&colour=red&sleeves=short
 location.search //=> ?size=M&colour=red&sleeves=short
+
+// Creating an instance of new URL from scratch works too...
+const url = new URL("https://buy-shirts-here.com/filter?filter?size=M&colour=red&sleeves=short")
+url.search //=> ?size=M&colour=red&sleeves=short
 ```
 
 We can now that that `location.search` and pass it to the `URLSearchParams`
@@ -109,6 +114,7 @@ You can also use `.keys()` to get an iterator of all the keys in the params, or
 const params = new URLSearchParams(location.search)
 console.log([...params.keys()]) // => ['size', 'size', 'colour']
 console.log([...params.values()]) // => ['M', 'L', 'red']
+console.log([...params.entries()]) // => [['size', 'M'], ['size', 'L'], ['colour', 'red']]
 ```
 
 ### Modifying parameters
@@ -135,6 +141,7 @@ const params = new URLSearchParams(location.search)
 params.append('size', 'L')
 console.log([...params.keys()]) // => ['size', 'size', 'colour']
 console.log([...params.values()]) // => ['M', 'L', 'red']
+console.log([...params.entries()]) // => [['size', 'M'], ['size', 'L'], ['colour', 'red']]
 ```
 
 If you want to set a new value for the parameter and remove all other existing
@@ -146,6 +153,7 @@ const params = new URLSearchParams(location.search)
 params.set('size', 'L')
 console.log([...params.keys()]) // => ['size', 'colour']
 console.log([...params.values()]) // => ['L', 'red']
+console.log([...params.entries()]) // => [['size', 'L'], ['colour', 'red']]
 ```
 
 ### Getting the URL back out
