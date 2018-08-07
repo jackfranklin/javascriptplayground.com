@@ -55,31 +55,31 @@ layout: none
       <div class="container">
         <div class="who-for">
           <h3>Is this course for me?</h3>
-          <p>If you're writing React in any capacity, this course if for you! This course assumes a base level understanding of React, but whether you're working on small React side projects or full React applications at the day job, you'll learn how to test a variety of React components.</p>
+          <p>If you’ve been working with React for a few months and would like some easy ways to improve your knowledge and applications, then this course is for you.</p>
 
-          <p>No prior knowledge of testing or React specific testing is required; we'll start from scratch and build up our testing knowledge over this set of ten videos.</p>
+          <p>Over the course of 10 videos we’ll look at React features and tips that you might have missed and see how we can harness them to improve our application’s code, performance and maintainability.
+            </p>
 
-          <p>Along with how-tos we'll also talk about characteristics of well written tests and how to avoid common pitfalls when writing tests.</p>
+          <p>Each video is less than five minutes long, offering the perfect way to level up your React during a quick break at work or on your commute home.</p>
+
         </div>
         <div class="what-learn">
           <h3>What will I learn?</h3>
 
-          <p>See below for a full list of topics covered in the videos of this course, but in a nutshell this course contains all you need to be confident testing a variety of React components. We'll cover:</p>
+          <p>See below for a full list of topics covered in the videos of this course, but in a nutshell this course will give you the understanding of many of React's lesser known features and approaches that you can use to improve the quality of your React codebases.</p>
 
           <ul>
-            <li>The roles that Jest and Enzyme play in writing React tests.</li>
-            <li>How to test for UI changes in React components using Jest snapshots.</li>
-            <li>Testing React components that make HTTP requests by mocking HTTP requests.</li>
-            <li>Using Jest spies to mock behaviour in React components for testing purposes.</li>
-            <li>Testing React components that are connected to Redux, including how to test dispatching actions.</li>
-            <li>Using Enzyme's mount API to test lifecycle methods like <code>componentDidMount</code> and <code>componentDidUpdate</code>.</li>
+            <li>How to avoid extraneous HTML elements with React fragments.</li>
+            <li>How to avoid CSS tricks by rendering modals outside of your React app using portals.</li>
+            <li>How to use React's <code>createRef</code> API to safely reach into the underlying DOM.</li>
+            <li>Using error boundaries to catch unexpected errors and ensure your users get a nice experience in the case of something going wrong.</li>
           </ul>
         </div>
       </div>
     </section>
     <section class="content-block" id="video-list">
       <ul class="videos-list">
-        {% for video in site.data.enzyme %}
+        {% for video in site.data.react %}
         <li class="container video-container">
           {{ video.title }}
           {% if video.free %}
@@ -93,15 +93,40 @@ layout: none
     </section>
     <section class="content-block">
       <div class="container">
+        <h3>Testimonials from “Testing React”</h3>
+        <div class="testimonials">
+          <p>Don’t just take my word about my courses - here’s what people who have watched my first video series, “<a href="/testing-react-enzyme-jest">Testing React applications with Enzyme and Jest</a>”, had to say about it.</p>
+
+          <ul>
+            <li><img src="/react-in-five/quote.svg" />This is such a well done and concise series! I bought the bundle because I'd like to see moar videos done in this style. I particularly like the zoomed-in and stripped-out view of everything but what matters most.<span>skube on YouTube</span></li>
+            <li><img src="/react-in-five/quote.svg" />These videos are great!! Thanks for making them.  I just started at my first job and I've been struggling to wrap my head around Jest and writing tests for React components.  This playlist has been very helpful!<span>Billy Thomas on YouTube</span></li>
+        </div>
+      </div>
+    </section>
+    <section class="content-block" id="buy-now">
+      <div class="container">
+        <h3>Buy the React in Five bundle now and get:</h3>
+
+        <ul>
+          <li>Ten full HD, DRM free, videos in mp4 format for you to download and watch from any device.</li>
+          <li>Access to the full source code from all videos.</li>
+          <li>Any new videos or updates to old videos in the future, for free.</li>
+          <li>Get help and answers from me to questions you might have from watching the videos.</li>
+        </ul>
+
+        <a href="watch/" class="cta-button js-buy-now">Buy now with Paddle for $20 >></a>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
         <h3>Who is this course by?</h3>
         <div class="about-author">
           <div class="jack-head">
             <img src="/img/head.png" alt="Headshot of Jack Franklin" />
           </div>
           <div class="about-author-content">
-            <p>Jack is JavaScript and React developer in London who has been working with and testing React applications for the past three years.</p>
+            <p>Jack is JavaScript and React developer in London who has been working with and teaching React for the past four years.</p>
             <p>He's released numerous tutorials and videos on <a href="/">The JavaScript Playground</a> and <a href="https://www.youtube.com/channel/UCa6ZNjpXUYfBT9CCucusjvg?view_as=subscriber">his YouTube channel</a>.</p>
-            <p>He's also spoken about React testing at conferences including <a href="https://www.youtube.com/watch?v=KBhHsYlF4mQ">React Amsterdam</a>.</p>
 
             <a class="twitter-follow-button" href="https://twitter.com/Jack_Franklin">
               Follow @Jack_Franklin
@@ -110,29 +135,16 @@ layout: none
         </div>
       </div>
     </section>
-    <section class="content-block" id="buy-now">
-      <div class="container">
-        <h3>Buy the Testing React bundle now and get:</h3>
-
-        <ul>
-          <li>Eleven full HD, DRM free, videos in mp4 format for you to download and watch from any device.</li>
-          <li>Access to the full source code from all eleven videos.</li>
-          <li>Any new videos or updates to old videos in the future, for free.</li>
-          <li>Get help and answers from me to questions you might have from watching the videos.</li>
-        </ul>
-
-        <a href="watch/" class="get-started js-buy-now">Buy now with Paddle for $20 >></a>
-      </div>
-    </section>
     <section class="content-block">
       <div class="container">
         <h3>Frequently Asked Questions</h3>
 
         <ul class="faq">
-          <li><strong>How long are the videos?</strong> Each video is around 5-10 minutes in length. They're designed to be easily watchable in short chunks when you've got a few minutes spare, on the commute to work, or in the evenings.</li>
+          <li><strong>How long are the videos?</strong> Each video is at most five minutes long. They're designed to be easily watchable in short chunks when you've got a few minutes spare, on the commute to work, or in the evenings.</li>
           <li><strong>I'm a student, can I get a discount?</strong> Yes! <a href="mailto:jack@javascriptplayground.com">Email me</a> from your school/college/university email address.</li>
           <li><strong>What format are the videos?</strong> They are MP4 files, filmed in full 1080p high definition. You can download them for watching whenever you like, and they are yours to keep forever.</li>
           <li><strong>What if I don't like the course?</strong> I want everyone to be fully satisified with the videos. If you aren't happy with them, <a href="mailto:jack@javascriptplayground.com">Email me</a> and I'll sort out a refund for you.</li>
+          <li><strong>Do I get a discount if I purchased your testing course?</strong> Yes! Check your emails for a code, or if you can't find it, <a href="mailto:jack@javascriptplayground.com">email me</a> and I'll get that right to you.</li>
         </ul>
       </div>
     </section>
@@ -153,6 +165,7 @@ layout: none
       </div>
     </section>
     <a href="/" class="logo">
+      <span>Quotes logo by Arthur Shiain from the Noun Project</span>
       <img src="/img/logo_big.png" alt="the javascript playground" />
     </a>
 

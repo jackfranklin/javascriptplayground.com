@@ -1,6 +1,6 @@
 @import 'mailchimp';
 
-$blue: #61dafb;
+$blue: #60bafa;
 
 html {
   font-size: 100%;
@@ -50,20 +50,27 @@ header {
     .cta-button:first-of-type {
       margin-right: 30px;
     }
+
+    @media (max-width: 769px) {
+      display: block;
+    }
   }
+
+  h1 { text-align: left; }
 
   h1,
   h4 {
-    margin: 0;
     font-weight: 500;
   }
 
-  h1 {
-    font-size: 36px;
-  }
   h4 {
+    margin: 0;
     font-size: 18px;
+    @media (max-width: 769px) {
+      margin-top: 15px;
+    }
   }
+
 
   .logo-img {
     margin-right: 30px;
@@ -84,16 +91,13 @@ header {
 }
 
 header h1 {
-  font-weight: normal;
   font-size: 45px;
-  text-align: center;
   margin: 0 auto;
   line-height: 65px;
 }
 
 header h3 {
-  font-weight: normal;
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   margin: 10px auto;
 }
@@ -103,6 +107,16 @@ header h3 {
   display: block;
   height: 70px;
   padding: 0 10px;
+  position: relative;
+}
+
+.logo span {
+  bottom: 5px;
+  left: 5px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  position: absolute;
 }
 
 .logo img {
@@ -117,6 +131,7 @@ header h3 {
 
 .content-block:nth-of-type(even) {
   background: $blue;
+  color: #fff;
 }
 
 .content-block:nth-of-type(odd) {
@@ -139,8 +154,8 @@ header h3 {
 }
 
 .content-block h3 {
-  font-weight: normal;
-  font-size: 30px;
+  font-size: 35px;
+  margin: 0;
 }
 
 .content-block ul {
@@ -180,19 +195,10 @@ header h3 {
 }
 
 #mc-embedded-subscribe {
-  padding: 1em;
-  display: inline-block;
-  font-size: 20px;
   text-decoration: none;
-  color: #111;
-  background: #f6dd3b;
-  border: 1px solid #111;
+  border-style: none;
   transition: all 0.2s;
   position: relative;
-
-  &:hover {
-    background: #fff;
-  }
 }
 
 .hero {
@@ -286,7 +292,19 @@ header h3 {
   }
 }
 
-.content-block a:not(.cta-button) {
+.content-block:nth-of-type(even) a:not(.cta-button) {
+  &:link,
+  &:visited {
+    color: #fff;
+  }
+
+  &:hover {
+    color: #111;
+    transition: all 0.2s ease-in;
+  }
+}
+
+.content-block:nth-of-type(odd) a:not(.cta-button) {
   &:link,
   &:visited {
     color: #111;
@@ -295,6 +313,21 @@ header h3 {
   &:hover {
     background-color: #fff;
     transition: background-color 0.2s ease-in;
+  }
+}
+
+.testimonials {
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  li {
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    margin-top: 20px;
+    font-style: italic;
+    span { display: block; font-style: normal; margin-top: 20px; font-weight: 600; }
   }
 }
 
