@@ -16,14 +16,15 @@ body {
   border-top: 10px solid $blue;
 }
 
-.cta-button {
+.cta-button,
+#mc-embedded-subscribe {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #3b99fc;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
-  display: block;
+  display: inline-block;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 19px;
   text-decoration: none;
@@ -178,8 +179,6 @@ header h3 {
   }
 }
 
-.get-started,
-.watch-now,
 #mc-embedded-subscribe {
   padding: 1em;
   display: inline-block;
@@ -194,6 +193,13 @@ header h3 {
   &:hover {
     background: #fff;
   }
+}
+
+.hero {
+  font-size: 22px;
+  line-height: 32px;
+  display: block;
+  width: 100%;
 }
 
 #mc-embedded-subscribe {
@@ -230,32 +236,6 @@ header h3 {
   }
   img {
     float: left;
-  }
-}
-
-.buy-now {
-  a:link,
-  a:visited {
-    color: #111;
-  }
-
-  a:hover {
-    text-decoration: none;
-    background: white;
-  }
-  .content-block:nth-of-type(even) {
-    background: #f6dd3b;
-  }
-  .container {
-    display: block;
-  }
-
-  ul {
-    margin: 10px 0;
-  }
-
-  .get-started {
-    margin-top: 30px;
   }
 }
 
@@ -306,7 +286,7 @@ header h3 {
   }
 }
 
-.content-block a {
+.content-block a:not(.cta-button) {
   &:link,
   &:visited {
     color: #111;
