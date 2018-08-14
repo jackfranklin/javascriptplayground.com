@@ -371,14 +371,16 @@ ul.archives {
 
 .thank-you-testing-react {
   padding: 10px;
-  background: #f6dd3b;
+  background: #60bafa;
+  color: #fff;
   a:link,
   a:visited {
-    color: #111;
+    color: #fff;
   }
 
   a:hover {
     background-color: #fff;
+    color: #111;
     transition: background-color 0.2s ease-in;
   }
 }
