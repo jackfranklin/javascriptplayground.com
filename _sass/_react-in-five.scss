@@ -29,10 +29,21 @@ body {
   line-height: 19px;
   text-decoration: none;
 
-  transition: box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in, background-color 0.1s ease-in;
 
   &:hover {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: $blue;
+  }
+}
+
+#mc-embedded-subscribe {
+  background-color: #fff;
+  color: #111;
+
+  &:hover {
+    background-color: #3b99fc;
+    color: #fff;
   }
 }
 
@@ -56,7 +67,9 @@ header {
     }
   }
 
-  h1 { text-align: left; }
+  h1 {
+    text-align: left;
+  }
 
   h1,
   h4 {
@@ -71,7 +84,6 @@ header {
     }
   }
 
-
   .logo-img {
     margin-right: 30px;
   }
@@ -82,6 +94,10 @@ header {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+}
+
+header {
+  padding-bottom: 0;
 }
 
 .container p,
@@ -112,11 +128,18 @@ header h3 {
 
 .logo span {
   bottom: 5px;
-  left: 5px;
+  right: 380px;
   color: #fff;
   font-size: 14px;
   text-decoration: none;
   position: absolute;
+
+  @media (max-width: 600px) {
+    display: block;
+    bottom: -25px;
+    right: 5px;
+    color: #111;
+  }
 }
 
 .logo img {
@@ -163,6 +186,12 @@ header h3 {
   margin: 0;
 }
 
+.content-block {
+  h3 + ul {
+    margin-top: 20px;
+  }
+}
+
 .content-block code {
   font-size: 16px;
 }
@@ -174,6 +203,7 @@ header h3 {
 }
 
 .about-author {
+  margin-top: 20px;
   display: flex;
 }
 
@@ -217,24 +247,10 @@ header h3 {
   }
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 850px) {
   .who-for,
   .what-learn {
     width: 100%;
-  }
-}
-
-.videos {
-  .video-container {
-    padding: 20px 0;
-
-    .container {
-      display: block;
-    }
-
-    &:nth-of-type(odd) {
-      background: #f6dd3b;
-    }
   }
 
   h3 {
@@ -266,7 +282,7 @@ header h3 {
     padding: 10px;
     border-bottom: 1px solid $blue;
 
-    @media (max-width: 860px) {
+    @media (max-width: 1000px) {
       &.container {
         display: block;
         height: auto;
@@ -279,7 +295,7 @@ header h3 {
     }
 
     .call-to-action {
-      @media (max-width: 860px) {
+      @media (max-width: 1000px) {
         display: block;
         width: 50%;
         min-width: 200px;
@@ -317,7 +333,11 @@ header h3 {
 }
 
 .testimonials {
-  ul { margin: 0; padding: 0; list-style: none; }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
   li {
     img {
@@ -327,7 +347,12 @@ header h3 {
 
     margin-top: 20px;
     font-style: italic;
-    span { display: block; font-style: normal; margin-top: 20px; font-weight: 600; }
+    span {
+      display: block;
+      font-style: normal;
+      margin-top: 20px;
+      font-weight: 600;
+    }
   }
 }
 
@@ -343,6 +368,9 @@ header h3 {
     input.email {
       font-size: 20px;
       width: 80%;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
   }
 }
