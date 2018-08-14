@@ -1,0 +1,376 @@
+@import 'mailchimp';
+
+$blue: #60bafa;
+
+html {
+  font-size: 100%;
+  text-rendering: optimizeLegibility;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  line-height: 1.5;
+  margin: 0;
+  border-top: 10px solid $blue;
+}
+
+.cta-button,
+#mc-embedded-subscribe {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #3b99fc;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 19px;
+  text-decoration: none;
+
+  transition: box-shadow 0.1s ease-in, background-color 0.1s ease-in;
+
+  &:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: $blue;
+  }
+}
+
+#mc-embedded-subscribe {
+  background-color: #fff;
+  color: #111;
+
+  &:hover {
+    background-color: #3b99fc;
+    color: #fff;
+  }
+}
+
+header {
+  background: #fff;
+  display: flex;
+
+  align-items: flex-end;
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+
+    h1,
+    .cta-button:first-of-type {
+      margin-right: 30px;
+    }
+
+    @media (max-width: 769px) {
+      display: block;
+    }
+  }
+
+  h1 {
+    text-align: left;
+  }
+
+  h1,
+  h4 {
+    font-weight: 500;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 18px;
+    @media (max-width: 769px) {
+      margin-top: 15px;
+    }
+  }
+
+  .logo-img {
+    margin-right: 30px;
+  }
+}
+
+.container,
+header {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  padding-bottom: 0;
+}
+
+.container p,
+.container li {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+header h1 {
+  font-size: 45px;
+  margin: 0 auto;
+  line-height: 65px;
+}
+
+header h3 {
+  font-size: 40px;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.logo {
+  background: #333;
+  display: block;
+  height: 70px;
+  padding: 0 10px;
+  position: relative;
+}
+
+.logo span {
+  bottom: 5px;
+  right: 380px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  position: absolute;
+
+  @media (max-width: 600px) {
+    display: block;
+    bottom: -25px;
+    right: 5px;
+    color: #111;
+  }
+}
+
+.logo img {
+  display: block;
+  float: right;
+  height: 70px;
+}
+
+.content-block {
+  padding: 20px;
+}
+
+.content-block:nth-of-type(even) {
+  background: $blue;
+  color: #fff;
+}
+
+.content-block:nth-of-type(odd) {
+  background: #fff;
+}
+
+.content-block .container {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &.header-container {
+    display: block;
+
+    .buy-now {
+      margin-left: 10px;
+    }
+  }
+}
+
+.content-block h3 {
+  font-size: 35px;
+  margin: 0;
+}
+
+.content-block ul {
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+
+.content-block {
+  h3 + ul {
+    margin-top: 20px;
+  }
+}
+
+.content-block code {
+  font-size: 16px;
+}
+
+.who-for,
+.what-learn {
+  width: 47%;
+  padding-bottom: 20px;
+}
+
+.about-author {
+  margin-top: 20px;
+  display: flex;
+}
+
+.about-author .jack-head {
+  width: 25%;
+  max-width: 200px;
+}
+
+.about-author img {
+  max-width: 100%;
+}
+
+.about-author-content {
+  margin-left: 20px;
+
+  > p:first-of-type {
+    margin-top: 0;
+  }
+}
+
+#mc-embedded-subscribe {
+  text-decoration: none;
+  border-style: none;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.hero {
+  font-size: 22px;
+  line-height: 32px;
+  display: block;
+  width: 100%;
+}
+
+#mc-embedded-subscribe {
+  margin-top: 10px;
+  width: 300px;
+  display: block;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .who-for,
+  .what-learn {
+    width: 100%;
+  }
+
+  h3 {
+    margin: 0;
+  }
+  img {
+    float: left;
+  }
+}
+
+.faq li {
+  margin-bottom: 20px;
+}
+.faq strong {
+  display: block;
+}
+
+.videos-list {
+  li {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 23px;
+    height: 50px;
+    line-height: 50px;
+
+    @media (max-width: 650px) {
+      line-height: 30px;
+    }
+
+    padding: 10px;
+    border-bottom: 1px solid $blue;
+
+    @media (max-width: 1000px) {
+      &.container {
+        display: block;
+        height: auto;
+        padding: 20px 0;
+      }
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    .call-to-action {
+      @media (max-width: 1000px) {
+        display: block;
+        width: 50%;
+        min-width: 200px;
+        margin-top: 15px;
+        padding-left: 0;
+      }
+      padding: 0 5px;
+      border-radius: 3px;
+    }
+  }
+}
+
+.content-block:nth-of-type(even) a:not(.cta-button) {
+  &:link,
+  &:visited {
+    color: #fff;
+  }
+
+  &:hover {
+    color: #111;
+    transition: all 0.2s ease-in;
+  }
+}
+
+.content-block:nth-of-type(odd) a:not(.cta-button) {
+  &:link,
+  &:visited {
+    color: #111;
+  }
+
+  &:hover {
+    background-color: #fff;
+    transition: background-color 0.2s ease-in;
+  }
+}
+
+.testimonials {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    img {
+      float: left;
+      margin-right: 10px;
+    }
+
+    margin-top: 20px;
+    font-style: italic;
+    span {
+      display: block;
+      font-style: normal;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+  }
+}
+
+.js-buy-now {
+  margin-top: 20px;
+}
+
+#mc_embed_signup {
+  background: none;
+
+  form {
+    text-align: left;
+    input.email {
+      font-size: 20px;
+      width: 80%;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  }
+}

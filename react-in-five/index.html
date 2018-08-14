@@ -1,0 +1,185 @@
+---
+layout: none
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>React in Five: learn React fundamentals video course</title>
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="/styles/react-in-five.css" rel="stylesheet" type="text/css">
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+  </head>
+  <body>
+    <header>
+      <img src="/react-in-five/logo.png" width="100" height="91" class="logo-img" />
+      <div>
+        <h1>React in 5.</h1>
+        <h4>A series of 5 minute videos to level up your React skillset.</h4>
+      </div>
+    </header>
+    <section class="content-block">
+      <div class="container">
+        <p class="hero">A video series to get you right up to speed with React. If you've done some beginner tutorials and think you're ready to dive into more React, this course is for you. In a series of five minute videos we'll cover many React features, tips and tricks to advance your React knowledge and improve your React applications.</p>
+
+        <p class="hero">Watch the first 4 videos <strong>for free</strong>, and pay just <strong>$20</strong> for the rest.</p>
+
+        <div>
+          <a href="#video-list" class="get-started cta-button">Watch now >></a>
+          <a href="#buy-now" class="get-started cta-button buy-now">Buy the full bundle >></a>
+        </div>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <div class="who-for">
+          <h3>Is this course for me?</h3>
+          <p>If you’ve been working with React for a few months and would like some easy ways to improve your knowledge and applications, then this course is for you.</p>
+
+          <p>Over the course of 10 videos we’ll look at React features and tips that you might have missed and see how we can harness them to improve our application’s code, performance and maintainability.
+            </p>
+
+          <p>Each video is less than five minutes long, offering the perfect way to level up your React during a quick break at work or on your commute home.</p>
+
+        </div>
+        <div class="what-learn">
+          <h3>What will I learn?</h3>
+
+          <p>See below for a full list of topics covered in the videos of this course, but in a nutshell this course will give you the understanding of many of React's lesser known features and approaches that you can use to improve the quality of your React codebases.</p>
+
+          <ul>
+            <li>How to avoid extraneous HTML elements with React fragments.</li>
+            <li>How to avoid CSS tricks by rendering modals outside of your React app using portals.</li>
+            <li>How to use React's <code>createRef</code> API to safely reach into the underlying DOM.</li>
+            <li>Using error boundaries to catch unexpected errors and ensure your users get a nice experience in the case of something going wrong.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="content-block" id="video-list">
+      <ul class="videos-list">
+        {% for video in site.data.react %}
+        <li class="container video-container">
+          {{ video.title }}
+          {% if video.free %}
+          <a href="{{ video.url }}" class="call-to-action" target="_blank">Watch Now >></a>
+          {% else %}
+          <a href="#buy-now" class="call-to-action">Buy now >></a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <h3>Testimonials from “Testing React”</h3>
+        <div class="testimonials">
+          <p>Don’t just take my word about my courses - here’s what people who have watched my first video series, “<a href="/testing-react-enzyme-jest">Testing React applications with Enzyme and Jest</a>”, had to say about it.</p>
+
+          <ul>
+            <li><img src="/react-in-five/quote.svg" />This is such a well done and concise series! I bought the bundle because I'd like to see moar videos done in this style. I particularly like the zoomed-in and stripped-out view of everything but what matters most.<span>skube on YouTube</span></li>
+            <li><img src="/react-in-five/quote.svg" />These videos are great!! Thanks for making them.  I just started at my first job and I've been struggling to wrap my head around Jest and writing tests for React components.  This playlist has been very helpful!<span>Billy Thomas on YouTube</span></li>
+        </div>
+      </div>
+    </section>
+    <section class="content-block" id="buy-now">
+      <div class="container">
+        <h3>Buy the React in Five bundle now and get:</h3>
+
+        <ul>
+          <li>Ten full HD, DRM free, videos in mp4 format for you to download and watch from any device.</li>
+          <li>Access to the full source code from all videos.</li>
+          <li>Any new videos or updates to old videos in the future, for free.</li>
+          <li>Get help and answers from me to questions you might have from watching the videos.</li>
+        </ul>
+
+        <a href="watch/" class="cta-button js-buy-now">Buy now with Paddle for $20 >></a>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <h3>Who is this course by?</h3>
+        <div class="about-author">
+          <div class="jack-head">
+            <img src="/img/head.png" alt="Headshot of Jack Franklin" />
+          </div>
+          <div class="about-author-content">
+            <p>Jack is JavaScript and React developer in London who has been working with and teaching React for the past four years.</p>
+            <p>He's released numerous tutorials and videos on <a href="/">The JavaScript Playground</a> and <a href="https://www.youtube.com/channel/UCa6ZNjpXUYfBT9CCucusjvg?view_as=subscriber">his YouTube channel</a>.</p>
+
+            <a class="twitter-follow-button" href="https://twitter.com/Jack_Franklin">
+              Follow @Jack_Franklin
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <h3>Frequently Asked Questions</h3>
+
+        <ul class="faq">
+          <li><strong>How long are the videos?</strong> Each video is at most five minutes long. They're designed to be easily watchable in short chunks when you've got a few minutes spare, on the commute to work, or in the evenings.</li>
+          <li><strong>I'm a student, can I get a discount?</strong> Yes! <a href="mailto:jack@javascriptplayground.com">Email me</a> from your school/college/university email address.</li>
+          <li><strong>What format are the videos?</strong> They are MP4 files, filmed in full 1080p high definition. You can download them for watching whenever you like, and they are yours to keep forever.</li>
+          <li><strong>What if I don't like the course?</strong> I want everyone to be fully satisified with the videos. If you aren't happy with them, <a href="mailto:jack@javascriptplayground.com">Email me</a> and I'll sort out a refund for you.</li>
+          <li><strong>Do I get a discount if I purchased your testing course?</strong> Yes! Check your emails for a code, or if you can't find it, <a href="mailto:jack@javascriptplayground.com">email me</a> and I'll get that right to you.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="content-block">
+      <div class="container">
+        <div id="mc_embed_signup">
+          <h3>Subscribe to keep up to date with the latest content.</h3>
+          <p>Join the JS Playground mailing list to be kept up to date with the latest tutorials, screencasts and video courses. You won't be spammed and you can unsubscribe at any time.</p>
+          <form action="//javascriptplayground.us14.list-manage.com/subscribe/post?u=5935b4febeb6cbf03a8bde89c&amp;id=e5d4b1e488" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5935b4febeb6cbf03a8bde89c_e5d4b1e488" tabindex="-1" value=""></div>
+              <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe">
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <a href="/" class="logo">
+      <span>Quotes logo by Arthur Shiain from the Noun Project</span>
+      <img src="/img/logo_big.png" alt="the javascript playground" />
+    </a>
+
+    {% include ga.html %}
+    <script src="smooth-scroll.js"></script>
+    <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+    <script>
+      new SmoothScroll('a[href*="#"]');
+      Paddle.Setup({
+        vendor: 29460
+      });
+      document.querySelector('.js-buy-now').addEventListener('click', function(event) {
+        event.preventDefault()
+        Paddle.Checkout.open({
+          product: 536425,
+          allowQuantity: false,
+        });
+      })
+    </script>
+</body>
+</html>

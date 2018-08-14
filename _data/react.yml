@@ -1,0 +1,33 @@
+- title: 'Avoiding extra DOM with React Fragments'
+  free: true
+  url: 'https://youtu.be/8gwpTaCDDzg'
+
+- title: 'Tidying up with componentWillUnmount'
+  free: true
+  url: 'https://youtu.be/2HL4LYGwK0A'
+
+- title: 'Spotting legacy code usage with React StrictMode'
+  free: true
+  url: 'https://youtu.be/SwR34X3ZHsc'
+
+- title: 'Updating to the new createRef() API'
+  free: true
+  url: 'https://youtu.be/qvZ7Q3VtCrA'
+
+- title: 'Getting better errors by giving better propTypes'
+  free: false
+
+- title: 'Conditional CSS classes with the classnames package'
+  free: false
+
+- title: 'Avoiding broken user interfaces with error boundaries'
+  free: false
+
+- title: 'Conditional event listeners for tidier event handling'
+  free: false
+
+- title: 'Wrapping legacy code in React by using references'
+  free: false
+
+- title: 'Avoiding CSS hacks by rendering in Portals'
+  free: false
