@@ -25,7 +25,8 @@ If you're eager to skip ahead into the code, you can
 In the rest of this post I'll talk you through my approach to getting up and
 running with Reason, and my thoughts on the language after trying it. I am _not_
 a Reason expert, so if you spot any errors or things I've misunderstood, please
-let me know!
+let me know! Equally, there might be better ways of solving the task, so if you
+have any suggestions please get in touch.
 
 ## Getting started
 
@@ -81,3 +82,61 @@ provides
 [`Js.String`](https://bucklescript.github.io/bucklescript/api/Js.String.html).
 Using a combination of methods from these modules, I could split my input, and
 loop over it, updating a dict with new frequencies as I go through each letter.
+
+I decided to store the frequencies in a dictionary. In Reason you have to decide
+what the types of the values are in a dictionary, so I went with integers, given
+we're counting frequencies.
+
+I first set out to write a function that could take a dictionary and a letter,
+and update the frequency for that letter:
+
+* If the letter has no entry in the dictionary, create one and set the frequency
+  to one.
+* If the letter has a frequency, update the count by one.
+
+Defining this function looks very similar to JavaScript:
+
+```reason
+let incrementOrSetFrequency =
+  (frequencies: Js.Dict.t(int), letter: string): Js.Dict.t(int) => {
+};
+```
+
+The bit that Reason adds is the type annotations. After each of the two
+arguments, we declare the types. We don't have to do this - Reason will be able
+to infer them for us - but I find it helps me work with code if I've documented
+the type, and very rarely the compiler can infer a type slightly differently to
+what you actually want it to be.
+
+The type annotation above says that `frequencies` is a `Js.Dict.t(int)`, which
+means a dictionary where each value is an `int` type. `letter` is a `string`.
+After the arguments we have the return type, which is also a dict, as we want to
+take the dict, update it, and then return it again.
+
+The first thing we need to do is check to see if `letter` is in the dictionary,
+and we can use `Js.Dict.get(frequencies, letter)` to do this. It doesn't return
+the value or `undefined` though, like you would expect in JavaScript. Instead,
+it returns something that's an `Option` type. This is Reason's way of trying to
+avoid unexpected `undefined` or `null`s in your application. You can read more
+about
+[`Option` on the Reason docs](https://reasonml.github.io/docs/en/null-undefined-option).
+
+When you have a function that returns an `Option` type, you can use
+[pattern matching](https://reasonml.github.io/docs/en/pattern-matching) to see
+what the value is, and act accordingly. So if we look in our dictionary for our
+letter and it returns `None`, we need to add the letter. If it returns
+`Some(int)`, we want to increment it by one:
+
+```re
+let incrementOrSetFrequency =
+    (frequencies: Js.Dict.t(int), letter: string): Js.Dict.t(int) => {
+  switch (Js.Dict.get(frequencies, letter)) {
+  | Some(x) =>
+    Js.Dict.set(frequencies, letter, x + 1);
+    frequencies;
+  | None =>
+    Js.Dict.set(frequencies, letter, 1);
+    frequencies;
+  };
+};
+```
