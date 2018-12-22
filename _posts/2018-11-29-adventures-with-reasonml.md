@@ -140,3 +140,43 @@ let incrementOrSetFrequency =
   };
 };
 ```
+
+## Getting our first test passing
+
+At this point I decided I'd figured out enough Reason to be dangerous, and
+wanted to write a test so I could work towards getting it passing. I created
+`__tests__/daytwo_test.re`:
+
+```re
+open Jest;
+describe("DayTwo", () => {
+  open Expect;
+  test("letterFrequencies", () =>
+    expect(DayTwo.letterFrequencies("bababc"))
+    |> toEqual(Js.Dict.fromList([("b", 3), ("a", 2), ("c", 1)]))
+  );
+```
+
+If you've written JS tests with Jest, you'll probably find the above quite
+intuitive, and I was able to use `Js.Dict.fromList` to take a list of tuples and
+create the dictionary that I needed for the test. The compiler compiled this
+into a JS file that I could run using the regular Jest CLI. This was one thing I
+liked about Reason; I can use the regular Jest CLI, rather than having to use a
+special one specifically for Reason. Jest's CLI is so good that it makes total
+sense to work on top of it rather than creating a language specific one from
+scratch.
+
+To get the test passing we needed to take our input string, split it into a list
+of letters, and run each one through our `incrementOrSetFrequency` function:
+
+```re
+let letterFrequencies = (input: string): Js.Dict.t(int) => {
+  let frequencies = Js.Dict.empty();
+  input
+  |> Js.String.split("")
+  |> Js.Array.reduce(
+       (acc, currentValue) => incrementOrSetFrequency(acc, currentValue),
+       frequencies,
+     );
+};
+```
