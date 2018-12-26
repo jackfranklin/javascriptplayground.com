@@ -180,3 +180,45 @@ let letterFrequencies = (input: string): Js.Dict.t(int) => {
      );
 };
 ```
+
+And with that the test is passing!
+
+## Getting frequencies for our entire puzzle input
+
+Next we need to take our full puzzle input, which is a series of strings, and
+run the above function on each of them, so we can start to work towards the
+final answer that we need.
+
+Once again, I start by writing a test. I replicate the input that the real
+puzzle provides by putting each entry on its own line. I want to make sure we
+get the logic for splitting lines works properly.
+
+```
+test("checksum", () => {
+   let puzzleInput = {|
+     abcdef
+     bababc
+     abbcde
+     abcccd
+     aabcdd
+     abcdee
+     ababab
+   |};
+
+   expect(DayTwo.checksum(puzzleInput)) |> toEqual(12);
+});
+```
+
+We can use the familiar `Js.String.split` once again here, but pass it `"\n"` as
+the thing to split on. We then map the resulting lines over `String.trim`, which
+trims any whitespace and removes it. Note that we're _not_ using
+`Js.String.trim` here, this is the
+[ReasonML module `String`](https://reasonml.github.io/api/String.html), _not_
+the
+[BuckleScript `Js.String` module](https://reasonml.github.io/api/String.html).
+This was one of the things I found most confusing when learning Reason. It
+wasn't clear why some of the functions we use are Reason modules, and others are
+provided by BuckleScript.
+
+> If you're familiar with Reason and can clarify the above confusion, I'd love
+> to talk it through and update the blog post to include it.
