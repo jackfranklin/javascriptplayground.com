@@ -222,3 +222,51 @@ provided by BuckleScript.
 
 > If you're familiar with Reason and can clarify the above confusion, I'd love
 > to talk it through and update the blog post to include it.
+
+So, the first part of the `checksum` function is to take the multi-line input,
+split it, and then ensure that we don't have any blanks:
+
+```re
+let checksum = (input: string): int => {
+  input
+  |> Js.String.split("\n")
+  |> Js.Array.map(String.trim)
+  |> Js.Array.filter(s => String.length(s) > 0)
+  // note: this is invalid (we're not returning an int)
+```
+
+Once I've split the lines and given them a trim, I then use `Js.Array.filter` to
+remove any strings that are entirely empty. Now we are working with an array of
+letter frequencies that looks something like this:
+
+```
+[
+  "abcdef",
+  "bababc",
+  "abbcde",
+  "abcccd",
+  "aabcdd",
+  "abcdee",
+  "ababab",
+]
+```
+
+So we want to take each one and pass it into the `letterFrequencies` function
+that we have defined:
+
+```re
+let checksum = (input: string): int => {
+  input
+  |> Js.String.split("\n")
+  |> Js.Array.map(String.trim)
+  |> Js.Array.filter(s => String.length(s) > 0)
+  |> Js.Array.map(letterFrequencies)
+  // note: this is invalid (we're not returning an int)
+```
+
+Now we've turned that list of strings into a list of frequencies. This code
+sample highlights one of my favourite Reason features (I'm biased as it's also a
+favourite feature of mine from other functional languages like Elm and Elixir),
+the pipeline operator. The pipeline operator takes the thing on the left and
+passes it as the last argument to the function on the right. It means fewer
+parentheses around everything and lends itself to creating really readable code.
