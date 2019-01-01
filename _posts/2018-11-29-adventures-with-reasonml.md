@@ -270,3 +270,40 @@ favourite feature of mine from other functional languages like Elm and Elixir),
 the pipeline operator. The pipeline operator takes the thing on the left and
 passes it as the last argument to the function on the right. It means fewer
 parentheses around everything and lends itself to creating really readable code.
+
+Now we have a list of frequency dictionaries, we need to take them and figure
+out:
+
+* how many of them contain a letter exactly 3 times
+* how many of them contain a letter exactly 2 times
+
+The amount for each of those is what we'll need to multiply together to get our
+checksum, which is the solution to our puzzle.
+
+What I'd like to do is take our list of frequencies and map it into a list of
+Reason objects that contain two properties, `twice` and `thrice`. These will be
+booleans and correspond to if a word contains a letter twice or thrice. To help
+the compiler give me good type errors if I make a mistake, I create a custom
+type:
+
+```re
+type twiceAndThriceFrequency = {
+  twice: bool,
+  thrice: bool,
+};
+```
+
+This declares a type, `twiceAndThriceFrequency`, which is an object with two
+properties that are both booleans. I can then create a function that will take a
+frequencies dictionary and convert it into one of these objects. Now I have this
+custom type, I can use it in the type annotation too:
+
+```re
+let findTwicesAndThrices = (frequencies: Js.Dict.t(int)): twiceAndThriceFrequency => {
+  {twice: true, thrice: true }
+};
+```
+
+(For now I've hardcoded the values to both be `true`, we will fill those in
+shortly.) Notice how having the custom type defined makes the type annotation
+read really nicely and clearly.
