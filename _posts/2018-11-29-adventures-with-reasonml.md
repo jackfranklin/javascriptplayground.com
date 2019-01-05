@@ -307,3 +307,54 @@ let findTwicesAndThrices = (frequencies: Js.Dict.t(int)): twiceAndThriceFrequenc
 (For now I've hardcoded the values to both be `true`, we will fill those in
 shortly.) Notice how having the custom type defined makes the type annotation
 read really nicely and clearly.
+
+To figure out the value of the `twice` and `thrice` keys, we need to see if the
+frequencies dictionary has any values of `2` or `3` in it. For this problem, we
+don't actually care about _which_ letter occurs two or three times, we just need
+to know if any of them do.
+
+We can use `Js.Dict.values`, which takes a dictionary and returns an array of
+the values inside it. It's just like `Object.values()` in JavaScript. We can
+then use `Js.Array.some`, which takes an array and a function and tells us if
+any items in the array satisfy it. Therefore, we can define the functions
+`hasTwices` and `hasThrices` like so:
+
+```re
+let hasTwices = (frequencies: Js.Dict.t(int)): bool => {
+  frequencies |> Js.Dict.values |> Js.Array.some(v => v === 2);
+};
+
+let hasThrices = (frequencies: Js.Dict.t(int)): bool => {
+  frequencies |> Js.Dict.values |> Js.Array.some(v => v === 3);
+};
+```
+
+> Note that in this solution I'm not worrying about performance. If I was, we'd
+> be doing this differently to reduce the number of times we iterate over the
+> `frequencies` array. I'll leave it as an exercise to the reader to improve
+> that.
+
+Now we have these functions, we can define a function that will take a
+frequencies dictionary and return a `twiceAndThriceFrequency` type:
+
+```re
+let findTwicesAndThrices = (frequencies: Js.Dict.t(int)): twiceAndThriceFrequency => {
+  {twice: hasTwices(frequencies), thrice: hasThrices(frequencies)};
+};
+```
+
+> Notice that we don't need the `return` keyword in Reason. The last expression
+> in a function is automatically returned for you.
+
+And once we have this function, we can update our main `checksum` function:
+
+```re
+let checksum = (input: string): int => {
+  input
+  |> Js.String.split("\n")
+  |> Js.Array.map(String.trim)
+  |> Js.Array.filter(s => String.length(s) > 0)
+  |> Js.Array.map(letterFrequencies)
+  |> Js.Array.map(findTwicesAndThrices)
+  // note: this is invalid (we're not returning an int)
+```
