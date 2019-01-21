@@ -358,3 +358,109 @@ let checksum = (input: string): int => {
   |> Js.Array.map(findTwicesAndThrices)
   // note: this is invalid (we're not returning an int)
 ```
+
+At this point we are working with a list of objects that have
+`{ twice: true/false, thrice: true/false }` within them. We want to go through
+this list and reduce it down to two values: the number of times that we have a
+letter occurring twice, and the number of times we have a letter occurring three
+times. So if we have this list:
+
+```
+[
+  { twice: true, thrice: false },
+  { twice: false, thrice: false },
+  { twice: true, thrice: true },
+]
+```
+
+We want to end up with:
+
+```
+{ twice: 2, thrice: 1 }
+```
+
+It's then these two numbers that we multiply to find our checksum.
+
+We can use `Js.Array.reduce` to do this. It will take our array and loop through
+each value in turn, allowing us to check the values of `twice` and `thrice` and
+increment our accumulator accordingly. Our starting accumulator will be an
+object, which I also define a type for:
+
+```re
+type twiceAndThriceCounter = {
+  twice: int,
+  thrice: int,
+};
+```
+
+And now we can start planning our `reduce` call:
+
+```re
+|> Js.Array.reduce(
+  (acc: twiceAndThriceCounter, currentValue: twiceAndThriceFrequency) => acc
+  {twice: 0, thrice: 0},
+)
+```
+
+Inside the body of the callback function, we need to check the `currentValue`
+and check the values of `twice` and `thrice`.
+
+This is a case where Reason's
+[pattern matching](https://reasonml.github.io/docs/en/pattern-matching) comes in
+really handy. We can write code that pattern matches against the object and its
+values:
+
+```re
+switch (currentValue) {
+  | {twice: true, thrice: true} => {
+      twice: acc.twice + 1,
+      thrice: acc.thrice + 1,
+    }
+  | {twice: true, thrice: false} => {
+      twice: acc.twice + 1,
+      thrice: acc.thrice,
+    }
+  | {twice: false, thrice: true} => {
+      twice: acc.twice,
+      thrice: acc.thrice + 1,
+    }
+  | {twice: false, thrice: false} => acc
+},
+```
+
+Each case that we're matching against starts with the pipe (`|`) and then we
+match against the `twice` and `thrice` values within `currentValue`. So the
+first will match only if `currentValue` has both values set to true, in which
+case we increment both of our counters. In the case of one of `twice` or
+`thrice` being true, we increment the appropriate counter and if both values are
+`false`, we do nothing.
+
+Pattern matching is my favourite feature of Reason (it's also one of my
+favourite parts of Elm), and it leads to some really nice, expressive code.
+What's also nice is that if we don't write code that deals with every possible
+case, we get a compiler error. In the example below, I've removed the case that
+deals with both values being `true`. You can see the compiler spot this and tell
+me:
+
+```re
+  Warning number 8
+  /Users/jackfranklin/git/advent-of-code/day-two-reason-ml/src/DayTwo.re 55:10-65:10
+
+  53 ┆ |> Js.Array.reduce(
+  54 ┆      (acc: twiceAndThriceCounter, currentValue: twiceAndThriceFrequenc
+       y) =>
+  55 ┆        switch (currentValue) {
+  56 ┆        | {twice: true, thrice: false} => {
+   . ┆ ...
+  64 ┆        | {twice: false, thrice: false} => acc
+  65 ┆        },
+  66 ┆      {twice: 0, thrice: 0},
+  67 ┆    )
+
+  You forgot to handle a possible value here, for example:
+{twice=true; thrice=true}
+```
+
+This means you can never end up with code in production that doesn't deal with
+all possible cases, which is fantastic. It also means if you refactor and now
+your pattern matching is out of date, the compiler will tell you.
