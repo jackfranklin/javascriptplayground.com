@@ -2,7 +2,7 @@
 layout: post
 title: "Adventures with ReasonML"
 intro: Over Christmas, I tackled an Advent of Code in ReasomML and in this post I'll share my solution along with my experience of Reason and its ecosystem.
-githubPath: 2018-11-22-black-friday-react-sale
+githubPath: 2019-01-23-adventures-with-reasonml
 ---
 
 If you follow me on Twitter, or have read this blog for a while, you'll probably
