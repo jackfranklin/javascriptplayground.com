@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Adventures with ReasonML"
-intro: For one week only, you can grab 40% off all my video courses.
+intro: Over Christmas, I tackled an Advent of Code in ReasomML and in this post I'll share my solution along with my experience of Reason and its ecosystem.
 githubPath: 2018-11-22-black-friday-react-sale
 ---
 
@@ -27,6 +27,9 @@ running with Reason, and my thoughts on the language after trying it. I am _not_
 a Reason expert, so if you spot any errors or things I've misunderstood, please
 let me know! Equally, there might be better ways of solving the task, so if you
 have any suggestions please get in touch.
+
+The first part of this blog post talks through my approach and how I solved the
+problem, and then we end with a list of my good and bad parts of trying Reason.
 
 ## Getting started
 
@@ -193,6 +196,8 @@ Once again, I start by writing a test. I replicate the input that the real
 puzzle provides by putting each entry on its own line. I want to make sure we
 get the logic for splitting lines works properly.
 
+Note that `{|string here|}` allows us to define a multi-line string.
+
 ```
 test("checksum", () => {
    let puzzleInput = {|
@@ -271,13 +276,15 @@ the pipeline operator. The pipeline operator takes the thing on the left and
 passes it as the last argument to the function on the right. It means fewer
 parentheses around everything and lends itself to creating really readable code.
 
+## Calculating frequency occurrences
+
 Now we have a list of frequency dictionaries, we need to take them and figure
 out:
 
 * how many of them contain a letter exactly 3 times
 * how many of them contain a letter exactly 2 times
 
-The amount for each of those is what we'll need to multiply together to get our
+The result for each of those is what we'll need to multiply together to get our
 checksum, which is the solution to our puzzle.
 
 What I'd like to do is take our list of frequencies and map it into a list of
@@ -304,8 +311,8 @@ let findTwicesAndThrices = (frequencies: Js.Dict.t(int)): twiceAndThriceFrequenc
 };
 ```
 
-(For now I've hardcoded the values to both be `true`, we will fill those in
-shortly.) Notice how having the custom type defined makes the type annotation
+For now I've hardcoded the values to both be `true`, we will fill those in
+shortly. Notice how having the custom type defined makes the type annotation
 read really nicely and clearly.
 
 To figure out the value of the `twice` and `thrice` keys, we need to see if the
@@ -334,6 +341,8 @@ let hasThrices = (frequencies: Js.Dict.t(int)): bool => {
 > `frequencies` array. I'll leave it as an exercise to the reader to improve
 > that.
 
+## Mapping to our `twiceAndThriceFrequency` type
+
 Now we have these functions, we can define a function that will take a
 frequencies dictionary and return a `twiceAndThriceFrequency` type:
 
@@ -358,6 +367,8 @@ let checksum = (input: string): int => {
   |> Js.Array.map(findTwicesAndThrices)
   // note: this is invalid (we're not returning an int)
 ```
+
+## Calculating our checksum
 
 At this point we are working with a list of objects that have
 `{ twice: true/false, thrice: true/false }` within them. We want to go through
@@ -503,7 +514,7 @@ what I struggled with, from the perspective of a beginner using a new language.
 It's also worth noting that my experience with Elm almost certainly makes it
 easier for me to learn Reason, there are similarities between the two.
 
-### Things I liked
+## Things I liked
 
 * The tight interopability between Reason and JavaScript is very compelling. I
   could easily see myself writing one module in Reason in an existing JS
@@ -535,7 +546,7 @@ easier for me to learn Reason, there are similarities between the two.
   something are gone. I just run the formatter! The VSCode plugin runs this for
   me when I save, so I just didn't have to think about it.
 
-### Things I found confusing
+## Things I found confusing
 
 > Please remember that I am writing this as a Reason beginner, not an authority!
 > If I've misunderstood something or made a mistake, please let me know and I'd
@@ -564,3 +575,8 @@ easier for me to learn Reason, there are similarities between the two.
   probably is an easier entry point for JS programmers, but I'd rather they all
   return the `Option` type, which
   [Reason does support and use](https://reasonml.github.io/docs/en/null-undefined-option)
+
+All in all, I'd really recommend giving Reason a go! I'm excited to see where
+the language and ecosystem goes in 2019 and beyond, and I'll definitely be
+playing with it some more, maybe next time on an actual frontend project, rather
+than just a coding exercise.
