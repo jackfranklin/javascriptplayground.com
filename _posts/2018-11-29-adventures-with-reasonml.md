@@ -464,3 +464,103 @@ me:
 This means you can never end up with code in production that doesn't deal with
 all possible cases, which is fantastic. It also means if you refactor and now
 your pattern matching is out of date, the compiler will tell you.
+
+Once we have this reduce done, it's going to end up turning our array of
+frequencies into one object with two values. The solution to the puzzle (and
+what we need to get our test passing) is to take these values and multiply them.
+We can do this by piping our object into an anonymous function that does just
+this:
+
+```re
+|> result => result.twice * result.thrice
+```
+
+And with this, our tests are back to green!
+
+```
+ PASS  __tests__/daytwo_test.bs.js
+  DayTwo
+    ✓ letterFrequencies (6ms)
+    ✓ checksum (1ms)
+```
+
+There's one small refactor we can make here though. Much like JavaScript and its
+ES2015 destructuring, we can destructure an object into the keys when it's
+passed into a function. So we can rewrite our final line as:
+
+```re
+|> (({twice, thrice}) => twice * thrice)
+```
+
+Which I think reads a bit more clearly. And with that, our puzzle is solved!
+
+## Conclusion
+
+This was literally the first time I'd written Reason and after finishing the
+Advent of Code challenge I took a moment to think through what I found good, and
+what I struggled with, from the perspective of a beginner using a new language.
+
+It's also worth noting that my experience with Elm almost certainly makes it
+easier for me to learn Reason, there are similarities between the two.
+
+### Things I liked
+
+* The tight interopability between Reason and JavaScript is very compelling. I
+  could easily see myself writing one module in Reason in an existing JS
+  application because the interop is so smooth and easy.
+* Continuing from the previous point, the fact that Reason can use Jest for its
+  test runner is excellent. Not having to learn how to run another test runner
+  was a major bonus. It also helps that Jest is absolutely exceptional and packs
+  in a tonne of useful features, so it makes perfect sense that Reason would
+  lean on that rather than build out a brand new test runner.
+* On the whole I found compiler errors clear and obvious. One of my main gripes
+  with TypeScript is that some of the compiler messages were hard to parse, but
+  Reason gave me understandable messages that I really appreciated, particularly
+  as a beginner.
+* The documentation on the Reason site is excellent. Take
+  [this page on pattern matching](https://reasonml.github.io/docs/en/pattern-matching)
+  as an example: it's clear, the code samples are easy to follow, and it
+  explains things thoroughly. It also avoids any complex jargon and doesn't
+  attempt to sound super clever.
+* This one is editor specific, but the
+  [reason-vscode](https://marketplace.visualstudio.com/items?itemName=jaredly.reason-vscode)
+  plugin gives a really good developer experience. It was easy to quickly get
+  formatting, syntax highlighting, compiler errors and so on in my editor. (If
+  you use another editor, there are
+  [links to plugins on the Reason site](https://reasonml.github.io/docs/en/editor-plugins)).
+* Reason includes `refmt`, a code formatter for Reason code. Much like Prettier
+  for JavaScript, this runs and formats your code. What's great about this is
+  that all Reason projects use this, so all Reason code is formatted the same,
+  and that as a beginner any worries about conventions or how to format
+  something are gone. I just run the formatter! The VSCode plugin runs this for
+  me when I save, so I just didn't have to think about it.
+
+### Things I found confusing
+
+> Please remember that I am writing this as a Reason beginner, not an authority!
+> If I've misunderstood something or made a mistake, please let me know and I'd
+> be happy to update the blog post and give credit accordingly.
+
+* I've struggled in my head to fully understand the iteraction between Reason,
+  OCaml and BuckleScript. In my head Reason is a syntax on top of OCaml, and
+  BuckleScript is the compiler that can produce JavaScript. I'm not sure if my
+  mental model stacks up though, and I found it hard to get clarity on this
+  online.
+* I also found it confusing where to look for documentation for available
+  modules. For example, when wanting to split a string, I found the
+  [Str](https://reasonml.github.io/api/Str.html) Reason module. However, this
+  isn't available when compiling with BuckleScript, so I ended up using the docs
+  from the BuckleScript API for
+  [Js.String](https://bucklescript.github.io/bucklescript/api/Js.String.html).
+  After this I was confused as to which one I should use, and why some modules
+  exist in BuckleScript, but others in Reason. This is still a big point of
+  confusion for me - if you can help me understand it I'd love to chat and also
+  update this blog post!
+* I think this is me being strongly biased based on my Elm experience, but I
+  didn't love that methods like
+  [Array.get](https://reasonml.github.io/api/Array.html) may raise an exception
+  if the item at the given index isn't present. I think here I'm projecting my
+  expectations from Elm onto Reason, and actually the approach Reason has taken
+  probably is an easier entry point for JS programmers, but I'd rather they all
+  return the `Option` type, which
+  [Reason does support and use](https://reasonml.github.io/docs/en/null-undefined-option)
