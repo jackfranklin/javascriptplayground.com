@@ -556,7 +556,10 @@ easier for me to learn Reason, there are similarities between the two.
   OCaml and BuckleScript. In my head Reason is a syntax on top of OCaml, and
   BuckleScript is the compiler that can produce JavaScript. I'm not sure if my
   mental model stacks up though, and I found it hard to get clarity on this
-  online.
+  online. _Update!_: [Axel](https://twitter.com/rauschma) was kind enough to
+  share
+  [this diagram](http://reasonmlhub.com/exploring-reasonml/ch_about-reasonml.html)
+  which I think makes things clearer and provides a nice picture.
 * I also found it confusing where to look for documentation for available
   modules. For example, when wanting to split a string, I found the
   [Str](https://reasonml.github.io/api/Str.html) Reason module. However, this
