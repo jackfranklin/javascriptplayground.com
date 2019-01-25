@@ -76,3 +76,20 @@ And with that, we're set! The beauty of this is that you can continue to use any
 other ESLint configurations you like (for example, I always
 [integrate Prettier into my ESLint setup](https://prettier.io/docs/en/eslint.html))
 and now I can do that whilst also linting TypeScript, too!
+
+## Enabling ESLint on TS files in VSCode
+
+One final note for all you VSCode users out there - by default the ESLint plugin
+only runs on `javascript` and `javascriptreact` files. To tell it to run on TS
+files, you need to update the `eslint.validate` setting to:
+
+```js
+"eslint.validate": [
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact"
+]
+```
+
+And that will get you nice linting errors in your editor.
