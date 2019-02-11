@@ -2,7 +2,109 @@ body {
   font-family: bio-sans, sans-serif;
 }
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 /*
  * grid = 1,180
  * 12 cols, with 20 px gutter
  */
+
+$global-grid-gutter: 20px;
+$global-base-spacing-1: 16px;
+$global-base-spacing-2: $global-base-spacing-1 * 2;
+$global-grid-upper-breakpoint: 768px;
+
+$global-yellow: #fef86e;
+$global-black: #000000;
+
+/**
+  * $col: number of columns that the elements should span
+  * $numCols: total number of columns (default: 12)
+  * $gutter: the gutter size (default: 20px)
+  */
+@function calc-grid($col, $numCols: 12, $gutter: $global-grid-gutter) {
+  $per: percentage($col / $numCols);
+  $amt: $numCols - $col;
+  @return calc(#{$per} - #{$gutter} * (#{$amt} / #{$numCols}));
+}
+
+@mixin base-grid-padding() {
+  padding-left: $global-base-spacing-1;
+  padding-right: $global-base-spacing-1;
+
+  @media (min-width: $global-grid-upper-breakpoint) {
+    padding-left: $global-base-spacing-2;
+    padding-right: $global-base-spacing-2;
+  }
+}
+
+@mixin base-max-width() {
+  @media (min-width: $global-grid-upper-breakpoint) {
+    max-width: 1180px;
+    width: 100%;
+  }
+}
+
+@mixin base-grid() {
+  @include base-grid-padding();
+  @include base-max-width();
+}
+
+body {
+  background: $global-yellow;
+}
+
+.container {
+  @include base-grid();
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-header {
+  margin-top: 40px;
+  display: flex;
+  .logo {
+    display: block;
+    img {
+      width: 146px;
+      height: 194px;
+    }
+  }
+
+  .nav-primary {
+    margin-left: auto;
+    ul {
+      display: flex;
+
+      li {
+        padding-bottom: 20px;
+      }
+      li + li {
+        margin-left: 23px;
+      }
+
+      li.active {
+        border-bottom: 5px solid $global-black;
+      }
+
+      a {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &:link,
+        &:visited {
+          color: $global-black;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

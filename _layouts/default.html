@@ -10,28 +10,19 @@
     {% seo %}
   </head>
   <body>
-    <header class="site-header" role="banner">
-      <div class="content-container">
-        <a href="/" class="logo">
-          <img src="/img/new_logo.svg" alt="The JavaScript Playground" />
-        </a>
-      </div>
-    </header>
-    <nav class="nav-primary" role="navigation">
-      <div class="content-container clearfix">
+    <header class="site-header container">
+      <a href="/" class="logo">
+        <img src="/img/new_logo.svg" alt="The JavaScript Playground" />
+      </a>
+      <nav class="nav-primary" role="navigation">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/testing-react-enzyme-jest">Testing React course</a></li>
-          <li><a href="/archives">Archives</a></li>
+          <li {% if page.url == "/" %}class="active"{% endif %}><a href="/">Home</a></li>
+          <li {% if page.url == "/archives" %}class="active"{% endif %}><a href="/archives">Archives</a></li>
+          <li {% if page.url == "/videos" %}class="active"{% endif %}><a href="/videos">Video courses</a></li>
           <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
-          <li class="twitter-li">
-            <a class="twitter-follow-button" href="https://twitter.com/Jack_Franklin">
-              Follow @Jack_Franklin
-            </a>
-          </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     <div class="clearfix content-container">
       <section role="main" class="main">
