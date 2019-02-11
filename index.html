@@ -21,17 +21,63 @@ title: The JavaScript Playground
   </div>
 
   <div class="latest-content">
-    <h2>{{post.title}}</h2>
+    <h2 class="post-title">{{post.title}}</h2>
     <p>{{ post.intro }}</p>
-    <a href="{{ post.url }}" class="read-more">Read more</a>
+    <a href="{{ post.url }}" class="read-more-link">Read more</a>
   </div>
 </div>
 {% endfor %}
 
-{% comment %} {% for post in site.posts limit: 2 offset: 1 %}
-{{post.title}}
+<div class="subsequent-posts">
+{% for post in site.posts limit: 2 offset: 1 %}
+  <div class="post">
+    <div class="latest-date">
+      <span class="day">
+        {{ post.date | date: "%d" }}
+      </span>
+      <span class="month">
+        {{ post.date | date: "%b" }}
+      </span>
+    </div>
+
+    <div class="latest-content">
+      <h2 class="post-title">{{post.title}}</h2>
+      <p>{{ post.intro }}</p>
+      <a href="{{ post.url }}" class="read-more-link">Read more</a>
+    </div>
+  </div>
 {% endfor %}
+</div>
+
+<div class="homepage-course-advert">
+  <p>Don't miss my latest course, React in Five! This course will help you level up your React skills by covering lesser known parts of the React API. Each video is less than five minutes long, and the first four are free to watch.</p>
+  <a href="/todo">
+    Get started <img src="/img/arrow-circle-right.svg" />
+  </a>
+</div>
+
+<div class="subsequent-posts">
 {% for post in site.posts limit: 2 offset: 3 %}
+  <div class="post">
+    <div class="latest-date">
+      <span class="day">
+        {{ post.date | date: "%d" }}
+      </span>
+      <span class="month">
+        {{ post.date | date: "%b" }}
+      </span>
+    </div>
+
+    <div class="latest-content">
+      <h2 class="post-title">{{post.title}}</h2>
+      <p>{{ post.intro }}</p>
+      <a href="{{ post.url }}" class="read-more-link">Read more</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% comment %} {% for post in site.posts limit: 2 offset: 3 %}
 {{post.title}}
 {% endfor %} {% endcomment %}
 {% comment %} <article class="entry hentry home-post">

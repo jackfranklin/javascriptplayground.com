@@ -113,8 +113,54 @@ body {
 
 // home page
 
+// common elements
+
+.read-more-link {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    color: $global-text-black;
+    font-weight: bold;
+    padding-bottom: 5px;
+    text-decoration: none;
+  }
+
+  &:hover {
+    border-bottom: 4px solid $global-text-black;
+  }
+}
+
+.latest-date {
+  span {
+    width: 100%;
+    display: block;
+    text-align: right;
+  }
+
+  .day {
+    font-size: 30px;
+    font-style: italic;
+    letter-spacing: -0.03em;
+    color: $global-text-black;
+  }
+
+  .month {
+    text-transform: uppercase;
+    font-size: 33px;
+    font-weight: 300;
+  }
+}
+
+.post-title {
+  font-weight: 700;
+  font-size: 30px;
+  color: $global-text-black;
+  margin-bottom: 30px;
+}
+
 .latest-post {
   margin-top: 120px;
+  margin-bottom: 150px;
 
   width: calc-grid(12);
   display: flex;
@@ -143,37 +189,24 @@ body {
   }
 
   .latest-date {
-    width: calc-grid(1);
     margin-left: calc-grid(1);
-
-    span {
-      display: block;
-      text-align: right;
-    }
+    width: calc-grid(1);
 
     .day {
       font-size: 30px;
-      font-style: italic;
-      letter-spacing: -0.03em;
-      color: $global-text-black;
     }
 
     .month {
-      text-transform: uppercase;
       font-size: 33px;
-      font-weight: 300;
     }
   }
   .latest-content {
     width: calc-grid(9);
     margin-left: $global-grid-gutter;
 
-    h2 {
-      font-weight: 700;
+    .post-title {
       font-size: 50px;
-      color: $global-text-black;
       margin-top: -5px;
-      margin-bottom: 30px;
     }
 
     p {
@@ -182,20 +215,87 @@ body {
       margin-bottom: 30px;
     }
 
-    a.read-more {
-      &:link,
-      &:visited {
-        text-transform: uppercase;
+    .read-more-link {
+      font-size: 21px;
+    }
+  }
+}
+
+.subsequent-posts {
+  display: flex;
+
+  .latest-date {
+    width: calc-grid(1, 6);
+  }
+
+  .post {
+    width: calc-grid(6);
+
+    display: flex;
+
+    .latest-content {
+      width: calc-grid(5, 6);
+      margin-left: $global-grid-gutter;
+
+      p {
         color: $global-text-black;
-        font-weight: bold;
         font-size: 21px;
-        padding-bottom: 5px;
-        text-decoration: none;
+        margin-bottom: 30px;
+        line-height: 1.4;
+        font-weight: 300;
       }
 
-      &:hover {
-        border-bottom: 4px solid $global-text-black;
+      .read-more-link {
+        font-size: 17px;
       }
+    }
+  }
+
+  .post + .post {
+    margin-left: $global-grid-gutter;
+  }
+}
+
+.homepage-course-advert {
+  width: calc-grid(12);
+  border-radius: 3px;
+  background: $global-text-black;
+  color: $global-yellow;
+  padding: 30px;
+  // 30px left because it's purposefully off grid
+  margin: 80px 0 80px 30px;
+  p {
+    line-height: 42px;
+    font-size: 24px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 180px;
+    padding-bottom: 5px;
+
+    img {
+      margin-left: 5px;
+      margin-top: 2px;
+      height: 24px;
+      width: 24px;
+    }
+
+    &:link,
+    &:visited {
+      color: $global-yellow;
+      font-weight: bold;
+      font-size: 21px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 5px solid $global-text-black;
+    }
+
+    &:hover {
+      border-bottom: 5px solid $global-yellow;
     }
   }
 }
