@@ -5,26 +5,35 @@ title: The JavaScript Playground
 
 {% for post in site.posts limit: 1 %}
 <div class="latest-post">
-  <span class="latest-rotated">
-  Latest Post
-  </span>
+  <div class="latest-post-text-container">
+    <span class="latest-rotated">
+    Latest Post
+    </span>
+  </div>
 
   <div class="latest-date">
-    {{ post.date | date: "%d %b" }}
+    <span class="day">
+      {{ post.date | date: "%d" }}
+    </span>
+    <span class="month">
+      {{ post.date | date: "%b" }}
+    </span>
   </div>
 
   <div class="latest-content">
+    <h2>{{post.title}}</h2>
+    <p>{{ post.intro }}</p>
+    <a href="{{ post.url }}" class="read-more">Read more</a>
   </div>
 </div>
-{{post.title}}
 {% endfor %}
 
-{% for post in site.posts limit: 2 offset: 1 %}
+{% comment %} {% for post in site.posts limit: 2 offset: 1 %}
 {{post.title}}
 {% endfor %}
 {% for post in site.posts limit: 2 offset: 3 %}
 {{post.title}}
-{% endfor %}
+{% endfor %} {% endcomment %}
 {% comment %} <article class="entry hentry home-post">
   <header class="entry-header">
     <h1 class="entry-title clearfix">

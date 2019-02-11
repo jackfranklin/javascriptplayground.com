@@ -24,6 +24,8 @@ $global-grid-upper-breakpoint: 768px;
 $global-yellow: #fef86e;
 $global-black: #000000;
 
+$global-text-black: #26282e;
+
 /**
   * $col: number of columns that the elements should span
   * $numCols: total number of columns (default: 12)
@@ -112,15 +114,88 @@ body {
 // home page
 
 .latest-post {
-  position: relative;
+  margin-top: 120px;
 
-  .latest-rotated {
-    text-transform: uppercase;
-    font-size: 21px;
-    transform: rotate(90deg);
-    display: block;
-    position: absolute;
-    top: 50px;
-    left: 0;
+  width: calc-grid(12);
+  display: flex;
+  min-height: 150px;
+
+  .latest-post-text-container {
+    position: relative;
+    width: calc-grid(1);
+
+    .latest-rotated {
+      text-transform: uppercase;
+      font-size: 21px;
+      transform: rotate(90deg);
+      display: block;
+      position: absolute;
+      font-weight: bold;
+      top: 88px;
+      left: -20px;
+      width: 200px;
+      line-height: normal;
+      font-size: 21px;
+      letter-spacing: 0.3em;
+
+      color: $global-text-black;
+    }
+  }
+
+  .latest-date {
+    width: calc-grid(1);
+    margin-left: calc-grid(1);
+
+    span {
+      display: block;
+      text-align: right;
+    }
+
+    .day {
+      font-size: 30px;
+      font-style: italic;
+      letter-spacing: -0.03em;
+      color: $global-text-black;
+    }
+
+    .month {
+      text-transform: uppercase;
+      font-size: 33px;
+      font-weight: 300;
+    }
+  }
+  .latest-content {
+    width: calc-grid(9);
+    margin-left: $global-grid-gutter;
+
+    h2 {
+      font-weight: 700;
+      font-size: 50px;
+      color: $global-text-black;
+      margin-top: -5px;
+      margin-bottom: 30px;
+    }
+
+    p {
+      color: $global-text-black;
+      font-size: 21px;
+      margin-bottom: 30px;
+    }
+
+    a.read-more {
+      &:link,
+      &:visited {
+        text-transform: uppercase;
+        color: $global-text-black;
+        font-weight: bold;
+        font-size: 21px;
+        padding-bottom: 5px;
+        text-decoration: none;
+      }
+
+      &:hover {
+        border-bottom: 4px solid $global-text-black;
+      }
+    }
   }
 }

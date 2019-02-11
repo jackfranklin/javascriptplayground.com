@@ -2,7 +2,6 @@ permalink: /:title/
 plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
-  - jekyll-paginate
 twitter:
   username: Jack_Franklin
 include: ['_redirects']
