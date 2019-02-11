@@ -4,6 +4,18 @@ title: The JavaScript Playground
 ---
 
 {% for post in site.posts limit: 1 %}
+<div class="latest-post">
+  <span class="latest-rotated">
+  Latest Post
+  </span>
+
+  <div class="latest-date">
+    {{ post.date | date: "%d %b" }}
+  </div>
+
+  <div class="latest-content">
+  </div>
+</div>
 {{post.title}}
 {% endfor %}
 

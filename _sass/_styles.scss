@@ -108,3 +108,19 @@ body {
     }
   }
 }
+
+// home page
+
+.latest-post {
+  position: relative;
+
+  .latest-rotated {
+    text-transform: uppercase;
+    font-size: 21px;
+    transform: rotate(90deg);
+    display: block;
+    position: absolute;
+    top: 50px;
+    left: 0;
+  }
+}
