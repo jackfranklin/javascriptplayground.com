@@ -5,7 +5,7 @@
     <title>{{ page.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/favicon.ico" rel="shortcut icon" />
-    <link rel="stylesheet" href="https://use.typekit.net/isx7pqv.css ">`
+    <link rel="stylesheet" href="https://use.typekit.net/isx7pqv.css ">
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     {% seo %}
   </head>
@@ -30,39 +30,19 @@
       </section>
     </div>
 
-    <footer class="site-footer" role="contentinfo">
-      <div class="about-the-site">
-
-        <ul>
-          <li><a href="/archives">Archives</a></li>
-          <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS</a></li>
-          <li><a href="http://twitter.com/Jack_Franklin">Twitter</a></li>
-          <li><a href="http://github.com/jackfranklin/javascriptplayground.com">GitHub</a></li>
-        </ul>
-        <p class="copyright">&copy; 2012-20{{ site.time | date: '%y' }} Jack Franklin</p>
-        <p class="credits">Info icon by Jürgen Bauer from the Noun Project</p>
-      </div>
-    </footer>
+    <div class="container">
+      <footer class="site-footer" role="contentinfo">
+        <div>
+            <ul>
+              <li><a href="/archives">Archives</a></li>
+              <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS</a></li>
+              <li><a href="http://twitter.com/Jack_Franklin">Twitter</a></li>
+            </ul>
+            <p class="copyright">&copy; 2012-20{{ site.time | date: '%y' }} Jack Franklin</p>
+          </div>
+      </footer>
+    </div>
     {% include ga.html %}
-    <script type="text/javascript">
-
-      window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
-
-        return t;
-      }(document, "script", "twitter-wjs"));
-    </script>
     <script src="/js/app.js"></script>
 </body>
 </html>

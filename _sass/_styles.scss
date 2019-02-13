@@ -82,14 +82,29 @@ body {
 
   .nav-primary {
     margin-left: auto;
+
     ul {
       display: flex;
+
+      @media (max-width: 550px) {
+        width: 200px;
+        flex-direction: column;
+      }
 
       li {
         padding-bottom: 20px;
       }
-      li + li {
-        margin-left: 23px;
+
+      @media (max-width: 550px) {
+        li + li {
+          margin-top: 20px;
+        }
+      }
+
+      @media (min-width: 551px) {
+        li + li {
+          margin-left: 23px;
+        }
       }
 
       li.active {
@@ -171,26 +186,31 @@ body {
     width: calc-grid(1);
 
     .latest-rotated {
-      text-transform: uppercase;
-      font-size: 21px;
-      transform: rotate(90deg);
-      display: block;
-      position: absolute;
-      font-weight: bold;
-      top: 88px;
-      left: -20px;
-      width: 200px;
-      line-height: normal;
-      font-size: 21px;
-      letter-spacing: 0.3em;
+      display: none;
 
       color: $global-text-black;
+      text-transform: uppercase;
+      font-size: 21px;
+      font-weight: bold;
+      letter-spacing: 0.3em;
+      transform: rotate(90deg);
+      width: 200px;
+
+      @media (min-width: 850px) {
+        display: block;
+        position: absolute;
+        top: 88px;
+        left: -20px;
+      }
     }
   }
 
   .latest-date {
     margin-left: calc-grid(1);
-    width: calc-grid(1);
+
+    @media (min-width: 850px) {
+      width: calc-grid(1);
+    }
 
     .day {
       font-size: 30px;
@@ -200,9 +220,15 @@ body {
       font-size: 33px;
     }
   }
+
   .latest-content {
-    width: calc-grid(9);
-    margin-left: $global-grid-gutter;
+    width: calc-grid(8);
+    margin-left: calc-grid(1);
+
+    @media (min-width: 850px) {
+      width: calc-grid(9);
+      margin-left: $global-grid-gutter;
+    }
 
     .post-title {
       font-size: 50px;
@@ -222,16 +248,49 @@ body {
 }
 
 .subsequent-posts {
-  display: flex;
+  @media (min-width: 680px) {
+    display: flex;
+  }
 
   .latest-date {
-    width: calc-grid(1, 6);
+    width: calc-grid(2, 12);
+
+    @media (min-width: 680px) {
+      width: calc-grid(1, 6);
+    }
+
+    .day {
+      font-size: 20px;
+      @media (min-width: 850px) {
+        font-size: 30px;
+      }
+    }
+
+    .month {
+      font-size: 20px;
+      @media (min-width: 850px) {
+        font-size: 33px;
+      }
+    }
   }
 
   .post {
-    width: calc-grid(6);
+    width: 100%;
+
+    & + .post {
+      margin-top: 60px;
+    }
+
+    @media (min-width: 680px) {
+      width: calc-grid(6);
+      margin-top: 0;
+    }
 
     display: flex;
+
+    .post-title {
+      margin-top: -3px;
+    }
 
     .latest-content {
       width: calc-grid(5, 6);
@@ -252,7 +311,9 @@ body {
   }
 
   .post + .post {
-    margin-left: $global-grid-gutter;
+    @media (min-width: 680px) {
+      margin-left: $global-grid-gutter;
+    }
   }
 }
 
@@ -261,9 +322,15 @@ body {
   border-radius: 3px;
   background: $global-text-black;
   color: $global-yellow;
+
+  margin: 80px 0;
+  @media (min-width: 850px) {
+    // 30px left because it's purposefully off grid
+    margin-left: 30px;
+  }
+
   padding: 30px;
-  // 30px left because it's purposefully off grid
-  margin: 80px 0 80px 30px;
+
   p {
     line-height: 42px;
     font-size: 24px;
@@ -296,6 +363,42 @@ body {
 
     &:hover {
       border-bottom: 5px solid $global-yellow;
+    }
+  }
+}
+
+.site-footer {
+  margin-top: 150px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 13px;
+
+  p {
+    text-align: right;
+    margin-top: 10px;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      padding: 10px;
+      text-transform: uppercase;
+
+      &:last-of-type {
+        padding-right: 0;
+      }
+
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: $global-text-black;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
