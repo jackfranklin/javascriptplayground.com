@@ -87,7 +87,7 @@ body {
       display: flex;
 
       @media (max-width: 550px) {
-        width: 200px;
+        width: 120px;
         flex-direction: column;
       }
 
@@ -174,8 +174,13 @@ body {
 }
 
 .latest-post {
-  margin-top: 120px;
-  margin-bottom: 150px;
+  margin-top: 60px;
+  margin-bottom: 80px;
+
+  @media (min-width: 850px) {
+    margin-top: 120px;
+    margin-bottom: 150px;
+  }
 
   width: calc-grid(12);
   display: flex;
@@ -183,7 +188,12 @@ body {
 
   .latest-post-text-container {
     position: relative;
-    width: calc-grid(1);
+    display: none;
+
+    @media (min-width: 850px) {
+      width: calc-grid(1);
+      display: block;
+    }
 
     .latest-rotated {
       display: none;
@@ -206,33 +216,36 @@ body {
   }
 
   .latest-date {
-    margin-left: calc-grid(1);
+    width: calc-grid(2);
 
     @media (min-width: 850px) {
-      width: calc-grid(1);
+      margin-left: calc-grid(1);
     }
 
     .day {
-      font-size: 30px;
+      font-size: 20px;
     }
 
     .month {
-      font-size: 33px;
+      font-size: 20px;
     }
   }
 
   .latest-content {
-    width: calc-grid(8);
-    margin-left: calc-grid(1);
+    width: calc-grid(9);
+    margin-left: $global-grid-gutter;
 
     @media (min-width: 850px) {
       width: calc-grid(9);
-      margin-left: $global-grid-gutter;
     }
 
     .post-title {
-      font-size: 50px;
+      font-size: 40px;
       margin-top: -5px;
+
+      @media (min-width: 850px) {
+        font-size: 50px;
+      }
     }
 
     p {
@@ -278,7 +291,9 @@ body {
     width: 100%;
 
     & + .post {
-      margin-top: 60px;
+      @media (max-width: 679px) {
+        margin-top: 60px;
+      }
     }
 
     @media (min-width: 680px) {
