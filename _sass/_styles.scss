@@ -26,6 +26,8 @@ $global-black: #000000;
 
 $global-text-black: #26282e;
 
+$posts-horizontal-min: 700px;
+
 /**
   * $col: number of columns that the elements should span
   * $numCols: total number of columns (default: 12)
@@ -153,7 +155,7 @@ body {
   }
 
   .day {
-    font-size: 30px;
+    font-size: 20px;
     font-style: italic;
     letter-spacing: -0.03em;
     color: $global-text-black;
@@ -161,7 +163,7 @@ body {
 
   .month {
     text-transform: uppercase;
-    font-size: 33px;
+    font-size: 20px;
     font-weight: 300;
   }
 }
@@ -216,10 +218,9 @@ body {
   }
 
   .latest-date {
-    width: calc-grid(2);
-
-    @media (min-width: 850px) {
-      margin-left: calc-grid(1);
+    width: calc-grid(1);
+    @media (max-width: $posts-horizontal-min - 1) {
+      width: calc-grid(2, 12);
     }
 
     .day {
@@ -229,11 +230,26 @@ body {
     .month {
       font-size: 20px;
     }
+
+    @media (min-width: 850px) {
+      margin-left: calc-grid(1);
+    }
+
+    @media (min-width: 950px) {
+      .day,
+      .month {
+        font-size: 30px;
+      }
+    }
   }
 
   .latest-content {
-    width: calc-grid(9);
+    width: calc-grid(11);
     margin-left: $global-grid-gutter;
+
+    @media (max-width: $posts-horizontal-min - 1) {
+      width: calc-grid(10, 12);
+    }
 
     @media (min-width: 850px) {
       width: calc-grid(9);
@@ -261,27 +277,27 @@ body {
 }
 
 .subsequent-posts {
-  @media (min-width: 680px) {
+  @media (min-width: $posts-horizontal-min) {
     display: flex;
   }
 
   .latest-date {
     width: calc-grid(2, 12);
 
-    @media (min-width: 680px) {
+    @media (min-width: $posts-horizontal-min) {
       width: calc-grid(1, 6);
     }
 
     .day {
       font-size: 20px;
-      @media (min-width: 850px) {
+      @media (min-width: 1000px) {
         font-size: 30px;
       }
     }
 
     .month {
       font-size: 20px;
-      @media (min-width: 850px) {
+      @media (min-width: 1000px) {
         font-size: 33px;
       }
     }
@@ -291,12 +307,12 @@ body {
     width: 100%;
 
     & + .post {
-      @media (max-width: 679px) {
+      @media (max-width: $posts-horizontal-min - 1) {
         margin-top: 60px;
       }
     }
 
-    @media (min-width: 680px) {
+    @media (min-width: $posts-horizontal-min) {
       width: calc-grid(6);
       margin-top: 0;
     }
@@ -326,7 +342,7 @@ body {
   }
 
   .post + .post {
-    @media (min-width: 680px) {
+    @media (min-width: 700px) {
       margin-left: $global-grid-gutter;
     }
   }
