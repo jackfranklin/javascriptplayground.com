@@ -9,26 +9,25 @@
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     {% seo %}
   </head>
-  <body>
-    <header class="site-header container">
-      <a href="/" class="logo">
-        <img src="/img/new_logo.svg" alt="The JavaScript Playground" />
-      </a>
-      <nav class="nav-primary" role="navigation">
-        <ul>
-          <li {% if page.url == "/" %}class="active"{% endif %}><a href="/">Home</a></li>
-          <li {% if page.url == "/archives" %}class="active"{% endif %}><a href="/archives">Archives</a></li>
-          <li {% if page.url == "/videos" %}class="active"{% endif %}><a href="/videos">Video courses</a></li>
-          <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
-        </ul>
-      </nav>
+  <body {% if page.url == '/'%}class="yellow-bg"{% endif %}>
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="logo">
+          <img src="/img/new_logo.svg" alt="The JavaScript Playground" />
+        </a>
+        <nav class="nav-primary" role="navigation">
+          <ul>
+            <li {% if page.url == "/" %}class="active"{% endif %}><a href="/">Home</a></li>
+            <li {% if page.url == "/archives" %}class="active"{% endif %}><a href="/archives">Archives</a></li>
+            <li {% if page.url == "/videos" %}class="active"{% endif %}><a href="/videos">Video courses</a></li>
+            <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <div class="container">
-      <section role="main" class="main">
-        {{ content }}
-      </section>
-    </div>
+
+    <div>{{ content }}</div>
 
     <div class="container">
       <footer class="site-footer" role="contentinfo">

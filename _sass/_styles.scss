@@ -61,7 +61,7 @@ $posts-horizontal-min: 700px;
   @include base-max-width();
 }
 
-body {
+body.yellow-bg {
   background: $global-yellow;
 }
 
@@ -72,8 +72,13 @@ body {
 }
 
 .site-header {
-  margin-top: 40px;
-  display: flex;
+  padding-top: 40px;
+  background: $global-yellow;
+
+  > .container {
+    display: flex;
+  }
+
   .logo {
     display: block;
     img {
@@ -81,7 +86,6 @@ body {
       height: 194px;
     }
   }
-
   .nav-primary {
     margin-left: auto;
 
@@ -430,6 +434,24 @@ body {
       a:hover {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+.individual-post {
+  background: $global-yellow;
+
+  .post-header .container {
+    display: flex;
+
+    .latest-date {
+      width: calc-grid(1, 12);
+      margin-left: calc-grid(1, 12);
+    }
+
+    .post-title {
+      margin-left: $global-grid-gutter;
+      width: calc-grid(10, 12);
     }
   }
 }

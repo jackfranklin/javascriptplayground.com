@@ -1,4 +1,22 @@
-<article class="entry hentry">
+<div class="individual-post">
+  <div class="post-header">
+    <div class="container">
+      <div class="latest-date">
+        <span class="day">
+          {{ post.date | date: '%d' }}
+        </span>
+        <span class="month">
+          {{ post.date | date: '%b' }}
+        </span>
+      </div>
+
+      <h2 class="post-title">{{ post.title }}</h2>
+    </div>
+  </div>
+
+  <p>{{ post.intro }}</p>
+</div>
+<!-- <article class="entry hentry">
   <header class="entry-header">
     <h1 class="entry-title">{{ post.title }}</h1>
     {% unless is_page %}
@@ -73,4 +91,4 @@
     </div>
     {% endunless %}
   </section>
-</article>
+</article> -->
