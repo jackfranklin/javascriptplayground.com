@@ -25,6 +25,7 @@ $global-yellow: #fef86e;
 $global-black: #000000;
 
 $global-text-black: #26282e;
+$global-text-dark-gray: #4a4c52;
 
 $posts-horizontal-min: 700px;
 
@@ -78,10 +79,17 @@ body.yellow-bg {
   > .container {
     display: flex;
   }
-
   .logo {
     display: block;
-    img {
+  }
+
+  .logo img {
+    width: 195px;
+    height: 42px;
+  }
+  /* homepage has the big full logo */
+  &.homepage-header {
+    .logo img {
       width: 146px;
       height: 194px;
     }
@@ -438,20 +446,67 @@ body.yellow-bg {
   }
 }
 
-.individual-post {
-  background: $global-yellow;
+.non-homepage {
+  .individual-post {
+    .post-header {
+      background: $global-yellow;
+      padding-top: 130px;
+      padding-bottom: 70px;
+      margin-bottom: 40px;
+    }
+    .post-header .container {
+      display: flex;
 
-  .post-header .container {
-    display: flex;
+      .latest-date {
+        width: calc-grid(1, 12);
+        margin-left: calc-grid(1, 12);
+        > span {
+          font-size: 30px;
+        }
+      }
 
-    .latest-date {
-      width: calc-grid(1, 12);
-      margin-left: calc-grid(1, 12);
+      .post-title {
+        margin-left: $global-grid-gutter;
+        width: calc-grid(10, 12);
+        font-size: 50px;
+        margin-top: -3px;
+      }
     }
 
-    .post-title {
-      margin-left: $global-grid-gutter;
-      width: calc-grid(10, 12);
+    .post-intro.container {
+      p {
+        margin-left: calc-grid(2, 12);
+        width: calc-grid(10, 12);
+        font-size: 21px;
+      }
+    }
+
+    .post-full-content {
+      .content-container {
+        width: calc-grid(10, 12);
+        margin-left: calc-grid(2, 12);
+
+        ol,
+        ul {
+          list-style: disc;
+        }
+
+        p,
+        li {
+          font-size: 24px;
+          line-height: 37px;
+          color: $global-text-dark-gray;
+        }
+
+        ol,
+        p,
+        ul,
+        pre {
+          + * {
+            margin-top: 20px;
+          }
+        }
+      }
     }
   }
 }

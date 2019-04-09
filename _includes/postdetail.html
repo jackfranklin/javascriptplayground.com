@@ -12,9 +12,21 @@
 
       <h2 class="post-title">{{ post.title }}</h2>
     </div>
+    <div class="container post-intro">
+      <p>{{ post.intro }}</p>
+    </div>
   </div>
 
-  <p>{{ post.intro }}</p>
+  <section class="post-full-content container">
+    <div class="content-container">
+      {% if post.deprecated_by %}
+        <p class="deprecation-warning">This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
+      {% endif %}
+
+      {{ content }}
+    </div>
+  </section>
+
 </div>
 <!-- <article class="entry hentry">
   <header class="entry-header">
@@ -35,11 +47,6 @@
       <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CKYIEK7M&placement=javascriptplaygroundcom" id="_carbonads_js"></script>
     </div>
   </header>
-  <section class="entry-content">
-    {% if post.deprecated_by %}
-      <p class='deprecation-warning'>This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
-    {% endif %}
-    {{ content }}
     {% unless is_page %}
     <hr />
 
