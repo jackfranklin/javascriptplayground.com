@@ -515,7 +515,7 @@ body.yellow-bg {
 
         blockquote {
           font-style: italic;
-          background: $global-yellow;
+          background: #e4edf9;
           padding: 20px;
           border-radius: 3px;
           width: 100%;
@@ -555,6 +555,31 @@ body.yellow-bg {
             border-radius: 3px;
             padding: 10px;
             font-size: 20px;
+          }
+        }
+
+        a:link,
+        a:visited {
+          color: #3a71b0;
+          text-decoration: underline;
+        }
+
+        a:hover {
+          text-decoration: none;
+        }
+
+        p.thank-you-tweet {
+          margin-top: 40px;
+          font-size: 18px;
+          font-style: italic;
+          color: #3a71b0;
+
+          img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            float: left;
+            margin-top: 7px;
           }
         }
       }
