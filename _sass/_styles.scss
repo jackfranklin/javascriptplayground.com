@@ -1,5 +1,13 @@
+@import './code';
+
 body {
   font-family: bio-sans, sans-serif;
+}
+
+pre,
+code {
+  font-family: 'Operator Mono', 'IBM Plex Mono', 'Courier New', Courier,
+    monospace;
 }
 
 html {
@@ -486,6 +494,13 @@ body.yellow-bg {
         width: calc-grid(10, 12);
         margin-left: calc-grid(2, 12);
 
+        h2 {
+          font-size: 33px;
+          line-height: 50px;
+          color: $global-text-black;
+          font-weight: bold;
+        }
+
         ol,
         ul {
           list-style: disc;
@@ -498,12 +513,48 @@ body.yellow-bg {
           color: $global-text-dark-gray;
         }
 
+        blockquote {
+          font-style: italic;
+          background: $global-yellow;
+          padding: 20px;
+          border-radius: 3px;
+          width: 100%;
+        }
+
         ol,
         p,
         ul,
-        pre {
+        blockquote,
+        .highlighter-rouge {
           + * {
             margin-top: 20px;
+          }
+
+          + h1,
+          + h2,
+          + h3,
+          + h4,
+          + h5 {
+            margin-top: 40px;
+          }
+        }
+
+        // only inline
+        code.highlighter-rouge {
+          background: #e4edf9;
+          border-radius: 2px;
+          padding: 2px 5px;
+        }
+
+        // only applies to blocks, not to inline
+        div.highlighter-rouge {
+          margin-top: 30px;
+          width: 110%;
+          margin-left: -10%;
+          .highlight {
+            border-radius: 3px;
+            padding: 10px;
+            font-size: 20px;
           }
         }
       }
