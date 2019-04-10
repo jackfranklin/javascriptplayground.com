@@ -458,41 +458,86 @@ body.yellow-bg {
   .individual-post {
     .post-header {
       background: $global-yellow;
-      padding-top: 130px;
-      padding-bottom: 70px;
-      margin-bottom: 40px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      @media (min-width: 700px) {
+        padding-top: 130px;
+        padding-bottom: 70px;
+        margin-bottom: 40px;
+      }
     }
     .post-header .container {
-      display: flex;
+      display: block;
+
+      @media (min-width: 700px) {
+        display: flex;
+      }
 
       .latest-date {
-        width: calc-grid(1, 12);
-        margin-left: calc-grid(1, 12);
+        width: calc-grid(2, 12);
         > span {
-          font-size: 30px;
+          text-align: left;
+        }
+
+        @media (min-width: 700px) {
+          width: calc-grid(1, 12);
+          margin-left: calc-grid(1, 12);
+          > span {
+            text-align: right;
+          }
+        }
+
+        > span {
+          font-size: 20px;
+          @media (min-width: 700px) {
+            font-size: 25px;
+          }
+          @media (min-width: 900px) {
+            font-size: 30px;
+          }
         }
       }
 
       .post-title {
-        margin-left: $global-grid-gutter;
-        width: calc-grid(10, 12);
-        font-size: 50px;
-        margin-top: -3px;
+        font-size: 40px;
+
+        width: calc-grid(1, 1);
+        margin-top: 5px;
+
+        @media (min-width: 700px) {
+          width: calc-grid(10, 12);
+          margin-left: $global-grid-gutter;
+          margin-top: -3px;
+        }
+
+        @media (min-width: 700px) {
+          font-size: 50px;
+        }
       }
     }
 
     .post-intro.container {
+      width: calc-grid(1, 1);
+      font-size: 21px;
+      line-height: 32px;
       p {
-        margin-left: calc-grid(2, 12);
-        width: calc-grid(10, 12);
-        font-size: 21px;
+        @media (min-width: 700px) {
+          margin-left: calc-grid(2, 12);
+          width: calc-grid(10, 12);
+        }
       }
     }
 
     .post-full-content {
       .content-container {
-        width: calc-grid(10, 12);
-        margin-left: calc-grid(2, 12);
+        width: calc-grid(11, 12);
+        margin-left: calc-grid(1, 12);
+
+        @media (min-width: 700px) {
+          width: calc-grid(10, 12);
+          margin-left: calc-grid(2, 12);
+        }
 
         h2 {
           font-size: 33px;
@@ -513,6 +558,10 @@ body.yellow-bg {
           color: $global-text-dark-gray;
         }
 
+        li + li {
+          margin-top: 15px;
+        }
+
         blockquote {
           font-style: italic;
           background: #e4edf9;
@@ -525,6 +574,9 @@ body.yellow-bg {
         p,
         ul,
         blockquote,
+        // syntax highlighting seems to end up in a `pre` if
+        // the actual syntax isn't known
+        > pre,
         .highlighter-rouge {
           + * {
             margin-top: 20px;
@@ -547,10 +599,26 @@ body.yellow-bg {
         }
 
         // only applies to blocks, not to inline
+        > pre {
+          > code {
+            border-radius: 3px;
+            padding: 10px;
+            font-size: 20px;
+            background: #272822;
+            display: block;
+            color: #f8f8f2;
+            line-height: 30px;
+          }
+        }
+        > pre,
         div.highlighter-rouge {
+          margin-left: -$global-base-spacing-1;
+          width: calc(100% + #{$global-base-spacing-1 * 2});
+          @media (min-width: 700px) {
+            width: 110%;
+            margin-left: -10%;
+          }
           margin-top: 30px;
-          width: 110%;
-          margin-left: -10%;
           .highlight {
             border-radius: 3px;
             padding: 10px;

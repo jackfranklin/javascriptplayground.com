@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>{{ page.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/favicon.ico" rel="shortcut icon" />
-    <link rel="stylesheet" href="https://use.typekit.net/isx7pqv.css ">
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
-    {% seo %}
+    {% include head.html %}
   </head>
   <body class="yellow-bg">
     <header class="site-header homepage-header">
@@ -15,33 +9,13 @@
         <a href="/" class="logo">
           <img src="/img/new_logo.svg" alt="The JavaScript Playground" />
         </a>
-        <nav class="nav-primary" role="navigation">
-          <ul>
-            <li {% if page.url == "/" %}class="active"{% endif %}><a href="/">Home</a></li>
-            <li {% if page.url == "/archives" %}class="active"{% endif %}><a href="/archives">Archives</a></li>
-            <li {% if page.url == "/videos" %}class="active"{% endif %}><a href="/videos">Video courses</a></li>
-            <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS Feed</a></li>
-          </ul>
-        </nav>
+        {% include nav.html %}
       </div>
     </header>
 
-
     <div>{{ content }}</div>
 
-    <div class="container">
-      <footer class="site-footer" role="contentinfo">
-        <div>
-            <ul>
-              <li><a href="/archives">Archives</a></li>
-              <li><a href="http://feeds.feedburner.com/TheJavascriptPlayground">RSS</a></li>
-              <li><a href="http://twitter.com/Jack_Franklin">Twitter</a></li>
-            </ul>
-            <p class="copyright">&copy; 2012-20{{ site.time | date: '%y' }} Jack Franklin</p>
-          </div>
-      </footer>
-    </div>
-    {% include ga.html %}
+    {% include footer.html %} {% include ga.html %}
     <script src="/js/app.js"></script>
-</body>
+  </body>
 </html>

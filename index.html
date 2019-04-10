@@ -58,7 +58,7 @@ title: The JavaScript Playground
         API. Each video is less than five minutes long, and the first four are
         free to watch.
       </p>
-      <a href="/todo">
+      <a href="/react-in-five">
         Get started <img src="/img/arrow-circle-right.svg" />
       </a>
     </div>
@@ -83,24 +83,5 @@ title: The JavaScript Playground
       </div>
       {% endfor %}
     </div>
-
-    {% comment %} {% for post in site.posts limit: 2 offset: 3 %}
-    {{ post.title }}
-    {% endfor %} {% endcomment %} {% comment %}
-    <article class="entry hentry home-post">
-      <header class="entry-header">
-        <h1 class="entry-title clearfix">
-          <a href="{{ post.url }}">{{ post.title }}</a>
-          <span class="entry-date">{{ post.date | date: '%d %B %Y' }}</span>
-        </h1>
-      </header>
-      <div class="entry-intro">
-        <p>
-          <a href="{{ post.url }}">{{ post.intro }}</a>
-        </p>
-        <a href="{{ post.url }}" class="entry-read-more">>> Read more</a>
-      </div>
-    </article>
-    {% endcomment %}
   </section>
 </div>
