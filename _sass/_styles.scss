@@ -653,4 +653,35 @@ body.yellow-bg {
       }
     }
   }
+
+  .carbon {
+    width: 350px;
+    margin: 10px auto 40px auto;
+    font-size: 14px;
+    background: #eee;
+    border-radius: 3px;
+    border: 1px solid $global-yellow;
+
+    .carbon-wrap {
+      display: flex;
+
+      .carbon-img {
+        display: block;
+      }
+
+      .carbon-text {
+        display: block;
+        margin-left: 15px;
+        padding-top: 10px;
+        padding-right: 7px;
+      }
+    }
+
+    .carbon-poweredby {
+      text-align: right;
+      width: 100%;
+      display: block;
+      padding: 2px 7px 7px 2px;
+    }
+  }
 }
