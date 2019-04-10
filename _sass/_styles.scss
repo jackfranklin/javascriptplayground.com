@@ -601,6 +601,9 @@ body.yellow-bg {
         }
 
         // only applies to blocks, not to inline
+        pre.highlight {
+          overflow: scroll;
+        }
         > pre {
           > code {
             border-radius: 3px;
@@ -610,7 +613,6 @@ body.yellow-bg {
             display: block;
             color: #f8f8f2;
             line-height: 30px;
-            overflow: scroll;
           }
         }
         > pre,
@@ -626,7 +628,6 @@ body.yellow-bg {
             border-radius: 3px;
             padding: 10px;
             font-size: 20px;
-            overflow: scroll;
           }
         }
 
