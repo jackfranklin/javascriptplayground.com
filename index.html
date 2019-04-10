@@ -1,63 +1,87 @@
 ---
-layout: default
+layout: homepage
 title: The JavaScript Playground
 ---
 
-{% for post in paginator.posts %}
-<article class="entry hentry home-post">
-  <header class="entry-header">
-    <h1 class="entry-title clearfix">
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <span class="entry-date">{{ post.date | date: "%d %B %Y" }}</span>
-    </h1>
-  </header>
-  <div class="entry-intro">
-    <p><a href="{{ post.url }}">{{ post.intro }}</a></p>
-    <a href="{{ post.url }}" class="entry-read-more">>> Read more</a>
-  </div>
-</article>
+<div class="container">
+  <section role="main" class="main">
+    {% for post in site.posts limit: 1 %}
+    <div class="latest-post">
+      <div class="latest-post-text-container">
+        <span class="latest-rotated">
+          Latest Post
+        </span>
+      </div>
 
-{% endfor %}
+      <div class="latest-date">
+        <span class="day">
+          {{ post.date | date: '%d' }}
+        </span>
+        <span class="month">
+          {{ post.date | date: '%b' }}
+        </span>
+      </div>
 
-<div class="pagination clearfix">
-  <div class="pagination-prev-btn">
-    {% if paginator.previous_page %}
-      <a class="pagination-button" href="{{ paginator.previous_page_path }}">
-        &lt;&lt;
-      </a>
-    {% else %}
-      <span>
-        &lt;&lt;
-      </span>
-    {% endif %}
-  </div>
-  <ul>
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <li class="pagination-current-page">
-          <span id="current-page">{{ page }}</span>
-        </li>
-      {% elsif page == 1 %}
-        <li>
-          <a href="/">{{ page }}</a>
-        </li>
-      {% else %}
-        <li>
-          <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-        </li>
-      {% endif %}
+      <div class="latest-content">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p>{{ post.intro }}</p>
+        <a href="{{ post.url }}" class="read-more-link">Read more</a>
+      </div>
+    </div>
     {% endfor %}
 
-  </ul>
-  <div class="pagination-next-btn">
-    {% if paginator.next_page %}
-      <a class="pagination-button" href="{{ paginator.next_page_path }}">
-        &gt;&gt;
+    <div class="subsequent-posts">
+      {% for post in site.posts limit: 2 offset: 1 %}
+      <div class="post">
+        <div class="latest-date">
+          <span class="day">
+            {{ post.date | date: '%d' }}
+          </span>
+          <span class="month">
+            {{ post.date | date: '%b' }}
+          </span>
+        </div>
+
+        <div class="latest-content">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p>{{ post.intro }}</p>
+          <a href="{{ post.url }}" class="read-more-link">Read more</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="homepage-course-advert">
+      <p>
+        Don't miss my latest course, React in Five! This course will help you
+        level up your React skills by covering lesser known parts of the React
+        API. Each video is less than five minutes long, and the first four are
+        free to watch.
+      </p>
+      <a href="/react-in-five">
+        Get started <img src="/img/arrow-circle-right.svg" />
       </a>
-    {% else %}
-      <span>
-        &gt;&gt;
-      </span>
-    {% endif %}
-  </div>
+    </div>
+
+    <div class="subsequent-posts">
+      {% for post in site.posts limit: 2 offset: 3 %}
+      <div class="post">
+        <div class="latest-date">
+          <span class="day">
+            {{ post.date | date: '%d' }}
+          </span>
+          <span class="month">
+            {{ post.date | date: '%b' }}
+          </span>
+        </div>
+
+        <div class="latest-content">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p>{{ post.intro }}</p>
+          <a href="{{ post.url }}" class="read-more-link">Read more</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 </div>

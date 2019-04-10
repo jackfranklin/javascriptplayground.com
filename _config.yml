@@ -2,18 +2,15 @@ permalink: /:title/
 plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
-  - jekyll-paginate
 twitter:
   username: Jack_Franklin
-paginate: 6
-paginate_path: "/blog/page:num/"
-include: ["_redirects"]
+include: ['_redirects']
 sass:
   sass_dir: _sass
   style: compressed
 url: https://javascriptplayground.com
 defaults:
   - scope:
-      path: ""
+      path: ''
     values:
       image: /img/graph-image.png

@@ -1,76 +1,60 @@
-<article class="entry hentry">
-  <header class="entry-header">
-    <h1 class="entry-title">{{ post.title }}</h1>
-    {% unless is_page %}
-    <p class="entry-meta">
-      Published on <time class="published" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-      {% if post.author %}
-        by <span class="author"><a href="http://twitter.com/{{ post.author_twitter }}">{{ post.author }}</a></span>
-      {% endif %}
-      {% if post.githubPath %}
-      -
-      <a href="https://github.com/jackfranklin/javascriptplayground.com/blob/master/_posts/{{post.githubPath}}.md" target="_blank">Edit this page on GitHub</a>
-      {% endif %}
-    </p>
-    {% endunless %}
-    <div class="carbon clearfix">
-      <script async type="text/javascript" src="https://cdn.carbonads.com/carbon.js?serve=CKYIEK7M&placement=javascriptplaygroundcom" id="_carbonads_js"></script>
-    </div>
-  </header>
-  <section class="entry-content">
-    {% if post.deprecated_by %}
-      <p class='deprecation-warning'>This post is now outdated. Instead of reading this one you should instead read <a href="{{post.deprecated_by }}">the newer post on this subject.</a></p>
-    {% endif %}
-    {{ content }}
-    {% unless is_page %}
-    <hr />
-
-    <div class="footer-content">
-      <p class="thank-you">
-        If you enjoyed this article please feel free to <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url=https://www.javascriptplayground.com{{ page.url }}&via=Jack_Franklin&related=Jack_Franklin" rel="nofollow" target="_blank" title="Share on Twitter">share it on Twitter</a>.
-      </p>
-
-    </div>
-
-    <hr />
-
-    <div>
-      <p class="thank-you-testing-react">
-        Don't miss my latest course, <a href="/react-in-five">React in Five</a>! This course will help you level up your React skills by covering lesser known parts of the React API. Each video is less than five minutes long, and the first four are free to watch. <a href="/react-in-five">Get started now</a>.
-      </p>
-    </div>
-
-      <hr />
-
-      <!-- Begin MailChimp Signup Form -->
-      <div id="mc_embed_signup">
-        <h4>Subscribe to keep up to date with the latest content.</h4>
-        <p>Join the JS Playground mailing list to be kept up to date with the latest tutorials, screencasts and more. You won't be spammed and you can unsubscribe at any time.</p>
-        <form action="//javascriptplayground.us14.list-manage.com/subscribe/post?u=5935b4febeb6cbf03a8bde89c&amp;id=e5d4b1e488" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-          <div id="mc_embed_signup_scroll">
-            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5935b4febeb6cbf03a8bde89c_e5d4b1e488" tabindex="-1" value=""></div>
-            <div class="clear"><input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-          </div>
-        </form>
+<div class="individual-post">
+  <div class="post-header">
+    <div class="container">
+      <div class="latest-date">
+        <span class="day">
+          {{ post.date | date: '%d' }}
+        </span>
+        <span class="month">
+          {{ post.date | date: '%b' }}
+        </span>
       </div>
 
-      <!--End mc_embed_signup-->
-
-      <hr />
-
-      <div class="about-author">
-        <img src="/img/head.png" alt="Headshot of Jack Franklin" />
-        <div class="about-author-content">
-          <p>Jack is JavaScript and React developer in London. He's also a keen <a href="http://elmplayground.com">Elm enthusiast</a>, <a href="https://speakerdeck.com/jackfranklin">conference speaker</a> and <a href="http://twitter.com/jack_franklin">tweets far too often</a>.</p>
-
-          <a class="twitter-follow-button" href="https://twitter.com/Jack_Franklin">
-            Follow @Jack_Franklin
-          </a>
-        </div>
-      </div>
+      <h2 class="post-title">{{ post.title }}</h2>
     </div>
-    {% endunless %}
+    <div class="container post-intro">
+      <p>{{ post.intro }}</p>
+    </div>
+  </div>
+
+  <section class="post-full-content container">
+    <div class="content-container">
+      {% if post.deprecated_by %}
+      <p class="deprecation-warning">
+        This post is now outdated. Instead of reading this one you should
+        instead read
+        <a href="{{ post.deprecated_by }}">the newer post on this subject.</a>
+      </p>
+      {% endif %}
+      <div class="carbon">
+        <script
+          async
+          type="text/javascript"
+          src="https://cdn.carbonads.com/carbon.js?serve=CKYIEK7M&placement=javascriptplaygroundcom"
+          id="_carbonads_js"
+        ></script>
+      </div>
+
+      {{ content }}
+
+      {% unless is_page %}
+      <p class="thank-you-tweet">
+        <img src="/img/twitter.svg" />
+        If you enjoyed this article please feel free to
+        <a
+          href="https://twitter.com/intent/tweet?text={{
+            page.title
+          }}&url=https://www.javascriptplayground.com{{
+            page.url
+          }}&via=Jack_Franklin&related=Jack_Franklin"
+          rel="nofollow"
+          target="_blank"
+          title="Share on Twitter"
+          >share it on Twitter</a
+        >.
+      </p>
+
+      {% endunless %}
+    </div>
   </section>
-</article>
+</div>
