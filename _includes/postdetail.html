@@ -29,6 +29,7 @@
 
       {{ content }}
 
+      {% unless is_page %}
       <p class="thank-you-tweet">
         <img src="/img/twitter.svg" />
         If you enjoyed this article please feel free to
@@ -44,6 +45,8 @@
           >share it on Twitter</a
         >.
       </p>
+
+      {% endunless %}
     </div>
   </section>
 </div>
