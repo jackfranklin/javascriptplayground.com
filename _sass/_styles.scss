@@ -661,11 +661,10 @@ body.yellow-bg {
     margin: 10px auto 40px auto;
     font-size: 14px;
     background: #eee;
-    border-radius: 3px;
-    border: 1px solid $global-yellow;
 
     .carbon-wrap {
       display: flex;
+      border-radius: 3px;
 
       .carbon-img {
         display: block;
