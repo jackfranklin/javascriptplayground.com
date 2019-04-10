@@ -539,7 +539,9 @@ body.yellow-bg {
           margin-left: calc-grid(2, 12);
         }
 
-        h2 {
+        // this is bad but historically I've used headings interchangeably :(
+        h2,
+        h3 {
           font-size: 33px;
           line-height: 50px;
           color: $global-text-black;
