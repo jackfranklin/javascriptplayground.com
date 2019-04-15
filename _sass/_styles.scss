@@ -110,6 +110,7 @@ body.yellow-bg {
 
       @media (max-width: 550px) {
         width: 120px;
+        text-align: right;
         flex-direction: column;
       }
 
@@ -119,7 +120,7 @@ body.yellow-bg {
 
       @media (max-width: 550px) {
         li + li {
-          margin-top: 20px;
+          margin-top: 15px;
         }
       }
 
@@ -546,6 +547,11 @@ body.yellow-bg {
           line-height: 50px;
           color: $global-text-black;
           font-weight: bold;
+
+          @media(max-width: 699px) {
+            font-size: 25px;
+            line-height: 35px;
+          }
         }
 
         ol,
@@ -558,6 +564,11 @@ body.yellow-bg {
           font-size: 24px;
           line-height: 37px;
           color: $global-text-dark-gray;
+
+          @media(max-width: 699px) {
+            font-size: 17px;
+            line-height: 24px;
+          }
         }
 
         li + li {
@@ -598,6 +609,10 @@ body.yellow-bg {
           background: #e4edf9;
           border-radius: 2px;
           padding: 2px 5px;
+
+          @media(max-width: 699px) {
+            padding: 1px 3px;
+          }
         }
 
         div.highlight pre.highlight {
@@ -613,6 +628,10 @@ body.yellow-bg {
             display: block;
             color: #f8f8f2;
             line-height: 30px;
+
+            @media(max-width: 699px) {
+              font-size: 16px;
+            }
           }
         }
         > pre,
@@ -629,6 +648,10 @@ body.yellow-bg {
             padding: 10px;
             font-size: 20px;
             line-height: 30px;
+
+            @media(max-width: 699px) {
+              font-size: 16px;
+            }
           }
         }
 
