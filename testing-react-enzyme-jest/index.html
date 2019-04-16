@@ -259,12 +259,8 @@ layout: none
                 style="position: absolute; left: -5000px;"
                 aria-hidden="true"
               >
-                <input
-                  type="text"
-                  name="b_5935b4febeb6cbf03a8bde89c_e5d4b1e488"
-                  tabindex="-1"
-                  value=""
-                />
+                <input type="text" name="b_5935b4febeb6cbf03a8bde89c_e5d4b1e488"
+                tabindex="-1" value="" / >
               </div>
               <input
                 type="submit"
@@ -278,17 +274,7 @@ layout: none
       </div>
     </section>
 
-    <section class="content-block">
-      <div class="container paddle-notice">
-        <img src="/img/paddle_web_white.png" alt="Paddle" />
-        <p>
-          All courses are sold and fulfilled by Paddle - an authorized reseller.
-          Our order process is conducted by our online reseller Paddle.com.
-          Paddle.com is the Merchant of Record for all our orders. Paddle
-          provides all customer service inquiries and handles returns.
-        </p>
-      </div>
-    </section>
+    {% include paddle.html %}
     <a href="/" class="logo">
       <img src="/img/logo_big.png" alt="the javascript playground" />
     </a>

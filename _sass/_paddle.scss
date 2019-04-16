@@ -1,0 +1,30 @@
+.paddle-notice {
+  display: flex;
+
+  align-items: center;
+
+  img {
+    width: 20%;
+    max-width: 300px;
+  }
+
+  p {
+    width: 70%;
+    margin-left: auto;
+  }
+
+  @media (max-width: 700px) {
+    display: block;
+
+    img {
+      margin: 10px auto;
+      width: 400px;
+      display: blokc;
+    }
+
+    p {
+      width: 100%;
+      max-width: 600px;
+    }
+  }
+}
