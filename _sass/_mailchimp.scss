@@ -1,15 +1,16 @@
-// TODO: move this into a variables file
-$global-yellow: #fef86e;
-$global-black: #000000;
-
-$global-text-black: #26282e;
-$global-text-dark-gray: #4a4c52;
+@import 'variables';
 
 .mailchimp {
-  padding: 10px 0;
+  padding: 20px 0;
   border-bottom: 1px solid $global-yellow;
   border-top: 1px solid $global-yellow;
-  margin: 20px 0;
+  margin: 30px 0 15px 0;
+
+  p,
+  input {
+    font-size: 18px !important;
+    line-height: 27px !important;
+  }
 
   form #mc_embed_signup_scroll {
     display: flex;
@@ -40,7 +41,6 @@ $global-text-dark-gray: #4a4c52;
     color: $global-text-dark-gray;
     padding: 5px 10px;
     display: block;
-    font-size: 16px;
     margin: 0 5px 0 0;
   }
 }
