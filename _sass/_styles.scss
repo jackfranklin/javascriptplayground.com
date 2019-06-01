@@ -1,4 +1,5 @@
-@import './code';
+@import 'code';
+@import 'variables';
 
 body {
   font-family: bio-sans, sans-serif;
@@ -548,7 +549,7 @@ body.yellow-bg {
           color: $global-text-black;
           font-weight: bold;
 
-          @media(max-width: 699px) {
+          @media (max-width: 699px) {
             font-size: 25px;
             line-height: 35px;
           }
@@ -565,7 +566,7 @@ body.yellow-bg {
           line-height: 37px;
           color: $global-text-dark-gray;
 
-          @media(max-width: 699px) {
+          @media (max-width: 699px) {
             font-size: 17px;
             line-height: 24px;
           }
@@ -610,7 +611,7 @@ body.yellow-bg {
           border-radius: 2px;
           padding: 2px 5px;
 
-          @media(max-width: 699px) {
+          @media (max-width: 699px) {
             padding: 1px 3px;
           }
         }
@@ -629,7 +630,7 @@ body.yellow-bg {
             color: #f8f8f2;
             line-height: 30px;
 
-            @media(max-width: 699px) {
+            @media (max-width: 699px) {
               font-size: 16px;
             }
           }
@@ -649,7 +650,7 @@ body.yellow-bg {
             font-size: 20px;
             line-height: 30px;
 
-            @media(max-width: 699px) {
+            @media (max-width: 699px) {
               font-size: 16px;
             }
           }
