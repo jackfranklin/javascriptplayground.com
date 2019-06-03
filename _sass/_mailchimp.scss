@@ -23,8 +23,9 @@
 
   input[type='submit'] {
     margin-left: 20px;
-    border: 4px solid $global-yellow;
+    border: 2px solid $global-yellow;
     background-color: $global-yellow;
+    border-radius: 2px;
     color: $global-text-black;
     padding: 5px 10px;
     cursor: pointer;
@@ -37,7 +38,8 @@
   input[type='email'] {
     width: 100%;
     max-width: 500px;
-    border: none;
+    border: 1px solid $global-text-dark-gray;
+    border-radius: 2px;
     color: $global-text-dark-gray;
     padding: 5px 10px;
     display: block;
