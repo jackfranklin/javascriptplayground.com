@@ -12,6 +12,11 @@ approaches and inefficient ways of working. These are all things I wish I could
 go back and tell myself - it would have saved a bunch of time having to learn
 them the hard way!
 
+I was inspired by a
+[post on a similar subject by Monica Lent](https://monicalent.com/blog/2019/06/03/absolute-truths-unlearned-as-junior-developer/)
+and thought it would be a good idea to write these down to share them with you
+all.
+
 Although these are things I ended up changing my opinion on, I'm still happy
 that I made these mistakes. The best way for me to learn is to see one strategy
 fail, reflect on why, and do it differently next time. If you're starting out,
