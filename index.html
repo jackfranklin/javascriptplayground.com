@@ -83,5 +83,39 @@ title: The JavaScript Playground
       </div>
       {% endfor %}
     </div>
+
+    <div class="homepage-course-advert">
+      <p>
+        Keen to understand how best to test your React components? In "Testing
+        React with Enzyme and Jest" we will cover a variety of unit testing
+        tips, tricks and techniques to give you confidence in knowing not only
+        how to test, but what to test. Watch the first five videos for free on
+        YouTube now!
+      </p>
+      <a href="/testing-react-enzyme-jest/">
+        Get started <img src="/img/arrow-circle-right.svg" />
+      </a>
+    </div>
+
+    <div class="subsequent-posts">
+      {% for post in site.posts limit: 2 offset: 5 %}
+      <div class="post">
+        <div class="latest-date">
+          <span class="day">
+            {{ post.date | date: '%d' }}
+          </span>
+          <span class="month">
+            {{ post.date | date: '%b' }}
+          </span>
+        </div>
+
+        <div class="latest-content">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p>{{ post.intro }}</p>
+          <a href="{{ post.url }}" class="read-more-link">Read more</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </section>
 </div>
