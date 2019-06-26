@@ -98,7 +98,7 @@ const [userData, setUserData] = useState({
   friends: ['alice', 'bob'],
 })
 
-// also runs infinitely for the same reasons as above
+// doesn't run infinitely! 👌
 useEffect(() => {
   setUserData(oldUser => {
     const newUser = {
