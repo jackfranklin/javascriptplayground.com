@@ -31,11 +31,45 @@ should have the confidence to stray from the rules if you think it's going to
 improve the quality of what you're working on.
 
 So, without further ado, here's all I have to say on structuring React
-applications:
+applications, in no particular order.
 
 ## Don't worry too much
 
+This might seem like an odd point to get started on but I genuinely mean it when
+I say that I think the biggest mistake people make is to stress too much about
+this. This is especially true if you're starting a new project: it's impossible
+to know the best structure as you create your first `index.jsx` file. As it
+grows you should naturally end up with some file structure which will probably
+do the job just fine, and you can tweak it as pain points start to arise.
+
+If you find yourself reading this post and thinking "but our app doesn't do any
+of these!" that's _not a problem_! Each app is different, each team is
+different, and you should work together to agree on a structure and approach
+that makes sense and helps you be productive. Don't worry about changing
+immediately how others are doing it, or what blog posts like this say is most
+effective. My tactic has always been to have my own set of rules, but read posts
+on how others are doing it and crib bits from it that I think are a good idea.
+This means over time you improve your own approach but without any big bang
+changes or reworks 👌.
+
 ## Tests alongside source code
+
+Let's start the points with an easy one: keep your test files next to your
+source files. I'll dive into more detail on how I like to structure all my
+components so their code is next to each other, but I've found my preference on
+tests is to name them identically to the source code, in the same folder, but
+with a `.test` suffix:
+
+* `auth.js`
+* `auth.test.js`
+
+The main benefits of this approach are:
+
+* it's easy to find the test file, and easy at a glance to see if there are even
+  tests for the file you're working on
+* all imports that you need are easier: no navigating out of a `__tests__`
+  directory to import the code you want to test. It's as easy as
+  `import Auth from './auth'`.
 
 ## CSS Modules
 
