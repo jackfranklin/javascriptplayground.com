@@ -52,6 +52,58 @@ on how others are doing it and crib bits from it that I think are a good idea.
 This means over time you improve your own approach but without any big bang
 changes or reworks 👌.
 
+## One folder per main component
+
+The approach I've landed on with folders and components is that components
+considered to be the "main" components of our system (such as a `<Product>`
+component for an e-commerce site) are placed in one folder called `components`:
+
+```
+- src/
+  - components/
+    - product/
+      - product.jsx
+      - product-price.jsx
+    - navigation/
+      - navigation.jsx
+    - checkout-flow/
+      - checkout-flow.jsx
+```
+
+Any small components that are only used by that component live within the same
+directory. This approach has worked well because it adds some folder structure
+but not so much that you end up with a bunch of `../../../` in your imports as
+you navigate. It makes the hierarchy of components clear: any with a folder
+named after them are big, large parts of the system, and any others within exist
+primarily to split that large component into pieces that make it easier to
+maintain and work with.
+
+## Nested folders for sub components if you prefer
+
+One downside of the above is that you can often end up with a large folder for
+one of these big components. Take `<Product>` as an example: it will have CSS
+files (more on those later), tests, many sub-components and probably other
+assets like images, SVG icons, and more, all in the one folder.
+
+I actually don't mind that, and find that as long as the file is named well and
+is discoverable (mostly via the fuzzy finder in my editor), the folder structure
+is less important.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🔥 Hot take: Most people create way too many folders in their projects. Introducing 5 levels of nested folder structure makes things harder to find, not easier.<br><br>&quot;Organizing&quot; things doesn&#39;t actually make your code better or make you more productive 👀</p>&mdash; Adam Wathan (@adamwathan) <a href="https://twitter.com/adamwathan/status/1145109572081860610?ref_src=twsrc%5Etfw">June 29, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+If you would like more structure though it's easy to simply move the
+sub-components into their own respective folders:
+
+```
+- src/
+  - components/
+    - product/
+      - product.jsx
+      - ...
+      - product-price/
+        - product-price.jsx
+```
+
 ## Tests alongside source code
 
 Let's start the points with an easy one: keep your test files next to your
@@ -71,26 +123,154 @@ The main benefits of this approach are:
   directory to import the code you want to test. It's as easy as
   `import Auth from './auth'`.
 
-## CSS Modules
+If we ever have any test data that we use for our tests - mocking an API call,
+for example - we'll put it in the same folder too. It feels very productive to
+have everything you could ever need available right in the same folder and to
+not have to go hunting through a large folder structure to find that file you're
+sure exists but can't quite remember the name of.
 
-## One folder per main component
+## CSS Modules
 
-## Nested folders for sub components if required
+I'm a big fan of [CSS Modules](https://css-tricks.com/css-modules-part-1-need/)
+and we've found them great for writing modularised CSS in our components.
 
-## Mostly one component per file
+> I'm also a big fan of [styled-components](https://www.styled-components.com),
+> but found at work with many contributors using actual CSS files has helped
+> people feel comfortable working with them.
 
-## Truly generic components get their own folder
+As you might have guessed, our CSS files go alongside our React components, too,
+in the same folder. It's really easy to jump between the files and understand
+exactly which class is doing what.
 
-## Make use of import aliasing to avoid `../../` imports
+The broader point here is a running theme through this blog post: keep all your
+component code close to each other. The days of having individual folders for
+CSS, JS, icons, tests, are done: they made it harder to move between related
+files for no apparent gain other than "organised code". Co-locate the files that
+interact the most and you'll spend less time folder hopping and more time coding
+👌.
 
-## A generic "lib" folder for utilities
+## Mostly one component per file
 
-## Use `.jsx` for React and `.js` for everything else
+In my experience people stick far too rigidly to the rule that each file should
+have only one React component defined within it. Whilst I subscribe to the idea
+that you don't want too large components in one file (just think how hard it
+would be to name that file!), there's nothing wrong with pulling a small
+component out if it helps keep the code clear, and remains small enough that it
+makes little sense to add the overhead of extra files.
 
-## Use error tracking and wrap it in your own utilities
+For example, if I was building a `<Product>` component, and needed a tiny bit of
+logic for showing the price, I might pull that out:
 
-## Hide 3rd party libraries behind your own API so they are easily swappable
+```js
+const Price = ({ price, currency }) => (
+  <span>
+    {currency}
+    {formatPrice(price)}
+  </span>
+)
+
+const Product = props => {
+  // imagine lots of code here!
+  return (
+    <div>
+      <Price price={props.price} currency={props.currency} />
+      <div>loads more stuff...</div>
+    </div>
+  )
+}
+```
+
+The nice thing about this is you don't create another file and you keep that
+component private to `Product`. Nothing can possibly import `Price` because we
+don't expose it. This means it'll be really clear to you about when to take the
+step of giving `Price` its own file: when something else needs to import it!
+
+## Truly generic components get their own folder
+
+One step we've taken recently at work is to introduce the idea of generic
+components. These will eventually form our design system (which we hope to
+publish online) but for now we're starting small with components such as
+`<Button>` and `<Logo>`. A component is "generic" if it's not tied to any part
+of the site, but is considered a building block of our UI.
+
+These live within their own folder (`src/components/generic`) and the idea
+behind this is that it's very easy to see all of the generic components we have
+in one place. Over time as we grow we'll add a styleguide (we are big fans of
+[react-styleguidist](https://github.com/styleguidist/react-styleguidist)) to
+make this even easier.
+
+## Make use of import aliasing
+
+Whilst our relatively flat structure limits the amount of `../../` jumping in
+our imports, it's hard to avoid having any at all. We use the
+[babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)
+to define some handy aliases to make this easier.
+
+> You can also do this via Webpack, but by using a Babel plugin the same imports
+> can work in our tests, too.
+
+We set this up with a couple of aliases:
+
+```js
+{
+  components: './src/components',
+  '^generic/([\\w_]+)': './src/components/generic/\\1/\\1',
+}
+```
+
+The first is straight forward: it allows any component to be imported by
+starting the import with `components`. So rather than:
+
+```js
+import Product from '../../components/product/product'
+```
+
+We can instead do:
+
+```js
+import Product from 'components/product/product'
+```
+
+And it will find the same file. This is great for not having to worry about
+folder structure.
+
+That second alias is slightly more complex:
+
+```js
+'^generic/([\\w_]+)': './src/components/generic/\\1/\\1',
+```
+
+We're using a regular expression here to say "match any import that starts with
+`generic` (the `^` ensures the import starts with "generic"), and capture what's
+after `generic/` in a group. We then map that to
+`./src/components/generic/\\1/\\1`, where `\\1` is what we matched in the regex
+group. So this turns:
+
+```js
+import Button from 'generic/button'
+```
+
+Into:
+
+```js
+import Button from 'src/components/generic/button/button'
+```
+
+Which will find us the JSX file of the generic button component. We do this
+because it makes importing these components really easy, and protects us from if
+we decide to change the file structure (which we might as we grow our design
+system).
+
+> Be careful with aliases! A couple to help you with common imports are great,
+> but more and it'll quickly start causing more confusion than the benefits it
+> brings.
+
+## A generic "lib" folder for utilities
+
+## Use an error tracking service and wrap it in your own helper functions
+
+## Hide 3rd party libraries behind your own API so they are easily swappable
 
 ## Always use `prop-types` (or TypeScript/Flow)
 
-## Avoid event emitters
+## Avoid event emitters
