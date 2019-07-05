@@ -312,4 +312,54 @@ know.
 
 ## Always use `prop-types` (or TypeScript/Flow)
 
+Whenever I'm programming I'm thinking about the three versions of myself:
+
+* Past Jack, and the (questionable at times!) code he wrote
+* Current Jack, and what code I'm writing right now
+* Future Jack, and how I can write code now that makes his life as easy as
+  possible later on
+
+This sounds a bit silly but I've found it a useful way to frame my thinking
+around approaches: _how is this going to feel in six months time when I come
+back to it?_
+
+One easy way to make current and future versions of yourself more productive is
+to document the prop-types that components use! This will save you time in the
+form of typos, misremembering how a certain prop is used, or just completely
+forgetting that you need to pass a certain prop. The
+[`eslint-react/prop-types` rule](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md)
+comes in handy for helping remind us, too.
+
+Going one step further: try to be specific about your prop-types. It's easy to
+do this:
+
+```js
+blogPost: PropTypes.object.isRequired
+```
+
+But far more helpful if you do this:
+
+```js
+blogPost: PropTypes.shape({
+  id: PropTypes.number,
+  title: PropTypes.string,
+  // and so on
+}).isRequired
+```
+
+## Don't reach for libraries until you need them
+
+This advice is more true now with the
+[release of React hooks](/refactoring-to-react-hooks/) than it ever has been
+before. I've been working on a large rebuild of part of
+[Thread's site](https://www.thread.com) and decided to be extra particular about
+including 3rd party libraries. My hunch was that with hooks and some of my own
+utilities I could get pretty far down the road before needing to consider
+anything else, and (unusually! 😃) it turned out that my hunch was correct.
+[Kent has written about this in his post "Application State Management with React"](https://kentcdodds.com/blog/application-state-management-with-react)
+but you can get a long way these days with some hooks and React's built in
+context functionality.
+
 ## Avoid event emitters
+
+## Make tests easy with domain specific utilities
