@@ -267,9 +267,48 @@ system).
 
 ## A generic "lib" folder for utilities
 
-## Use an error tracking service and wrap it in your own helper functions
+I wish I could get back all the hours I spent trying to find the perfect
+structure for all my non-component code. I split them up into utilities,
+services, helpers, and a million more names that I can't even remember. My
+approach now is much more straightforward: just put them all in one "lib"
+folder.
+
+Long term, this folder might get so large that you want to add structure, but
+that's OK. _It's always easier to add extra structure than remove superfluous
+structure_.
+
+Our `lib` folder at Thread has about 100 files in it, split roughly 50/50
+between tests and implementation. And it hasn't once been hard to find the file
+I'm looking for. With fuzzy file finders in most editors, I can just type
+`lib/name_of_thing` and I'll find exactly what I want nearly every time.
+
+We've also added an alias to make importing easier:
+`import formatPrice from 'lib/format_price'`.
+
+Don't be afraid of flat folders with lots of files in. It's often all you need.
 
 ## Hide 3rd party libraries behind your own API so they are easily swappable
+
+I'm a big fan of [Sentry](https://sentry.io/welcome/) and have used it many
+times across the backend and the frontend to capture and get notified of
+exceptions. It's a great tool that has helped us become aware of bugs on the
+site very quickly.
+
+Whenever I implement a 3rd party library I'm thinking about how I can make it
+easy to replace should we need to. Often we don't need to - in the case of
+Sentry we are very happy - but it's good to think about how you would move away
+from one service, or swap it for another, just in case.
+
+The best approach for this is to provide your own API around the underlying
+tool. I like to create a `lib/error-reporting.js` module, which exposes an
+`reportError()` function. Under the hood this uses Sentry, but other than in
+`lib/error-reporting.js`, there is no direct import of the Sentry module. This
+means that swapping Sentry for another tool is really easy - I change one file
+in one place, and as long as I keep the public API the same, no other files need
+know.
+
+> A module's public API is all the functions it exposes, and their arguments.
+> This is also known as a module's public interface.
 
 ## Always use `prop-types` (or TypeScript/Flow)
 
