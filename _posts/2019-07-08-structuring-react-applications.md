@@ -78,6 +78,9 @@ named after them are big, large parts of the system, and any others within exist
 primarily to split that large component into pieces that make it easier to
 maintain and work with.
 
+> Whilst I do advocate for some folder structure, the most important thing is
+> that your files are well named. The folders are less important.
+
 ## Nested folders for sub components if you prefer
 
 One downside of the above is that you can often end up with a large folder for
@@ -148,6 +151,11 @@ CSS, JS, icons, tests, are done: they made it harder to move between related
 files for no apparent gain other than "organised code". Co-locate the files that
 interact the most and you'll spend less time folder hopping and more time coding
 👌.
+
+We even built a
+[strict CSS Modules Webpack loader](https://thread.engineering/2019-03-30-css-modules-strict/)
+to aid our developer workflow: it looks to see what classnames are defined and
+sends a loud error to the console if you reference one that doesn't exist.
 
 ## Mostly one component per file
 
