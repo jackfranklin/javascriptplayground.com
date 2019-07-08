@@ -341,11 +341,14 @@ But far more helpful if you do this:
 
 ```js
 blogPost: PropTypes.shape({
-  id: PropTypes.number,
-  title: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   // and so on
 }).isRequired
 ```
+
+The former will do the bare minimum of checks; the latter will give you much
+more useful information if you miss one particular field in the object.
 
 ## Don't reach for libraries until you need them
 
@@ -360,6 +363,103 @@ anything else, and (unusually! 😃) it turned out that my hunch was correct.
 but you can get a long way these days with some hooks and React's built in
 context functionality.
 
+There is certainly a time and a place for libraries like Redux; my advice here
+isn't to completely shun such solutions (and nor should you prioritise moving
+away from it if you use it at the moment) but just to be considered when
+introducing a new library and the benefits it provides.
+
 ## Avoid event emitters
 
+Event emitters are a design pattern I used to reach for often to allow for two
+components to communicate with no direct link between them.
+
+```js
+// in component one
+emitter.send('user_add_to_cart')
+
+// in component two
+emitter.on('user_add_to_cart', () => {
+  // do something
+})
+```
+
+My motivation for using them was that the components could be entirely decoupled
+and talk purely over the emitter. Where this came back to bite me is in the
+"decoupled" part. Although you may _think_ these components are decoupled, I
+would argue they are not, they just have a dependency that's incredibly
+implicit. It's implicit specifically because of what I thought was the benefit
+of this pattern: the components don't know about each other.
+
+It's true that if this example was in Redux it would share some similarities:
+the components still wouldn't be talking directly to each other, but the
+additional structure of a named action, along with the logic for what happens on
+`user_add_to_cart` living in the reducer, makes it easier to follow.
+Additionally the Redux developer tools makes it easier to hunt down an action
+and where it came from, so the extra structure of Redux here is a benefit.
+
+After working on many large codebases that are full of event emitters, I've seen
+the following things happen regularly:
+
+1. Code gets deleted and you have emitters sending events that are never
+   listened to.
+2. Or, code gets deleted and you have listeners listening to events that are
+   never sent.
+3. An event that someone thought wasn't important gets deleted and a core bit of
+   functionality breaks.
+
+All of these are bad because they lead to a _lack of confidence_ in your code.
+When developers are unsure if some code can be removed, it's normally left in
+place. This leads to you accumulating code that may or may not be needed.
+
+These days I would look to solve this problem either using React context, or by
+passing [callback props around](https://kentcdodds.com/blog/prop-drilling).
+
 ## Make tests easy with domain specific utilities
+
+We will end with a final tip of testing your components (PS:
+[I wrote a course on this!](/testing-react-enzyme-jest/)): build out a suite of
+test helper functions that you can use to make testing your components easier.
+
+For example, I once built an app where the user's authentication status was
+stored in a small piece of context that a lot of components needed. Rather than
+do this in every test:
+
+```js
+const wrapper = mount(
+  <UserAuth.Provider value={{ name: 'Jack', userId: 1 }}>
+    <ComponentUnderTest />
+  </UserAuth.Provider>
+)
+```
+
+I created a small helper:
+
+```js
+const wrapper = mountWithAuth(ComponentUnderTest, {
+  name: 'Jack',
+  userId: 1,
+})
+```
+
+This has multiple benefits:
+
+* each test is cleaned up and is very clear in what it's doing: you can tell
+  quickly if the test deals with the logged in or logged out experience
+* if our auth implementation changes I can update `mountWithAuth` and all my
+  tests will continue to work: I've moved our authentication test logic into one
+  place.
+
+Don't be afraid to create a lot of these helpers in a `test-utils.js` file that
+you can rely upon to make testing easier.
+
+## In conclusion
+
+In this post I've shared a bunch of tips from my experiences that will help your
+codebase stay maintainable and more importantly _enjoyable_ to work on as it
+grows. Whilst every codebase has its rough edges and technical debt there are
+techniques we can use to lessen the impact of it and avoid creating it in the
+first place. As I said right at the start of this post, you should take these
+tips and mould them to your own team, codebase, and preferences. We all have
+different approaches and opinions when it comes to structuring and working on
+large apps. I'd love to hear other tips you have: you can tweet me on
+[@Jack_Franklin](https://www.twitter.com/jack_franklin), I'd love to chat.
