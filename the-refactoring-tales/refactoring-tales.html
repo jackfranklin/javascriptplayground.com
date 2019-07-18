@@ -27,6 +27,10 @@ code > span.ot { color: #007020; }
 code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
+.carbon{width:350px;margin:10px auto 40px auto;font-size:14px;background:#eee}
+.carbon .carbon-wrap{display:flex;border-radius:3px}.carbon .carbon-wrap .carbon-img{display:block}.carbon .carbon-wrap .carbon-text{display:block;margin-left:15px;padding-top:10px;padding-right:7px}.carbon .carbon-poweredby{text-align:right;width:100%;display:block;padding:2px 7px 7px 2px}
+
+.
   </style>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -34,6 +38,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <h1>The Refactoring Tales</h1>
   <h3>By Jack Franklin (<a href="http://twitter.com/jack_franklin">@jack_franklin</a>)</h3>
   <p><strong>This book is not being actively worked on, but is left online for posterity.</strong></p>
+  <p>If you enjoy my writing, you might like to <a href="/">check out my latest blog posts</a> or <a href="/testing-react-enzyme-jest">my course on Testing React applications</a>.</p>
+      <div class="carbon">
+        <script
+          async
+          type="text/javascript"
+          src="https://cdn.carbonads.com/carbon.js?serve=CKYIEK7M&placement=javascriptplaygroundcom"
+          id="_carbonads_js"
+        ></script>
+      </div>
 <nav id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a><ul>
@@ -1373,16 +1386,5 @@ UserCanSubscribeService.canSubscribe = function() {
 <p>The test passes, but obviously that implementation needs a bit more work doing. However the point here, even if this might seem a little pointless, is to go one test at a time and make small steps. What this does is stops you over complicating your initial approach and potentially abstracting in the wrong place. A bad abstraction is worse than no abstraction, and by waiting until you have more code and context, you are more likely to pick the right abstraction.</p>
 <h2 id="conclusion-1">Conclusion</h2>
 <p>The above code has been altered slightly for easier reading, but I did actually write this service in a real application. If you’re interested, you can <a href="https://github.com/clusterapp/client/tree/master/app/shared/user-can-subscribe-service">find it on GitHub</a>.</p>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-3206068-17']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>
