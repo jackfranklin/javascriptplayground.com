@@ -31,13 +31,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<p>
   <h1>The Refactoring Tales</h1>
   <h3>By Jack Franklin (<a href="http://twitter.com/jack_franklin">@jack_franklin</a>)</h3>
-  <p>This book is freely available to read online, but you can purchase PDF, MOBI and EPUB versions for a small fee to help support The JavaScript Playground. <a href="http://javascriptplayground.com/the-refactoring-tales/">Find out more and purchase digital download editions here.</a></p>
-
-  <p>The book is also not yet fully completed, and more content is to come very soon. <a href="http://twitter.com/jsplayground_">Follow The JavaScript Playground on Twitter</a> to keep up to date with changes.</p>
-</p>
+  <p><strong>This book is not being actively worked on, but is left online for posterity.</strong></p>
 <nav id="TOC">
 <ul>
 <li><a href="#introduction">Introduction</a><ul>
@@ -450,7 +446,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   }
 });</code></pre>
 <p>The fact that we have to loop over means we can’t just abstract out as easily. Instead of the <code>each</code>, we can instead use jQuery’s <code>filter</code> method:</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> link = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() { 
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> link = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() {
   <span class="kw">return</span> <span class="fu">$</span>(<span class="kw">this</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>) === active;
 }).<span class="fu">parent</span>();
 <span class="fu">activateLink</span>(link);</code></pre>
@@ -473,7 +469,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="kw">var</span> active = <span class="ot">location</span>.<span class="fu">hash</span>;
 <span class="kw">if</span>(active) {
   <span class="fu">activateTab</span>(active);
-  <span class="kw">var</span> link = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() { 
+  <span class="kw">var</span> link = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() {
     <span class="kw">return</span> <span class="fu">$</span>(<span class="kw">this</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>) === active;
   }).<span class="fu">parent</span>();
   <span class="fu">activateLink</span>(link);
@@ -486,7 +482,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Now, to see where the next change will come from, we need to examine a bit more closely the <code>activateLink</code> and <code>activateTab</code> function. Ideally, I’d like to encapsulate these into another function, but to do that we need to see what each function needs as a parameter. <code>activateTab</code> just takes a selector and uses that to hide and show what’s required, but <code>activateLink</code> actually takes in an element. However, if you look closely, you’ll note that there is a relationship between the <code>activateTab</code> parameter and the <code>activateLink</code> parameter. The <code>activateLink</code> is the parent of the element whose selector we pass into <code>activateTab</code>. So why don’t we pass the selector into <code>activateLink</code>, and let it find the exact element it needs?</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> activateLink = <span class="kw">function</span>(selector) {
   <span class="fu">$</span>(<span class="st">&quot;.&quot;</span> + activeClass).<span class="fu">removeClass</span>(activeClass);
-  <span class="kw">var</span> elem = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() { 
+  <span class="kw">var</span> elem = <span class="ot">tabLinks</span>.<span class="fu">filter</span>(<span class="kw">function</span>() {
     <span class="kw">return</span> <span class="fu">$</span>(<span class="kw">this</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>) === selector;
   }).<span class="fu">parent</span>();
   <span class="fu">$</span>(elem).<span class="fu">addClass</span>(activeClass);
@@ -609,7 +605,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="kw">var</span> timeout = <span class="fu">setTimeout</span>(<span class="kw">function</span>() {
     <span class="fu">$</span>(<span class="st">&quot;.left&quot;</span>).<span class="fu">trigger</span>(<span class="st">&quot;click&quot;</span>);
   }, <span class="dv">10000</span>);
-  
+
   <span class="kw">var</span> currentImage = <span class="dv">0</span>;
   <span class="fu">$</span>(<span class="st">&quot;.left&quot;</span>).<span class="fu">click</span>(<span class="kw">function</span>() {
     <span class="fu">clearTimeout</span>(timeout);
@@ -633,7 +629,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     }, <span class="dv">10000</span>);
     <span class="kw">return</span> <span class="kw">false</span>;
   });
-  
+
   <span class="fu">$</span>(<span class="st">&quot;.right&quot;</span>).<span class="fu">click</span>(<span class="kw">function</span>() {
     <span class="fu">clearTimeout</span>(timeout);
     <span class="kw">if</span>(currentImage == <span class="dv">0</span>) {
@@ -698,7 +694,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="fu">$</span>(<span class="st">&quot;div&quot;</span>).<span class="fu">on</span>(<span class="st">&quot;click&quot;</span>, <span class="kw">function</span>() {
     <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;div got clicked&quot;</span>);
   });
-  
+
   <span class="fu">$</span>(<span class="st">&quot;div p&quot;</span>).<span class="fu">on</span>(<span class="st">&quot;click&quot;</span>, <span class="kw">function</span>(e) {
     <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&quot;p got clicked&quot;</span>);
     <span class="ot">e</span>.<span class="fu">stopPropagation</span>();
@@ -795,11 +791,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="kw">var</span> controlText = <span class="fu">$</span>(<span class="st">&quot;.controls span&quot;</span>);
   <span class="kw">var</span> leftLink = <span class="fu">$</span>(<span class="st">&quot;.left&quot;</span>);
   <span class="kw">var</span> rightLink = <span class="fu">$</span>(<span class="st">&quot;.right&quot;</span>);
-  
+
   <span class="kw">var</span> updateControlText = <span class="kw">function</span>() {
     <span class="ot">controlText</span>.<span class="fu">text</span>(<span class="st">&quot;Current: &quot;</span> + (currentImage + <span class="dv">1</span>));
   };
-  
+
   <span class="kw">if</span>(<span class="ot">location</span>.<span class="fu">hash</span> &amp;&amp; <span class="ot">location</span>.<span class="ot">hash</span>.<span class="fu">indexOf</span>(<span class="st">&quot;image&quot;</span>) &gt; -<span class="dv">1</span>) {
     <span class="kw">var</span> number = <span class="fu">parseInt</span>(<span class="ot">location</span>.<span class="ot">hash</span>.<span class="fu">charAt</span>(<span class="ot">location</span>.<span class="ot">hash</span>.<span class="fu">length</span> -<span class="dv">1</span>));
     <span class="ot">ul</span>.<span class="fu">animate</span>({
@@ -812,7 +808,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="kw">var</span> timeout = <span class="fu">setTimeout</span>(<span class="kw">function</span>() {
     <span class="ot">leftLink</span>.<span class="fu">trigger</span>(<span class="st">&quot;click&quot;</span>);
   }, CAROUSEL_TRANSITION_TIME);
-  
+
   <span class="kw">var</span> currentImage = <span class="dv">0</span>;
   <span class="ot">leftLink</span>.<span class="fu">on</span>(<span class="st">&quot;click&quot;</span>, <span class="kw">function</span>(event) {
     <span class="ot">event</span>.<span class="fu">preventDefault</span>();
@@ -836,7 +832,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
       <span class="ot">leftLink</span>.<span class="fu">trigger</span>(<span class="st">&quot;click&quot;</span>);
     }, CAROUSEL_TRANSITION_TIME);
   });
-  
+
   <span class="ot">rightLink</span>.<span class="fu">on</span>(<span class="st">&quot;click&quot;</span>, <span class="kw">function</span>(event) {
     <span class="ot">event</span>.<span class="fu">preventDefault</span>();
     <span class="fu">clearTimeout</span>(timeout);
@@ -917,12 +913,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <span class="kw">var</span> validateParamsExist = <span class="kw">function</span>(params, req, res, cb) {
   <span class="kw">if</span>(<span class="fu">noParamsPassed</span>(req, res)) <span class="kw">return</span> <span class="fu">cb</span>(<span class="kw">false</span>);
-  
+
   <span class="kw">var</span> errors = [];
   <span class="ot">params</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(p) {
     <span class="kw">if</span>(!<span class="ot">req</span>.<span class="fu">query</span>[p]) <span class="ot">errors</span>.<span class="fu">push</span>(<span class="st">&#39;parameter &#39;</span> + p + <span class="st">&#39; is required&#39;</span>);
   });
-  
+
   <span class="fu">checkTokenAndIds</span>(req, errors, <span class="kw">function</span>() {
     <span class="kw">if</span>(<span class="ot">errors</span>.<span class="fu">length</span> &gt; <span class="dv">0</span>) {
       <span class="ot">res</span>.<span class="fu">json</span>({ <span class="dt">errors</span>: errors });
