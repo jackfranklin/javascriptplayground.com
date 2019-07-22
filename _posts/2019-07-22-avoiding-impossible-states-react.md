@@ -314,3 +314,15 @@ some tabs and you want to show one as active? Possibly not - that's up to you.
 As always in programming, it depends. But I hope this blog post inspires you to
 think more carefully about data structures and ask how you can structure them to
 work with you and help rule out impossible states.
+
+## NPM Package
+
+I have published the Zip List implementation (well, a slightly tweaked one) as
+an npm package so you can use them without having to implement them! You can
+find the repository [on Github](https://github.com/jackfranklin/zip-list/) and
+install it via npm or Yarn today 🎉:
+
+```
+yarn add @jackfranklin/zip-list
+npm install @jackfranklin/zip-list
+```
