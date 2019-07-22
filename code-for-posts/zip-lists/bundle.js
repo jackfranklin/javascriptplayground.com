@@ -1,12 +1,81 @@
 (function () {
   'use strict';
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(source, true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(source).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
   }
 
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest();
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+  }
+
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
   }
 
   function _iterableToArrayLimit(arr, i) {
@@ -33,6 +102,10 @@
     }
 
     return _arr;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
   }
 
   function _nonIterableRest() {
@@ -2097,6 +2170,89 @@
   }
   });
 
+  var partionListByIndex = function partionListByIndex(list, index) {
+    return list.reduce(function (accumlator, currentValue, currentIndex) {
+      if (currentIndex < index) {
+        return _objectSpread2({}, accumlator, {
+          before: [].concat(_toConsumableArray(accumlator.before), [currentValue])
+        });
+      } else if (currentIndex > index) {
+        return _objectSpread2({}, accumlator, {
+          after: [].concat(_toConsumableArray(accumlator.after), [currentValue])
+        });
+      } else {
+        return accumlator;
+      }
+    }, {
+      before: [],
+      after: []
+    });
+  };
+
+  var zipList = function zipList(initialArray) {
+    var _initialArray = _toArray(initialArray),
+        initialActive = _initialArray[0],
+        restOfTabs = _initialArray.slice(1);
+
+    var zip = {
+      previous: [],
+      current: initialActive,
+      next: restOfTabs
+    };
+
+    var apiForZip = function apiForZip(zip) {
+      return {
+        asArray: function asArray() {
+          return [].concat(_toConsumableArray(zip.previous), [zip.current], _toConsumableArray(zip.next));
+        },
+        isActive: function isActive(tab) {
+          return zip.current === tab;
+        },
+        setActive: setActive(zip),
+        activeTab: function activeTab() {
+          return zip.current;
+        }
+      };
+    };
+
+    var setActive = function setActive(zip) {
+      return function (newActive) {
+        if (zip.next.includes(newActive)) {
+          var _partionListByIndex = partionListByIndex(zip.next, zip.next.findIndex(function (item) {
+            return item === newActive;
+          })),
+              nextItemsBeforeActive = _partionListByIndex.before,
+              nextItemsAfterActive = _partionListByIndex.after;
+
+          var newZip = {
+            previous: [].concat(_toConsumableArray(zip.previous), [zip.current], _toConsumableArray(nextItemsBeforeActive)),
+            current: newActive,
+            next: _toConsumableArray(nextItemsAfterActive)
+          };
+          return apiForZip(newZip);
+        } else if (zip.previous.includes(newActive)) {
+          var _partionListByIndex2 = partionListByIndex(zip.previous, zip.previous.findIndex(function (item) {
+            return item === newActive;
+          })),
+              previousItemsBeforeActive = _partionListByIndex2.before,
+              previousItemsAfterActive = _partionListByIndex2.after;
+
+          var _newZip = {
+            previous: _toConsumableArray(previousItemsBeforeActive),
+            current: newActive,
+            next: [].concat(_toConsumableArray(previousItemsAfterActive), [zip.current], _toConsumableArray(zip.next))
+          };
+          return apiForZip(_newZip);
+        } else {
+          // the clicked tab must be the current tab, so just return the original
+          return apiForZip(zip);
+        }
+      };
+    };
+
+    return apiForZip(zip);
+  };
+
   var FirstTabs = function FirstTabs() {
     var _React$useState = react.useState(0),
         _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -2131,7 +2287,35 @@
     })), react.createElement("div", {
       className: "border border-gray-400 mt-4 p-8"
     }, tabs[activeIndex].content));
-    return react.createElement("p", null, "hello world");
+  };
+  var SecondTabs = function SecondTabs() {
+    var _React$useState3 = react.useState(zipList([{
+      title: 'Tab One',
+      content: 'This is tab one'
+    }, {
+      title: 'Tab Two',
+      content: 'This is tab two'
+    }, {
+      title: 'Tab Three',
+      content: 'This is tab three'
+    }])),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        tabs = _React$useState4[0],
+        setTabs = _React$useState4[1];
+
+    return react.createElement("div", null, react.createElement("ul", {
+      className: "flex"
+    }, tabs.asArray().map(function (tab) {
+      return react.createElement("li", {
+        key: tab.title,
+        onClick: function onClick() {
+          return setTabs(tabs.setActive(tab));
+        },
+        className: "px-2 py-4 mr-4 border-b-2 mb-4 ".concat(tabs.isActive(tab) ? 'border-red-800' : 'border-gray-800', " hover:border-red-800 cursor-pointer")
+      }, tab.title);
+    })), react.createElement("div", {
+      className: "border border-gray-400 mt-4 p-8"
+    }, tabs.activeTab().content));
   };
 
   var scheduler_production_min = createCommonjsModule(function (module, exports) {
@@ -23905,5 +24089,6 @@
   });
 
   reactDom.render(react.createElement(FirstTabs, null), document.getElementById('first-tabs'));
+  reactDom.render(react.createElement(SecondTabs, null), document.getElementById('second-tabs'));
 
 }());
