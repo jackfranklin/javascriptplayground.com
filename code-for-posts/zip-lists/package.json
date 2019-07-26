@@ -1,25 +1,8 @@
 {
   "name": "zip-lists",
-  "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "live-server": "^1.2.1",
-    "lorem-ipsum": "^2.0.3",
-    "npm-run-all": "^4.1.5",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "rollup": "^1.17.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0"
-  },
   "scripts": {
-    "build": "rollup -c -w",
+    "build": "../../node_modules/.binrollup -c -w",
     "serve": "live-server . --port=8080 --no-browser",
     "go": "run-p build serve"
   }
