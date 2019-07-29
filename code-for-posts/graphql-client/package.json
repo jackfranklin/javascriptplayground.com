@@ -1,5 +1,5 @@
 {
-  "name": "zip-lists",
+  "name": "graphql-client",
   "main": "index.js",
   "scripts": {
     "build": "../../node_modules/.bin/rollup -c -w",
