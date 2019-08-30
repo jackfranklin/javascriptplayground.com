@@ -193,8 +193,17 @@ body.yellow-bg {
 .post-title {
   font-weight: 700;
   font-size: 30px;
-  color: $global-text-black;
   margin-bottom: 30px;
+
+  a:link,
+  a:visited {
+    color: $global-text-black;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 .latest-post {
