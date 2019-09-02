@@ -51,12 +51,12 @@ names.add('jack') // does nothing!
 Be careful though: adding to a set mutates the set. When working with React you
 typically want to avoid mutating data and instead create new instances. You
 could use a [library such as Immer](https://github.com/immerjs/immer) to make
-this easier, or convert the set to an array before adding to it:
+this easier, or pass the set into the `Set` constructor:
 
 ```js
 const names = new Set(['alice'])
 
-const newNames = new Set([...names])
+const newNames = new Set(names)
 newNames.add('bob')
 
 // newNames = alice, bob
@@ -70,7 +70,7 @@ const [tags, setTags] = React.useState(new Set(['react', 'javascript']))
 
 const addTag = newTag => {
   setTags(oldTags => {
-    const newSet = new Set([...oldTags])
+    const newSet = new Set(oldTags)
     newSet.add(newTag)
     return newSet
   })
