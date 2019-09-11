@@ -358,7 +358,7 @@ blogPost: PropTypes.shape({
 The former will do the bare minimum of checks; the latter will give you much
 more useful information if you miss one particular field in the object.
 
-## Don't reach for libraries until you need them
+## Don't reach for libraries until you need them
 
 This advice is more true now with the
 [release of React hooks](/refactoring-to-react-hooks/) than it ever has been
