@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Windows 10 and the WSL for frontend web development"
+title: "Using Windows 10 and WSL for frontend web development"
 intro: "It's been about six weeks since I took the plunge and picked up a Dell XPS with Windows 10. Today I'm sharing my experiences, both good and bad, of moving to Windows 10."
 ---
 
