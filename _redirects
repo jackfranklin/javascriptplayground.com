@@ -4,4 +4,5 @@
 
 /react-in-five /react-in-five 200
 /testing-react-enzyme-jest /testing-react-enzyme-jest 200
-/:x https://www.jackfranklin.co.uk/:x 302
+
+https://www.javascriptplayground.com/* https://www.jackfraknlin.co.uk/:splat 301!
