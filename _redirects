@@ -1,2 +1,7 @@
 /blog/:year/:month/:title  /:title
 /the-refactoring-tales /the-refactoring-tales/the-refactoring-tales
+
+
+/react-in-five /react-in-five 200
+/testing-react-enzyme-jest /testing-react-enzyme-jest 200
+/:x https://www.jackfranklin.co.uk/:x 302
