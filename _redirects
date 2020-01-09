@@ -5,5 +5,5 @@
 /react-in-five /react-in-five 200
 /testing-react-enzyme-jest /testing-react-enzyme-jest 200
 
-https://javascriptplayground.com/* https://www.jackfranklin.co.uk/:splat 301!
-https://www.javascriptplayground.com/* https://www.jackfranklin.co.uk/:splat 301!
+https://javascriptplayground.com/* https://www.jackfranklin.co.uk/blog/:splat 301!
+https://www.javascriptplayground.com/* https://www.jackfranklin.co.uk/blog/:splat 301!
