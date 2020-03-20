@@ -1,8 +1,7 @@
-/blog/:year/:month/:title  /:title
-/the-refactoring-tales /the-refactoring-tales/the-refactoring-tales
+/the-refactoring-tales https://www.jackfranklin.co.uk/refactoring-tales/ 301!
 
-
-/react-in-five /react-in-five 200
+/react-in-five https://www.jackfranklin.co.uk/react-in-five 301!
+/testing-react-enzyme-jest https://www.jackfranklin.co.uk/testing-react-enzyme-jest 301!
 
 https://javascriptplayground.com/* https://www.jackfranklin.co.uk/blog/:splat 301!
 https://www.javascriptplayground.com/* https://www.jackfranklin.co.uk/blog/:splat 301!
